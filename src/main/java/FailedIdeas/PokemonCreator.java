@@ -1,9 +1,10 @@
-package org.example.Pokemon;
+package FailedIdeas;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.example.Pokemon.*;
 import org.example.Pokemon.Effects.MoveEffect;
 import org.example.Pokemon.Effects.NoEffect;
 
@@ -52,7 +53,7 @@ public class PokemonCreator {
         int speed = statsObj.get("speed").getAsInt();
 
 
-        return new Stats(hp, attack, defense, speed);
+        return null;
     }
 
     private static List<Moves> extractMoves(JsonObject jsonObject) {

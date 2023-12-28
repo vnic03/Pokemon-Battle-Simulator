@@ -1,4 +1,4 @@
-package org.example.Pokemon;
+package FailedIdeas;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;

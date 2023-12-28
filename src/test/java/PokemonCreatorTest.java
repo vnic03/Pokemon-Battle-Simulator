@@ -1,6 +1,6 @@
 import org.example.Pokemon.PokeTyping;
 import org.example.Pokemon.Pokemon;
-import org.example.Pokemon.PokemonCreator;
+import FailedIdeas.PokemonCreator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

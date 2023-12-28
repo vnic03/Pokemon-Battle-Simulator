@@ -1,6 +1,7 @@
 package org.example.Pokemon;
 
 public enum MoveCategory {
-    ATTACKING,
+    PHYSICAL,
+    SPECIAL,
     STATUS
 }
