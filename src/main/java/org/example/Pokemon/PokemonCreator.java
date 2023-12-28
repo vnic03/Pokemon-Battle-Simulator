@@ -4,6 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.example.Pokemon.Effects.MoveEffect;
+import org.example.Pokemon.Effects.NoEffect;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +33,11 @@ public class PokemonCreator {
 
         List<PokeTyping> typing = new ArrayList<>();
 
-        for (JsonElement typeElement : types) {
-            String typeName = typeElement.getAsJsonObject().getAsJsonObject("type").get("name").getAsString();
-            typing.add(PokeTyping.valueOf(typeName.toUpperCase()));
+        if (types != null) {
+            for (JsonElement typeElement : types) {
+                String typeName = typeElement.getAsJsonObject().getAsJsonObject("type").get("name").getAsString();
+                typing.add(PokeTyping.valueOf(typeName.toUpperCase()));
+            }
         }
         return typing;
     }
@@ -67,15 +72,20 @@ public class PokemonCreator {
 
         for (JsonElement moveElement : moves) {
             String moveName = moveElement.getAsJsonObject().getAsJsonObject("move").get("name").getAsString();
-            // more data for moves later on !! NEED TO DO
+            String moveDetailsJson = MoveFetcher.fetchMoveDetails(moveName);
 
-            PokeTyping moveType = PokeTyping.NORMAL; // Standard Type
-            int movePower = 50; // Standard Power
-            int moveAccuracy = 100; // Standard accuracy
+            if (moveDetailsJson != null) {
+                JsonObject moveDetails = JsonParser.parseString(moveDetailsJson).getAsJsonObject();
+                PokeTyping moveType = PokeTyping.valueOf(moveDetails.getAsJsonObject("type").get("name").getAsString().toUpperCase());
+                MoveCategory cat = MoveCategory.valueOf(moveDetails.getAsJsonObject("damage_class").get("name").getAsString().toUpperCase());
+                int movePower = moveDetails.get("power").getAsInt();
+                int moveAccuracy = moveDetails.get("accuracy").getAsInt();
+                int pp = moveDetails.get("pp").getAsInt();
+                MoveEffect effect = new NoEffect(); // Change logic on how to use effect !!
 
-            attacks.add(new Moves(moveName, moveType, movePower, moveAccuracy));
+                attacks.add(new Moves(moveName, moveType, cat, movePower, moveAccuracy, pp, effect));
+            }
         }
-
         return attacks;
     }
 }

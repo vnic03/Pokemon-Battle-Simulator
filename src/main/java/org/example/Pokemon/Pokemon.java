@@ -7,13 +7,13 @@ public class Pokemon {
     private List<PokeTyping> typing;
     private final int level = 50;
     private Stats stats;
-    private List<Moves> attack;
+    private List<Moves> moves;
 
-    public Pokemon(String name, List<PokeTyping> typing, Stats stats, List<Moves> attacks){
+    public Pokemon(String name, List<PokeTyping> typing, Stats stats, List<Moves> moves){
         this.name = name;
         this.typing = typing;
         this.stats = stats;
-        this.attack = attacks;
+        this.moves = moves;
 
     }
 
@@ -31,7 +31,7 @@ public class Pokemon {
     public Stats getStats(){
         return stats;
     }
-    public List<Moves> getAttacks() {
-        return attack;
+    public List<Moves> getMoves() {
+        return moves;
     }
 }
