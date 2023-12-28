@@ -44,23 +44,14 @@ public class PokemonCreator {
 
     private static Stats extractStats(JsonObject jsonObject) {
 
-        JsonArray stats = jsonObject.getAsJsonArray("stats");
+        JsonObject statsObj = jsonObject.getAsJsonObject("stats");
 
-        int hp = 0, attack = 0, defense = 0, speed = 0;
+        int hp = statsObj.get("hp").getAsInt();
+        int attack = statsObj.get("attack").getAsInt();
+        int defense = statsObj.get("defense").getAsInt();
+        int speed = statsObj.get("speed").getAsInt();
 
-        for (JsonElement statsElement : stats) {
-            JsonObject stat = statsElement.getAsJsonObject().getAsJsonObject("stat");
-            String statName = stat.get("name").getAsString();
 
-            int baseStat = statsElement.getAsJsonObject().get("base_stat").getAsInt();
-
-            switch (statName) {
-                case "hp": hp = baseStat; break;
-                case "attack": attack = baseStat; break;
-                case "defense": defense = baseStat; break;
-                case "speed": speed = baseStat; break;
-            }
-        }
         return new Stats(hp, attack, defense, speed);
     }
 
@@ -70,20 +61,22 @@ public class PokemonCreator {
 
         List<Moves> attacks = new ArrayList<>();
 
-        for (JsonElement moveElement : moves) {
-            String moveName = moveElement.getAsJsonObject().getAsJsonObject("move").get("name").getAsString();
-            String moveDetailsJson = MoveFetcher.fetchMoveDetails(moveName);
+        if (moves != null) {
+            for (JsonElement moveElement : moves) {
+                String moveName = moveElement.getAsJsonObject().getAsJsonObject("move").get("name").getAsString();
+                String moveDetailsJson = MoveFetcher.fetchMoveDetails(moveName);
 
-            if (moveDetailsJson != null) {
-                JsonObject moveDetails = JsonParser.parseString(moveDetailsJson).getAsJsonObject();
-                PokeTyping moveType = PokeTyping.valueOf(moveDetails.getAsJsonObject("type").get("name").getAsString().toUpperCase());
-                MoveCategory cat = MoveCategory.valueOf(moveDetails.getAsJsonObject("damage_class").get("name").getAsString().toUpperCase());
-                int movePower = moveDetails.get("power").getAsInt();
-                int moveAccuracy = moveDetails.get("accuracy").getAsInt();
-                int pp = moveDetails.get("pp").getAsInt();
-                MoveEffect effect = new NoEffect(); // Change logic on how to use effect !!
+                if (moveDetailsJson != null) {
+                    JsonObject moveDetails = JsonParser.parseString(moveDetailsJson).getAsJsonObject();
+                    PokeTyping moveType = PokeTyping.valueOf(moveDetails.getAsJsonObject("type").get("name").getAsString().toUpperCase());
+                    MoveCategory cat = MoveCategory.valueOf(moveDetails.getAsJsonObject("damage_class").get("name").getAsString().toUpperCase());
+                    int movePower = moveDetails.get("power").getAsInt();
+                    int moveAccuracy = moveDetails.get("accuracy").getAsInt();
+                    int pp = moveDetails.get("pp").getAsInt();
+                    MoveEffect effect = new NoEffect(); // Change logic on how to use effect !!
 
-                attacks.add(new Moves(moveName, moveType, cat, movePower, moveAccuracy, pp, effect));
+                    attacks.add(new Moves(moveName, moveType, cat, movePower, moveAccuracy, pp, effect));
+                }
             }
         }
         return attacks;
