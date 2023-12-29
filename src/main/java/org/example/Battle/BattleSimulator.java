@@ -9,29 +9,39 @@ public class BattleSimulator {
     public void simulateBattle(Pokemon pokemon1, Pokemon pokemon2){
 
         Scanner scanner = new Scanner(System.in);
+        int round = 1;
 
         while (pokemon1.isAlive() && pokemon2.isAlive()) {
+
+            System.out.println("Round " + round + ": ");
+            System.out.println(pokemon1.getName() + " (" + pokemon1.getStats().getHp() + " HP) vs. " + pokemon2.getName() + " (" + pokemon2.getStats().getHp() + " HP)");
 
             Pokemon firstAttacker = determineFirstAttacker(pokemon1, pokemon2);
             Pokemon secondAttacker = (firstAttacker == pokemon1) ? pokemon2 : pokemon1;
 
             System.out.println(firstAttacker.getName() + ", choose your move: ");
 
-            String firstMove = scanner.nextLine();
+            String firstMoveInput = scanner.nextLine();
+            String firstMove = MoveSelector.getMoveNameByNumber(firstAttacker, firstMoveInput);
             doAttack(firstAttacker, secondAttacker, firstMove);
+
+
             if (!secondAttacker.isAlive()) {
                 System.out.println(firstAttacker.getName() + " wins!");
                 break;
             }
 
             System.out.println(secondAttacker.getName() + ", choose your move: ");
-            String secondMove = scanner.nextLine();
+
+            String secondMoveInput = scanner.nextLine();
+            String secondMove = MoveSelector.getMoveNameByNumber(secondAttacker, secondMoveInput);
             doAttack(secondAttacker, firstAttacker, secondMove);
 
             if (!firstAttacker.isAlive()) {
                 System.out.println(secondAttacker.getName() + " wins!");
                 break;
             }
+            round++;
 
         }
     }
@@ -56,13 +66,14 @@ public class BattleSimulator {
         if (move != null) {
             if (!doesMoveHit(move, attacker, defender)) {
                 System.out.println(attacker.getName() + " missed " + defender.getName());
+            } else {
+                int damage = DamageCalculator.calculateDamage(attacker, defender, move);
+                defender.takeDamage(damage);
+                System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + damage + " damage.");
             }
+        } else {
+            System.out.println("Move not found or invalid.");
         }
-        int damage = DamageCalculator.calculateDamage(attacker, defender, move);
-
-        defender.takeDamage(damage);
-
-        System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + damage + " damage.");
 
     }
     private boolean doesMoveHit(Moves move, Pokemon attacker, Pokemon defender) {

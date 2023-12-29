@@ -17,7 +17,6 @@ public class Pokemon {
         this.typing = typing;
         this.stats = stats;
         this.moves = moves;
-
     }
 
     public String getName(){
