@@ -35,7 +35,15 @@ public class Pokemon {
         return stats;
     }
     public List<Moves> getMoves() {
-        return moves;
+        return this.moves;
+    }
+
+    public void addMove(Moves move) {
+        if (this.moves.size() < 4) {
+            this.moves.add(move);
+        } else {
+            System.out.println(this.name + " moves slots are full !");
+        }
     }
 
     public Moves chooseMoveByName(String moveName) {
