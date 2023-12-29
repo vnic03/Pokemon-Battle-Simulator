@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="CreatePokemon tests succeeded">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/HitsMoreTimesEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayFlinchEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayParalyzeEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonFactory.java" afterDir="false" />
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="DamageCalculator expanded and improved.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Battle/BattleSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Battle/BattleSimulator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/AbsorbEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/AbsorbEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MoveCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MoveCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MovesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokeApiFetcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FailedIdeas/PokeApiFetcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FailedIdeas/PokemonCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Stats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/PokemonCreatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PokemonCreatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonFactory.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +33,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -116,6 +111,8 @@
       <workItem from="1703717588377" duration="4840000" />
       <workItem from="1703723735885" duration="10145000" />
       <workItem from="1703771253028" duration="8532000" />
+      <workItem from="1703799043773" duration="14585000" />
+      <workItem from="1703872278636" duration="5448000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -141,7 +138,23 @@
       <option name="project" value="LOCAL" />
       <updated>1703772330914</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added a simple BattleSimulator, some MoveEffects and more moves.">
+      <option name="closed" value="true" />
+      <created>1703804244440</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1703804244440</updated>
+    </task>
+    <task id="LOCAL-00005" summary="DamageCalculator expanded and improved.">
+      <option name="closed" value="true" />
+      <created>1703811489699</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1703811489699</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,6 +165,8 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Day 2, added some moves and tried testing the PokemonCreator, but it failed" />
     <MESSAGE value="CreatePokemon tests succeeded" />
-    <option name="LAST_COMMIT_MESSAGE" value="CreatePokemon tests succeeded" />
+    <MESSAGE value="Added a simple BattleSimulator, some MoveEffects and more moves." />
+    <MESSAGE value="DamageCalculator expanded and improved." />
+    <option name="LAST_COMMIT_MESSAGE" value="DamageCalculator expanded and improved." />
   </component>
 </project>

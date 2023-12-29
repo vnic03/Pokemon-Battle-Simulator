@@ -38,6 +38,16 @@ public class Pokemon {
         return moves;
     }
 
+    public Moves chooseMoveByName(String moveName) {
+        for (Moves move : moves) {
+            if (move.getName().equalsIgnoreCase(moveName)) {
+                return MovesRepository.getMoveByName(moveName);
+            }
+        }
+        System.out.println("Move not found!");
+        return null;
+    }
+
     public boolean isAlive() {
         return stats.getHp() > 0;
     }

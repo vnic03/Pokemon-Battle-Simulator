@@ -3,28 +3,35 @@ package org.example.Battle;
 import org.example.Pokemon.*;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class BattleSimulator {
     public void simulateBattle(Pokemon pokemon1, Pokemon pokemon2){
+
+        Scanner scanner = new Scanner(System.in);
 
         while (pokemon1.isAlive() && pokemon2.isAlive()) {
 
             Pokemon firstAttacker = determineFirstAttacker(pokemon1, pokemon2);
             Pokemon secondAttacker = (firstAttacker == pokemon1) ? pokemon2 : pokemon1;
 
-            doAttack(firstAttacker, secondAttacker);
+            System.out.println(firstAttacker.getName() + ", choose your move: ");
+
+            String firstMove = scanner.nextLine();
+            doAttack(firstAttacker, secondAttacker, firstMove);
             if (!secondAttacker.isAlive()) {
+                System.out.println(firstAttacker.getName() + " wins!");
                 break;
             }
 
-            doAttack(secondAttacker, firstAttacker);
+            System.out.println(secondAttacker.getName() + ", choose your move: ");
+            String secondMove = scanner.nextLine();
+            doAttack(secondAttacker, firstAttacker, secondMove);
 
-            if (pokemon1.isAlive()) {
-                System.out.println(pokemon1.getName() + " wins!");
-            } else {
-                System.out.println(pokemon2.getName() + " wins!");
+            if (!firstAttacker.isAlive()) {
+                System.out.println(secondAttacker.getName() + " wins!");
+                break;
             }
-
 
         }
     }
@@ -42,16 +49,16 @@ public class BattleSimulator {
         }
     }
 
-    private void doAttack(Pokemon attacker, Pokemon defender){
+    private void doAttack(Pokemon attacker, Pokemon defender, String moveName){
 
-        Moves move = MovesRepository.getMoveByName("Peck");
+        Moves move = attacker.chooseMoveByName(moveName);
 
         if (move != null) {
             if (!doesMoveHit(move, attacker, defender)) {
                 System.out.println(attacker.getName() + " missed " + defender.getName());
             }
         }
-        int damage = DamageCalculator.calculateDamage( attacker, defender, move);
+        int damage = DamageCalculator.calculateDamage(attacker, defender, move);
 
         defender.takeDamage(damage);
 
