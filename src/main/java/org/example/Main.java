@@ -7,6 +7,8 @@ import org.example.Pokemon.*;
 public class Main {
     public static void main(String[] args) {
 
+        /*
+
         MoveSelector moveSelector = new MoveSelector();
         BattleSimulator battle = new BattleSimulator();
 
@@ -17,5 +19,10 @@ public class Main {
         moveSelector.selectMovesForPokemon(two);
 
         battle.simulateBattle(one, two);
+
+         */
+
+        Pokemon pokemon = PokemonRepository.getPokemon("Gengar");
+        System.out.println(pokemon);
     }
 }

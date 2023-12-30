@@ -42,4 +42,25 @@ public class MoveSelector {
         }
         return input;
     }
+
+    public static Nature chooseNature() {
+
+        Scanner scannerNature = new Scanner(System.in);
+
+        System.out.println("Choose the Nature for your Pokemon:");
+
+        for (Nature nature : Nature.values()) {
+            System.out.println(nature.name());
+        }
+
+        System.out.println("Nature: ");
+        String input = scannerNature.nextLine().toUpperCase();
+
+        try {
+            return Nature.valueOf(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid Nature");
+            return Nature.SERIOUS;
+        }
+    }
 }

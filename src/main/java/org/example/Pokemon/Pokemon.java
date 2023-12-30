@@ -10,13 +10,16 @@ public class Pokemon {
     private final int level = 50;
     private Stats stats;
     private List<Moves> moves;
+    private Nature nature;
     private boolean isParalyzed;
 
-    public Pokemon(String name, List<PokeTyping> typing, Stats stats, List<Moves> moves){
+    public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature, List<Moves> moves) {
         this.name = name;
         this.typing = typing;
         this.stats = stats;
+        this.nature = nature;
         this.moves = moves;
+        applyNatureEffects();
     }
 
     public String getName(){
@@ -85,6 +88,32 @@ public class Pokemon {
             return new Random().nextDouble() > 0.25;
         }
         return true;
+    }
+
+    private void applyNatureEffects() {
+
+        double increase = 1.1;
+        double decrease = 0.9;
+
+        if (nature.getIncreasedStat() != null) {
+            switch (nature.getIncreasedStat()) {
+                case ATTACK -> stats.setAttack((int) (stats.getAttack() * increase));
+                case DEFENSE -> stats.setDefense((int) (stats.getDefense() * increase));
+                case SPECIAL_ATTACK -> stats.setSpecialAttack((int) (stats.getSpecialAttack() * increase));
+                case SPECIAL_DEFENSE -> stats.setSpecialDefense((int) (stats.getSpecialDefense() * increase));
+                case SPEED -> stats.setSpeed((int) (stats.getSpeed() * increase));
+            }
+        }
+
+        if (nature.getDecreasedStat() != null) {
+            switch (nature.getDecreasedStat()) {
+                case ATTACK -> stats.setAttack((int) (stats.getAttack() * decrease));
+                case DEFENSE -> stats.setDefense((int) (stats.getDefense() * decrease));
+                case SPECIAL_ATTACK -> stats.setSpecialAttack((int) (stats.getSpecialAttack() * decrease));
+                case SPECIAL_DEFENSE -> stats.setSpecialDefense((int) (stats.getSpecialDefense() * decrease));
+                case SPEED -> stats.setSpeed((int) (stats.getSpeed() * decrease));
+            }
+        }
     }
 
 
