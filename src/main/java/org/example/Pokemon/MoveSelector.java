@@ -47,13 +47,19 @@ public class MoveSelector {
 
         Scanner scannerNature = new Scanner(System.in);
 
+        Nature[] natures = Nature.values();
+
         System.out.println("Choose the Nature for your Pokemon:");
+        System.out.println();
 
-        for (Nature nature : Nature.values()) {
-            System.out.println(nature.name());
+        for (int i = 0; i < natures.length; i++) {
+            System.out.print(natures[i].name() + "\t");
+            if ((i + 1) % 5 == 0) {
+                System.out.println();
+            }
         }
-
-        System.out.println("Nature: ");
+        System.out.println();
+        System.out.println("Chose your Nature: ");
         String input = scannerNature.nextLine().toUpperCase();
 
         try {

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated Nature" />
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Nature toString" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,7 +106,7 @@
       <workItem from="1703723735885" duration="10145000" />
       <workItem from="1703771253028" duration="8532000" />
       <workItem from="1703799043773" duration="14585000" />
-      <workItem from="1703872278636" duration="24393000" />
+      <workItem from="1703872278636" duration="24882000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -188,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703899630427</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Nature toString">
+      <option name="closed" value="true" />
+      <created>1703900104606</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1703900104606</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,6 +214,7 @@
     <MESSAGE value="MoveSelector updated" />
     <MESSAGE value="Updated BattleSimulator, Effects and added Nature" />
     <MESSAGE value="Updated Nature" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Nature" />
+    <MESSAGE value="Nature toString" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nature toString" />
   </component>
 </project>
