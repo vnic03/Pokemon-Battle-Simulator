@@ -1,5 +1,6 @@
 package org.example.Pokemon.Effects;
 
+import org.example.Pokemon.Moves;
 import org.example.Pokemon.PokeTyping;
 import org.example.Pokemon.Pokemon;
 

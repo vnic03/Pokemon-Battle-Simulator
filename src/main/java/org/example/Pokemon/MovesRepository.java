@@ -16,7 +16,7 @@ public class MovesRepository {
 
         MoveEffect paralyzes_opponent = new ParalyzeEffect();
 
-        MoveEffect absorbs_hp = new AbsorbEffect();
+        MoveEffectWithDamage absorbs_hp = new AbsorbEffect();
 
         MoveEffect may_cause_flinching = new MayFlinchEffect();
 

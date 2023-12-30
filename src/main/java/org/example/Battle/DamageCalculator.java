@@ -35,6 +35,8 @@ public class DamageCalculator {
                 defenseStat) / 50 + 2) * typeAdvantage * randomFactor);
         return damage;
     }
+
+
     public static double getTypeAdvantage(PokeTyping attackType, List<PokeTyping> defenderTypes, List<PokeTyping> attackerType){
 
         double typeEffectiveness = 1.0;

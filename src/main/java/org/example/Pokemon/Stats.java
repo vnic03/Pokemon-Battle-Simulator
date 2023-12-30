@@ -3,14 +3,16 @@ package org.example.Pokemon;
 public class Stats {
 
     private int hp;
+    private int maxHp;
     private int attack;
     private int defense;
     private int specialAttack;
     private int specialDefense;
     private int speed;
 
-    public Stats(int hp, int attack, int defense, int specialAttack, int specialDefense, int speed) {
-        this.hp = hp;
+    public Stats(int maxHp, int attack, int defense, int specialAttack, int specialDefense, int speed) {
+        this.maxHp = maxHp;
+        this.hp = maxHp;
         this.attack = attack;
         this.defense = defense;
         this.specialAttack = specialAttack;
@@ -23,7 +25,21 @@ public class Stats {
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
+        if (hp < 0) {
+            this.hp = 0;
+        } else if (hp > this.maxHp) {
+            this.hp = this.maxHp;
+        } else {
+            this.hp = hp;
+        }
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
     }
 
     public int getAttack() {

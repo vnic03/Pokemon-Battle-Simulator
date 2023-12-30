@@ -15,6 +15,9 @@ public class Pokemon {
     private Nature nature;
     private boolean isParalyzed;
 
+    private int lastDamageTaken;
+
+
     public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature, List<Moves> moves) {
         this.name = name;
         this.typing = typing;
@@ -73,7 +76,10 @@ public class Pokemon {
     }
 
     public void takeDamage(int damage){
-        int currentHP = stats.getHp();
+
+        this.lastDamageTaken = damage;
+
+        int currentHP = stats.getHp() - damage;
         currentHP -= damage;
 
         if (currentHP < 0) {
@@ -81,6 +87,10 @@ public class Pokemon {
         }
 
         stats.setHp(currentHP);
+    }
+
+    public int getLastDamageTaken() {
+        return lastDamageTaken;
     }
 
     public void setParalyzed(boolean paralyzed) {
@@ -129,6 +139,24 @@ public class Pokemon {
             }
         }
     }
+
+    public void heal(int amount) {
+        int currentHP = stats.getHp();
+        int maxHp = stats.getMaxHp();
+
+        int healedAmount = Math.min(amount, maxHp - currentHP);
+
+        currentHP += amount;
+
+        if (currentHP > maxHp) {
+            currentHP = maxHp;
+        }
+
+        stats.setHp(currentHP);
+
+        System.out.println(this.getName() + " healed " + healedAmount + " HP !");
+    }
+
 
 
     public String toString(){

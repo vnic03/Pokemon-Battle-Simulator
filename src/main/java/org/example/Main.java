@@ -11,7 +11,7 @@ public class Main {
         MoveSelector moveSelector = new MoveSelector();
         BattleSimulator battle = new BattleSimulator();
 
-        Pokemon one = PokemonRepository.getPokemon("Gengar");
+        Pokemon one = PokemonRepository.getPokemon("Charizard");
         moveSelector.selectMovesForPokemon(one);
 
         Pokemon two = PokemonRepository.getPokemon("Weezing");

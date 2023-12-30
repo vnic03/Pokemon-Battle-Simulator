@@ -2,6 +2,7 @@ package org.example.Battle;
 
 import org.example.Pokemon.*;
 import org.example.Pokemon.Effects.MoveEffect;
+import org.example.Pokemon.Effects.MoveEffectWithDamage;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -94,7 +95,13 @@ public class BattleSimulator {
         }
 
         MoveEffect effect = move.getEffect();
-        effect.apply(attacker, defender);
+
+        if (effect instanceof MoveEffectWithDamage) {
+            MoveEffectWithDamage effectWithDamage = (MoveEffectWithDamage) effect;
+            effectWithDamage.applyWithDamage(attacker, defender, move);
+        } else {
+            effect.apply(attacker ,defender);
+        }
 
 
         if (move.getCategory() != MoveCategory.STATUS) {
