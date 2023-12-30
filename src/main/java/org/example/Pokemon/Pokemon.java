@@ -1,5 +1,7 @@
 package org.example.Pokemon;
 
+import org.example.Battle.DamageCalculator;
+
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -38,6 +40,14 @@ public class Pokemon {
     }
     public List<Moves> getMoves() {
         return this.moves;
+    }
+
+    public Nature getNature(){
+        return this.nature;
+    }
+
+    public void setNature(Nature nature){
+        this.nature = nature;
     }
 
     public void addMove(Moves move) {
@@ -91,6 +101,10 @@ public class Pokemon {
     }
 
     private void applyNatureEffects() {
+
+        if (this.nature == null) {
+            return;
+        }
 
         double increase = 1.1;
         double decrease = 0.9;

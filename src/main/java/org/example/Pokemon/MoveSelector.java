@@ -25,7 +25,7 @@ public class MoveSelector {
             if (move != null) {
                 pokemon.addMove(move);
             } else {
-                System.out.println("Couldn't found " + moveName);
+                System.out.println("Couldn't find " + moveName);
             }
         }
     }
@@ -43,13 +43,13 @@ public class MoveSelector {
         return input;
     }
 
-    public static Nature chooseNature() {
+    public static Nature chooseNature(String pokemonName) {
 
         Scanner scannerNature = new Scanner(System.in);
 
         Nature[] natures = Nature.values();
 
-        System.out.println("Choose the Nature for your Pokemon:");
+        System.out.println("Choose the Nature for "+ pokemonName + ":");
         System.out.println();
 
         for (int i = 0; i < natures.length; i++) {
@@ -59,13 +59,13 @@ public class MoveSelector {
             }
         }
         System.out.println();
-        System.out.println("Chose your Nature: ");
+        System.out.println("Choose your Nature: ");
         String input = scannerNature.nextLine().toUpperCase();
 
         try {
             return Nature.valueOf(input);
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid Nature");
+            System.out.println("Invalid Nature, defaulting to SERIOUS for " + pokemonName);
             return Nature.SERIOUS;
         }
     }
