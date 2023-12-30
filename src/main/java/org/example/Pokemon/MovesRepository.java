@@ -24,6 +24,8 @@ public class MovesRepository {
 
         MoveEffect burns_opponent = new BurnEffect();
 
+        MoveEffect may_burn_opponent = new MayBurnEffect();
+
 
         List<Moves> allMoves = new ArrayList<>();
 
@@ -109,6 +111,16 @@ public class MovesRepository {
 
         allMoves.add(new Moves("Will-O-Wisp", PokeTyping.FIRE, MoveCategory.STATUS, 0, 85, 15 ,burns_opponent));
         allMoves.add(new Moves("Inferno", PokeTyping.FIRE, MoveCategory.SPECIAL, 100,50,5,burns_opponent));
+
+        // may burn opponent
+
+        allMoves.add(new Moves("Blue Flare", PokeTyping.FIRE, MoveCategory.SPECIAL, 130,85,5 ,may_burn_opponent));
+        allMoves.add(new Moves("Ember", PokeTyping.FIRE, MoveCategory.SPECIAL, 40, 100, 25, may_burn_opponent));
+        allMoves.add(new Moves("Heat Wave", PokeTyping.FIRE, MoveCategory.SPECIAL, 95, 90, 10, may_burn_opponent));
+        allMoves.add(new Moves("Scald", PokeTyping.WATER, MoveCategory.SPECIAL, 80, 100, 15, may_burn_opponent));
+        allMoves.add(new Moves("Flamethrower", PokeTyping.FIRE, MoveCategory.SPECIAL, 90, 100, 15, may_burn_opponent));
+        allMoves.add(new Moves("Fire Punch", PokeTyping.FIRE, MoveCategory.PHYSICAL, 75, 100, 15, may_burn_opponent));
+
 
 
         return allMoves;
