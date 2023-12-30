@@ -3,6 +3,7 @@ package org.example.Battle;
 import org.example.Pokemon.*;
 import org.example.Pokemon.Effects.MoveEffect;
 import org.example.Pokemon.Effects.MoveEffectWithDamage;
+import org.example.Pokemon.Effects.MultiHitMoveEffect;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -94,17 +95,27 @@ public class BattleSimulator {
             return;
         }
 
+        boolean isDamageApplied = false;
+
         MoveEffect effect = move.getEffect();
 
-        if (effect instanceof MoveEffectWithDamage) {
+
+        if (effect instanceof MultiHitMoveEffect) {
+            MultiHitMoveEffect multiHitMoveEffect = (MultiHitMoveEffect) effect;
+            int totalDamage = multiHitMoveEffect.applyMultiHitDamage(attacker, defender, move);
+            System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + totalDamage + " damage.");
+            isDamageApplied = true;
+
+        } else if (effect instanceof MoveEffectWithDamage) {
             MoveEffectWithDamage effectWithDamage = (MoveEffectWithDamage) effect;
             effectWithDamage.applyWithDamage(attacker, defender, move);
+            isDamageApplied = true;
+
         } else {
-            effect.apply(attacker ,defender);
+            effect.apply(attacker, defender);
         }
 
-
-        if (move.getCategory() != MoveCategory.STATUS) {
+        if (!isDamageApplied && move.getCategory() != MoveCategory.STATUS) {
 
             int damage = DamageCalculator.calculateDamage(attacker, defender, move);
             defender.takeDamage(damage);

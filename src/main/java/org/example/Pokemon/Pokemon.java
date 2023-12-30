@@ -80,7 +80,7 @@ public class Pokemon {
         this.lastDamageTaken = damage;
 
         int currentHP = stats.getHp() - damage;
-        currentHP -= damage;
+
 
         if (currentHP < 0) {
             currentHP = 0;

@@ -45,6 +45,13 @@ public class MovesRepository {
         allMoves.add(new Moves("Vise Grip", PokeTyping.NORMAL,MoveCategory.PHYSICAL,55,100,30,nothing));
         allMoves.add(new Moves("Water Gun", PokeTyping.WATER, MoveCategory.SPECIAL, 40, 100, 25, nothing));
         allMoves.add(new Moves("Wing Attack", PokeTyping.FLYING, MoveCategory.PHYSICAL, 60, 100, 35, nothing));
+        allMoves.add(new Moves("Aqua Tail", PokeTyping.WATER, MoveCategory.PHYSICAL, 90,90,10, nothing));
+        allMoves.add(new Moves("Dragon Claw", PokeTyping.DRAGON, MoveCategory.PHYSICAL, 80,100,15, nothing));
+        allMoves.add(new Moves("Dragon Pulse", PokeTyping.DRAGON, MoveCategory.SPECIAL, 85,100,10,nothing));
+        allMoves.add(new Moves("Fairy Wind", PokeTyping.FAIRY, MoveCategory.SPECIAL, 40,100, 30, nothing));
+        allMoves.add(new Moves("Hyper Voice", PokeTyping.NORMAL, MoveCategory.SPECIAL, 90,100,10,nothing));
+
+
 
         // may paralyze the target
 
@@ -54,6 +61,8 @@ public class MovesRepository {
         allMoves.add(new Moves("Thunder", PokeTyping.ELECTRIC, MoveCategory.SPECIAL, 110,70, 10, May_paralyze_the_target));
         allMoves.add(new Moves("Lick", PokeTyping.GHOST, MoveCategory.PHYSICAL,30,100,30,May_paralyze_the_target));
         allMoves.add(new Moves("Body Slam", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 85, 100,15, May_paralyze_the_target));
+        allMoves.add(new Moves("Dragon Breath", PokeTyping.DRAGON, MoveCategory.SPECIAL, 60,100,20, May_paralyze_the_target));
+
 
         // absorbs HP
 
@@ -61,6 +70,10 @@ public class MovesRepository {
         allMoves.add(new Moves("Mega Drain", PokeTyping.GRASS, MoveCategory.SPECIAL, 40, 100, 15, absorbs_hp));
         allMoves.add(new Moves("Leech Life", PokeTyping.BUG, MoveCategory.PHYSICAL, 80, 100, 10, absorbs_hp));
         allMoves.add(new Moves("Giga Drain", PokeTyping.GRASS, MoveCategory.SPECIAL, 75,100,15, absorbs_hp));
+        allMoves.add(new Moves("Bitter Blade", PokeTyping.FIRE, MoveCategory.PHYSICAL, 90,100,10, absorbs_hp));
+        allMoves.add(new Moves("Drain Punch", PokeTyping.FIGHTING, MoveCategory.PHYSICAL, 70,100,10, absorbs_hp));
+        allMoves.add(new Moves("Horn Leech", PokeTyping.GRASS, MoveCategory.PHYSICAL, 75,100, 10, absorbs_hp));
+
 
         // causes flinching (maybe)
 
@@ -87,22 +100,23 @@ public class MovesRepository {
         allMoves.add(new Moves("Glare", PokeTyping.NORMAL, MoveCategory.STATUS, 0, 100, 30, paralyzes_opponent));
         allMoves.add(new Moves("Stun Spore", PokeTyping.GRASS, MoveCategory.STATUS, 0, 75, 30, paralyzes_opponent));
         allMoves.add(new Moves("Thunder Wave", PokeTyping.ELECTRIC, MoveCategory.STATUS, 0, 90, 20, paralyzes_opponent));
-
-
-
-
-
-
+        allMoves.add(new Moves("Nuzzle", PokeTyping.ELECTRIC, MoveCategory.PHYSICAL, 20, 100, 20, paralyzes_opponent));
+        allMoves.add(new Moves("Zap Canon", PokeTyping.ELECTRIC, MoveCategory.SPECIAL, 120, 50, 5, paralyzes_opponent));
 
         return allMoves;
     }
 
-    public static Moves getMoveByName(String moveName){
+    public static Moves getMoveByName(String moveName) {
         for (Moves move : getAllMoves()) {
             if (move.getName().equalsIgnoreCase(moveName)){
                 return move;
             }
         }
         return null;
+    }
+
+    public static int countAllMoves() {
+        List<Moves> allMoves = getAllMoves();
+        return allMoves.size();
     }
 }

@@ -21,6 +21,9 @@ public class Main {
         battle.simulateBattle(one, two);
 
 
+        //System.out.println(MovesRepository.countAllMoves());
+
+
 
     }
 }
