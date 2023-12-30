@@ -114,6 +114,7 @@ public class BattleSimulator {
             isDamageApplied = true;
 
         } else {
+
             effect.apply(attacker, defender);
         }
 

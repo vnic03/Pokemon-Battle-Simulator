@@ -22,6 +22,7 @@ public class MayPoisonEffect implements MoveEffectWithDamage {
 
        int damage = DamageCalculator.calculateDamage(user, target, move);
        target.takeDamage(damage);
+        System.out.println(user.getName() + " hits " + target.getName() + " with " + move.getName() + " for " + damage + " damage !");
 
         if (target.hasStatusCondition() || target.getTyping().contains(PokeTyping.POISON)) {
             return;

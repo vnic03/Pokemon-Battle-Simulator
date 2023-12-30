@@ -14,6 +14,8 @@ public class AbsorbEffect implements MoveEffectWithDamage {
     public void applyWithDamage(Pokemon user, Pokemon target, Moves move) {
 
         int damage = DamageCalculator.calculateDamage(user, target, move);
+        target.takeDamage(damage);
+        System.out.println(user.getName() + " hits " + target.getName() + " with " + move.getName() + " for " + damage + " damage !");
 
         user.heal(damage / 2);
 

@@ -32,7 +32,7 @@ public class MovesRepository {
 
         MoveEffect may_poison_opponent = new MayPoisonEffect();
 
-        MoveEffect may_freeze_opponent = new FreezeEffect();
+        MoveEffect may_freeze_opponent = new MayFreezeEffect();
 
 
         List<Moves> allMoves = new ArrayList<>();
