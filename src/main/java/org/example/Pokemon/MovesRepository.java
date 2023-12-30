@@ -22,6 +22,8 @@ public class MovesRepository {
 
         MoveEffect hits_2_5_times = new HitsMoreTimesEffect();
 
+        MoveEffect burns_opponent = new BurnEffect();
+
 
         List<Moves> allMoves = new ArrayList<>();
 
@@ -102,6 +104,12 @@ public class MovesRepository {
         allMoves.add(new Moves("Thunder Wave", PokeTyping.ELECTRIC, MoveCategory.STATUS, 0, 90, 20, paralyzes_opponent));
         allMoves.add(new Moves("Nuzzle", PokeTyping.ELECTRIC, MoveCategory.PHYSICAL, 20, 100, 20, paralyzes_opponent));
         allMoves.add(new Moves("Zap Canon", PokeTyping.ELECTRIC, MoveCategory.SPECIAL, 120, 50, 5, paralyzes_opponent));
+
+        // burns opponent
+
+        allMoves.add(new Moves("Will-O-Wisp", PokeTyping.FIRE, MoveCategory.STATUS, 0, 85, 15 ,burns_opponent));
+        allMoves.add(new Moves("Inferno", PokeTyping.FIRE, MoveCategory.SPECIAL, 100,50,5,burns_opponent));
+
 
         return allMoves;
     }

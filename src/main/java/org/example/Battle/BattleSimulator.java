@@ -51,6 +51,9 @@ public class BattleSimulator {
 
             doAttack(secondAttacker, firstAttacker, secondMove);
 
+            applyEndOfTurnEffects(pokemon1);
+            applyEndOfTurnEffects(pokemon2);
+
             if (!firstAttacker.isAlive()) {
                 System.out.println(secondAttacker.getName() + " wins!");
                 break;
@@ -132,5 +135,14 @@ public class BattleSimulator {
         int hitRoll = random.nextInt(100) + 1;
 
         return hitRoll <= accuracy;
+    }
+
+    public void applyEndOfTurnEffects(Pokemon pokemon) {
+        if (pokemon.isBurned()) {
+            int burnDamage = pokemon.getStats().getMaxHp() / 16;
+            pokemon.takeDamage(burnDamage);
+            System.out.println(pokemon.getName() + " is hurt by it's burn!");
+        }
+        // more effects
     }
 }

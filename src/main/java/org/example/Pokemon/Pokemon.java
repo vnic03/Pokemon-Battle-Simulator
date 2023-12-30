@@ -14,6 +14,7 @@ public class Pokemon {
     private List<Moves> moves;
     private Nature nature;
     private boolean isParalyzed;
+    private boolean isBurned;
 
     private int lastDamageTaken;
 
@@ -108,6 +109,16 @@ public class Pokemon {
             return new Random().nextDouble() > 0.25;
         }
         return true;
+    }
+
+    public void setBurned(boolean burned){
+        this.isBurned = burned;
+        if (burned) {
+            this.stats.setAttack(this.stats.getAttack() / 2);
+        }
+    }
+    public boolean isBurned() {
+        return isBurned;
     }
 
     private void applyNatureEffects() {
