@@ -3,7 +3,7 @@ package org.example.Pokemon.Effects;
 import org.example.Pokemon.PokeTyping;
 import org.example.Pokemon.Pokemon;
 
-public class BurnEffect implements MoveEffect {
+public class BadlyPoisonedEffect implements MoveEffect {
 
     @Override
     public void apply(Pokemon user, Pokemon target) {
@@ -13,17 +13,17 @@ public class BurnEffect implements MoveEffect {
             return;
         }
 
-        if (target.getTyping().contains(PokeTyping.FIRE)) {
-            System.out.println(target.getName() +" can't be burned !");
+        if (target.getTyping().contains(PokeTyping.POISON)) {
+            System.out.println(target.getName() + " can't be poisoned");
             return;
         }
 
-        if (target.isBurned()) {
-            System.out.println(target.getName() + " is already burned !");
+        if (target.isBadlyPoisoned()) {
+            System.out.println(target.getName() + " is already badly poisoned !");
             return;
         }
 
-        target.setBurned(true);
-        System.out.println(target.getName() + " got burned !");
+        target.setBadlyPoisoned(true);
+        System.out.println(target.getName() + " got badly poisoned !");
     }
 }

@@ -26,6 +26,14 @@ public class MovesRepository {
 
         MoveEffect may_burn_opponent = new MayBurnEffect();
 
+        MoveEffect poisons_opponent = new PoisonEffect();
+
+        MoveEffect badly_poisons_opponent = new BadlyPoisonedEffect();
+
+        MoveEffect may_poison_opponent = new MayPoisonEffect();
+
+        MoveEffect may_freeze_opponent = new FreezeEffect();
+
 
         List<Moves> allMoves = new ArrayList<>();
 
@@ -120,6 +128,35 @@ public class MovesRepository {
         allMoves.add(new Moves("Scald", PokeTyping.WATER, MoveCategory.SPECIAL, 80, 100, 15, may_burn_opponent));
         allMoves.add(new Moves("Flamethrower", PokeTyping.FIRE, MoveCategory.SPECIAL, 90, 100, 15, may_burn_opponent));
         allMoves.add(new Moves("Fire Punch", PokeTyping.FIRE, MoveCategory.PHYSICAL, 75, 100, 15, may_burn_opponent));
+
+        // poisons opponent
+
+        allMoves.add(new Moves("Poison Gas", PokeTyping.POISON, MoveCategory.STATUS, 0, 90, 40, poisons_opponent));
+        allMoves.add(new Moves("Poison Powder", PokeTyping.POISON, MoveCategory.STATUS, 0, 75, 30, poisons_opponent));
+
+        // badly poisons opponent
+
+        allMoves.add(new Moves("Toxic", PokeTyping.POISON, MoveCategory.STATUS, 0, 90, 10, badly_poisons_opponent));
+
+        // may poison opponent
+
+        allMoves.add(new Moves("Gunk Shot", PokeTyping.POISON, MoveCategory.PHYSICAL, 120, 80, 5, may_poison_opponent));
+        allMoves.add(new Moves("Poison Jab", PokeTyping.POISON, MoveCategory.PHYSICAL, 80, 100, 20, may_poison_opponent));
+        allMoves.add(new Moves("Poison Sting", PokeTyping.POISON, MoveCategory.PHYSICAL, 15, 100, 30, may_poison_opponent));
+        allMoves.add(new Moves("Sludge", PokeTyping.POISON, MoveCategory.SPECIAL, 65,100,20,may_poison_opponent));
+        allMoves.add(new Moves("Sludge Bomb", PokeTyping.POISON, MoveCategory.SPECIAL, 90, 100, 10, may_poison_opponent));
+        allMoves.add(new Moves("Sludge Wave", PokeTyping.POISON, MoveCategory.SPECIAL, 95,100, 10, may_poison_opponent));
+        allMoves.add(new Moves("Smog", PokeTyping.POISON, MoveCategory.SPECIAL, 30,70,20,may_poison_opponent));
+
+        // may freeze opponent
+
+        allMoves.add(new Moves("Blizzard", PokeTyping.ICE, MoveCategory.SPECIAL, 110, 70, 5, may_freeze_opponent));
+        allMoves.add(new Moves("Ice Beam", PokeTyping.ICE, MoveCategory.SPECIAL, 90,100,10,may_freeze_opponent));
+        allMoves.add(new Moves("Ice Punch", PokeTyping.ICE, MoveCategory.PHYSICAL, 75,100, 15,may_freeze_opponent));
+        allMoves.add(new Moves("Powder Snow", PokeTyping.ICE, MoveCategory.SPECIAL, 40, 100, 25, may_freeze_opponent ));
+
+
+
 
 
 

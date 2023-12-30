@@ -15,6 +15,12 @@ public class Pokemon {
     private Nature nature;
     private boolean isParalyzed;
     private boolean isBurned;
+    private boolean isPoisoned;
+    private boolean isBadlyPoisoned;
+    private int badlyPoisonedTurns;
+    private boolean isFrozen;
+    private static final double CHANCE_TO_THAW = 0.20;
+    private static final Random random = new Random();
 
     private int lastDamageTaken;
 
@@ -105,10 +111,34 @@ public class Pokemon {
     }
 
     public boolean canAct() {
-        if (isParalyzed) {
-            return new Random().nextDouble() > 0.25;
+
+        if (isFrozen) {
+            if (random.nextDouble() < CHANCE_TO_THAW) {
+                isFrozen =false;
+                System.out.println(this.name + " has thawed out !");
+
+            } else {
+                System.out.println(this.name + " is frozen solid !");
+                return false;
+            }
         }
+
+        if (isParalyzed) {
+            if (random.nextDouble() > 0.25) {
+                System.out.println(this.name + " is paralyzed and can't move !");
+                return false;
+            }
+        }
+
         return true;
+    }
+
+    public boolean isFrozen() {
+        return isFrozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        isFrozen = frozen;
     }
 
     public void setBurned(boolean burned){
@@ -120,6 +150,32 @@ public class Pokemon {
     public boolean isBurned() {
         return isBurned;
     }
+
+    public void setPoisoned(boolean poisoned) {
+        isPoisoned = poisoned;
+    }
+
+    public boolean isPoisoned() {
+        return isPoisoned;
+    }
+
+    public void setBadlyPoisoned(boolean badlyPoisoned) {
+        isBadlyPoisoned = badlyPoisoned;
+        badlyPoisonedTurns = 1; // Counter to increase damage every round
+    }
+
+    public boolean isBadlyPoisoned() {
+        return isBadlyPoisoned;
+    }
+
+    public int getBadlyPoisonedTurns() {
+        return badlyPoisonedTurns;
+    }
+
+    public void incrementBadlyPoisonedTurns() {
+        badlyPoisonedTurns++;
+    }
+
 
     private void applyNatureEffects() {
 
@@ -168,6 +224,16 @@ public class Pokemon {
         System.out.println(this.getName() + " healed " + healedAmount + " HP !");
     }
 
+    public boolean hasStatusCondition() {
+        return isBurned || isParalyzed || isPoisoned || isBadlyPoisoned || isFrozen;
+    }
+
+    public void clearStatusCondition(){
+        isBurned = false;
+        isPoisoned = false;
+        isParalyzed = false;
+        isBadlyPoisoned = false;
+    }
 
 
     public String toString(){

@@ -80,7 +80,6 @@ public class BattleSimulator {
     private void doAttack(Pokemon attacker, Pokemon defender, String moveName) {
 
         if (!attacker.canAct()) {
-            System.out.println(attacker.getName() + " is paralyzed and cannot act!");
             return;
         }
 
@@ -138,11 +137,27 @@ public class BattleSimulator {
     }
 
     public void applyEndOfTurnEffects(Pokemon pokemon) {
+
+        // Weather
+
         if (pokemon.isBurned()) {
             int burnDamage = pokemon.getStats().getMaxHp() / 16;
             pokemon.takeDamage(burnDamage);
             System.out.println(pokemon.getName() + " is hurt by it's burn!");
         }
+
+        if (pokemon.isPoisoned()) {
+            int poisonDamage = pokemon.getStats().getMaxHp() / 8;
+            pokemon.takeDamage(poisonDamage);
+            System.out.println(pokemon.getName() + " is hurt by poison !");
+        }
+
+        if (pokemon.isBadlyPoisoned()) {
+            int badlyPoisonDamage = pokemon.getStats().getMaxHp() / 16 * pokemon.getBadlyPoisonedTurns();
+            pokemon.takeDamage(badlyPoisonDamage);
+            System.out.println(pokemon.getName() + " is hurt by bad poison !");
+        }
+
         // more effects
     }
 }

@@ -1,23 +1,31 @@
 package org.example.Pokemon.Effects;
 
+import org.example.Battle.DamageCalculator;
+import org.example.Pokemon.Moves;
 import org.example.Pokemon.PokeTyping;
 import org.example.Pokemon.Pokemon;
 
 import java.util.Random;
 
-public class MayBurnEffect implements MoveEffect {
+public class MayBurnEffect implements MoveEffectWithDamage {
 
     private static final double CHANCE_TO_BURN = 0.10;
 
     @Override
-    public void apply(Pokemon user, Pokemon target) {
+    public void apply(Pokemon user, Pokemon target) {}
 
+    @Override
+    public void applyWithDamage(Pokemon user, Pokemon target, Moves move) {
+
+        int damage = DamageCalculator.calculateDamage(user, target, move);
+        target.takeDamage(damage);
+
+        if (target.hasStatusCondition() || target.getTyping().contains(PokeTyping.FIRE)) {
+            return;
+        }
         if (new Random().nextDouble() < CHANCE_TO_BURN) {
-
-            if (!target.isBurned() && !target.getTyping().contains(PokeTyping.FIRE)) {
-                target.setBurned(true);
-                System.out.println(target.getName() + " got burned!");
-            }
+            target.setBurned(true);
+            System.out.println(target.getName() + " got burned!");
         }
     }
 }

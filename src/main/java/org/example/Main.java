@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
 
+
         MoveSelector moveSelector = new MoveSelector();
         BattleSimulator battle = new BattleSimulator();
 
@@ -19,6 +20,7 @@ public class Main {
         moveSelector.selectMovesForPokemon(two);
 
         battle.simulateBattle(one, two);
+
 
 
         //System.out.println(MovesRepository.countAllMoves());
