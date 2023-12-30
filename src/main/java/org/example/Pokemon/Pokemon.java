@@ -46,9 +46,9 @@ public class Pokemon {
     }
 
     public Moves chooseMoveByName(String moveName) {
-        for (Moves move : moves) {
+        for (Moves move : this.moves) {
             if (move.getName().equalsIgnoreCase(moveName)) {
-                return MovesRepository.getMoveByName(moveName);
+                return move;
             }
         }
         System.out.println("Move not found!");
@@ -77,7 +77,7 @@ public class Pokemon {
         }
     }
     public boolean isParalyzed() {
-        return isParalyzed;
+        return this.isParalyzed;
     }
 
     public boolean canAct() {

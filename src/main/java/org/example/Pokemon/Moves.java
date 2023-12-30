@@ -8,16 +8,16 @@ public class Moves {
     private  MoveCategory category;
     private int power;
     private int accuracy;
-    private int powerPoints;
+    private int currentPP;
     private MoveEffect effect;
 
-    public Moves(String name, PokeTyping type,MoveCategory category, int power, int accuracy, int pp, MoveEffect moveEffect){
+    public Moves(String name, PokeTyping type,MoveCategory category, int power, int accuracy, int initialPP, MoveEffect moveEffect){
         this.name = name;
         this.type = type;
         this.category = category;
         this.power = power;
         this.accuracy = accuracy;
-        this.powerPoints = pp;
+        this.currentPP = initialPP;
         this.effect = moveEffect;
     }
 
@@ -45,11 +45,21 @@ public class Moves {
         this.category = category;
     }
     public int getPp() {
-        return powerPoints;
+        return this.currentPP;
     }
 
     public void setPp(int pp) {
-        this.powerPoints = pp;
+        this.currentPP = pp;
+    }
+
+    public MoveEffect getEffect() {
+        return effect;
+    }
+
+    public void useMove() {
+        if (this.currentPP > 0) {
+            this.currentPP--;
+        }
     }
 
     @Override
@@ -59,7 +69,7 @@ public class Moves {
                 ", Category: " + category +
                 ", Power: " + power +
                 ", Accuracy: " + accuracy +
-                ", PP: " + powerPoints +
+                ", PP: " + currentPP +
                 ", Effect: " + (effect != null ? effect.getClass().getSimpleName() : "None");
     }
 }

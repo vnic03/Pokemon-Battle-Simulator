@@ -13,7 +13,7 @@ public class MoveSelector {
         System.out.println("Choose moves for " + pokemon.getName() + " (4 moves MAX) Type 'done' if you don't want to add 4 moves: ");
 
         while (pokemon.getMoves().size() < 4) {
-            System.out.println("Move name (Move " + (pokemon.getMoves().size() + 1) + " ): ");
+            System.out.println("Move name (Move " + (pokemon.getMoves().size() + 1) + "): ");
             String moveName = scanner.nextLine();
 
             if ("done".equalsIgnoreCase(moveName) && !pokemon.getMoves().isEmpty()) {

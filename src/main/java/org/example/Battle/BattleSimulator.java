@@ -1,12 +1,13 @@
 package org.example.Battle;
 
 import org.example.Pokemon.*;
+import org.example.Pokemon.Effects.MoveEffect;
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class BattleSimulator {
-    public void simulateBattle(Pokemon pokemon1, Pokemon pokemon2){
+    public void simulateBattle(Pokemon pokemon1, Pokemon pokemon2) {
 
         Scanner scanner = new Scanner(System.in);
         int round = 1;
@@ -23,8 +24,13 @@ public class BattleSimulator {
 
             String firstMoveInput = scanner.nextLine();
             String firstMove = MoveSelector.getMoveNameByNumber(firstAttacker, firstMoveInput);
-            doAttack(firstAttacker, secondAttacker, firstMove);
 
+            Moves chosenMove = firstAttacker.chooseMoveByName(firstMove);
+            if (chosenMove != null) {
+                System.out.println(chosenMove.getName() + " PP remaining: " + chosenMove.getPp());
+            }
+
+            doAttack(firstAttacker, secondAttacker, firstMove);
 
             if (!secondAttacker.isAlive()) {
                 System.out.println(firstAttacker.getName() + " wins!");
@@ -35,6 +41,12 @@ public class BattleSimulator {
 
             String secondMoveInput = scanner.nextLine();
             String secondMove = MoveSelector.getMoveNameByNumber(secondAttacker, secondMoveInput);
+
+            Moves chosenMove2 = secondAttacker.chooseMoveByName(secondMove);
+            if (chosenMove2 != null) {
+                System.out.println(chosenMove2.getName() + " PP remaining: " + chosenMove2.getPp());
+            }
+
             doAttack(secondAttacker, firstAttacker, secondMove);
 
             if (!firstAttacker.isAlive()) {
@@ -45,6 +57,7 @@ public class BattleSimulator {
 
         }
     }
+
     private Pokemon determineFirstAttacker(Pokemon pokemon1, Pokemon pokemon2) {
 
         int pokemonSpeed1 = pokemon1.getStats().getSpeed();
@@ -59,23 +72,40 @@ public class BattleSimulator {
         }
     }
 
-    private void doAttack(Pokemon attacker, Pokemon defender, String moveName){
+    private void doAttack(Pokemon attacker, Pokemon defender, String moveName) {
+
+        if (!attacker.canAct()) {
+            System.out.println(attacker.getName() + " is paralyzed and cannot act!");
+            return;
+        }
 
         Moves move = attacker.chooseMoveByName(moveName);
 
-        if (move != null) {
-            if (!doesMoveHit(move, attacker, defender)) {
-                System.out.println(attacker.getName() + " missed " + defender.getName());
-            } else {
-                int damage = DamageCalculator.calculateDamage(attacker, defender, move);
-                defender.takeDamage(damage);
-                System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + damage + " damage.");
-            }
-        } else {
+        if (move == null) {
             System.out.println("Move not found or invalid.");
+            return;
         }
 
+        move.useMove();
+
+        if (!doesMoveHit(move, attacker, defender)) {
+            System.out.println(attacker.getName() + " missed " + defender.getName());
+            return;
+        }
+
+        MoveEffect effect = move.getEffect();
+        effect.apply(attacker, defender);
+
+
+        if (move.getCategory() != MoveCategory.STATUS) {
+
+            int damage = DamageCalculator.calculateDamage(attacker, defender, move);
+            defender.takeDamage(damage);
+            System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + damage + " damage.");
+        }
     }
+
+
     private boolean doesMoveHit(Moves move, Pokemon attacker, Pokemon defender) {
         Random random = new Random();
 
