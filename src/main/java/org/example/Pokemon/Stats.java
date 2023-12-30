@@ -73,9 +73,9 @@ public class Stats {
                 "hp=" + hp +
                 ", attack=" + attack +
                 ", defense=" + defense +
-                ", speed=" + speed +
                 ", specialAttack=" + specialAttack +
                 ", specialDefense=" + specialDefense +
+                ", speed=" + speed +
                 '}';
     }
 }

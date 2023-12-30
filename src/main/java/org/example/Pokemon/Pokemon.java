@@ -126,6 +126,7 @@ public class Pokemon {
                 "name='" + name + '\'' +
                 ", typing=" + typeString +
                 ", level=" + level +
+                ", nature=" + nature +
                 ", stats=" + stats +
                 ", moves=" + moveString +
                 '}';

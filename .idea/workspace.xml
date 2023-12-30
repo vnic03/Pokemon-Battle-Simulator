@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated BattleSimulator, Effects and added Nature">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Stat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FailedIdeas/PokemonCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FailedIdeas/PokemonCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MoveSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MoveSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Nature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Nature.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonRepository.java" afterDir="false" />
-    </list>
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated Nature" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,7 +106,7 @@
       <workItem from="1703723735885" duration="10145000" />
       <workItem from="1703771253028" duration="8532000" />
       <workItem from="1703799043773" duration="14585000" />
-      <workItem from="1703872278636" duration="23894000" />
+      <workItem from="1703872278636" duration="24393000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -189,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703896190167</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Updated Nature">
+      <option name="closed" value="true" />
+      <created>1703899630427</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1703899630427</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,6 +205,7 @@
     <MESSAGE value="MoveSelector added, simple Battle test" />
     <MESSAGE value="MoveSelector updated" />
     <MESSAGE value="Updated BattleSimulator, Effects and added Nature" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated BattleSimulator, Effects and added Nature" />
+    <MESSAGE value="Updated Nature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Nature" />
   </component>
 </project>
