@@ -9,7 +9,31 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class BattleSimulator {
+
+    private static BattleSimulator instance = new BattleSimulator();
+
+    private Pokemon pokemon1;
+    private Pokemon pokemon2;
+
+    private Weather currentWeather;
+    private int weatherDuration;
+
+    private BattleSimulator(){}
+
+    public static BattleSimulator getInstance() {
+        return instance;
+    }
+
+
     public void simulateBattle(Pokemon pokemon1, Pokemon pokemon2) {
+
+        this.pokemon1 = pokemon1;
+        this.pokemon2 = pokemon2;
+
+        pokemon1.saveOriginalStats();
+        pokemon2.saveOriginalStats();
+
+        setWeather(Weather.NONE);
 
         Scanner scanner = new Scanner(System.in);
         int round = 1;
@@ -18,6 +42,15 @@ public class BattleSimulator {
 
             System.out.println("Round " + round + ": ");
             System.out.println(pokemon1.getName() + " (" + pokemon1.getStats().getHp() + " HP) vs. " + pokemon2.getName() + " (" + pokemon2.getStats().getHp() + " HP)");
+
+            if (currentWeather != Weather.NONE) {
+                weatherDuration++;
+                if (weatherDuration >= 5) {
+                    setWeather(Weather.NONE);
+                }
+            }
+
+            System.out.println("Current weather: " + currentWeather);
 
             Pokemon firstAttacker = determineFirstAttacker(pokemon1, pokemon2);
             Pokemon secondAttacker = (firstAttacker == pokemon1) ? pokemon2 : pokemon1;
@@ -61,6 +94,9 @@ public class BattleSimulator {
             round++;
 
         }
+
+        pokemon1.resetStats();
+        pokemon2.resetStats();
     }
 
     private Pokemon determineFirstAttacker(Pokemon pokemon1, Pokemon pokemon2) {
@@ -104,13 +140,13 @@ public class BattleSimulator {
 
         if (effect instanceof MultiHitMoveEffect) {
             MultiHitMoveEffect multiHitMoveEffect = (MultiHitMoveEffect) effect;
-            int totalDamage = multiHitMoveEffect.applyMultiHitDamage(attacker, defender, move);
+            int totalDamage = multiHitMoveEffect.applyMultiHitDamage(attacker, defender, move, currentWeather);
             System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + totalDamage + " damage.");
             isDamageApplied = true;
 
         } else if (effect instanceof MoveEffectWithDamage) {
             MoveEffectWithDamage effectWithDamage = (MoveEffectWithDamage) effect;
-            effectWithDamage.applyWithDamage(attacker, defender, move);
+            effectWithDamage.applyWithDamage(attacker, defender, move, currentWeather);
             isDamageApplied = true;
 
         } else {
@@ -119,7 +155,7 @@ public class BattleSimulator {
 
         if (!isDamageApplied && move.getCategory() != MoveCategory.STATUS) {
 
-            int damage = DamageCalculator.calculateDamage(attacker, defender, move);
+            int damage = DamageCalculator.calculateDamage(attacker, defender, move, currentWeather);
             defender.takeDamage(damage);
             System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + damage + " damage.");
         }
@@ -138,7 +174,24 @@ public class BattleSimulator {
 
     public void applyEndOfTurnEffects(Pokemon pokemon) {
 
-        // Weather
+        int originalSpDefense = pokemon.getStats().getSpecialDefense();
+        int originalDefense = pokemon.getStats().getDefense();
+
+        applyWeatherEffects(pokemon);
+
+        switch (currentWeather) {
+            case SANDSTORM:
+                applySandstormDamage(pokemon);
+                if (pokemon.getTyping().contains(PokeTyping.ROCK)) {
+                    pokemon.getStats().setSpecialDefense((int) (pokemon.getStats().getSpecialDefense() * 1.5));
+                }
+                break;
+            case SNOW:
+                if (pokemon.getTyping().contains(PokeTyping.ICE)) {
+                    pokemon.getStats().setDefense((int) (pokemon.getStats().getDefense() * 1.5));
+                }
+                break;
+        }
 
         if (pokemon.isBurned()) {
             int burnDamage = pokemon.getStats().getMaxHp() / 16;
@@ -161,5 +214,70 @@ public class BattleSimulator {
         pokemon.decrementSleepTurns();
 
         // more effects
+
+        pokemon.getStats().setSpecialDefense(originalSpDefense);
+        pokemon.getStats().setDefense(originalDefense);
     }
+
+    private void applyWeatherEffects(Pokemon pokemon) {
+        switch (currentWeather) {
+            case SANDSTORM:
+                applySandstormDamage(pokemon);
+                if (pokemon.getTyping().contains(PokeTyping.ROCK)) {
+                    pokemon.getStats().setSpecialDefense((int) (pokemon.getStats().getSpecialDefense() * 1.5));
+                }
+                break;
+            case SNOW:
+                if (pokemon.getTyping().contains(PokeTyping.ICE)) {
+                    pokemon.getStats().setDefense((int) (pokemon.getStats().getDefense() * 1.5));
+                }
+                break;
+        }
+    }
+
+    private void applySandstormDamage(Pokemon pokemon) {
+        if (!pokemon.getTyping().contains(PokeTyping.ROCK) &&
+                !pokemon.getTyping().contains(PokeTyping.GROUND) &&
+                !pokemon.getTyping().contains(PokeTyping.STEEL)) {
+
+            int damage = pokemon.getStats().getMaxHp() / 16;
+            pokemon.takeDamage(damage);
+            System.out.println(pokemon.getName() + " took damage(" + damage +") from Sand");
+        }
+    }
+
+    public void setWeather(Weather updatedWeather) {
+        currentWeather = updatedWeather;
+        weatherDuration = 0;
+        System.out.println(getWeatherMessage(updatedWeather));
+    }
+
+    private void resetWeatherEffects(Pokemon pokemon) {
+        pokemon.resetStats();
+    }
+
+    private String getWeatherMessage(Weather weather) {
+        switch (weather) {
+            case SUN -> {
+                return "The sunlight turned harsh!";
+            }
+            case RAIN -> {
+                return "It started to rain!";
+            }
+            case SANDSTORM -> {
+                return "A sandstorm kicked up!";
+            }
+            case SNOW -> {
+                return "It started to snow!";
+            }
+            case NONE -> {
+                return "The weather cleared up !";
+            }
+            default -> {
+                return "The weather changed !";
+            }
+        }
+    }
+
+
 }

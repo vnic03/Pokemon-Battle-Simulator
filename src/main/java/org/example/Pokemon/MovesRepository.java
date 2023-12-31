@@ -1,5 +1,7 @@
 package org.example.Pokemon;
 
+import org.example.Battle.BattleSimulator;
+import org.example.Battle.Weather;
 import org.example.Pokemon.Effects.*;
 
 import java.util.ArrayList;
@@ -37,6 +39,14 @@ public class MovesRepository {
         MoveEffect puts_opponent_to_sleep = new SleepEffect();
 
         MoveEffect puts_opponent_to_sleep_no_grass = new SleepPowderEffect();
+
+        MoveEffect makes_it_sunny = new ChangeWeatherEffect(Weather.SUN);
+
+        MoveEffect makes_it_rain = new ChangeWeatherEffect(Weather.RAIN);
+
+        MoveEffect creates_a_sandStorm = new ChangeWeatherEffect(Weather.SANDSTORM);
+
+        MoveEffect snow = new ChangeWeatherEffect(Weather.SNOW);
 
 
         List<Moves> allMoves = new ArrayList<>();
@@ -169,6 +179,14 @@ public class MovesRepository {
 
         allMoves.add(new Moves("Sleep Powder", PokeTyping.GRASS, MoveCategory.STATUS, 0, 75, 15, puts_opponent_to_sleep_no_grass));
         allMoves.add(new Moves("Spore", PokeTyping.GRASS, MoveCategory.STATUS, 0, 100, 15, puts_opponent_to_sleep_no_grass));
+
+
+        // Weather Moves
+
+        allMoves.add(new Moves("Sunny Day", PokeTyping.FIRE, MoveCategory.STATUS, 0, 100, 5, makes_it_sunny));
+        allMoves.add(new Moves("Rain Dance", PokeTyping.WATER, MoveCategory.STATUS, 0, 100 ,5, makes_it_rain));
+        allMoves.add(new Moves("SandStorm", PokeTyping.ROCK, MoveCategory.STATUS, 0, 100, 10, creates_a_sandStorm));
+        allMoves.add(new Moves("Snowscape", PokeTyping.ICE, MoveCategory.STATUS, 0, 100, 10, snow));
 
 
         return allMoves;

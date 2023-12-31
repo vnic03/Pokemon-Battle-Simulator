@@ -24,6 +24,9 @@ public class Pokemon {
     private int sleepTurns;
     private static final Random random = new Random();
 
+    private int originalDefense;
+    private int originalSpDefense;
+
     private int lastDamageTaken;
 
 
@@ -261,6 +264,18 @@ public class Pokemon {
         isPoisoned = false;
         isParalyzed = false;
         isBadlyPoisoned = false;
+    }
+
+    public void saveOriginalStats() {
+        this.originalDefense = this.getStats().getDefense();
+        this.originalSpDefense = this.getStats().getSpecialDefense();
+
+        // more later for stat boost ?
+    }
+
+    public void resetStats() {
+         this.getStats().setDefense(this.originalDefense);
+         this.getStats().setSpecialDefense(this.originalSpDefense);
     }
 
 

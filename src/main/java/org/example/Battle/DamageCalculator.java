@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Collections;
 
 public class DamageCalculator {
-    public static int calculateDamage(Pokemon attacker, Pokemon defender, Moves attack) {
+    public static int calculateDamage(Pokemon attacker, Pokemon defender, Moves attack, Weather weather) {
 
         Stats attackStats = attacker.getStats();
         Stats defenderStats = defender.getStats();
@@ -33,7 +33,10 @@ public class DamageCalculator {
 
         int damage = (int) ((((2 * attacker.getLevel() / 5 + 2) * attack.getPower() * attackStat /
                 defenseStat) / 50 + 2) * typeAdvantage * randomFactor);
-        return damage;
+
+        int finalDamage = applyWeather(damage, attacker, defender, attack, weather);
+
+        return finalDamage;
     }
 
 
@@ -252,5 +255,27 @@ public class DamageCalculator {
 
         return typeChart.getOrDefault(attackType, Collections.emptyMap()).getOrDefault(defenderType, 1.0);
 
+    }
+
+    public static int applyWeather(int baseDamage, Pokemon attacker,Pokemon defender ,Moves attack, Weather weather) {
+        switch (weather) {
+            case SUN:
+                if (attack.getType() == PokeTyping.FIRE) {
+                    return (int) (baseDamage * 1.5);
+                }
+                if (attack.getType() == PokeTyping.WATER) {
+                    return (int) (baseDamage * 0.5);
+                }
+                break;
+            case RAIN:
+                if (attack.getType() == PokeTyping.WATER) {
+                    return (int) (baseDamage * 1.5);
+                }
+                if (attack.getType() == PokeTyping.FIRE) {
+                    return (int) (baseDamage * 0.5);
+                }
+                break;
+        }
+        return baseDamage;
     }
 }
