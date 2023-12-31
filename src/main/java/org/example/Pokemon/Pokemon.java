@@ -20,6 +20,8 @@ public class Pokemon {
     private int badlyPoisonedTurns;
     private boolean isFrozen;
     private static final double CHANCE_TO_THAW = 0.20;
+    private boolean isAsleep;
+    private int sleepTurns;
     private static final Random random = new Random();
 
     private int lastDamageTaken;
@@ -130,6 +132,12 @@ public class Pokemon {
             }
         }
 
+        if (isAsleep) {
+            System.out.println(this.name + " is fast asleep.");
+            decrementSleepTurns();
+            return false;
+        }
+
         return true;
     }
 
@@ -174,6 +182,26 @@ public class Pokemon {
 
     public void incrementBadlyPoisonedTurns() {
         badlyPoisonedTurns++;
+    }
+
+    public boolean isAsleep() {
+        return isAsleep;
+    }
+
+    public void setAsleep(boolean asleep, int turns) {
+        isAsleep = asleep;
+        sleepTurns = asleep ? turns : 0;
+    }
+
+    public void decrementSleepTurns() {
+
+        if (isAsleep) {
+            sleepTurns --;
+            if (sleepTurns <= 0) {
+                isAsleep = false;
+                System.out.println(this.name +" woke up !");
+            }
+        }
     }
 
 
@@ -225,7 +253,7 @@ public class Pokemon {
     }
 
     public boolean hasStatusCondition() {
-        return isBurned || isParalyzed || isPoisoned || isBadlyPoisoned || isFrozen;
+        return isBurned || isParalyzed || isPoisoned || isBadlyPoisoned || isFrozen || isAsleep;
     }
 
     public void clearStatusCondition(){

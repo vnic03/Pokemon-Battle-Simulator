@@ -114,7 +114,6 @@ public class BattleSimulator {
             isDamageApplied = true;
 
         } else {
-
             effect.apply(attacker, defender);
         }
 
@@ -158,6 +157,8 @@ public class BattleSimulator {
             pokemon.takeDamage(badlyPoisonDamage);
             System.out.println(pokemon.getName() + " is hurt by bad poison !");
         }
+
+        pokemon.decrementSleepTurns();
 
         // more effects
     }

@@ -34,6 +34,10 @@ public class MovesRepository {
 
         MoveEffect may_freeze_opponent = new MayFreezeEffect();
 
+        MoveEffect puts_opponent_to_sleep = new SleepEffect();
+
+        MoveEffect puts_opponent_to_sleep_no_grass = new SleepPowderEffect();
+
 
         List<Moves> allMoves = new ArrayList<>();
 
@@ -155,9 +159,16 @@ public class MovesRepository {
         allMoves.add(new Moves("Ice Punch", PokeTyping.ICE, MoveCategory.PHYSICAL, 75,100, 15,may_freeze_opponent));
         allMoves.add(new Moves("Powder Snow", PokeTyping.ICE, MoveCategory.SPECIAL, 40, 100, 25, may_freeze_opponent ));
 
+        // puts opponent to sleep
+
+        allMoves.add(new Moves("Hypnosis", PokeTyping.PSYCHIC, MoveCategory.STATUS, 0, 60, 20, puts_opponent_to_sleep));
+        allMoves.add(new Moves("Grass whistle", PokeTyping.GRASS, MoveCategory.STATUS, 0, 55, 15, puts_opponent_to_sleep));
 
 
+        // puts opponent to sleep (powder moves)
 
+        allMoves.add(new Moves("Sleep Powder", PokeTyping.GRASS, MoveCategory.STATUS, 0, 75, 15, puts_opponent_to_sleep_no_grass));
+        allMoves.add(new Moves("Spore", PokeTyping.GRASS, MoveCategory.STATUS, 0, 100, 15, puts_opponent_to_sleep_no_grass));
 
 
         return allMoves;
