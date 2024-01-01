@@ -16,6 +16,15 @@ public class DamageCalculator {
         List<PokeTyping> attackerTypes = attacker.getTyping();
 
         double typeAdvantage = getTypeAdvantage(attack.getType(), defender.getTyping(), attackerTypes);
+
+        if (typeAdvantage > 1.0) {
+            System.out.println("It's super effective !");
+        } else if (typeAdvantage < 1.0 && typeAdvantage > 0) {
+            System.out.println("It's not very effective...");
+        } else if (typeAdvantage == 0) {
+            System.out.println("It had no effect...");
+        }
+
         double randomFactor = 0.85 + Math.random() * 0.15;
 
         int attackStat;

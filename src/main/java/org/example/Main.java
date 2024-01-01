@@ -14,7 +14,7 @@ public class Main {
         moveSelector.selectMovesForPokemon(one);
 
 
-        Pokemon two = PokemonRepository.getPokemon("Weezing");
+        Pokemon two = PokemonRepository.getPokemon("Venusaur");
         moveSelector.selectMovesForPokemon(two);
 
 
