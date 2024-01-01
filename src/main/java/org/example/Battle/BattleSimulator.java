@@ -112,6 +112,20 @@ public class BattleSimulator {
         }
     }
 
+    public boolean doesTargetActAfterAttacker(Pokemon attacker, Pokemon target) {
+
+       int attackerSpeed = attacker.getStats().getSpeed();
+       int targetSpeed = target.getStats().getSpeed();
+
+        if (attackerSpeed > targetSpeed) {
+            return true;
+        } else if (targetSpeed > attackerSpeed) {
+            return false;
+        } else {
+            return Math.random() < 0.5;
+        }
+    }
+
     private void doAttack(Pokemon attacker, Pokemon defender, String moveName) {
 
         if (!attacker.canAct()) {
@@ -159,6 +173,11 @@ public class BattleSimulator {
                 isDamageApplied = true;
             }
 
+        }
+
+        if (defender.isFlinching()) {
+            defender.setFlinching(false);
+            return;
         }
 
         if (!isDamageApplied && move.getCategory() != MoveCategory.STATUS) {

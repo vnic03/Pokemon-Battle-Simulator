@@ -24,6 +24,8 @@ public class Pokemon {
     private int sleepTurns;
     private static final Random random = new Random();
 
+    private boolean isFlinching = false;
+
     private int originalDefense;
     private int originalSpDefense;
 
@@ -138,6 +140,12 @@ public class Pokemon {
         if (isAsleep) {
             System.out.println(this.name + " is fast asleep.");
             decrementSleepTurns();
+            return false;
+        }
+
+        if (isFlinching) {
+            System.out.println(this.name + " flinched and couldn't move !");
+            isFlinching =false;
             return false;
         }
 
@@ -285,6 +293,14 @@ public class Pokemon {
             }
         }
         return true;
+    }
+
+    public void setFlinching(boolean flinching) {
+        this.isFlinching = flinching;
+    }
+
+    public boolean isFlinching() {
+        return isFlinching;
     }
 
 

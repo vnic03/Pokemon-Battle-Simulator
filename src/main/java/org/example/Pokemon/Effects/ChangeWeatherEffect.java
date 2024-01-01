@@ -6,7 +6,7 @@ import org.example.Pokemon.Pokemon;
 
 public class ChangeWeatherEffect implements MoveEffect {
 
-    private Weather weatherToChange;
+    private final Weather weatherToChange;
 
 
     public ChangeWeatherEffect(Weather changeWeather) {

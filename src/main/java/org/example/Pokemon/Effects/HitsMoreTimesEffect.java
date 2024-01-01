@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class HitsMoreTimesEffect implements MultiHitMoveEffect {
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     @Override
     public void apply(Pokemon user, Pokemon target) {

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class PokemonRepository {
 
-    private static Map<String, Pokemon> pokemonMap = new HashMap<>();
+    private final static Map<String, Pokemon> pokemonMap = new HashMap<>();
 
 
     static {

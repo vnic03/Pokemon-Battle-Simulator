@@ -115,7 +115,7 @@ public class MovesRepository {
         allMoves.add(new Moves("Rock Slide", PokeTyping.ROCK, MoveCategory.PHYSICAL, 75, 90, 10, may_cause_flinching));
         allMoves.add(new Moves("Rolling Kick", PokeTyping.FIGHTING, MoveCategory.PHYSICAL, 60,85,15,may_cause_flinching));
         allMoves.add(new Moves("Stomp", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 65, 100, 20, may_cause_flinching));
-        allMoves.add(new Moves("Waterfall", PokeTyping.WATER ,MoveCategory.PHYSICAL, 80,100,14,may_cause_flinching));
+        allMoves.add(new Moves("Waterfall", PokeTyping.WATER, MoveCategory.PHYSICAL, 80, 100, 14,may_cause_flinching));
 
         // hits multiple times
 
