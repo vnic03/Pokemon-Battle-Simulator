@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Collections;
 
 public class DamageCalculator {
+
+    private static final double CRITICAL_HIT_CHANCE = 0.0417;
+
     public static int calculateDamage(Pokemon attacker, Pokemon defender, Moves attack, Weather weather) {
 
         Stats attackStats = attacker.getStats();
@@ -45,7 +48,16 @@ public class DamageCalculator {
 
         int finalDamage = applyWeather(damage, attacker, defender, attack, weather);
 
+        if (isCriticalHit()) {
+            finalDamage = (int) (finalDamage * 1.5);
+            System.out.println("\u001B[31m" + "CRITICAL HIT !" + "\u001B[0m"); // color = red
+        }
+
         return finalDamage;
+    }
+
+    private static boolean isCriticalHit() {
+        return Math.random() < CRITICAL_HIT_CHANCE;
     }
 
 
