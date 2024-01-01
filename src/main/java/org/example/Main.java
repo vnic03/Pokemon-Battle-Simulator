@@ -7,10 +7,12 @@ import org.example.Pokemon.*;
 public class Main {
     public static void main(String[] args) {
 
+        /*
+
         MoveSelector moveSelector = new MoveSelector();
 
 
-        Pokemon one = PokemonRepository.getPokemon("Charizard");
+
         moveSelector.selectMovesForPokemon(one);
 
 
@@ -24,5 +26,12 @@ public class Main {
 
         //System.out.println(MovesRepository.countAllMoves());
 
+         */
+        Pokemon one = PokemonRepository.getPokemon("Charizard");
+        System.out.println(one);
+        Pokemon p = PokemonRepository.getPokemon("Weezing");
+        System.out.println(p);
+        Pokemon t = PokemonRepository.getPokemon("Pikachu");
+        System.out.println(t);
     }
 }

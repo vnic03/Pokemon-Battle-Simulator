@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Pokemon {
     String name;
+    private Gender gender;
     private List<PokeTyping> typing;
     private final int level = 50;
     private Stats stats;
@@ -34,6 +35,7 @@ public class Pokemon {
 
     public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature, List<Moves> moves) {
         this.name = name;
+        this.gender = randomGender();
         this.typing = typing;
         this.stats = stats;
         this.nature = nature;
@@ -46,6 +48,13 @@ public class Pokemon {
     }
     public int getLevel() {
         return level;
+    }
+
+    private Gender randomGender() {
+        return Math.random() < 0.5 ? Gender.MALE : Gender.FEMALE;
+    }
+    public Gender getGender() {
+        return gender;
     }
 
     public List<PokeTyping> getTyping(){
@@ -312,6 +321,7 @@ public class Pokemon {
 
         return "Pokemon{" +
                 "name='" + name + '\'' +
+                ", gender= " + gender.getSymbol() +
                 ", typing=" + typeString +
                 ", level=" + level +
                 ", nature=" + nature +
