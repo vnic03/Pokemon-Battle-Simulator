@@ -27,10 +27,17 @@ public class Pokemon {
 
     private boolean isFlinching = false;
 
+    private int originalHp;
+    private int originalAttack;
     private int originalDefense;
     private int originalSpDefense;
+    private int originalSpAttack;
+    private int originalSpeed;
 
     private int lastDamageTaken;
+
+
+    private final int[] evs = new int[6];
 
 
     public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature, List<Moves> moves) {
@@ -40,7 +47,10 @@ public class Pokemon {
         this.stats = stats;
         this.nature = nature;
         this.moves = moves;
-        applyNatureEffects();
+
+        if (this.nature != null) {
+            applyNatureEffects();
+        }
     }
 
     public String getName(){
@@ -224,11 +234,8 @@ public class Pokemon {
     }
 
 
-    private void applyNatureEffects() {
+    public void applyNatureEffects() {
 
-        if (this.nature == null) {
-            return;
-        }
 
         double increase = 1.1;
         double decrease = 0.9;
@@ -243,6 +250,8 @@ public class Pokemon {
             }
         }
 
+
+
         if (nature.getDecreasedStat() != null) {
             switch (nature.getDecreasedStat()) {
                 case ATTACK -> stats.setAttack((int) (stats.getAttack() * decrease));
@@ -252,6 +261,65 @@ public class Pokemon {
                 case SPEED -> stats.setSpeed((int) (stats.getSpeed() * decrease));
             }
         }
+
+    }
+
+    public Stats getStatsAfterNatureEffects() {
+        if (this.nature == null) {
+            return this.stats;
+        }
+
+        Stats modifiedStats = new Stats(
+                this.stats.getHp(),
+                this.stats.getAttack(),
+                this.stats.getDefense(),
+                this.stats.getSpecialAttack(),
+                this.stats.getSpecialDefense(),
+                this.stats.getSpeed()
+        );
+
+        double increase = 1.1;
+        double decrease = 0.9;
+
+
+        switch (this.nature.getIncreasedStat()) {
+            case ATTACK:
+                modifiedStats.setAttack((int) (modifiedStats.getAttack() * increase));
+                break;
+            case DEFENSE:
+                modifiedStats.setDefense((int) (modifiedStats.getDefense() * increase));
+                break;
+            case SPECIAL_ATTACK:
+                modifiedStats.setSpecialAttack((int) (modifiedStats.getSpecialAttack() * increase));
+                break;
+            case SPECIAL_DEFENSE:
+                modifiedStats.setSpecialDefense((int) (modifiedStats.getSpecialDefense() * increase));
+                break;
+            case SPEED:
+                modifiedStats.setSpeed((int) (modifiedStats.getSpeed() * increase));
+                break;
+        }
+
+
+        switch (this.nature.getDecreasedStat()) {
+            case ATTACK:
+                modifiedStats.setAttack((int) (modifiedStats.getAttack() * decrease));
+                break;
+            case DEFENSE:
+                modifiedStats.setDefense((int) (modifiedStats.getDefense() * decrease));
+                break;
+            case SPECIAL_ATTACK:
+                modifiedStats.setSpecialAttack((int) (modifiedStats.getSpecialAttack() * decrease));
+                break;
+            case SPECIAL_DEFENSE:
+                modifiedStats.setSpecialDefense((int) (modifiedStats.getSpecialDefense() * decrease));
+                break;
+            case SPEED:
+                modifiedStats.setSpeed((int) (modifiedStats.getSpeed() * decrease));
+                break;
+        }
+
+        return modifiedStats;
     }
 
     public void heal(int amount) {
@@ -280,18 +348,26 @@ public class Pokemon {
         isPoisoned = false;
         isParalyzed = false;
         isBadlyPoisoned = false;
+        isAsleep = false;
     }
 
     public void saveOriginalStats() {
+        this.originalHp = this.getStats().getMaxHp();
+        this.originalAttack = this.getStats().getAttack();
         this.originalDefense = this.getStats().getDefense();
+        this.originalSpAttack = this.getStats().getSpecialAttack();
         this.originalSpDefense = this.getStats().getSpecialDefense();
+        this.originalSpeed = this.getStats().getSpeed();
 
-        // more later for stat boost ?
     }
 
     public void resetStats() {
-         this.getStats().setDefense(this.originalDefense);
-         this.getStats().setSpecialDefense(this.originalSpDefense);
+        this.getStats().setMaxHp(this.originalHp);
+        this.getStats().setAttack(this.originalAttack);
+        this.getStats().setDefense(this.originalDefense);
+        this.getStats().setSpecialAttack(this.originalSpAttack);
+        this.getStats().setSpecialDefense(this.originalSpDefense);
+        this.getStats().setSpeed(this.originalSpeed);
     }
 
     public boolean allMovesOutOfPP() {
@@ -309,6 +385,28 @@ public class Pokemon {
 
     public boolean isFlinching() {
         return isFlinching;
+    }
+
+    public void setEvs(int hpEVs, int attackEVs, int defenseEvs, int spAttackEvs, int spDefenseEvs, int speedEvs) {
+
+        if (hpEVs + attackEVs + defenseEvs + spAttackEvs + spDefenseEvs + speedEvs <= 508
+                && hpEVs <= 252 && attackEVs <= 252 && defenseEvs <= 252
+            && spAttackEvs <= 252 && spDefenseEvs <= 252 && speedEvs <= 252) {
+
+            evs[0] = hpEVs;
+            evs[1] = attackEVs;
+            evs[2] = defenseEvs;
+            evs[3] = spAttackEvs;
+            evs[4] = spDefenseEvs;
+            evs[5] = speedEvs;
+
+        } else {
+            throw new IllegalArgumentException("Invalid Ev spread !");
+        }
+    }
+
+    public int[] getEVs() {
+        return evs;
     }
 
 

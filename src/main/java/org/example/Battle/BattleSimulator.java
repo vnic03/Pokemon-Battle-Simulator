@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class BattleSimulator {
 
-    private static BattleSimulator instance = new BattleSimulator();
+    private final static BattleSimulator instance = new BattleSimulator();
 
     private Pokemon pokemon1;
     private Pokemon pokemon2;
@@ -32,6 +32,9 @@ public class BattleSimulator {
 
         pokemon1.saveOriginalStats();
         pokemon2.saveOriginalStats();
+
+        pokemon1.getStats().calculateFinalStats(pokemon1);
+        pokemon2.getStats().calculateFinalStats(pokemon2);
 
         System.out.println("/=====================! BATTLE BEGINS  !============================/");
 
@@ -314,7 +317,6 @@ public class BattleSimulator {
                 System.out.println("Invalid move. Try again !");
             }
         }
-
     }
 
     private boolean isMoveInputValid(String input, Pokemon pokemon) {

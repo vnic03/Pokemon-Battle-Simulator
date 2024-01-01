@@ -83,6 +83,21 @@ public class Stats {
     }
 
 
+    public void calculateFinalStats(Pokemon pokemon) {
+
+        this.hp = pokemon.getEVs()[0] > 3 ? pokemon.getStats().getMaxHp() + increasedStats(pokemon.getEVs()[0]) + 1 : pokemon.getStats().getMaxHp();
+        this.attack = pokemon.getEVs()[1] > 3 ? pokemon.getStats().getAttack() + increasedStats(pokemon.getEVs()[1]) + 1 : pokemon.getStats().getAttack();
+        this.defense = pokemon.getEVs()[2] > 3 ? pokemon.getStats().getDefense() + increasedStats(pokemon.getEVs()[2]) + 1 : pokemon.getStats().getDefense();
+        this.specialAttack = pokemon.getEVs()[3] > 3 ? pokemon.getStats().getSpecialAttack() + increasedStats(pokemon.getEVs()[3]) + 1 : pokemon.getStats().getSpecialAttack();
+        this.specialDefense = pokemon.getEVs()[4] > 3 ? pokemon.getStats().getSpecialDefense() + increasedStats(pokemon.getEVs()[4]) + 1 : pokemon.getStats().getSpecialDefense();
+        this.speed = pokemon.getEVs()[5] > 3 ? pokemon.getStats().getSpeed() + increasedStats(pokemon.getEVs()[5]) + 1 : pokemon.getStats().getSpeed();
+    }
+
+    private int increasedStats(int evs) {
+        return evs / 8;
+    }
+
+
     @Override
     public String toString() {
         return "Stats{" +
