@@ -15,7 +15,7 @@ public class BattleSimulator {
     private Pokemon pokemon1;
     private Pokemon pokemon2;
 
-    private Weather currentWeather;
+    private Weather currentWeather = Weather.NONE;
     private int weatherDuration;
 
     private BattleSimulator(){}
@@ -33,67 +33,66 @@ public class BattleSimulator {
         pokemon1.saveOriginalStats();
         pokemon2.saveOriginalStats();
 
-        setWeather(Weather.NONE);
+        System.out.println("/=====================! BATTLE BEGINS  !==================================/");
 
         Scanner scanner = new Scanner(System.in);
         int round = 1;
 
         while (pokemon1.isAlive() && pokemon2.isAlive()) {
 
+
             System.out.println("Round " + round + ": ");
             System.out.println(pokemon1.getName() + " (" + pokemon1.getStats().getHp() + " HP) vs. " + pokemon2.getName() + " (" + pokemon2.getStats().getHp() + " HP)");
+
 
             if (currentWeather != Weather.NONE) {
                 weatherDuration++;
                 if (weatherDuration >= 5) {
                     setWeather(Weather.NONE);
                 }
+            } else {
+                System.out.println("Current weather: " + currentWeather);
             }
 
-            System.out.println("Current weather: " + currentWeather);
 
             Pokemon firstAttacker = determineFirstAttacker(pokemon1, pokemon2);
             Pokemon secondAttacker = (firstAttacker == pokemon1) ? pokemon2 : pokemon1;
 
-            System.out.println(firstAttacker.getName() + ", choose your move: ");
 
-            String firstMoveInput = scanner.nextLine();
-            String firstMove = MoveSelector.getMoveNameByNumber(firstAttacker, firstMoveInput);
+            String firstMoveInput = promptForMove(firstAttacker, scanner);
+            String secondMoveInput = promptForMove(secondAttacker, scanner);
 
-            Moves chosenMove = firstAttacker.chooseMoveByName(firstMove);
-            if (chosenMove != null) {
-                System.out.println(chosenMove.getName() + " PP remaining: " + chosenMove.getPp());
-            }
 
-            doAttack(firstAttacker, secondAttacker, firstMove);
 
-            if (!secondAttacker.isAlive()) {
-                System.out.println(firstAttacker.getName() + " wins!");
+            doAttack(firstAttacker, secondAttacker, MoveSelector.getMoveNameByNumber(firstAttacker, firstMoveInput));
+
+            if (secondAttacker.isAlive()) {
+                doAttack(secondAttacker, firstAttacker, MoveSelector.getMoveNameByNumber(secondAttacker, secondMoveInput));
+            } else {
+                System.out.println(secondAttacker.getName() + " has fainted !");
+                System.out.println(firstAttacker.getName() + " WINS !");
                 break;
             }
 
-            System.out.println(secondAttacker.getName() + ", choose your move: ");
 
-            String secondMoveInput = scanner.nextLine();
-            String secondMove = MoveSelector.getMoveNameByNumber(secondAttacker, secondMoveInput);
-
-            Moves chosenMove2 = secondAttacker.chooseMoveByName(secondMove);
-            if (chosenMove2 != null) {
-                System.out.println(chosenMove2.getName() + " PP remaining: " + chosenMove2.getPp());
+            if (pokemon1.isAlive()) {
+                applyEndOfTurnEffects(pokemon1);
+            }
+            if (pokemon2.isAlive()) {
+                applyEndOfTurnEffects(pokemon2);
             }
 
-            doAttack(secondAttacker, firstAttacker, secondMove);
-
-            applyEndOfTurnEffects(pokemon1);
-            applyEndOfTurnEffects(pokemon2);
 
             if (!firstAttacker.isAlive()) {
-                System.out.println(secondAttacker.getName() + " wins!");
+                System.out.println(firstAttacker.getName() + " has fainted ");
+                System.out.println(secondAttacker.getName() + " WINS !");
                 break;
             }
             round++;
 
         }
+
+        System.out.println("/===============! The Battle is OVER !===================/");
 
         pokemon1.resetStats();
         pokemon2.resetStats();
@@ -121,12 +120,16 @@ public class BattleSimulator {
 
         Moves move = attacker.chooseMoveByName(moveName);
 
-        if (move == null) {
-            System.out.println("Move not found or invalid.");
-            return;
+        if (move == null || !move.useMove()) {
+            if (attacker.allMovesOutOfPP()) {
+                System.out.println(attacker.getName() + " has no moves left !");
+                move = MovesRepository.getMoveByName("Struggle");
+            } else {
+                System.out.println("Move has no PP");
+                return;
+            }
         }
 
-        move.useMove();
 
         if (!doesMoveHit(move, attacker, defender)) {
             System.out.println(attacker.getName() + " missed " + defender.getName());
@@ -151,6 +154,11 @@ public class BattleSimulator {
 
         } else {
             effect.apply(attacker, defender);
+
+            if (moveName.equalsIgnoreCase("Struggle")) {
+                isDamageApplied = true;
+            }
+
         }
 
         if (!isDamageApplied && move.getCategory() != MoveCategory.STATUS) {
@@ -177,21 +185,9 @@ public class BattleSimulator {
         int originalSpDefense = pokemon.getStats().getSpecialDefense();
         int originalDefense = pokemon.getStats().getDefense();
 
+
         applyWeatherEffects(pokemon);
 
-        switch (currentWeather) {
-            case SANDSTORM:
-                applySandstormDamage(pokemon);
-                if (pokemon.getTyping().contains(PokeTyping.ROCK)) {
-                    pokemon.getStats().setSpecialDefense((int) (pokemon.getStats().getSpecialDefense() * 1.5));
-                }
-                break;
-            case SNOW:
-                if (pokemon.getTyping().contains(PokeTyping.ICE)) {
-                    pokemon.getStats().setDefense((int) (pokemon.getStats().getDefense() * 1.5));
-                }
-                break;
-        }
 
         if (pokemon.isBurned()) {
             int burnDamage = pokemon.getStats().getMaxHp() / 16;
@@ -220,6 +216,11 @@ public class BattleSimulator {
     }
 
     private void applyWeatherEffects(Pokemon pokemon) {
+
+        if (currentWeather == null) {
+            return;
+        }
+
         switch (currentWeather) {
             case SANDSTORM:
                 applySandstormDamage(pokemon);
@@ -242,14 +243,17 @@ public class BattleSimulator {
 
             int damage = pokemon.getStats().getMaxHp() / 16;
             pokemon.takeDamage(damage);
-            System.out.println(pokemon.getName() + " took damage(" + damage +") from Sand");
+            System.out.println(pokemon.getName() + " took damage (" + damage +") from Sand");
         }
     }
 
     public void setWeather(Weather updatedWeather) {
-        currentWeather = updatedWeather;
-        weatherDuration = 0;
-        System.out.println(getWeatherMessage(updatedWeather));
+
+        if (currentWeather != updatedWeather) {
+            currentWeather = updatedWeather;
+            weatherDuration = 0;
+            System.out.println(getWeatherMessage(updatedWeather));
+        }
     }
 
     private void resetWeatherEffects(Pokemon pokemon) {
@@ -279,5 +283,32 @@ public class BattleSimulator {
         }
     }
 
+    private String promptForMove(Pokemon pokemon, Scanner scanner) {
 
+        while (true) {
+            System.out.println(pokemon.getName() + ", choose your move: ");
+
+            for (int i = 0; i < pokemon.getMoves().size(); i++) {
+                System.out.println((i + 1) + ": " + pokemon.getMoves().get(i).getName()+ " Type: " + pokemon.getMoves().get(i).getType() + " - PP  " + pokemon.getMoves().get(i).getCurrentPP());
+            }
+
+            String moveInput = scanner.nextLine();
+
+            if (isMoveInputValid(moveInput, pokemon)) {
+                return moveInput;
+            } else {
+                System.out.println("Invalid move. Try again !");
+            }
+        }
+
+    }
+
+    private boolean isMoveInputValid(String input, Pokemon pokemon) {
+        try {
+            int moveIndex = Integer.parseInt(input) - 1;
+            return moveIndex >= 0 && moveIndex < pokemon.getMoves().size();
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }

@@ -278,6 +278,16 @@ public class Pokemon {
          this.getStats().setSpecialDefense(this.originalSpDefense);
     }
 
+    public boolean allMovesOutOfPP() {
+        for (Moves move : this.moves) {
+            if (move.getCurrentPP() > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
     public String toString(){
         String typeString = typing.stream().map(PokeTyping::name).collect(Collectors.joining(", "));

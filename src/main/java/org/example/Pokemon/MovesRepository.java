@@ -1,6 +1,5 @@
 package org.example.Pokemon;
 
-import org.example.Battle.BattleSimulator;
 import org.example.Battle.Weather;
 import org.example.Pokemon.Effects.*;
 
@@ -13,6 +12,8 @@ public class MovesRepository {
     public static List<Moves> getAllMoves() {
 
         MoveEffect nothing = new NoEffect();
+
+        MoveEffect struggleEffect = new StruggleEffect();
 
         MoveEffect May_paralyze_the_target = new MayParalyzeEffect();
 
@@ -50,6 +51,10 @@ public class MovesRepository {
 
 
         List<Moves> allMoves = new ArrayList<>();
+
+        // struggle
+
+        allMoves.add(new Moves("Struggle", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 50, 100 ,1000, struggleEffect));
 
         // nothing
 

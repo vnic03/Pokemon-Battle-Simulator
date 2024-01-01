@@ -254,10 +254,15 @@ public class DamageCalculator {
         typeChart.put(PokeTyping.FAIRY, fairy);
 
         return typeChart.getOrDefault(attackType, Collections.emptyMap()).getOrDefault(defenderType, 1.0);
-
     }
 
+
     public static int applyWeather(int baseDamage, Pokemon attacker,Pokemon defender ,Moves attack, Weather weather) {
+
+        if (weather == null) {
+            return baseDamage;
+        }
+
         switch (weather) {
             case SUN:
                 if (attack.getType() == PokeTyping.FIRE) {

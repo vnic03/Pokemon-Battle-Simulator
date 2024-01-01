@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Sleep Effect added, not tested">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Battle/Weather.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/ChangeWeatherEffect.java" afterDir="false" />
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Weather added, needs testing">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/StruggleEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Battle/BattleSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Battle/BattleSimulator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Battle/DamageCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Battle/DamageCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/AbsorbEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/AbsorbEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/HitsMoreTimesEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/HitsMoreTimesEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayBurnEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayBurnEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayFreezeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayFreezeEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayParalyzeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayParalyzeEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayPoisonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MayPoisonEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MoveEffectWithDamage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MoveEffectWithDamage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MultiHitMoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Effects/MultiHitMoveEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MoveSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MoveSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Moves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Moves.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MovesRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" afterDir="false" />
     </list>
@@ -128,7 +120,9 @@
       <workItem from="1703872278636" duration="28101000" />
       <workItem from="1703951877610" duration="35892000" />
       <workItem from="1704045196880" duration="3894000" />
-      <workItem from="1704050847531" duration="799000" />
+      <workItem from="1704050847531" duration="4464000" />
+      <workItem from="1704102650990" duration="6776000" />
+      <workItem from="1704117630500" duration="322000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -298,7 +292,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703981526438</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Weather added, needs testing">
+      <option name="closed" value="true" />
+      <created>1704051915044</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1704051915044</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,6 +339,7 @@
     <MESSAGE value="Added more Effects, not tested yet" />
     <MESSAGE value="tested the effects, should be working" />
     <MESSAGE value="Sleep Effect added, not tested" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sleep Effect added, not tested" />
+    <MESSAGE value="Weather added, needs testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Weather added, needs testing" />
   </component>
 </project>

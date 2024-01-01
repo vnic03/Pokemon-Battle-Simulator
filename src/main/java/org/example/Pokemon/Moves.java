@@ -54,6 +54,10 @@ public class Moves {
         this.currentPP = pp;
     }
 
+    public int getCurrentPP() {
+        return currentPP;
+    }
+
     public MoveEffect getEffect() {
         return effect;
     }
@@ -61,9 +65,13 @@ public class Moves {
         return effectWithDamage;
     }
 
-    public void useMove() {
+    public boolean useMove() {
         if (this.currentPP > 0) {
             this.currentPP--;
+            return true;
+        } else {
+            System.out.println(this.name + " has no PP left!");
+            return false;
         }
     }
 
