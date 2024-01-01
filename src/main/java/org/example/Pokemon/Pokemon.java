@@ -251,7 +251,6 @@ public class Pokemon {
         }
 
 
-
         if (nature.getDecreasedStat() != null) {
             switch (nature.getDecreasedStat()) {
                 case ATTACK -> stats.setAttack((int) (stats.getAttack() * decrease));

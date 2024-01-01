@@ -53,9 +53,10 @@ public class BattleSimulator {
                 if (weatherDuration >= 5) {
                     setWeather(Weather.NONE);
                 }
-            } else {
-                System.out.println("Current weather: " + currentWeather);
             }
+
+            System.out.println("Current weather: " + currentWeather);
+
 
 
             Pokemon firstAttacker = determineFirstAttacker(pokemon1, pokemon2);
@@ -170,6 +171,16 @@ public class BattleSimulator {
             isDamageApplied = true;
 
         } else {
+            if (move.getName().equalsIgnoreCase("Sunny Day")) {
+                System.out.println(attacker.getName() + " used Sunny Day !");
+            } else if (move.getName().equalsIgnoreCase("Rain Dance")) {
+                System.out.println(attacker.getName() + " used Rain Dance !");
+            } else if (move.getName().equalsIgnoreCase("SandStorm")) {
+                System.out.println(attacker.getName() + " used Sandstorm !");
+            } else if (move.getName().equalsIgnoreCase("Snowscape")) {
+                System.out.println(attacker.getName() + " used Snowscape !");
+            }
+
             effect.apply(attacker, defender);
 
             if (moveName.equalsIgnoreCase("Struggle")) {
