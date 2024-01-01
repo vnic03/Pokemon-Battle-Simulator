@@ -33,7 +33,7 @@ public class BattleSimulator {
         pokemon1.saveOriginalStats();
         pokemon2.saveOriginalStats();
 
-        System.out.println("/=====================! BATTLE BEGINS  !==================================/");
+        System.out.println("/=====================! BATTLE BEGINS  !============================/");
 
         Scanner scanner = new Scanner(System.in);
         int round = 1;
@@ -173,11 +173,6 @@ public class BattleSimulator {
                 isDamageApplied = true;
             }
 
-        }
-
-        if (defender.isFlinching()) {
-            defender.setFlinching(false);
-            return;
         }
 
         if (!isDamageApplied && move.getCategory() != MoveCategory.STATUS) {

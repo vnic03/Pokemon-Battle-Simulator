@@ -21,7 +21,9 @@ public class MovesRepository {
 
         MoveEffectWithDamage absorbs_hp = new AbsorbEffect();
 
-        MoveEffect may_cause_flinching = new MayFlinchEffect();
+        MoveEffect may_cause_flinching_10 = new MayFlinchEffect(0.10);
+        MoveEffect may_cause_flinching_20 = new MayFlinchEffect(0.20);
+        MoveEffect may_cause_flinching_30 = new MayFlinchEffect(0.30);
 
         MoveEffect hits_2_5_times = new HitsMoreTimesEffect();
 
@@ -108,14 +110,20 @@ public class MovesRepository {
 
         // causes flinching (maybe)
 
-        allMoves.add(new Moves("Bite", PokeTyping.DARK, MoveCategory.PHYSICAL, 60, 100, 25, may_cause_flinching));
-        allMoves.add(new Moves("Bone Club", PokeTyping.GROUND, MoveCategory.PHYSICAL, 65,85,20,may_cause_flinching));
-        allMoves.add(new Moves("Headbutt", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 70, 100, 15, may_cause_flinching));
-        allMoves.add(new Moves("Hyper Fang", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 80,90,15, may_cause_flinching));
-        allMoves.add(new Moves("Rock Slide", PokeTyping.ROCK, MoveCategory.PHYSICAL, 75, 90, 10, may_cause_flinching));
-        allMoves.add(new Moves("Rolling Kick", PokeTyping.FIGHTING, MoveCategory.PHYSICAL, 60,85,15,may_cause_flinching));
-        allMoves.add(new Moves("Stomp", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 65, 100, 20, may_cause_flinching));
-        allMoves.add(new Moves("Waterfall", PokeTyping.WATER, MoveCategory.PHYSICAL, 80, 100, 14,may_cause_flinching));
+        allMoves.add(new Moves("Bite", PokeTyping.DARK, MoveCategory.PHYSICAL, 60, 100, 25, may_cause_flinching_30));
+        allMoves.add(new Moves("Bone Club", PokeTyping.GROUND, MoveCategory.PHYSICAL, 65,85,20,may_cause_flinching_10));
+        allMoves.add(new Moves("Headbutt", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 70, 100, 15, may_cause_flinching_30));
+        allMoves.add(new Moves("Rock Slide", PokeTyping.ROCK, MoveCategory.PHYSICAL, 75, 90, 10, may_cause_flinching_30));
+        allMoves.add(new Moves("Rolling Kick", PokeTyping.FIGHTING, MoveCategory.PHYSICAL, 60,85,15,may_cause_flinching_30));
+        allMoves.add(new Moves("Stomp", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 65, 100, 20, may_cause_flinching_30));
+        allMoves.add(new Moves("Waterfall", PokeTyping.WATER, MoveCategory.PHYSICAL, 80, 100, 14,may_cause_flinching_20));
+        allMoves.add(new Moves("Air Slash", PokeTyping.FLYING ,MoveCategory.SPECIAL, 75, 95, 15, may_cause_flinching_30));
+        allMoves.add(new Moves("Extrasensory", PokeTyping.PSYCHIC ,MoveCategory.SPECIAL, 80, 100, 10, may_cause_flinching_10));
+        allMoves.add(new Moves("Iron Head", PokeTyping.STEEL, MoveCategory.PHYSICAL, 80,100,15,may_cause_flinching_30));
+        allMoves.add(new Moves("Icicle crash", PokeTyping.ICE, MoveCategory.PHYSICAL, 85, 90, 10, may_cause_flinching_30));
+
+
+
 
         // hits multiple times
 

@@ -154,10 +154,9 @@ public class Pokemon {
 
         if (isFlinching) {
             System.out.println(this.name + " flinched and couldn't move !");
-            isFlinching =false;
+            isFlinching = false;
             return false;
         }
-
         return true;
     }
 
@@ -314,9 +313,9 @@ public class Pokemon {
 
 
 
-    public String toString(){
-        String typeString = typing.stream().map(PokeTyping::name).collect(Collectors.joining(", "));
+    public String toString() {
 
+        String typeString = typing.stream().map(PokeTyping::name).collect(Collectors.joining(", "));
         String moveString = moves.stream().map(Moves::getName).collect(Collectors.joining(", "));
 
         return "Pokemon{" +

@@ -52,6 +52,12 @@ public class FlinchTest {
     }
 
     private static class TestableMayFlinchEffect extends MayFlinchEffect {
+
+
+        public TestableMayFlinchEffect() {
+            super(0.3);
+        }
+
         @Override
         public void apply(Pokemon user, Pokemon target) {
             target.setFlinching(true);
