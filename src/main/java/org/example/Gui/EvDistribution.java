@@ -168,7 +168,12 @@ public class EvDistribution {
 
 
     private static JSlider createSlider() {
-        return new JSlider(0, 252, 0);
+        JSlider slider = new JSlider(0, 252, 0);
+
+        slider.setBackground(Color.LIGHT_GRAY);
+        slider.setPaintLabels(true);
+
+        return slider;
     }
 
 }

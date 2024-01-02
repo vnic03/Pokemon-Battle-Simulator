@@ -1,6 +1,15 @@
 plugins {
     id("java")
+    kotlin("jvm") version "1.6.10"
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
+
+javafx {
+    version="21.0.1"
+    modules = listOf("javafx.controls", "javafx.fxml")
+}
+
+
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
@@ -15,7 +24,15 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
     implementation("com.google.code.gson:gson:2.8.6")
+
+    implementation(kotlin("stdlib"))
+
 }
+
+tasks.register<JavaExec>("run") {
+     mainClass.set("org.example.Main")
+}
+
 
 tasks.test {
     useJUnitPlatform()

@@ -1,12 +1,20 @@
 package org.example;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import org.example.Battle.BattleSimulator;
 import org.example.Gui.EvDistribution;
 import org.example.Pokemon.*;
 
 
-public class Main {
+
+
+public class Main extends Application {
     public static void main(String[] args) {
+
+        launch(args);
 
 
         MoveSelector moveSelector = new MoveSelector();
@@ -27,8 +35,15 @@ public class Main {
         //System.out.println(MovesRepository.countAllMoves());
 
 
+    }
 
-        //p.resetStats();
+    @Override
+    public void start(Stage stage) throws Exception {
+        StackPane root = new StackPane();
+        Scene scene = new Scene(root, 300, 250);
 
+        stage.setTitle("EV Distribution");
+        stage.setScene(scene);
+        stage.show();
     }
 }
