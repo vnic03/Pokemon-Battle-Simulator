@@ -41,6 +41,10 @@ public class PokemonRepository {
         pokemonMap.put("Weezing", new Pokemon("Weezing", Collections.singletonList(PokeTyping.POISON), new Stats(140,110, 140, 105, 90, 80),Nature.SERIOUS ,new ArrayList<>()));
     }
 
+    public static List<String> getAllPokemonNames() {
+        return new ArrayList<>(pokemonMap.keySet());
+    }
+
     public static Pokemon getPokemon(String name) {
         Pokemon pokemon = pokemonMap.get(name);
 

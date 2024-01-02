@@ -1,4 +1,6 @@
-package org.example.Gui;
+package FailedIdeas;
+
+/*
 
 import org.example.Pokemon.Pokemon;
 
@@ -7,7 +9,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 
-public class EvDistribution {
+public class EvDistributionFirstTest {
 
     public static void EvDistributionWindow(Pokemon pokemon) {
 
@@ -175,5 +177,7 @@ public class EvDistribution {
 
         return slider;
     }
-
 }
+ */
+
+

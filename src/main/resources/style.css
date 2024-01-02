@@ -1,0 +1,22 @@
+
+.label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.button {
+    -fx-background-color: #ff6347;
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-border-color: #b0c4de;
+    -fx-padding: 5px;
+
+}
+
+.slider {
+    -fx-control-inner-background: #f0e68c;
+    -fx-base: #666666;
+}
