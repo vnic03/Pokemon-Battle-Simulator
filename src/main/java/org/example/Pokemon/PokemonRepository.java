@@ -1,5 +1,7 @@
 package org.example.Pokemon;
 
+import org.example.Gui.NatureSelectionWindow;
+
 import java.util.*;
 
 public class PokemonRepository {
@@ -49,11 +51,12 @@ public class PokemonRepository {
         Pokemon pokemon = pokemonMap.get(name);
 
         if (pokemon.getNature() == Nature.SERIOUS) {
-            pokemon.setNature(MoveSelector.chooseNature(name));
+            NatureSelectionWindow.display(pokemon.name, pokemon::setNature);
         }
 
         return pokemon;
     }
+
 
 
 }

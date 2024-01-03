@@ -1,4 +1,6 @@
-package org.example.Gui;
+package FailedIdeas;
+
+/*
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -271,5 +273,7 @@ public class EvDistributionFx extends Application {
             speedTextField.setText(String.valueOf(pokemon.getEVs()[5]));
         }
     }
-
 }
+ */
+
+

@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.example.Battle.BattleSimulator;
-import org.example.Pokemon.MoveSelector;
 import org.example.Pokemon.Pokemon;
 import org.example.Pokemon.PokemonRepository;
 
@@ -63,10 +62,10 @@ public class ChoosePokemon extends Application {
 
                 // ob die Pokémon bereits EVs zugewiesen bekommen haben
 
-                // pokemon bereits moves ausgewahlt
-                MoveSelector moveSelector = new MoveSelector();
-                moveSelector.selectMovesForPokemon(pokemon1);
-                moveSelector.selectMovesForPokemon(pokemon2);
+                MoveSelectionWindow.display(pokemon1);
+
+                MoveSelectionWindow.display(pokemon2);
+
 
                 BattleSimulator.getInstance().simulateBattle(pokemon1, pokemon2);
             } else {
@@ -86,7 +85,7 @@ public class ChoosePokemon extends Application {
     private void openEvConfigWindow(String pokemonName) {
         if (pokemonName != null) {
             Pokemon pokemon = PokemonRepository.getPokemon(pokemonName);
-            new EvConfigWindow(pokemon); // EvDistributionFx
+            new EvConfigWindow(pokemon);
         }
     }
 }

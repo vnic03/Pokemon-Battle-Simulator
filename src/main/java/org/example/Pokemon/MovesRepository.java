@@ -5,6 +5,7 @@ import org.example.Pokemon.Effects.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MovesRepository {
 
@@ -218,4 +219,11 @@ public class MovesRepository {
         List<Moves> allMoves = getAllMoves();
         return allMoves.size();
     }
+
+    public static List<String> getAllMoveNames() {
+        return getAllMoves().stream()
+                .map(Moves::getName)
+                .collect(Collectors.toList());
+    }
+
 }
