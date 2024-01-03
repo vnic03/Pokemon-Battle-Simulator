@@ -28,6 +28,8 @@ public class EvConfigWindow {
 
         stage = new Stage();
 
+        stage.setTitle("Select Evs for: " + pokemon.getName());
+
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(8);
@@ -68,7 +70,7 @@ public class EvConfigWindow {
         });
 
 
-        Scene scene = new Scene(grid, 500, 500);
+        Scene scene = new Scene(grid, 535, 370);
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.show();

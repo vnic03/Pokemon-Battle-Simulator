@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class Pokemon {
     String name;
+    private String spritePath; // path to the image
+    private String typeString;
     private Gender gender;
     private List<PokeTyping> typing;
     private final int level = 50;
@@ -40,17 +42,20 @@ public class Pokemon {
     private final int[] evs = new int[6];
 
 
-    public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature, List<Moves> moves) {
+    public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature,String spritePath, List<Moves> moves) {
         this.name = name;
         this.gender = randomGender();
         this.typing = typing;
+        this.typeString = typing.stream().map(PokeTyping::name).collect(Collectors.joining(", ")); // showing the type
         this.stats = stats;
         this.nature = nature;
+        this.spritePath = spritePath;
         this.moves = moves;
 
         if (this.nature != null) {
             applyNatureEffects();
         }
+
     }
 
     public String getName(){
@@ -58,6 +63,14 @@ public class Pokemon {
     }
     public int getLevel() {
         return level;
+    }
+
+    public String getSpritePath() {
+        return spritePath;
+    }
+
+    public String getTypeString() {
+        return typeString;
     }
 
     private Gender randomGender() {

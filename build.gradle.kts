@@ -45,3 +45,7 @@ sourceSets {
     }
 }
 
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+

@@ -4,15 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Gui expanded, needs testing and fixing">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/MoveSelectionWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/NatureSelectionWindow.java" afterDir="false" />
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Added more UI, needs styling">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Bulbasaur.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Charizard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Charmander.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Cubone.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Gengar.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Ivysaur.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Pikachu.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Snorlax.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Venusaur.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/charmeleon.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/ChoosePokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/ChoosePokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/EvDistributionFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FailedIdeas/EvDistributionFx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MovesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/EvConfigWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/EvConfigWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/choosePokemonStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/choosePokemonStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +60,7 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -70,38 +81,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Gradle.Build PokeDuelByNico.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FlinchTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.MayBurnEffectTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.NatureTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokeDuelByNico [:EvDistributionFx.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokeDuelByNico [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokeDuelByNico [:fxTest.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokemonCreatorTest.testCreatePokemon.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Gradle.Build PokeDuelByNico.executor": "Run",
+    "Gradle.FlinchTest.executor": "Run",
+    "Gradle.MayBurnEffectTest.executor": "Run",
+    "Gradle.NatureTest.executor": "Run",
+    "Gradle.PokeDuelByNico [:ChoosePokemon.main()].executor": "Debug",
+    "Gradle.PokeDuelByNico [:EvDistributionFx.main()].executor": "Run",
+    "Gradle.PokeDuelByNico [:Main.main()].executor": "Run",
+    "Gradle.PokeDuelByNico [:fxTest.main()].executor": "Run",
+    "Gradle.PokemonCreatorTest.testCreatePokemon.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/FailedIdeas" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/FailedIdeas" />
       <recent name="$PROJECT_DIR$/src/main/java/resources/org/example/Gui" />
       <recent name="$PROJECT_DIR$/src/main/java/org/example/Gui" />
     </key>
@@ -182,6 +195,7 @@
       <workItem from="1704210281558" duration="2411000" />
       <workItem from="1704212719156" duration="1984000" />
       <workItem from="1704214719038" duration="24597000" />
+      <workItem from="1704293389469" duration="13620000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -439,7 +453,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704234834050</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Added more UI, needs styling">
+      <option name="closed" value="true" />
+      <created>1704293733062</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1704293733062</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -458,7 +480,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="MoveSelector added, simple Battle test" />
     <MESSAGE value="MoveSelector updated" />
     <MESSAGE value="Updated BattleSimulator, Effects and added Nature" />
     <MESSAGE value="Updated Nature" />
@@ -483,6 +504,7 @@
     <MESSAGE value="Fixed Weather" />
     <MESSAGE value="Added JavaFx" />
     <MESSAGE value="Gui expanded, needs testing and fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gui expanded, needs testing and fixing" />
+    <MESSAGE value="Added more UI, needs styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added more UI, needs styling" />
   </component>
 </project>

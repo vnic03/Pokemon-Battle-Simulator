@@ -1,0 +1,41 @@
+
+.label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.combo-box {
+    -fx-font-size: 14px;
+    -fx-background-color: #fff;
+    -fx-background-radius: 5px;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 8px;
+    -fx-alignment: center-left;
+    -fx-font-size: 14px;
+}
+
+.combo-box .list-cell .image-view {
+    -fx-fit-width: 60px;
+    -fx-fit-height: 60px;
+    -fx-preserve-ratio: true;
+}
+
+.combo-box .list-cell .label {
+    -fx-label-padding: 0 10px;
+    -fx-text-fill: #333;
+}
+
+
+.button {
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.grid-pane {
+    -fx-background-color: #FBE870;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}

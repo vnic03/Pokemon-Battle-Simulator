@@ -3,15 +3,17 @@ package org.example.Gui;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.example.Battle.BattleSimulator;
 import org.example.Pokemon.Pokemon;
 import org.example.Pokemon.PokemonRepository;
+import javafx.scene.image.Image;
+
+import java.io.InputStream;
 
 
 public class ChoosePokemon extends Application {
@@ -27,28 +29,146 @@ public class ChoosePokemon extends Application {
         this.primaryStage = stage;
 
         GridPane grid = new GridPane();
+        grid.getStyleClass().add("grid-pane");
+
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 20, 20, 20));
 
         Label label1 = new Label("Pokemon 1: ");
+        label1.getStyleClass().add("label");
+
         ComboBox<String> pokemon1ComboBox = new ComboBox<>();
+        pokemon1ComboBox.getStyleClass().add("combo-box");
+
         pokemon1ComboBox.getItems().addAll(PokemonRepository.getAllPokemonNames());
+
+        pokemon1ComboBox.setCellFactory(lv -> new ListCell<String>() {
+            private ImageView imageView = new ImageView();
+            private Label typeLabel = new Label();
+
+            @Override
+            protected void updateItem(String pokemonName, boolean empty) {
+                super.updateItem(pokemonName, empty);
+
+                if (empty || pokemonName == null) {
+                    setGraphic(null);
+
+                } else {
+                    Pokemon pokemon = PokemonRepository.getPokemon(pokemonName);
+                    String spritePath = pokemon.getSpritePath();
+
+                    InputStream is = getClass().getResourceAsStream(spritePath);
+
+                    if (is == null) {
+                        System.err.println("Image not found: " + spritePath);
+                        setGraphic(null);
+                    } else {
+                        Image image = new Image(is);
+                        imageView.setImage(image);
+                        imageView.setFitWidth(60);
+                        imageView.setFitHeight(60);
+                        imageView.setPreserveRatio(true);
+
+                        typeLabel.setText(pokemon.getTypeString());
+
+                        HBox hBox = new HBox(imageView, new Label(pokemonName), typeLabel);
+
+                        hBox.setSpacing(10);
+                        setGraphic(hBox);
+                    }
+                }
+            }
+        });
+
+        pokemon1ComboBox.setVisibleRowCount(5);
+
         grid.add(label1, 0, 0);
         grid.add(pokemon1ComboBox, 1, 0);
 
 
         Label label2 = new Label("Pokemon 2:");
+        label2.getStyleClass().add("label");
+
         ComboBox<String> pokemon2ComboBox = new ComboBox<>();
+        pokemon2ComboBox.getStyleClass().add("combo-box");
+
         pokemon2ComboBox.getItems().addAll(PokemonRepository.getAllPokemonNames());
+
+        pokemon2ComboBox.setCellFactory(lv -> new ListCell<String>() {
+            private ImageView imageView = new ImageView();
+            private Label typeLabel = new Label();
+
+            @Override
+            protected void updateItem(String pokemonName, boolean empty) {
+                super.updateItem(pokemonName, empty);
+
+                if (empty || pokemonName == null) {
+                    setGraphic(null);
+
+                } else {
+                    Pokemon pokemon = PokemonRepository.getPokemon(pokemonName);
+                    String spritePath = pokemon.getSpritePath();
+
+                    InputStream is = getClass().getResourceAsStream(spritePath);
+
+                    if (is == null) {
+                        System.err.println("Image not found: " + spritePath);
+                        setGraphic(null);
+                    } else {
+                        Image image = new Image(is);
+                        imageView.setImage(image);
+                        imageView.setFitWidth(60);
+                        imageView.setFitHeight(60);
+                        imageView.setPreserveRatio(true);
+
+                        typeLabel.setText(pokemon.getTypeString());
+
+                        HBox hBox = new HBox(imageView, new Label(pokemonName), typeLabel);
+
+                        hBox.setSpacing(10);
+                        setGraphic(hBox);
+                    }
+                }
+            }
+        });
+
+        pokemon2ComboBox.setVisibleRowCount(5);
+
         grid.add(label2, 0, 1);
         grid.add(pokemon2ComboBox, 1, 1);
 
         Button startBattleButton = new Button("Start Battle");
+        startBattleButton.getStyleClass().add("button");
         grid.add(startBattleButton, 1, 2);
 
-        pokemon1ComboBox.setOnAction(e -> openEvConfigWindow(pokemon1ComboBox.getValue()));
-        pokemon2ComboBox.setOnAction(e -> openEvConfigWindow(pokemon2ComboBox.getValue()));
+        pokemon1ComboBox.setOnAction(e -> {
+            String pokemonName = pokemon1ComboBox.getValue();
+
+            if (pokemonName != null) {
+                Pokemon pokemon = PokemonRepository.getPokemon(pokemonName);
+
+                NatureSelectionWindow.display(pokemon.getName(), (nature -> {
+                    pokemon.setNature(nature);
+                    openEvConfigWindow(pokemonName);
+                }));
+            }
+        });
+
+
+        pokemon2ComboBox.setOnAction(e -> {
+            String pokemonName = pokemon2ComboBox.getValue();
+
+            if ( pokemonName != null) {
+                Pokemon pokemon = PokemonRepository.getPokemon(pokemonName);
+
+                NatureSelectionWindow.display(pokemon.getName(), (nature -> {
+                    pokemon.setNature(nature);
+                    openEvConfigWindow(pokemonName);
+                }));
+            }
+        });
+
 
         startBattleButton.setOnAction(e -> {
 
@@ -76,7 +196,10 @@ public class ChoosePokemon extends Application {
 
         });
 
-        primaryStage.setScene(new Scene(grid, 400, 200));
+        Scene scene = new Scene(grid, 600, 200);
+        scene.getStylesheets().add(getClass().getResource("/choosePokemonStyle.css").toExternalForm());
+
+        primaryStage.setScene(scene);
         primaryStage.setTitle("Pokémon Battle Setup");
         primaryStage.show();
 
