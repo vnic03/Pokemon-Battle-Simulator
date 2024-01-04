@@ -11,9 +11,16 @@
 }
 
 .text-field {
-    -fx-border-color: #b0c4de;
-    -fx-padding: 5px;
+    -fx-font-size: 12px;
+    -fx-border-color: #a9a9a9;
+    -fx-padding: 3px;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #a9a9a9;
+}
 
+.text-field:focused {
+    -fx-border-color: #1e90ff;
 }
 
 .slider {

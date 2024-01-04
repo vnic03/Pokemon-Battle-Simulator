@@ -2,7 +2,9 @@ package org.example.Pokemon;
 
 import org.example.Battle.DamageCalculator;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -420,8 +422,6 @@ public class Pokemon {
     public int[] getEVs() {
         return evs;
     }
-
-
 
     public String toString() {
 

@@ -4,25 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Added more UI, needs styling">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Bulbasaur.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Charizard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Charmander.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Cubone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Gengar.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Ivysaur.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Pikachu.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Snorlax.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/Venusaur.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/sprites/charmeleon.jpg" afterDir="false" />
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Added Pokemon sprites and styled the UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/ChoosePokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/ChoosePokemon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/EvConfigWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/EvConfigWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokemonRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/choosePokemonStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/choosePokemonStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/FlinchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/FlinchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/NatureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/NatureTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +56,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -107,6 +95,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
@@ -195,7 +184,9 @@
       <workItem from="1704210281558" duration="2411000" />
       <workItem from="1704212719156" duration="1984000" />
       <workItem from="1704214719038" duration="24597000" />
-      <workItem from="1704293389469" duration="13620000" />
+      <workItem from="1704293389469" duration="13789000" />
+      <workItem from="1704311877619" duration="12576000" />
+      <workItem from="1704338789640" duration="2481000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -461,7 +452,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704293733062</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Added Pokemon sprites and styled the UI">
+      <option name="closed" value="true" />
+      <created>1704307075244</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1704307075244</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -480,7 +479,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="MoveSelector updated" />
     <MESSAGE value="Updated BattleSimulator, Effects and added Nature" />
     <MESSAGE value="Updated Nature" />
     <MESSAGE value="Nature toString" />
@@ -505,6 +503,7 @@
     <MESSAGE value="Added JavaFx" />
     <MESSAGE value="Gui expanded, needs testing and fixing" />
     <MESSAGE value="Added more UI, needs styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added more UI, needs styling" />
+    <MESSAGE value="Added Pokemon sprites and styled the UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Pokemon sprites and styled the UI" />
   </component>
 </project>
