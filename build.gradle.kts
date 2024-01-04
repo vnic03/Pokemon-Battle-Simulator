@@ -5,6 +5,8 @@ plugins {
     kotlin("jvm") version "1.6.10"
     id("org.openjfx.javafxplugin") version "0.1.0"
     id("com.moowork.node") version "1.3.1"
+    id("org.springframework.boot") version "2.6.3"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
 }
 
 javafx {
@@ -31,8 +33,9 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-
     implementation(kotlin("stdlib"))
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.register<JavaExec>("run") {
@@ -56,25 +59,5 @@ tasks.processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
-task("installFrontend", type = NpmTask::class) {
-    setArgs(listOf("install"))
-    setWorkingDir(file("frontend"))
-}
-
-task("buildFrontend", type = NpmTask::class) {
-    dependsOn("installFrontend")
-    setArgs(listOf("run", "build"))
-    setWorkingDir(file("frontend"))
-}
-
-task("copyFrontendToStatic", type = Copy::class) {
-    dependsOn("buildFrontend")
-    from("frontend/build")
-    into("src/main/resources/static")
-}
-
-task("buildFrontendAssets") {
-    dependsOn("copyFrontendToStatic")
-}
 
 
