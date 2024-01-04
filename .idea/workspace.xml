@@ -4,9 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated the UI and improved the EvConfigWindow">
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated the UI and added ExplosionEffect">
+      <change afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/App.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/reportWebVitals.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/setupTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/EvConfigWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/EvConfigWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,16 +62,19 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -77,17 +99,21 @@
     "Gradle.PokeDuelByNico [:Main.main()].executor": "Run",
     "Gradle.PokeDuelByNico [:fxTest.main()].executor": "Run",
     "Gradle.PokemonCreatorTest.testCreatePokemon.executor": "Run",
+    "JavaScript Debug.Debug Application.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "21",
     "kotlin-language-version-configured": "true",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
+    "npm.start.executor": "Run",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -149,6 +175,9 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.EvDistributionFx" />
@@ -183,6 +212,8 @@
       <workItem from="1704293389469" duration="13789000" />
       <workItem from="1704311877619" duration="12576000" />
       <workItem from="1704338789640" duration="2859000" />
+      <workItem from="1704377719168" duration="12509000" />
+      <workItem from="1704391952919" duration="3193000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -464,7 +495,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704341399816</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Updated the UI and added ExplosionEffect">
+      <option name="closed" value="true" />
+      <created>1704391809243</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1704391809243</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,7 +522,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated Nature" />
     <MESSAGE value="Nature toString" />
     <MESSAGE value="Fixed the Nature output" />
     <MESSAGE value="Test deleted" />
@@ -508,6 +546,17 @@
     <MESSAGE value="Added more UI, needs styling" />
     <MESSAGE value="Added Pokemon sprites and styled the UI" />
     <MESSAGE value="Updated the UI and improved the EvConfigWindow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the UI and improved the EvConfigWindow" />
+    <MESSAGE value="Updated the UI and added ExplosionEffect" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the UI and added ExplosionEffect" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.StackOverflowError" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
