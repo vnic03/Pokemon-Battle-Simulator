@@ -78,24 +78,27 @@ public class EvConfigWindow {
                 int spDefenseEvs = Integer.parseInt(spDefenseTextField.getText());
                 int speedEvs = Integer.parseInt(speedTextField.getText());
 
-                pokemon.setEvs(hpEvs, attackEvs, defenseEvs, spAttackEvs, spDefenseEvs, speedEvs);
+                if (canAssignMoreEVs()) {
 
-                pokemon.getStats().calculateFinalStats(pokemon);
+                    pokemon.setEvs(hpEvs, attackEvs, defenseEvs, spAttackEvs, spDefenseEvs, speedEvs);
 
-                Alert confirmation = new Alert(Alert.AlertType.INFORMATION, "EVs successfully assigned!");
-                confirmation.setHeaderText(null);
-                confirmation.showAndWait();
+                    pokemon.getStats().calculateFinalStats(pokemon);
 
-                Stage stage = (Stage) submitButton.getScene().getWindow();
-                stage.close();
+                    Alert confirmation = new Alert(Alert.AlertType.INFORMATION, "EVs successfully assigned!");
+                    confirmation.setHeaderText(null);
+                    confirmation.showAndWait();
 
+                    Stage stage = (Stage) submitButton.getScene().getWindow();
+                    stage.close();
+
+                } else  {
+                    throw new IllegalArgumentException("Invalid Ev spread !");
+                }
             } catch (NumberFormatException e) {
-
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Please enter valid numbers for EVs.");
                 errorAlert.setHeaderText(null);
                 errorAlert.showAndWait();
             }
-
         });
 
 
@@ -141,12 +144,12 @@ public class EvConfigWindow {
 
         boolean limit = totalEvs > TOTAl_EVS;
 
-        hpSlider.setDisable(limit && hpSlider.getValue() == 0);
-        attackSlider.setDisable(limit && attackSlider.getValue() == 0);
-        defenseSlider.setDisable(limit && defenseSlider.getValue() == 0);
-        spAttackSlider.setDisable(limit && spAttackSlider.getValue() == 0);
-        spDefenseSlider.setDisable(limit && spDefenseSlider.getValue() == 0);
-        speedSlider.setDisable(limit && speedSlider.getValue() == 0);
+        hpSlider.setDisable(limit);
+        attackSlider.setDisable(limit);
+        defenseSlider.setDisable(limit);
+        spAttackSlider.setDisable(limit);
+        spDefenseSlider.setDisable(limit);
+        speedSlider.setDisable(limit);
 
 
         if (limit) {
@@ -173,37 +176,37 @@ public class EvConfigWindow {
         spDefenseProgressBar = new ProgressBar(0);
         speedProgressBar = new ProgressBar(0);
 
-        hpTextField = new TextField();
+        hpTextField = new TextField("0");
         hpTextField.getStyleClass().add("text-field");
         hpTextField.setPrefWidth(40);
         hpTextField.setMinWidth(Control.USE_PREF_SIZE);
         hpTextField.setMaxWidth(Control.USE_PREF_SIZE);
 
-        attackTextField = new TextField();
+        attackTextField = new TextField("0");
         attackTextField.getStyleClass().add("text-field");
         attackTextField.setPrefWidth(40);
         attackTextField.setMinWidth(Control.USE_PREF_SIZE);
         attackTextField.setMaxWidth(Control.USE_PREF_SIZE);
 
-        defenseTextField = new TextField();
+        defenseTextField = new TextField("0");
         defenseTextField.getStyleClass().add("text-field");
         defenseTextField.setPrefWidth(40);
         defenseTextField.setMinWidth(Control.USE_PREF_SIZE);
         defenseTextField.setMaxWidth(Control.USE_PREF_SIZE);
 
-        spAttackTextField = new TextField();
+        spAttackTextField = new TextField("0");
         spAttackTextField.getStyleClass().add("text-field");
         spAttackTextField.setPrefWidth(40);
         spAttackTextField.setMinWidth(Control.USE_PREF_SIZE);
         spAttackTextField.setMaxWidth(Control.USE_PREF_SIZE);
 
-        spDefenseTextField = new TextField();
+        spDefenseTextField = new TextField("0");
         spDefenseTextField.getStyleClass().add("text-field");
         spDefenseTextField.setPrefWidth(40);
         spDefenseTextField.setMinWidth(Control.USE_PREF_SIZE);
         spDefenseTextField.setMaxWidth(Control.USE_PREF_SIZE);
 
-        speedTextField = new TextField();
+        speedTextField = new TextField("0");
         speedTextField.getStyleClass().add("text-field");
         speedTextField.setPrefWidth(40);
         speedTextField.setMinWidth(Control.USE_PREF_SIZE);
@@ -336,12 +339,18 @@ public class EvConfigWindow {
     }
 
     private void updateFinalStatsLabel(Label finalLabel, String statName, int evValue) {
-        int baseValue = baseStats.get(statName);
 
-        int increasedValue = evValue > 3 ? increasedStats(evValue) + 1 : 0;
+        if (baseStats.containsKey(statName) && baseStats.get(statName) != null) {
+            int baseValue = baseStats.get(statName);
 
-        int finalValue = baseValue + increasedValue;
-        finalLabel.setText(String.valueOf(finalValue));
+            int increasedValue = evValue > 3 ? increasedStats(evValue) + 1 : 0;
+
+            int finalValue = baseValue + increasedValue;
+            finalLabel.setText(String.valueOf(finalValue));
+
+        } else {
+            finalLabel.setText("N/A");
+        }
     }
 
     private int increasedStats(int evs) {
@@ -357,7 +366,7 @@ public class EvConfigWindow {
                 String text = textField.getText();
                 if (!text.isEmpty() && isValidEVInput(text)) {
                     int value = Integer.parseInt(text);
-                    if (value <= slider.getMax() && (canAssignMoreEVs() || value <slider.getValue())) {
+                    if (value <= slider.getMax() && canAssignMoreEVs()) {
                         slider.setValue(value);
                     } else {
                         textField.setText(String.valueOf((int) slider.getValue()));
@@ -371,12 +380,29 @@ public class EvConfigWindow {
     }
 
     private void setUpTextFieldListeners() {
-        hpTextField.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (!isValidEVInput(newVal) || !canAssignMoreEVs()) {
-                hpTextField.setText(oldVal);
+        setupTextFieldListener(hpTextField, hpSlider);
+        setupTextFieldListener(attackTextField, attackSlider);
+        setupTextFieldListener(defenseTextField, defenseSlider);
+        setupTextFieldListener(spAttackTextField, spAttackSlider);
+        setupTextFieldListener(spDefenseTextField, spDefenseSlider);
+        setupTextFieldListener(speedTextField, speedSlider);
+    }
+
+    private void setupTextFieldListener(TextField textField, Slider slider) {
+        textField.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (isValidEVInput(newVal)) {
+                int value = Integer.parseInt(newVal);
+                if (value <= MAX_EVS && canAssignMoreEVs()) {
+                    slider.setValue(value);
+                } else {
+                    textField.setText(oldVal);
+                }
+            } else {
+                textField.setText(oldVal);
             }
         });
     }
+
     private boolean isValidEVInput(String input) {
         try {
             int value = Integer.parseInt(input);
@@ -388,9 +414,12 @@ public class EvConfigWindow {
     private boolean canAssignMoreEVs() {
         int totalEvs = (int) (hpSlider.getValue() + attackSlider.getValue() + defenseSlider.getValue() +
                 spAttackSlider.getValue() + spDefenseSlider.getValue() + speedSlider.getValue());
-        return totalEvs <= TOTAl_EVS;
-
+        return totalEvs <= TOTAl_EVS &&
+                hpSlider.getValue() <= MAX_EVS &&
+                attackSlider.getValue() <= MAX_EVS &&
+                defenseSlider.getValue() <= MAX_EVS &&
+                spAttackSlider.getValue() <= MAX_EVS &&
+                spDefenseSlider.getValue() <= MAX_EVS &&
+                speedSlider.getValue() <= MAX_EVS;
     }
-
-
 }

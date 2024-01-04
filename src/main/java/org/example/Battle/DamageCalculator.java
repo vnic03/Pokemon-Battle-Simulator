@@ -20,7 +20,7 @@ public class DamageCalculator {
 
         double typeAdvantage = getTypeAdvantage(attack.getType(), defender.getTyping(), attackerTypes);
 
-        if (typeAdvantage > 1.0) {
+        if (typeAdvantage == 2.0) {
             System.out.println("It's super effective !");
         } else if (typeAdvantage < 1.0 && typeAdvantage > 0) {
             System.out.println("It's not very effective...");

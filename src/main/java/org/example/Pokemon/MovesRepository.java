@@ -52,6 +52,8 @@ public class MovesRepository {
 
         MoveEffect snow = new ChangeWeatherEffect(Weather.SNOW);
 
+        MoveEffect user_faints = new ExplosionEffect();
+
 
         List<Moves> allMoves = new ArrayList<>();
 
@@ -202,6 +204,9 @@ public class MovesRepository {
         allMoves.add(new Moves("SandStorm", PokeTyping.ROCK, MoveCategory.STATUS, 0, 100, 10, creates_a_sandStorm));
         allMoves.add(new Moves("Snowscape", PokeTyping.ICE, MoveCategory.STATUS, 0, 100, 10, snow));
 
+        // user faints
+
+        allMoves.add(new Moves("Explosion", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 250, 100, 5, user_faints));
 
         return allMoves;
     }

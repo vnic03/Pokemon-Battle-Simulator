@@ -4,13 +4,13 @@ import org.example.Pokemon.Effects.MoveEffect;
 import org.example.Pokemon.Effects.MoveEffectWithDamage;
 
 public class Moves {
-    private String name;
+    private final String name;
     private PokeTyping type;
     private  MoveCategory category;
     private int power;
     private int accuracy;
     private int currentPP;
-    private MoveEffect effect;
+    private final MoveEffect effect;
     private MoveEffectWithDamage effectWithDamage;
 
     public Moves(String name, PokeTyping type,MoveCategory category, int power, int accuracy, int initialPP, MoveEffect moveEffect){

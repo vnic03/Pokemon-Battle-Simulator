@@ -151,6 +151,8 @@ public class ChoosePokemon extends Application {
                 NatureSelectionWindow.display(pokemon.getName(), (nature -> {
                     pokemon.setNature(nature);
                     openEvConfigWindow(pokemonName);
+
+                    MoveSelectionWindow.display(pokemon);
                 }));
             }
         });
@@ -165,6 +167,8 @@ public class ChoosePokemon extends Application {
                 NatureSelectionWindow.display(pokemon.getName(), (nature -> {
                     pokemon.setNature(nature);
                     openEvConfigWindow(pokemonName);
+
+                    MoveSelectionWindow.display(pokemon);
                 }));
             }
         });
@@ -176,16 +180,9 @@ public class ChoosePokemon extends Application {
             String pokemon2Name = pokemon2ComboBox.getValue();
 
             if (pokemon1Name != null && pokemon2Name != null) {
+
                 Pokemon pokemon1 = PokemonRepository.getPokemon(pokemon1Name);
                 Pokemon pokemon2 = PokemonRepository.getPokemon(pokemon2Name);
-
-
-                // ob die Pokémon bereits EVs zugewiesen bekommen haben
-
-                MoveSelectionWindow.display(pokemon1);
-
-                MoveSelectionWindow.display(pokemon2);
-
 
                 BattleSimulator.getInstance().simulateBattle(pokemon1, pokemon2);
             } else {
