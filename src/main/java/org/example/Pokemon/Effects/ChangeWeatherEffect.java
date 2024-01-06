@@ -19,4 +19,9 @@ public class ChangeWeatherEffect implements MoveEffect {
         BattleSimulator.getInstance().setWeather(weatherToChange);
 
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

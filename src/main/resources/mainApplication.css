@@ -1,0 +1,18 @@
+
+.button {
+    -fx-background-color: #8A2BE2;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 15px 30px;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #7B68EE; /* Etwas dunkleres Blau für Hover-Effekt */
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.8) , 0,0,0,1 );
+}

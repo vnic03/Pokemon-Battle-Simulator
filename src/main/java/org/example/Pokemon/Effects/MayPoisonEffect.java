@@ -48,4 +48,9 @@ public class MayPoisonEffect implements MoveEffectWithDamage {
             System.out.println(target.getName() + " got poisoned !");
         }
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

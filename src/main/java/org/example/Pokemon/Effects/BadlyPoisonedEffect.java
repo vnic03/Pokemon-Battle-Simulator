@@ -26,4 +26,9 @@ public class BadlyPoisonedEffect implements MoveEffect {
         target.setBadlyPoisoned(true);
         System.out.println(target.getName() + " got badly poisoned !");
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

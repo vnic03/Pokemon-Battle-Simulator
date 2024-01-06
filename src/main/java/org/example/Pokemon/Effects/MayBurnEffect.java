@@ -30,4 +30,9 @@ public class MayBurnEffect implements MoveEffectWithDamage {
             System.out.println(target.getName() + " got burned!");
         }
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

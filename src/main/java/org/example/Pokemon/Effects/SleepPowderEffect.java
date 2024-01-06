@@ -21,4 +21,9 @@ public class SleepPowderEffect implements MoveEffect {
         target.setAsleep(true, sleepTurns);
         System.out.println(target.getName() + " is fast asleep !");
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

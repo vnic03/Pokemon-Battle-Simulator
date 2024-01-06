@@ -20,4 +20,9 @@ public class StruggleEffect implements MoveEffect {
     private int calculateStruggleDamage(Pokemon user) {
         return user.getStats().getAttack() / 2;
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

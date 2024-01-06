@@ -1,11 +1,13 @@
 package org.example.Pokemon.Effects;
 
 import org.example.Battle.BattleSimulator;
+import org.example.Battle.Weather;
+import org.example.Pokemon.Moves;
 import org.example.Pokemon.Pokemon;
 
 import java.util.Random;
 
-public class MayFlinchEffect implements MoveEffect{
+public class MayFlinchEffect implements MoveEffectWithDamage {
 
     private final double chanceToFlinch;
 
@@ -16,9 +18,17 @@ public class MayFlinchEffect implements MoveEffect{
 
     @Override
     public void apply(Pokemon user, Pokemon target) {
+    }
 
-        if (BattleSimulator.getInstance().doesTargetActAfterAttacker(user, target) && new Random().nextDouble() < chanceToFlinch) {
+    @Override
+    public void applyWithDamage(Pokemon user, Pokemon target, Moves move, Weather weather) {
+        if (BattleSimulator.getInstance().doesTargetActAfterAttacker(user, target, move.getEffect(), move.getEffect()) && new Random().nextDouble() < chanceToFlinch) {
             target.setFlinching(true);
         }
+    }
+
+    @Override
+    public int getPriority() {
+        return 0;
     }
 }

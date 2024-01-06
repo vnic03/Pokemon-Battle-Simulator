@@ -1,0 +1,63 @@
+package org.example;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import org.example.Gui.firstPage.BattleButton;
+import org.example.Gui.firstPage.TeamBuilderButton;
+
+public class MainApplication extends Application {
+
+    private TabPane tabPane = new TabPane();
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        Image background = new Image(getClass().getResourceAsStream("/mainBackground.jpg"));
+
+        ImageView backgroundView = new ImageView(background);
+
+        backgroundView.setFitWidth(1100);
+        backgroundView.setFitHeight(800);
+        backgroundView.setPreserveRatio(false);
+
+        Button teambuilderButton = TeamBuilderButton.createButton();
+        teambuilderButton.getStyleClass().add("button");
+        Button battleButton = BattleButton.createButton();
+        battleButton.getStyleClass().add("button");
+
+        VBox buttonBox = new VBox(10);
+        buttonBox.getChildren().addAll(teambuilderButton, battleButton);
+        buttonBox.setAlignment(Pos.TOP_CENTER);
+
+        VBox.setMargin(teambuilderButton, new Insets(300, 0, 0, 0));
+
+
+        StackPane rootPane = new StackPane();
+        rootPane.getChildren().add(backgroundView);
+
+        rootPane.getChildren().add(tabPane);
+        rootPane.getChildren().add(buttonBox);
+
+
+
+        Scene scene = new Scene(rootPane,  1100, 800);
+        scene.getStylesheets().add(getClass().getResource("/mainApplication.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Pokémon Battle Simulator by Nico");
+        primaryStage.show();
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}

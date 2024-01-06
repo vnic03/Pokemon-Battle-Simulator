@@ -50,4 +50,9 @@ public class HitsMoreTimesEffect implements MultiHitMoveEffect {
 
         return totalDamage;
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

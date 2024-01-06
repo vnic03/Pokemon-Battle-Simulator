@@ -25,4 +25,9 @@ public class ParalyzeEffect implements MoveEffect {
         target.setParalyzed(true);
         System.out.println(target.getName() + " got paralyzed!");
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

@@ -30,4 +30,9 @@ public class MayParalyzeEffect implements MoveEffectWithDamage {
             System.out.println(target.getName() + " got paralyzed");
         }
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

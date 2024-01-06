@@ -21,4 +21,9 @@ public class AbsorbEffect implements MoveEffectWithDamage {
         user.heal(damage / 2);
 
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

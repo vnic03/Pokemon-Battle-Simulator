@@ -9,4 +9,9 @@ public class ExplosionEffect implements MoveEffect {
         user.takeDamage(1000);
         System.out.println(user.getName() + " didn't wanna be around anymore :(");
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

@@ -2,6 +2,7 @@ package org.example.Pokemon;
 
 import org.example.Battle.Weather;
 import org.example.Pokemon.Effects.*;
+import org.example.Pokemon.Effects.Priority.PriorityOne;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,9 @@ public class MovesRepository {
         MoveEffect snow = new ChangeWeatherEffect(Weather.SNOW);
 
         MoveEffect user_faints = new ExplosionEffect();
+
+        MoveEffect priority_one = new PriorityOne();
+
 
 
         List<Moves> allMoves = new ArrayList<>();
@@ -208,6 +212,13 @@ public class MovesRepository {
 
         allMoves.add(new Moves("Explosion", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 250, 100, 5, user_faints));
 
+        // Priority Moves
+
+        allMoves.add(new Moves("Quick Attack", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 40, 100 ,30, priority_one));
+        allMoves.add(new Moves("Extreme Speed", PokeTyping.NORMAL, MoveCategory.PHYSICAL, 80, 100, 5, priority_one));
+        allMoves.add(new Moves("Mach Punch", PokeTyping.FIGHTING, MoveCategory.PHYSICAL, 40, 100, 20, priority_one));
+
+
         return allMoves;
     }
 
@@ -230,5 +241,16 @@ public class MovesRepository {
                 .map(Moves::getName)
                 .collect(Collectors.toList());
     }
+
+    public static MoveEffect getMoveEffectByName(String moveName) {
+        Moves move = getMoveByName(moveName);
+        if (move != null) {
+            return move.getEffect();
+        }
+        return null;
+    }
+
+
+
 
 }

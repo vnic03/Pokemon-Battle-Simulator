@@ -33,4 +33,9 @@ public class MayFreezeEffect implements MoveEffectWithDamage {
         }
 
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

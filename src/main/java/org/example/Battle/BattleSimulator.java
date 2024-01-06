@@ -57,21 +57,20 @@ public class BattleSimulator {
 
             System.out.println("Current weather: " + currentWeather);
 
+            String firstMoveName = promptForMove(pokemon1, scanner);
+            MoveEffect firstMove = MovesRepository.getMoveEffectByName(firstMoveName);
 
+            String secondMoveName = promptForMove(pokemon2, scanner);
+            MoveEffect secondMove = MovesRepository.getMoveEffectByName(secondMoveName);
 
-            Pokemon firstAttacker = determineFirstAttacker(pokemon1, pokemon2);
+            Pokemon firstAttacker = determineFirstAttacker(pokemon1, pokemon2, firstMove, secondMove);
             Pokemon secondAttacker = (firstAttacker == pokemon1) ? pokemon2 : pokemon1;
 
 
-            String firstMoveInput = promptForMove(firstAttacker, scanner);
-            String secondMoveInput = promptForMove(secondAttacker, scanner);
-
-
-
-            doAttack(firstAttacker, secondAttacker, MoveSelector.getMoveNameByNumber(firstAttacker, firstMoveInput));
+            doAttack(firstAttacker, secondAttacker, MoveSelector.getMoveNameByNumber(firstAttacker, firstMoveName));
 
             if (secondAttacker.isAlive()) {
-                doAttack(secondAttacker, firstAttacker, MoveSelector.getMoveNameByNumber(secondAttacker, secondMoveInput));
+                doAttack(secondAttacker, firstAttacker, MoveSelector.getMoveNameByNumber(secondAttacker, secondMoveName));
             } else {
                 System.out.println(secondAttacker.getName() + " has fainted !");
                 System.out.println(firstAttacker.getName() + " WINS !");
@@ -102,31 +101,53 @@ public class BattleSimulator {
         pokemon2.resetStats();
     }
 
-    private Pokemon determineFirstAttacker(Pokemon pokemon1, Pokemon pokemon2) {
+    private Pokemon determineFirstAttacker(Pokemon pokemon1, Pokemon pokemon2, MoveEffect move1, MoveEffect move2) {
 
-        int pokemonSpeed1 = pokemon1.getStats().getSpeed();
-        int pokemonSpeed2 = pokemon2.getStats().getSpeed();
+        int priority1 = move1.getPriority();
+        int priority2 = move2.getPriority();
 
-        if (pokemonSpeed1 > pokemonSpeed2) {
+        if (priority1 > priority2) {
             return pokemon1;
-        } else if (pokemonSpeed2 > pokemonSpeed1) {
+        } else if (priority2 > priority1) {
             return pokemon2;
+
         } else {
-            return Math.random() < 0.5 ? pokemon1 : pokemon2;
+
+            int pokemonSpeed1 = pokemon1.getStats().getSpeed();
+            int pokemonSpeed2 = pokemon2.getStats().getSpeed();
+
+            if (pokemonSpeed1 > pokemonSpeed2) {
+                return pokemon1;
+            } else if (pokemonSpeed2 > pokemonSpeed1) {
+                return pokemon2;
+            } else {
+                return Math.random() < 0.5 ? pokemon1 : pokemon2;
+            }
         }
     }
 
-    public boolean doesTargetActAfterAttacker(Pokemon attacker, Pokemon target) {
+    public boolean doesTargetActAfterAttacker(Pokemon attacker, Pokemon target, MoveEffect move1, MoveEffect move2) {
 
-       int attackerSpeed = attacker.getStats().getSpeed();
-       int targetSpeed = target.getStats().getSpeed();
+        int priority1 = move1.getPriority();
+        int priority2 = move2.getPriority();
 
-        if (attackerSpeed > targetSpeed) {
+        if (priority1 > priority2) {
             return true;
-        } else if (targetSpeed > attackerSpeed) {
+        } else if (priority2 > priority1) {
             return false;
+
         } else {
-            return Math.random() < 0.5;
+
+            int attackerSpeed = attacker.getStats().getSpeed();
+            int targetSpeed = target.getStats().getSpeed();
+
+            if (attackerSpeed > targetSpeed) {
+                return true;
+            } else if (targetSpeed > attackerSpeed) {
+                return false;
+            } else {
+                return Math.random() < 0.5;
+            }
         }
     }
 

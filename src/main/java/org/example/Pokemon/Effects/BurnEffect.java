@@ -26,4 +26,9 @@ public class BurnEffect implements MoveEffect {
         target.setBurned(true);
         System.out.println(target.getName() + " got burned !");
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }

@@ -26,4 +26,9 @@ public class PoisonEffect implements MoveEffect {
         target.setPoisoned(true);
         System.out.println(target.getName() + " got poisoned!");
     }
+
+    @Override
+    public int getPriority() {
+        return 0;
+    }
 }
