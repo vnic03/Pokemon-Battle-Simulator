@@ -2,10 +2,7 @@ package org.example.Pokemon;
 
 import org.example.Battle.DamageCalculator;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Pokemon {
@@ -18,6 +15,8 @@ public class Pokemon {
     private Stats stats;
     private List<Moves> moves;
     private Nature nature;
+    private List<Ability> abilities;
+    private Ability activeAbility;
     private boolean isParalyzed;
     private boolean isBurned;
     private boolean isPoisoned;
@@ -40,17 +39,21 @@ public class Pokemon {
 
     private int lastDamageTaken;
 
-
     private final int[] evs = new int[6];
 
+    private boolean thickFatActive;
 
-    public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature,String spritePath, List<Moves> moves) {
+    private Map<Moves, Integer> disabledMoves = new HashMap<>();
+
+    public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature, List<Ability> abilities,String spritePath, List<Moves> moves) {
         this.name = name;
         this.gender = randomGender();
         this.typing = typing;
         this.typeString = typing.stream().map(PokeTyping::name).collect(Collectors.joining(", ")); // showing the type
         this.stats = stats;
         this.nature = nature;
+        this.abilities = abilities;
+        this.activeAbility = null;
         this.spritePath = spritePath;
         this.moves = moves;
 
@@ -58,6 +61,7 @@ public class Pokemon {
             applyNatureEffects();
         }
 
+        this.thickFatActive = false;
     }
 
     public String getName(){
@@ -99,6 +103,14 @@ public class Pokemon {
 
     public void setNature(Nature nature){
         this.nature = nature;
+    }
+
+    public void setActiveAbility(Ability ability) {
+        this.activeAbility = ability;
+    }
+
+    public Ability getActiveAbility() {
+        return this.activeAbility;
     }
 
     public void addMove(Moves move) {
@@ -421,6 +433,50 @@ public class Pokemon {
 
     public int[] getEVs() {
         return evs;
+    }
+
+    public boolean hasAbility(String abilityName) {
+        for (Ability ability : abilities) {
+            if (ability.getName().equalsIgnoreCase(abilityName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasActiveAbility(String abilityName) {
+        if (activeAbility != null && activeAbility.getName().equalsIgnoreCase(abilityName)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void setThickFatActive(boolean isActive) {
+        this.thickFatActive = isActive;
+    }
+
+    public boolean isThickFatActive() {
+        return this.thickFatActive;
+    }
+
+    public void disableMove(Moves move, int duration) {
+        disabledMoves.put(move, duration);
+    }
+
+    public void updateDisabledMoves() {
+        disabledMoves.forEach((move, duration) -> disabledMoves.put(move, duration - 1));
+        disabledMoves.entrySet().removeIf(entry -> entry.getValue() <= 0);
+    }
+
+    public boolean isMoveDisabled(Moves move) {
+        return disabledMoves.containsKey(move) && disabledMoves.get(move) > 0;
+    }
+
+    public void addAbility(Ability ability) {
+        if (abilities == null) {
+            abilities = new ArrayList<>();
+        }
+        abilities.add(ability);
     }
 
     public String toString() {

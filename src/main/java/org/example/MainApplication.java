@@ -3,6 +3,7 @@ package org.example;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
@@ -16,7 +17,8 @@ import org.example.Gui.firstPage.TeamBuilderButton;
 
 public class MainApplication extends Application {
 
-    private TabPane tabPane = new TabPane();
+    private final TabPane tabPane = new TabPane();
+    private final StackPane rootPane = new StackPane();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -31,7 +33,9 @@ public class MainApplication extends Application {
 
         Button teambuilderButton = TeamBuilderButton.createButton();
         teambuilderButton.getStyleClass().add("button");
-        Button battleButton = BattleButton.createButton();
+
+        BattleButton bBC = new BattleButton(this);
+        Button battleButton = bBC.createButton();
         battleButton.getStyleClass().add("button");
 
         VBox buttonBox = new VBox(10);
@@ -41,7 +45,6 @@ public class MainApplication extends Application {
         VBox.setMargin(teambuilderButton, new Insets(300, 0, 0, 0));
 
 
-        StackPane rootPane = new StackPane();
         rootPane.getChildren().add(backgroundView);
 
         rootPane.getChildren().add(tabPane);
@@ -60,4 +63,12 @@ public class MainApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public void setMainContent(Node node) {
+        rootPane.getChildren().setAll(node);
+    }
+
 }
+
+
+

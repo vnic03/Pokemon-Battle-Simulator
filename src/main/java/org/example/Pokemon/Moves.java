@@ -4,10 +4,13 @@ import org.example.Pokemon.Effects.MoveEffect;
 import org.example.Pokemon.Effects.MoveEffectWithDamage;
 
 public class Moves {
+
+    private Pokemon attacker;
     private final String name;
     private PokeTyping type;
     private  MoveCategory category;
     private int power;
+    private int originalPower;
     private int accuracy;
     private int currentPP;
     private final MoveEffect effect;
@@ -38,6 +41,13 @@ public class Moves {
         return accuracy; }
     public void setType(PokeTyping type) { this.type = type; }
     public void setPower(int power) { this.power = power; }
+    public void saveOriginalPower() {
+        this.originalPower = this.power;
+    }
+    public void resetPower() {
+        this.power = this.originalPower;
+    }
+
     public void setAccuracy(int accuracy) { this.accuracy = accuracy; }
 
     public MoveCategory getCategory() {
@@ -63,6 +73,14 @@ public class Moves {
     }
     public MoveEffectWithDamage getEffectWithDamage() {
         return effectWithDamage;
+    }
+
+    public void setAttacker(Pokemon attacker) {
+        this.attacker = attacker;
+    }
+
+    public Pokemon getAttacker() {
+        return attacker;
     }
 
     public boolean useMove() {

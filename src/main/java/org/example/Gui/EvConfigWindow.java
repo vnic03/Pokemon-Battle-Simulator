@@ -238,7 +238,7 @@ public class EvConfigWindow {
         setupSliderTextFieldBinding(attackSlider, attackTextField, attackProgressBar, attackBaseLabel, attackFinalLabel,"Attack");
         setupSliderTextFieldBinding(defenseSlider, defenseTextField, defenseProgressBar, defenseBaseLabel, defenseFinalLabel,"Defense");
         setupSliderTextFieldBinding(spAttackSlider, spAttackTextField, spAttackProgressBar, spABaseLabel,spAFinalLabel ,"Sp.Atk");
-        setupSliderTextFieldBinding(spDefenseSlider, spDefenseTextField, spDefenseProgressBar, spDBaseLabel, spDFinalLabel,"SP.Def");
+        setupSliderTextFieldBinding(spDefenseSlider, spDefenseTextField, spDefenseProgressBar, spDBaseLabel, spDFinalLabel,"Sp.Def");
         setupSliderTextFieldBinding(speedSlider, speedTextField, speedProgressBar, speedBaseLabel, speedFinalLabel,"Speed");
 
         setUpTextFieldListeners();

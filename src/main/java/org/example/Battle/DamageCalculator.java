@@ -46,9 +46,13 @@ public class DamageCalculator {
         int damage = (int) ((((2 * attacker.getLevel() / 5 + 2) * attack.getPower() * attackStat /
                 defenseStat) / 50 + 2) * typeAdvantage * randomFactor);
 
+        if (defender.hasActiveAbility("Thick Fat") && (attack.getType() == PokeTyping.FIRE || attack.getType() == PokeTyping.ICE)) {
+            damage = (int) (damage * 0.5);
+        }
+
         int finalDamage = applyWeather(damage, attacker, defender, attack, weather);
 
-        if (isCriticalHit()) {
+        if (isCriticalHit() && !defender.hasActiveAbility("Battle Armor")) {
             finalDamage = (int) (finalDamage * 1.5);
             System.out.println("\u001B[31m" + "CRITICAL HIT !" + "\u001B[0m"); // color = red
         }

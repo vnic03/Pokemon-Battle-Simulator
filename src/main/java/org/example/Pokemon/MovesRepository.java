@@ -244,10 +244,12 @@ public class MovesRepository {
 
     public static MoveEffect getMoveEffectByName(String moveName) {
         Moves move = getMoveByName(moveName);
+
         if (move != null) {
             return move.getEffect();
+        } else  {
+            System.out.println("move not found"); return null;
         }
-        return null;
     }
 
 

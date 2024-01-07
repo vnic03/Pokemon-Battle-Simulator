@@ -57,10 +57,12 @@ public class BattleSimulator {
 
             System.out.println("Current weather: " + currentWeather);
 
-            String firstMoveName = promptForMove(pokemon1, scanner);
+            String firstMoveInput = promptForMove(pokemon1, scanner);
+            String firstMoveName = MoveSelector.getMoveNameByNumber(pokemon1, firstMoveInput);
             MoveEffect firstMove = MovesRepository.getMoveEffectByName(firstMoveName);
 
-            String secondMoveName = promptForMove(pokemon2, scanner);
+            String secondMoveInput = promptForMove(pokemon2, scanner);
+            String secondMoveName = MoveSelector.getMoveNameByNumber(pokemon2, secondMoveInput);
             MoveEffect secondMove = MovesRepository.getMoveEffectByName(secondMoveName);
 
             Pokemon firstAttacker = determineFirstAttacker(pokemon1, pokemon2, firstMove, secondMove);
@@ -99,6 +101,9 @@ public class BattleSimulator {
 
         pokemon1.resetStats();
         pokemon2.resetStats();
+
+        resetPokemonMoves(pokemon1);
+        resetPokemonMoves(pokemon2);
     }
 
     private Pokemon determineFirstAttacker(Pokemon pokemon1, Pokemon pokemon2, MoveEffect move1, MoveEffect move2) {
@@ -169,6 +174,7 @@ public class BattleSimulator {
             }
         }
 
+        move.setAttacker(attacker);
 
         if (!doesMoveHit(move, attacker, defender)) {
             System.out.println(attacker.getName() + " missed " + defender.getName());
@@ -257,6 +263,12 @@ public class BattleSimulator {
         }
 
         pokemon.decrementSleepTurns();
+
+        if (pokemon.hasActiveAbility("Solar Power") && currentWeather == Weather.SUN) {
+            int solarPowerDamage = (int) (pokemon.getStats().getMaxHp() * 0.1);
+            pokemon.takeDamage(solarPowerDamage);
+            System.out.println(pokemon.getName() + " is hurt by the Sun");
+        }
 
         // more effects
 
@@ -357,6 +369,11 @@ public class BattleSimulator {
             return moveIndex >= 0 && moveIndex < pokemon.getMoves().size();
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+    public void resetPokemonMoves(Pokemon pokemon) {
+        for (Moves move : pokemon.getMoves()) {
+            move.resetPower();
         }
     }
 }
