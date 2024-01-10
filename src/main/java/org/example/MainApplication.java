@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.Gui.TeamBuilder;
 import org.example.Gui.firstPage.BattleButton;
 import org.example.Gui.firstPage.TeamBuilderButton;
 
@@ -20,8 +21,12 @@ public class MainApplication extends Application {
     private final TabPane tabPane = new TabPane();
     private final StackPane rootPane = new StackPane();
 
+    private Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        this.primaryStage = primaryStage;
 
         Image background = new Image(getClass().getResourceAsStream("/mainBackground.jpg"));
 
@@ -33,6 +38,7 @@ public class MainApplication extends Application {
 
         Button teambuilderButton = TeamBuilderButton.createButton();
         teambuilderButton.getStyleClass().add("button");
+        teambuilderButton.setOnAction(event -> openTeamBuilder());
 
         BattleButton bBC = new BattleButton(this);
         Button battleButton = bBC.createButton();
@@ -66,6 +72,12 @@ public class MainApplication extends Application {
 
     public void setMainContent(Node node) {
         rootPane.getChildren().setAll(node);
+    }
+
+    private void openTeamBuilder() {
+        TeamBuilder teamBuilder = new TeamBuilder(primaryStage);
+        Scene teamBuilderScene = new Scene(teamBuilder.getBuilderView(), 1100, 800);
+        primaryStage.setScene(teamBuilderScene);
     }
 
 }

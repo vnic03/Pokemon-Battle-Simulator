@@ -489,6 +489,7 @@ public class Pokemon {
                 ", gender= " + gender.getSymbol() +
                 ", typing=" + typeString +
                 ", level=" + level +
+                ", abilities=" + abilities +
                 ", nature=" + nature +
                 ", stats=" + stats +
                 ", moves=" + moveString +
