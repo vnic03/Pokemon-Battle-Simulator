@@ -1,9 +1,9 @@
 package org.example.Pokemon;
 
 public enum Gender {
-    MALE('♂', "\u001B[34m"),
-    FEMALE('♀', "\u001B[31m"),
-    NONE('-', "\u001B[0m");
+    MALE('♂', "blue"),
+    FEMALE('♀', "red"),
+    NONE('-', "black");
 
     private final char symbol;
     private final String color;
@@ -12,8 +12,11 @@ public enum Gender {
         this.symbol = symbol;
         this.color = color;
     }
-
     public String getSymbol() {
-        return color + symbol + "\u001B[0m";
+        return String.valueOf(symbol);
+    }
+
+    public String getStyledSymbol() {
+        return "-fx-text-fill: " + color + ";";
     }
 }

@@ -2,11 +2,13 @@ package org.example.Gui;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,8 +39,10 @@ public class TeamBuilder {
         createNewTeam();
         initializeLayout();
 
-        team1Box.setPrefWidth(550);
-        team2Box.setPrefWidth(550);
+        teamsContainer.setAlignment(Pos.CENTER);
+
+        HBox.setHgrow(team1Box, Priority.ALWAYS);
+        HBox.setHgrow(team2Box, Priority.ALWAYS);
 
 
         teamsContainer.getChildren().addAll(team1Box, team2Box);
@@ -175,17 +179,34 @@ public class TeamBuilder {
             return;
         }
 
-        PokemonBuilder pokemonBuilder = new PokemonBuilder(pokemon);
+        final Tab pokemonBuilderTab = tabPane.getTabs().stream().filter(
+                t -> t.getText().equals("Edit Pokemon")).findFirst().orElseGet(() -> {
 
-        Stage popUpStage = new Stage();
-        popUpStage.initModality(Modality.WINDOW_MODAL);
-        popUpStage.initOwner(stage);
+            PokemonBuilder pokemonBuilder = new PokemonBuilder(pokemon);
+            Tab newTab = new Tab("Edit Pokemon", pokemonBuilder.getView());
+            tabPane.getTabs().add(newTab);
+            return newTab;
+        });
 
-        Scene popUpScene = new Scene(pokemonBuilder.getView());
-        popUpStage.setScene(popUpScene);
 
-        popUpStage.setTitle("Edit Pokemon");
-        popUpStage.showAndWait();
+        tabPane.getSelectionModel().select(pokemonBuilderTab);
+
+        boolean doneButtonExists = ((VBox) pokemonBuilderTab.getContent()).getChildren().stream()
+                .anyMatch(node -> node instanceof Button && ((Button) node).getText().equals("Done"));
+
+        if (!doneButtonExists) {
+            Button doneButton = new Button("Done");
+
+            doneButton.setOnAction(e -> finishEditingPokemon(index, isTeam1, pokemonBuilderTab));
+            ((VBox) pokemonBuilderTab.getContent()).getChildren().add(doneButton);
+        }
+    }
+
+    private void finishEditingPokemon(int index, boolean isTeam1, Tab pokemonBuilderTab) {
+        // save changes of the Pokmon for fight later
+
+        tabPane.getTabs().remove(pokemonBuilderTab);
+        tabPane.getSelectionModel().selectFirst();
     }
 
     private void createNewTeam() {

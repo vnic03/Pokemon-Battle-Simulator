@@ -18,12 +18,15 @@ public class Ability {
     public void activate(Pokemon pokemon) {
         effect.applyEffect(pokemon);
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDescription() {
         return description;
     }
@@ -38,5 +41,11 @@ public class Ability {
 
     public void setEffect(AbilityEffect effect) {
         this.effect = effect;
+    }
+
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

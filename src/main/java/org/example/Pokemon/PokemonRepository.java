@@ -1,7 +1,5 @@
 package org.example.Pokemon;
 
-
-
 import java.util.*;
 
 public class PokemonRepository {
@@ -11,7 +9,6 @@ public class PokemonRepository {
 
 
     static {
-
 
         pokemonMap.put("Pikachu", new Pokemon("Pikachu", Collections.singletonList(PokeTyping.ELECTRIC), new Stats(110, 75, 60, 70, 70, 110),Nature.SERIOUS, Arrays.asList(aR.getAbility("Static")),"/sprites/Pikachu.jpg" ,new ArrayList<>()));
 

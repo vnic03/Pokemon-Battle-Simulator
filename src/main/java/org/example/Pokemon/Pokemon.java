@@ -85,6 +85,9 @@ public class Pokemon {
     public Gender getGender() {
         return gender;
     }
+    public void setGender(Gender newGender) {
+        this.gender = newGender;
+    }
 
     public List<PokeTyping> getTyping(){
         return typing;
@@ -112,6 +115,12 @@ public class Pokemon {
     public Ability getActiveAbility() {
         return this.activeAbility;
     }
+
+    public List<Ability> getAbilities() {
+        return abilities;
+    }
+
+
 
     public void addMove(Moves move) {
         if (this.moves.size() < 4) {

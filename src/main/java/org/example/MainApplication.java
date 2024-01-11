@@ -5,8 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -28,12 +27,18 @@ public class MainApplication extends Application {
 
         this.primaryStage = primaryStage;
 
+        primaryStage.setFullScreen(true);
+
+        primaryStage.setMinWidth(1100);
+        primaryStage.setMinHeight(800);
+
+
         Image background = new Image(getClass().getResourceAsStream("/mainBackground.jpg"));
 
         ImageView backgroundView = new ImageView(background);
 
-        backgroundView.setFitWidth(1100);
-        backgroundView.setFitHeight(800);
+        backgroundView.fitWidthProperty().bind(primaryStage.widthProperty());
+        backgroundView.fitHeightProperty().bind(primaryStage.heightProperty());
         backgroundView.setPreserveRatio(false);
 
         Button teambuilderButton = TeamBuilderButton.createButton();
@@ -57,8 +62,7 @@ public class MainApplication extends Application {
         rootPane.getChildren().add(buttonBox);
 
 
-
-        Scene scene = new Scene(rootPane,  1100, 800);
+        Scene scene = new Scene(rootPane);
         scene.getStylesheets().add(getClass().getResource("/mainApplication.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Pokémon Battle Simulator by Nico");
@@ -76,8 +80,9 @@ public class MainApplication extends Application {
 
     private void openTeamBuilder() {
         TeamBuilder teamBuilder = new TeamBuilder(primaryStage);
-        Scene teamBuilderScene = new Scene(teamBuilder.getBuilderView(), 1100, 800);
+        Scene teamBuilderScene = new Scene(teamBuilder.getBuilderView());
         primaryStage.setScene(teamBuilderScene);
+        primaryStage.setFullScreen(true);
     }
 
 }
