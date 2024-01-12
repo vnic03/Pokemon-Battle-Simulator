@@ -1,10 +1,10 @@
 
 .root {
     -fx-font-family: 'Arial';
-    -fx-background-image: url('/second-background.jpg');
+    -fx-background-image: url('/testImage.jpg');
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
-    -fx-background-position: left center;
+    -fx-background-position: center;
 }
 
 .grid-pane {
@@ -14,96 +14,112 @@
 .label {
     -fx-font-size: 1em;
     -fx-font-weight: bold;
-    fx-text-fill: #333333;
+    -fx-text-fill: #f8f8ff;
+}
+
+.pokemon-name-label {
+    -fx-text-fill: #000000;
 }
 
 .combo-box {
     -fx-pref-width: 200px;
-    -fx-background-color: #ffffff;
-    -fx-border-color: #cccccc;
+    -fx-background-color:  #333333;
+    -fx-border-color: #7c538c;
     -fx-border-radius: 15;
+    -fx-text-fill: #FFFFFF;
 }
 
 .combo-box .list-cell {
     -fx-padding: 8px;
+    -fx-border-color: transparent;
+    -fx-background-color: #333333;
+    -fx-text-fill: #FFFFFF;
+
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #dcd0ff;;
+    -fx-text-fill: #FFFFFF;
 }
 
 .button {
-    -fx-background-color: linear-gradient(#78c850, #5a9a32);
-    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(#7c538c, #6a0dad);
+    -fx-text-fill: #f8f8ff;
     -fx-border-radius: 15;
     -fx-background-radius: 15;
     -fx-padding: 0.5em 1em;
 }
 .button:hover {
-    -fx-background-color: linear-gradient(#5a9a32, #78c850);
+    -fx-background-color: linear-gradient(#6a0dad, #7c538c);
 }
 
 .team-box, .pokemon-slot {
     -fx-spacing: 10px;
     -fx-pref-width: 100%;
-    -fx-background-color: #ffffff;
-    -fx-border-color: #aaaaaa;
+    -fx-background-color: #333333;
+    -fx-border-color: #5d4777;
     -fx-border-width: 1px;
     -fx-border-radius: 15;
     -fx-background-radius: 15;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+    -fx-effect: dropshadow(three-pass-box, rgba(93,71,119,0.3), 10, 0, 0, 10);
     -fx-padding: 15px;
 }
 
-.combo-box .list-cell {
-    -fx-padding: 4 5 4 5;
-    -fx-border-color: transparent;
-    -fx-background-color: #ffffff;
-}
-
-.combo-box .list-cell:hover {
-    -fx-background-color: #f0f0f0;
-}
 
 .type-label {
     -fx-font-weight: bold;
-    -fx-background-color: #78c850;
-    -fx-text-fill: white;
+    -fx-background-color: #7c538c;
+    -fx-text-fill: #f8f8ff;
     -fx-padding: 5px 10px;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
-    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 2);
+    -fx-effect: dropshadow(one-pass-box, rgba(93, 71, 119, 0.5), 3, 0, 0, 2);
 }
 
 .tooltip {
     -fx-font-size: 12px;
-    -fx-background-color: #ffffff;
-    -fx-text-fill: #333333;
-    -fx-border-color: #aaaaaa;
+    -fx-background-color: #f8f8ff;
+    -fx-text-fill: #5d4777;
+    -fx-border-color: #7c538c;
     -fx-padding: 10px;
     -fx-border-radius: 5;
 }
 
 .combo-box:focused {
-    -fx-border-color: #5a9a32;
+    -fx-border-color: #6a0dad;
     -fx-border-width: 2px;
 }
 
 .move-input {
     -fx-min-height: 30px;
     -fx-font-size: 14px;
+    -fx-background-color: #2C2F33;
+    -fx-border-color:  #40444B;
+    -fx-border-radius: 15px;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 5px 10px;
 }
 
 .moves-list {
     -fx-min-height: 80px;
-    -fx-background-color: #f7f7f7;
-    -fx-border-color: #cccccc;
-    -fx-border-radius: 5px;
+    -fx-background-color: #23272A;
+    -fx-border-color: #5d4777;
+    -fx-border-radius: 15px;
+    -fx-padding: 5px;
 }
 
 .moves-list .list-cell {
     -fx-padding: 10px;
     -fx-border-color: transparent;
+    -fx-background-color: #333333;
+    -fx-text-fill: #FFFFFF;
 }
 
 .moves-list .list-cell:filled:selected, .moves-list .list-cell:filled:selected:hover {
-    -fx-background-color: #e1e1e1;
-    -fx-text-fill: #333333;
+    -fx-background-color: #4C4F52;
+    -fx-text-fill: #FFFFFF;
+}
+.moves-list .list-cell:hover {
+    -fx-background-color: #5d4777;
 }
 

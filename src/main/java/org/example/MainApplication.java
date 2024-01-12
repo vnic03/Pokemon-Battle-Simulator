@@ -27,6 +27,7 @@ public class MainApplication extends Application {
 
         this.primaryStage = primaryStage;
 
+
         primaryStage.setFullScreen(true);
 
         primaryStage.setMinWidth(1100);

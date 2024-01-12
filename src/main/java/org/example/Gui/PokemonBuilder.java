@@ -18,6 +18,7 @@ import org.example.Pokemon.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -26,6 +27,18 @@ public class PokemonBuilder {
     private VBox pokemonBuilderLayout = new VBox(10);
     private Pokemon pokemon;
     private TabPane tabPane = new TabPane();
+
+    //Ev Configuration
+
+    private final static int MAX_EVS = 252;
+    private static final int TOTAl_EVS = 508;
+    private Slider hpSlider, attackSlider, defenseSlider, spAttackSlider, spDefenseSlider, speedSlider;
+    private ProgressBar hpProgressBar, attackProgressBar, defenseProgressBar, spAttackProgressBar, spDefenseProgressBar, speedProgressBar;
+    private TextField hpTextField, attackTextField, defenseTextField, spAttackTextField, spDefenseTextField, speedTextField;
+    private Label hpBaseLabel, attackBaseLabel, defenseBaseLabel, spABaseLabel, spDBaseLabel, speedBaseLabel;
+    private Label hpFinalLabel, attackFinalLabel, defenseFinalLabel, spAFinalLabel, spDFinalLabel, speedFinalLabel;
+    private Label remainingEvsLabel;
+    private Button submitButton;
 
 
     public PokemonBuilder(Pokemon pokemon) {
@@ -89,6 +102,7 @@ public class PokemonBuilder {
 
 
         Label pokemonName = new Label(pokemon.getName());
+        pokemonName.getStyleClass().add("pokemon-name-label");
         pokemonName.setFont(Font.font("Arial", FontWeight.BOLD ,14));
         GridPane.setHalignment(pokemonName, HPos.LEFT);
         detailsPane.add(pokemonName, 0, 0);
@@ -196,7 +210,7 @@ public class PokemonBuilder {
                     if (empty || move == null) {
                         setText(null);
                     } else {
-                        setText(move.getName() + " - Power: " + move.getPower() + ", Type: " + move.getType());
+                        setText(move.getName() +"  " + move.getType() + " " + move.getCategory() + " Power: " + move.getPower() + " Accuracy: " + move.getAccuracy() + " PP: " + move.getPp() + " "+ move.getEffect());
                     }
                 }
             });
@@ -210,7 +224,7 @@ public class PokemonBuilder {
                 if (selectedMove != null && !selectedMoves.contains(selectedMove)) {
                     selectedMoves.add(selectedMove);
                     moveInput.setText(selectedMove.getName());
-                    moveInput.setStyle("-fx-text-fill: green;");
+                    moveInput.setStyle("-fx-text-fill: #6a0dad;");
                 }
             });
 
@@ -227,9 +241,233 @@ public class PokemonBuilder {
         movesList.setItems(FXCollections.observableArrayList(filteredMoves));
     }
 
+
+
     private VBox createEvPane() {
-        return null;
+        VBox evPane = new VBox(10);
+        evPane.setPadding(new Insets(10));
+
+        initializeEvComponents(pokemon);
+
+        evPane.getChildren().addAll( hpBaseLabel, hpProgressBar, hpSlider, hpTextField, hpFinalLabel,
+                attackBaseLabel, attackProgressBar, attackSlider, attackTextField, attackFinalLabel,
+                defenseBaseLabel, defenseProgressBar, defenseSlider, defenseTextField, defenseFinalLabel,
+                spABaseLabel, spAttackProgressBar, spAttackSlider, spAttackTextField, spAFinalLabel,
+                spDBaseLabel, spDefenseProgressBar, spDefenseSlider, spDefenseTextField, spDFinalLabel,
+                speedBaseLabel, speedProgressBar, speedSlider, speedTextField, speedFinalLabel,
+                remainingEvsLabel, submitButton);
+
+        return evPane;
     }
+
+
+    private void initializeEvComponents(Pokemon pokemon) {
+        Map<String, Integer> baseStats = EvConfigWindow.getPokemonBaseStats(pokemon);
+
+        hpBaseLabel = new Label(String.valueOf(pokemon.getStats().getMaxHp()));
+        attackBaseLabel = new Label(String.valueOf(pokemon.getStats().getAttack()));
+        defenseBaseLabel = new Label(String.valueOf(pokemon.getStats().getDefense()));
+        spABaseLabel = new Label(String.valueOf(pokemon.getStats().getSpecialAttack()));
+        spDBaseLabel = new Label(String.valueOf(pokemon.getStats().getSpecialDefense()));
+        speedBaseLabel = new Label(String.valueOf(pokemon.getStats().getSpeed()));
+
+        hpFinalLabel = new Label();
+        attackFinalLabel = new Label();
+        defenseFinalLabel = new Label();
+        spAFinalLabel = new Label();
+        spDFinalLabel = new Label();
+        speedFinalLabel = new Label();
+
+        hpSlider = createSlider();
+        attackSlider = createSlider();
+        defenseSlider = createSlider();
+        spAttackSlider = createSlider();
+        spDefenseSlider = createSlider();
+        speedSlider = createSlider();
+
+        hpTextField = new TextField("0");
+        attackTextField = new TextField("0");
+        defenseTextField = new TextField("0");
+        spAttackTextField = new TextField("0");
+        spDefenseTextField = new TextField("0");
+        speedTextField = new TextField("0");
+
+        hpProgressBar = new ProgressBar(0);
+        attackProgressBar = new ProgressBar(0);
+        defenseProgressBar = new ProgressBar(0);
+        spAttackProgressBar = new ProgressBar(0);
+        spDefenseProgressBar = new ProgressBar(0);
+        speedProgressBar = new ProgressBar(0);
+
+        hpProgressBar.setProgress(baseStats.get("HP") / 255.0);
+        attackProgressBar.setProgress(baseStats.get("Attack") / 255.0);
+        defenseProgressBar.setProgress(baseStats.get("Defense") / 255.0);
+        spAttackProgressBar.setProgress(baseStats.get("Sp.Atk") / 255.0);
+        spDefenseProgressBar.setProgress(baseStats.get("Sp.Def") / 255.0);
+        speedProgressBar.setProgress(baseStats.get("Speed") / 255.0);
+
+        setupSliderTextFieldBinding(hpSlider, hpTextField,hpProgressBar, hpBaseLabel, hpFinalLabel,"HP");
+        setupSliderTextFieldBinding(attackSlider, attackTextField, attackProgressBar,attackBaseLabel, attackFinalLabel,"Attack");
+        setupSliderTextFieldBinding(defenseSlider, defenseTextField, defenseProgressBar,defenseBaseLabel, defenseFinalLabel,"Defense");
+        setupSliderTextFieldBinding(spAttackSlider, spAttackTextField,spAttackProgressBar,spABaseLabel, spAFinalLabel,"Sp.Atk");
+        setupSliderTextFieldBinding(spDefenseSlider, spDefenseTextField, spDefenseProgressBar ,spDBaseLabel, spDFinalLabel,"Sp.Def");
+        setupSliderTextFieldBinding(speedSlider, speedTextField, speedProgressBar,speedBaseLabel, speedFinalLabel,"Speed");
+
+        remainingEvsLabel = new Label("Remaining EVs: " + TOTAl_EVS);
+        submitButton = new Button("Assign Evs");
+
+        submitButton.setOnAction(event -> submitEvConfiguration());
+
+        updateProgressBars();
+    }
+
+    private Slider createSlider() {
+
+        Slider slider = new Slider(0, MAX_EVS, 0);
+
+        slider.setMajorTickUnit(4);
+        slider.setMinorTickCount(0);
+        slider.setSnapToTicks(true);
+        slider.setBlockIncrement(4);
+
+        slider.setShowTickLabels(false);
+        slider.setShowTickMarks(false);
+
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            int roundedValue = (int) (4 * (Math.round(newValue.doubleValue() / 4)));
+            if (roundedValue != newValue.intValue()) {
+                slider.setValue(roundedValue);
+            }
+        });
+
+        return slider;
+    }
+
+    private void updateProgressBars() {
+        hpProgressBar.setProgress((double) pokemon.getEVs()[0] / MAX_EVS);
+        attackProgressBar.setProgress((double) pokemon.getEVs()[1] / MAX_EVS);
+        defenseProgressBar.setProgress((double) pokemon.getEVs()[2] / MAX_EVS);
+        spAttackProgressBar.setProgress((double) pokemon.getEVs()[3] / MAX_EVS);
+        spDefenseProgressBar.setProgress((double) pokemon.getEVs()[4] / MAX_EVS);
+        speedProgressBar.setProgress((double) pokemon.getEVs()[5] / MAX_EVS);
+    }
+
+    private void submitEvConfiguration() {
+
+        try {
+            int hpEvs = Integer.parseInt(hpTextField.getText());
+            int attackEvs = Integer.parseInt(attackTextField.getText());
+            int defenseEvs = Integer.parseInt(defenseTextField.getText());
+            int spAttackEvs = Integer.parseInt(spAttackTextField.getText());
+            int spDefenseEvs = Integer.parseInt(spDefenseTextField.getText());
+            int speedEvs = Integer.parseInt(speedTextField.getText());
+
+            int totalEvs = hpEvs + attackEvs + defenseEvs + spAttackEvs + spDefenseEvs + speedEvs;
+
+            if (totalEvs <= TOTAl_EVS) {
+
+                pokemon.setEvs(hpEvs, attackEvs, defenseEvs, spAttackEvs, spDefenseEvs, speedEvs);
+
+                pokemon.getStats().calculateFinalStats(pokemon);
+
+                updateProgressBars();
+
+                displayFinalStat();
+
+
+
+            }
+        } catch (NumberFormatException e) {
+
+        }
+    }
+
+    private void setupSliderTextFieldBinding(Slider slider, TextField textField, ProgressBar progressBar,Label baselabel, Label finalLabel, String statName) {
+
+        slider.valueProperty().addListener((obs, oldval, newVal) -> {
+            textField.setText(String.format("%d", newVal.intValue()));
+            progressBar.setProgress(newVal.doubleValue() / MAX_EVS);
+            updateTotalEvs();
+            updateFinalStatsLabel(finalLabel, statName, newVal.intValue());
+        });
+
+
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                try {
+                    int value = Integer.parseInt(textField.getText());
+                    value = Math.min(MAX_EVS, Math.max(value, 0));
+                    slider.setValue(value);
+                    updateTotalEvs();
+                } catch (NumberFormatException e) {
+                    textField.setText(String.format("%d", (int) slider.getValue()));
+                }
+            }
+        });
+    }
+
+    private void updateTotalEvs() {
+
+        int totalEvs = (int) (hpSlider.getValue() + attackSlider.getValue() + defenseSlider.getValue() +
+                spAttackSlider.getValue() + spDefenseSlider.getValue() + speedSlider.getValue());
+
+
+        int remainingEvs = TOTAl_EVS - totalEvs;
+
+        remainingEvsLabel.setText("Remaining Evs: " + remainingEvs);
+
+        boolean limit = totalEvs > TOTAl_EVS;
+
+        hpSlider.setDisable(limit);
+        attackSlider.setDisable(limit);
+        defenseSlider.setDisable(limit);
+        spAttackSlider.setDisable(limit);
+        spDefenseSlider.setDisable(limit);
+        speedSlider.setDisable(limit);
+
+
+        if (limit) {
+            remainingEvsLabel.setTextFill(Color.RED);
+            submitButton.setDisable(true);
+
+        } else {
+            remainingEvsLabel.setTextFill(Color.BLUE);
+            submitButton.setDisable(false);
+        }
+    }
+
+    private void displayFinalStat() {
+
+        updateFinalStatsLabel(hpFinalLabel, "HP", Integer.parseInt(hpTextField.getText()));
+        updateFinalStatsLabel(attackFinalLabel, "Attack", Integer.parseInt(hpTextField.getText()));
+        updateFinalStatsLabel(defenseFinalLabel, "Defense", Integer.parseInt(hpTextField.getText()));
+        updateFinalStatsLabel(spAFinalLabel, "Sp.Atk", Integer.parseInt(hpTextField.getText()));
+        updateFinalStatsLabel(spDFinalLabel, "Sp.Def", Integer.parseInt(hpTextField.getText()));
+        updateFinalStatsLabel(speedFinalLabel, "Speed", Integer.parseInt(hpTextField.getText()));
+    }
+
+    private void updateFinalStatsLabel(Label finalLabel, String statName, int evValue) {
+
+        Map<String, Integer> baseStats = EvConfigWindow.getPokemonBaseStats(pokemon);
+
+        if (baseStats.containsKey(statName) && baseStats.get(statName) != null) {
+            int baseValue = baseStats.get(statName);
+
+            int increasedValue = evValue > 3 ? increasedStats(evValue) + 1 : 0;
+
+            int finalValue = baseValue + increasedValue;
+            finalLabel.setText(String.valueOf(finalValue));
+
+        } else {
+            finalLabel.setText("N/A");
+        }
+    }
+    private int increasedStats(int evs) {
+        return evs / 8;
+    }
+
+
+
 
     public VBox getView() {
         return pokemonBuilderLayout;
