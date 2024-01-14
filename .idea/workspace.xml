@@ -4,11 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Abilities still not tested, updated UI">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/testImage.jpg" afterDir="false" />
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Abilities still not tested, updated UI added evs; needs fixing">
+      <change afterPath="$PROJECT_DIR$/hs_err_pid68808.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/moveCategory/physical_move_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/moveCategory/special_move_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/moveCategory/status_move_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/bug.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/contest_cute.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/dragon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/electric.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/fight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/fire.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/flying.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/ghost.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/grass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/ground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/ice.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/mystery.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/normal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/poison.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/psychic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/rock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/steel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/types/water.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/PokemonBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/PokemonBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MoveCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MoveCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokeTyping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/PokeTyping.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/teamBuilderStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/teamBuilderStyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,11 +138,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/moveCategory" />
       <recent name="$PROJECT_DIR$/frontend/src" />
       <recent name="$PROJECT_DIR$/frontend/public" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/java/FailedIdeas" />
-      <recent name="$PROJECT_DIR$/src/main/java/resources/org/example/Gui" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainApplication">
@@ -234,7 +257,11 @@
       <workItem from="1704809043813" duration="35000" />
       <workItem from="1704817557117" duration="12657000" />
       <workItem from="1704919551416" duration="18719000" />
-      <workItem from="1705008443099" duration="10709000" />
+      <workItem from="1705008443099" duration="12082000" />
+      <workItem from="1705107971531" duration="33000" />
+      <workItem from="1705108641534" duration="243000" />
+      <workItem from="1705109208500" duration="770000" />
+      <workItem from="1705243541429" duration="27597000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -572,7 +599,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704938237209</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Abilities still not tested, updated UI added evs; needs fixing">
+      <option name="closed" value="true" />
+      <created>1705025500162</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1705025500162</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,7 +626,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="May Burn effect added" />
     <MESSAGE value="Added more Effects, not tested yet" />
     <MESSAGE value="tested the effects, should be working" />
     <MESSAGE value="Sleep Effect added, not tested" />
@@ -616,7 +650,8 @@
     <MESSAGE value="Added Abilities, needs testing" />
     <MESSAGE value="Abilities still not tested, added Teams" />
     <MESSAGE value="Abilities still not tested, updated UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Abilities still not tested, updated UI" />
+    <MESSAGE value="Abilities still not tested, updated UI added evs; needs fixing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Abilities still not tested, updated UI added evs; needs fixing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

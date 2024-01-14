@@ -1,8 +1,12 @@
 package org.example.Gui;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -14,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import org.example.Pokemon.*;
 
 import java.util.ArrayList;
@@ -190,62 +196,161 @@ public class PokemonBuilder {
         return detailsPane;
     }
 
-    private VBox creatMovesPane() {
+
+    // Moves Pane
+
+    private ScrollPane creatMovesPane() {
         VBox movesPane = new VBox(10);
         movesPane.setPadding(new Insets(10));
-        List<Moves> selectedMoves = new ArrayList<>();
+        movesPane.setAlignment(Pos.CENTER);
 
         for (int i = 0; i < 4; i++) {
-            TextField moveInput = new TextField();
-            moveInput.setPromptText("Enter Move " + (i + 1));
-            moveInput.getStyleClass().add("move-input");
 
-            ListView<Moves> movesList = new ListView<>();
-            movesList.getStyleClass().add("moves-list");
+            ComboBox<Moves> movesComboBox = createComboBox();
+            movesComboBox.setEditable(true);
 
-            movesList.setCellFactory(param -> new ListCell<Moves>() {
+            movesComboBox.getStyleClass().add("combo-box");
+
+            movesComboBox.setPrefWidth(300);
+            movesComboBox.setMaxWidth(Double.MAX_VALUE);
+
+            movesComboBox.setVisibleRowCount(4);
+
+
+            FilteredList<Moves> filteredMoves = new FilteredList<>(
+                    FXCollections.observableArrayList(MovesRepository.getAllMoves()), p -> true);
+
+            movesComboBox.setItems(filteredMoves);
+
+            movesComboBox.setConverter(new StringConverter<Moves>() {
                 @Override
-                protected void updateItem(Moves move, boolean empty) {
-                    super.updateItem(move, empty);
-                    if (empty || move == null) {
-                        setText(null);
-                    } else {
-                        setText(move.getName() +"  " + move.getType() + " " + move.getCategory() + " Power: " + move.getPower() + " Accuracy: " + move.getAccuracy() + " PP: " + move.getPp() + " "+ move.getEffect());
+                public String toString(Moves move) {
+                    return move != null ? move.getName() : "";
+                }
+
+                @Override
+                public Moves fromString(String string) {
+                    if (string == null) {
+                        return null;
                     }
+
+                    return filteredMoves.stream()
+                            .filter(move -> move.getName().equals(string))
+                            .findFirst()
+                            .orElse(null);
+
                 }
             });
 
-            moveInput.textProperty().addListener((observable, oldValue, newValue) -> {
-                updateMovesList(movesList, newValue);
-            });
+            final boolean[] isUpdating = {false};
 
-            movesList.setOnMouseClicked(event -> {
-                Moves selectedMove = movesList.getSelectionModel().getSelectedItem();
-                if (selectedMove != null && !selectedMoves.contains(selectedMove)) {
-                    selectedMoves.add(selectedMove);
-                    moveInput.setText(selectedMove.getName());
-                    moveInput.setStyle("-fx-text-fill: #6a0dad;");
+            movesComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null && !isUpdating[0]) {
+                    isUpdating[0] = true;
+                    movesComboBox.getEditor().setText(newValue.getName());
+                    isUpdating[0] = false;
                 }
             });
 
-            movesPane.getChildren().addAll(moveInput, movesList);
+            final boolean[] isShowing = {false};
+
+            movesComboBox.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+
+                if (!isUpdating[0]) {
+                    isUpdating[0] = true;
+
+                    movesComboBox.getSelectionModel().clearSelection();
+
+                    filteredMoves.setPredicate(move -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        return move.getName().toLowerCase().contains(newValue.toLowerCase());
+                    });
+
+                    isUpdating[0] = false;
+                }
+
+                if (!filteredMoves.isEmpty() && !movesComboBox.isShowing()) {
+                    movesComboBox.show();
+                }
+            });
+
+            movesComboBox.setOnHidden(event -> isShowing[0] = false);
+
+            movesPane.getChildren().add(movesComboBox);
+
         }
-        return movesPane;
+
+        ScrollPane movesScrollPane = new ScrollPane(movesPane);
+        movesScrollPane.setFitToWidth(true);
+
+        return movesScrollPane;
     }
 
-    private void updateMovesList(ListView<Moves> movesList, String searchText) {
-        List<Moves> filteredMoves = MovesRepository.getAllMoves().stream()
-                .filter(move -> move.getName().toLowerCase().startsWith(searchText.toLowerCase()))
-                .collect(Collectors.toList());
 
-        movesList.setItems(FXCollections.observableArrayList(filteredMoves));
+    private ComboBox<Moves> createComboBox() {
+        ComboBox<Moves> moveComboBox = new ComboBox<>();
+        moveComboBox.setCellFactory(param -> new ListCell<Moves>() {
+            @Override
+            protected void updateItem(Moves move, boolean empty) {
+                super.updateItem(move, empty);
+                if (empty || move == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    HBox hBox = new HBox(5);
+                    hBox.setAlignment(Pos.CENTER_LEFT);
+
+                    ImageView typeImage = new ImageView(move.getType().getImage());
+                    typeImage.setFitHeight(28);
+                    typeImage.setFitWidth(50);
+
+                    ImageView categoryImage = new ImageView(move.getCategory().getImage());
+                    categoryImage.setFitHeight(61);
+                    categoryImage.setFitWidth(55);
+
+                    Label nameLabel = new Label(move.getName());
+
+                    Label categorylabel = new Label("Cat: ");
+                    Label powerLabel = new Label("Power: " + move.getPower());
+                    Label accuracyLabel = new Label("Acc: " + move.getAccuracy());
+                    Label ppLabel = new Label("PP: " + move.getPp());
+
+                    hBox.getChildren().addAll(nameLabel, typeImage,categorylabel ,categoryImage, powerLabel, accuracyLabel, ppLabel);
+
+                    setGraphic(hBox);
+                    setText(null);
+                }
+            }
+        });
+
+        moveComboBox.setButtonCell(new ListCell<Moves>() {
+            @Override
+            protected void updateItem(Moves move, boolean empty) {
+                super.updateItem(move, empty);
+                if (empty || move == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setText(move.getName());
+                    ImageView typeImage = new ImageView(move.getType().getImage());
+                    typeImage.setFitHeight(28);
+                    typeImage.setFitWidth(50);
+                    setGraphic(typeImage);
+                }
+            }
+        });
+        return moveComboBox;
     }
 
 
 
     private VBox createEvPane() {
         VBox evPane = new VBox(10);
-        evPane.setPadding(new Insets(10));
+        evPane.getStyleClass().add("ev-pane");
+
+        evPane.minWidthProperty().set(600);
 
         initializeEvComponents(pokemon);
 
@@ -257,6 +362,10 @@ public class PokemonBuilder {
                 speedBaseLabel, speedProgressBar, speedSlider, speedTextField, speedFinalLabel,
                 remainingEvsLabel, submitButton);
 
+        ScrollPane scrollPane = new ScrollPane(evPane);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+
         return evPane;
     }
 
@@ -264,40 +373,107 @@ public class PokemonBuilder {
     private void initializeEvComponents(Pokemon pokemon) {
         Map<String, Integer> baseStats = EvConfigWindow.getPokemonBaseStats(pokemon);
 
+        // Stat Labels
+
         hpBaseLabel = new Label(String.valueOf(pokemon.getStats().getMaxHp()));
+        hpBaseLabel.getStyleClass().addAll("label", "stat-label");
+
         attackBaseLabel = new Label(String.valueOf(pokemon.getStats().getAttack()));
+        attackBaseLabel.getStyleClass().addAll("label", "stat-label");
+
         defenseBaseLabel = new Label(String.valueOf(pokemon.getStats().getDefense()));
+        defenseBaseLabel.getStyleClass().addAll("label", "stat-label");
+
         spABaseLabel = new Label(String.valueOf(pokemon.getStats().getSpecialAttack()));
+        spABaseLabel.getStyleClass().addAll("label", "stat-label");
+
         spDBaseLabel = new Label(String.valueOf(pokemon.getStats().getSpecialDefense()));
+        spDBaseLabel.getStyleClass().addAll("label", "stat-label");
+
         speedBaseLabel = new Label(String.valueOf(pokemon.getStats().getSpeed()));
+        speedBaseLabel.getStyleClass().addAll("label", "stat-label");
+
+
+        // Evs Result labels
 
         hpFinalLabel = new Label();
+        hpFinalLabel.getStyleClass().addAll("label", "final-stat-label");
+
         attackFinalLabel = new Label();
+        attackFinalLabel.getStyleClass().addAll("label", "final-stat-label");
+
         defenseFinalLabel = new Label();
+        defenseFinalLabel.getStyleClass().addAll("label", "final-stat-label");
+
         spAFinalLabel = new Label();
+        spAFinalLabel.getStyleClass().addAll("label", "final-stat-label");
+
         spDFinalLabel = new Label();
+        spDFinalLabel.getStyleClass().addAll("label", "final-stat-label");
+
         speedFinalLabel = new Label();
+        speedFinalLabel.getStyleClass().addAll("label", "final-stat-label");
+
+        // Sliders
 
         hpSlider = createSlider();
+        hpSlider.getStyleClass().add("ev-slider");
+
         attackSlider = createSlider();
+        attackSlider.getStyleClass().add("ev-slider");
+
         defenseSlider = createSlider();
+        defenseSlider.getStyleClass().add("ev-slider");
+
         spAttackSlider = createSlider();
+        spAttackSlider.getStyleClass().add("ev-slider");
+
         spDefenseSlider = createSlider();
+        spDefenseSlider.getStyleClass().add("ev-slider");
+
         speedSlider = createSlider();
+        speedSlider.getStyleClass().add("ev-slider");
+
+        // TextFields
 
         hpTextField = new TextField("0");
+        hpTextField.getStyleClass().add("ev-text-field");
+
         attackTextField = new TextField("0");
+        attackTextField.getStyleClass().add("ev-text-field");
+
         defenseTextField = new TextField("0");
+        defenseTextField.getStyleClass().add("ev-text-field");
+
         spAttackTextField = new TextField("0");
+        spAttackTextField.getStyleClass().add("ev-text-field");
+
         spDefenseTextField = new TextField("0");
+        spDefenseTextField.getStyleClass().add("ev-text-field");
+
         speedTextField = new TextField("0");
+        speedTextField.getStyleClass().add("ev-text-field");
+
+        // Progress Bars
 
         hpProgressBar = new ProgressBar(0);
+        hpProgressBar.getStyleClass().add("ev-progress-bar");
+
         attackProgressBar = new ProgressBar(0);
+        attackProgressBar.getStyleClass().add("ev-progress-bar");
+
         defenseProgressBar = new ProgressBar(0);
+        defenseProgressBar.getStyleClass().add("ev-progress-bar");
+
         spAttackProgressBar = new ProgressBar(0);
+        spAttackProgressBar.getStyleClass().add("ev-progress-bar");
+
         spDefenseProgressBar = new ProgressBar(0);
+        spDefenseProgressBar.getStyleClass().add("ev-progress-bar");
+
         speedProgressBar = new ProgressBar(0);
+        speedProgressBar.getStyleClass().add("ev-progress-bar");
+
 
         hpProgressBar.setProgress(baseStats.get("HP") / 255.0);
         attackProgressBar.setProgress(baseStats.get("Attack") / 255.0);
@@ -314,7 +490,9 @@ public class PokemonBuilder {
         setupSliderTextFieldBinding(speedSlider, speedTextField, speedProgressBar,speedBaseLabel, speedFinalLabel,"Speed");
 
         remainingEvsLabel = new Label("Remaining EVs: " + TOTAl_EVS);
+
         submitButton = new Button("Assign Evs");
+        submitButton.getStyleClass().add("ev-submit-button");
 
         submitButton.setOnAction(event -> submitEvConfiguration());
 
