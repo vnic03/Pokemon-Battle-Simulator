@@ -1,7 +1,7 @@
 
 .root {
     -fx-font-family: 'Arial';
-    -fx-background-image: url('/testImage.jpg');
+    -fx-background-image: url('/teambuilderBackground.jpg');
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center;
@@ -21,8 +21,8 @@
 }
 
 .combo-box {
+    -fx-background-color: transparent;
     -fx-pref-width: 200px;
-    -fx-background-color:  #333333;
     -fx-border-color: #7c538c;
     -fx-border-radius: 15;
     -fx-text-fill: #FFFFFF;
@@ -68,6 +68,7 @@
     -fx-border-color: transparent;
     -fx-background-color: #333333;
     -fx-text-fill: #FFFFFF;
+    -fx-background-insets: 0;
     -fx-background-radius: 15px;
 }
 
@@ -91,6 +92,7 @@
     -fx-border-radius: 15px;
     -fx-padding: 5px;
     -fx-background-radius: 15px;
+
 }
 
 .combo-box .list-view .list-cell {
@@ -108,6 +110,16 @@
 
 .combo-box .list-view .list-cell:hover {
     -fx-background-color: #5d4777;
+}
+
+.combo-box-popup .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-radius: 15px;
+}
+
+.combo-box-popup .scroll-pane .viewport {
+    -fx-background-color: transparent;
+    -fx-background-radius: 15px;
 }
 
 
@@ -283,5 +295,33 @@
 
 .moves-list .list-cell, .move-input, .scroll-pane {
     -fx-overflow: hidden;
+}
+
+
+.start-battle-button {
+    -fx-background-color: linear-gradient(to bottom, #dc143c, #a40000);
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5;
+    -fx-border-color: #FFFFFF, #dc143c;
+    -fx-border-width: 2, 2;
+    -fx-border-insets: 0, 2;
+    -fx-border-style: solid inside, solid outside;
+    -fx-border-radius: 5, 5;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-padding: 15px 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 10);
+    -fx-cursor: hand;
+}
+
+.start-battle-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #ff3030, #dc143c);
+    -fx-border-color: #FFFFFF, #ff3030;
+}
+
+.start-battle-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #a40000, #dc143c);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 0, 3, 3, 0);
 }
 

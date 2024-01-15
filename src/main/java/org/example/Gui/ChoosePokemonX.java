@@ -51,7 +51,7 @@ public class ChoosePokemonX {
 
                 } else {
                     Pokemon pokemon = PokemonRepository.getPokemon(pokemonName);
-                    String spritePath = pokemon.getSpritePath();
+                    String spritePath = pokemon.getFrontSprite().getUrl();
 
                     InputStream is = getClass().getResourceAsStream(spritePath);
 
@@ -103,7 +103,7 @@ public class ChoosePokemonX {
 
                 } else {
                     Pokemon pokemon = PokemonRepository.getPokemon(pokemonName);
-                    String spritePath = pokemon.getSpritePath();
+                    String spritePath = pokemon.getFrontSprite().getUrl();
 
                     InputStream is = getClass().getResourceAsStream(spritePath);
 

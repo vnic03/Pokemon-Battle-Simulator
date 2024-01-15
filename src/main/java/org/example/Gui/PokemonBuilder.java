@@ -103,7 +103,7 @@ public class PokemonBuilder {
         detailsPane.setVgap(10);
         detailsPane.setPadding(new Insets(10, 10, 10, 10));
 
-        ImageView pokemonSprite = createPokemonImage(pokemon.getSpritePath());
+        ImageView pokemonSprite = createPokemonImage(pokemon.getFrontSprite().getUrl());
         detailsPane.add(pokemonSprite, 0, 0, 1, 2);
 
 
@@ -116,14 +116,16 @@ public class PokemonBuilder {
 
         HBox typeBox = new HBox(5);
         for (PokeTyping type : pokemon.getTyping()) {
-            Label typeLabel = new Label(type.toString());
-            typeLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
-            typeBox.getChildren().add(typeLabel);
+            Image typeImage = new Image(getClass().getResource("/types/" + type.name().toLowerCase() + ".png").toExternalForm());
+            ImageView typeIconView = new ImageView(typeImage);
+            typeIconView.setFitWidth(50);
+            typeIconView.setFitHeight(30);
+            typeBox.getChildren().add(typeIconView);
         }
         detailsPane.add(typeBox, 1, 2,2,1);
 
 
-        Label levelLabel = new Label("Level: 50"); // level is always 50 rn
+        Label levelLabel = new Label("Level: 50"); // level is always 50 rn, not changeable
         levelLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
         GridPane.setHalignment(levelLabel, HPos.RIGHT);
         detailsPane.add(levelLabel, 1, 0);
@@ -214,7 +216,7 @@ public class PokemonBuilder {
             movesComboBox.setPrefWidth(300);
             movesComboBox.setMaxWidth(Double.MAX_VALUE);
 
-            movesComboBox.setVisibleRowCount(4);
+            movesComboBox.setVisibleRowCount(3);
 
 
             FilteredList<Moves> filteredMoves = new FilteredList<>(

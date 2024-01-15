@@ -1,13 +1,19 @@
 package org.example.Pokemon;
 
+import javafx.scene.image.Image;
 import org.example.Battle.DamageCalculator;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Pokemon {
     String name;
-    private String spritePath; // path to the image
+
+    private String frontSpritePath;
+    private String backSpritePath;
+    private String iconSpritePath;
+
     private String typeString;
     private Gender gender;
     private List<PokeTyping> typing;
@@ -45,7 +51,7 @@ public class Pokemon {
 
     private Map<Moves, Integer> disabledMoves = new HashMap<>();
 
-    public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature, List<Ability> abilities,String spritePath, List<Moves> moves) {
+    public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature, List<Ability> abilities, String frontSpritePath, String backSpritePath, String iconSpritePath, List<Moves> moves) {
         this.name = name;
         this.gender = randomGender();
         this.typing = typing;
@@ -54,8 +60,14 @@ public class Pokemon {
         this.nature = nature;
         this.abilities = abilities;
         this.activeAbility = null;
-        this.spritePath = spritePath;
+
+        this.frontSpritePath = frontSpritePath;
+        this.backSpritePath = backSpritePath;
+        this.iconSpritePath = iconSpritePath;
+
+
         this.moves = moves;
+
 
         if (this.nature != null) {
             applyNatureEffects();
@@ -71,8 +83,16 @@ public class Pokemon {
         return level;
     }
 
-    public String getSpritePath() {
-        return spritePath;
+    public Image getFrontSprite() {
+        return new Image(frontSpritePath);
+    }
+
+    public Image getBackSprite() {
+        return new Image(backSpritePath);
+    }
+
+    public Image getIconSprite() {
+        return new Image(iconSpritePath);
     }
 
     public String getTypeString() {
