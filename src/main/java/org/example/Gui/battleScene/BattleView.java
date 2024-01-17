@@ -10,8 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.example.Gui.TeamBuilder;
+import org.example.Pokemon.Moves;
 import org.example.Pokemon.Pokemon;
 import org.example.teams.Team;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class BattleView extends AnchorPane {
@@ -30,14 +34,6 @@ public class BattleView extends AnchorPane {
         initializeBattleField();
         this.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/battleViewStyles/battleViewStyle.css")).toExternalForm());
         this.getStyleClass().add("battle-view");
-
-        Button switchButtonTeam1 = new Button("Switch Pokemon");
-        setUpSwitchButton(switchButtonTeam1, this.team1, true);
-        playerOneView.getChildren().add(switchButtonTeam1);
-
-        Button switchButtonTeam2 = new Button("Switch Pokemon");
-        setUpSwitchButton(switchButtonTeam2, this.team2, false);
-        playerTwoView.getChildren().add(switchButtonTeam2);
     }
 
     private void initializeBattleField() {
@@ -47,13 +43,6 @@ public class BattleView extends AnchorPane {
 
         playerOneView.getChildren().add(team1Container);
         playerTwoView.getChildren().add(team2Container);
-
-
-        AnchorPane.setBottomAnchor(playerOneView, 50.0);
-        AnchorPane.setLeftAnchor(playerOneView, 50.0);
-
-        AnchorPane.setTopAnchor(playerTwoView, 50.0);
-        AnchorPane.setRightAnchor(playerTwoView, 50.0);
 
         this.getChildren().addAll(playerOneView, playerTwoView);
     }
@@ -73,6 +62,14 @@ public class BattleView extends AnchorPane {
                 spriteView.setSmooth(true);
                 PokemonStatusBar statusBar = new PokemonStatusBar(pokemonTeam1);
                 team1Container.getChildren().addAll(spriteView, statusBar);
+
+                List<Button> moveButtonsTeam1 = createMovesButtonForTeam(pokemonTeam1);
+                Button switchButtonTeam1 = createSwitchButton(team1, true);
+                VBox movesLayoutTeam1 = createMovesLayout(moveButtonsTeam1, switchButtonTeam1);
+                HBox fullLayoutTeam1 = new HBox(movesLayoutTeam1, team1Container);
+                playerOneView.getChildren().add(fullLayoutTeam1);
+                AnchorPane.setBottomAnchor(playerOneView, 150.0);
+                AnchorPane.setLeftAnchor(playerOneView, 200.0);
             }
         }
 
@@ -85,19 +82,27 @@ public class BattleView extends AnchorPane {
                 spriteView.setFitHeight(200);
                 spriteView.setPreserveRatio(true);
                 spriteView.setSmooth(true);
+
                 PokemonStatusBar statusBar = new PokemonStatusBar(pokemonTeam2);
-                team2Container.getChildren().addAll(spriteView, statusBar);
+                List<Button> moveButtonsTeam2 = createMovesButtonForTeam(pokemonTeam2);
+                Button switchButtonTeam2 = createSwitchButton(team2, false);
+                VBox movesLayoutTeam2 = createMovesLayout(moveButtonsTeam2, switchButtonTeam2);
+
+                HBox fullLayoutTeam2 = new HBox(statusBar, spriteView, movesLayoutTeam2);
+                playerTwoView.getChildren().add(fullLayoutTeam2);
+                AnchorPane.setTopAnchor(playerTwoView, 150.0);
+                AnchorPane.setRightAnchor(playerTwoView, 300.0);
+
+                team2Container.getChildren().addAll(fullLayoutTeam2);
+
             }
         }
     }
-
     private void changePokemon(Team team, int pokemonIndex, boolean isTeamOne) {
         if (pokemonIndex < 0 || pokemonIndex >= team.getPokemons().size()) {
             return;
         }
-
         Pokemon newPokemon = team.getPokemons().get(pokemonIndex);
-
         if (isTeamOne) {
             ImageView newSpriteView = new ImageView(newPokemon.getBackSprite());
             newSpriteView.setFitWidth(200);
@@ -122,16 +127,20 @@ public class BattleView extends AnchorPane {
     }
 
     public void handlePokemonChangeRequest(Team team, int pokemonIndex, boolean isTeam1) {
-
         if (canPokemonSwitch(team.getPokemons().get(pokemonIndex))) {
             changePokemon(team, pokemonIndex, isTeam1);
             team.setActivePokemonIndex(pokemonIndex);
+            updateTeamView(isTeam1 ? team1Container : team2Container, team, isTeam1);
 
-            if (isTeam1) {
-                updateTeamView(team1Container, team, true);
-            } else {
-                updateTeamView(team2Container, team, false);
-            }
+            List<Button> movesButtons = createMovesButtonForTeam(team.getPokemons().get(pokemonIndex));
+            Button switchButton = createSwitchButton(team, isTeam1);
+            VBox movesLayout = createMovesLayout(movesButtons, switchButton);
+
+            VBox view = isTeam1 ? playerOneView : playerTwoView;
+            view.getChildren().removeIf(node -> node instanceof VBox && node.getStyleClass().contains("moves-layout"));
+            view.getChildren().add(movesLayout);
+            view.getStyleClass().add("moves-layout");
+
         } else {
             System.out.println("Can't switch right now"); // fix later
         }
@@ -151,7 +160,9 @@ public class BattleView extends AnchorPane {
         }
     }
 
-   private void setUpSwitchButton(Button switchButton, Team team, boolean isTeam1) {
+   private Button createSwitchButton(Team team, boolean isTeam1) {
+       Button switchButton = new Button("Switch Pokemon");
+       switchButton.getStyleClass().add("switch-button");
        switchButton.setOnAction(event -> {
            ContextMenu switchMenu = new ContextMenu();
 
@@ -176,10 +187,53 @@ public class BattleView extends AnchorPane {
            }
            switchMenu.show(switchButton, Side.RIGHT, 0, 0);
        });
+       return switchButton;
    }
     private boolean canPokemonSwitch(Pokemon pokemon) {
         // add logic later
         return true;
+    }
+
+    private List<Button> createMovesButtonForTeam(Pokemon activePokemon) {
+        List<Button> moveButtons = new ArrayList<>();
+
+        if (activePokemon != null) {
+            for (Moves move : activePokemon.getMoves()) {
+                Button moveButton = new Button(move.getName() + " / pp." + move.getCurrentPP());
+                moveButton.getStyleClass().addAll("move-button", move.getType().toString());
+                //moveButton.setOnAction(event -> handleMoveSelection(move, activePokemon, isTeam1));
+                moveButtons.add(moveButton);
+            }
+        }
+        return moveButtons;
+    }
+    private void handleMoveSelection(Moves move, Pokemon activePokemon, boolean isTeam1) {
+        // for later: what happens when a move gets chosen
+    }
+    private VBox createMovesLayout(List<Button> moveButtons, Button switchButton) {
+        HBox topRow = new HBox(10);
+        HBox bottomRow = new HBox(10);
+
+        for (int i = 0; i < moveButtons.size(); i++) {
+            if (i < 2) {
+                topRow.getChildren().add(moveButtons.get(i));
+            } else {
+                bottomRow.getChildren().add(moveButtons.get(i));
+            }
+        }
+        topRow.setAlignment(Pos.CENTER);
+        bottomRow.setAlignment(Pos.CENTER);
+
+        VBox movesLayout = new VBox(20);
+        movesLayout.getChildren().add(switchButton);
+        if (!topRow.getChildren().isEmpty()) {
+            movesLayout.getChildren().add(topRow);
+        }
+        if (!bottomRow.getChildren().isEmpty()) {
+            movesLayout.getChildren().add(bottomRow);
+        }
+        movesLayout.setAlignment(Pos.CENTER);
+        return movesLayout;
     }
     public Scene createScene() {
         return new Scene(this);

@@ -140,7 +140,9 @@ public class Pokemon {
         return abilities;
     }
 
-
+    public void setMoves(List<Moves> moves) {
+        this.moves = moves;
+    }
 
     public void addMove(Moves move) {
         if (this.moves.size() < 4) {
@@ -148,6 +150,9 @@ public class Pokemon {
         } else {
             System.out.println(this.name + " moves slots are full !");
         }
+    }
+    public void clearMoves() {
+        this.moves.clear();
     }
 
     public Moves chooseMoveByName(String moveName) {

@@ -2,12 +2,11 @@ package org.example.Gui;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.concurrent.Task;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -17,14 +16,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.example.Pokemon.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
 
 public class PokemonBuilder {
@@ -32,6 +30,10 @@ public class PokemonBuilder {
     private VBox pokemonBuilderLayout = new VBox(10);
     private Pokemon pokemon;
     private TabPane tabPane = new TabPane();
+    private ComboBox<Moves>[] moveComboBoxes;
+    private PokemonEditListener editListener;
+    private int pokemonIndex;
+    private boolean isTeam1;
 
     //Ev Configuration
 
@@ -46,8 +48,10 @@ public class PokemonBuilder {
     private Button submitButton;
 
 
-    public PokemonBuilder(Pokemon pokemon) {
+    public PokemonBuilder(Pokemon pokemon, int pokemonIndex, boolean isTeam1) {
         this.pokemon = pokemon;
+        this.pokemonIndex = pokemonIndex;
+        this.isTeam1 = isTeam1;
         initializeLayout();
         pokemonBuilderLayout.getStylesheets().add(getClass().getResource("/teamBuilderStyle.css").toExternalForm());
     }
@@ -207,25 +211,26 @@ public class PokemonBuilder {
         movesPane.setPadding(new Insets(10));
         movesPane.setAlignment(Pos.CENTER);
 
-        for (int i = 0; i < 4; i++) {
+        moveComboBoxes = new ComboBox[4];
 
-            ComboBox<Moves> movesComboBox = createComboBox();
-            movesComboBox.setEditable(true);
+        for (int i = 0; i < moveComboBoxes.length; i++) {
+            final int index = i;
+            moveComboBoxes[index] = createComboBox();
 
-            movesComboBox.getStyleClass().add("combo-box");
+            moveComboBoxes[index].setEditable(true);
+            moveComboBoxes[index].getStyleClass().add("combo-box");
+            moveComboBoxes[index].setPrefWidth(300);
+            moveComboBoxes[index].setMaxWidth(Double.MAX_VALUE);
+            moveComboBoxes[index].setVisibleRowCount(3);
 
-            movesComboBox.setPrefWidth(300);
-            movesComboBox.setMaxWidth(Double.MAX_VALUE);
-
-            movesComboBox.setVisibleRowCount(3);
-
+            //moveComboBoxes[index].hide();
 
             FilteredList<Moves> filteredMoves = new FilteredList<>(
                     FXCollections.observableArrayList(MovesRepository.getAllMoves()), p -> true);
 
-            movesComboBox.setItems(filteredMoves);
+            moveComboBoxes[index].setItems(filteredMoves);
 
-            movesComboBox.setConverter(new StringConverter<Moves>() {
+            moveComboBoxes[index].setConverter(new StringConverter<Moves>() {
                 @Override
                 public String toString(Moves move) {
                     return move != null ? move.getName() : "";
@@ -233,56 +238,80 @@ public class PokemonBuilder {
 
                 @Override
                 public Moves fromString(String string) {
-                    if (string == null) {
+                    if (string == null || string.trim().isEmpty()) {
                         return null;
                     }
 
-                    return filteredMoves.stream()
-                            .filter(move -> move.getName().equals(string))
+                    Moves move = MovesRepository.getAllMoves().stream()
+                            .filter(m -> m.getName().equalsIgnoreCase(string.trim()))
                             .findFirst()
                             .orElse(null);
 
+                    System.out.println("From String: " + string + " -> Move: " + move);
+
+                    return move;
                 }
             });
 
+            //moveComboBoxes[index].setItems(filteredMoves);
+
             final boolean[] isUpdating = {false};
 
-            movesComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            moveComboBoxes[index].getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null && !isUpdating[0]) {
                     isUpdating[0] = true;
-                    movesComboBox.getEditor().setText(newValue.getName());
+                    moveComboBoxes[index].getEditor().setText(newValue.getName());
                     isUpdating[0] = false;
                 }
             });
 
             final boolean[] isShowing = {false};
 
-            movesComboBox.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
-
-                if (!isUpdating[0]) {
+            moveComboBoxes[index].getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!isUpdating[0] && (newValue == null || !newValue.equals(oldValue))) {
                     isUpdating[0] = true;
-
-                    movesComboBox.getSelectionModel().clearSelection();
-
-                    filteredMoves.setPredicate(move -> {
-                        if (newValue == null || newValue.isEmpty()) {
-                            return true;
+                    Task<Void> filterTask = new Task<Void>() {
+                        @Override
+                        protected Void call() throws Exception {
+                            Predicate<Moves> filter = move -> {
+                                if (newValue == null || newValue.isEmpty()) {
+                                    return true;
+                                }
+                                return move.getName().toLowerCase().startsWith(newValue.toLowerCase());
+                            };
+                            Platform.runLater(() -> {
+                                filteredMoves.setPredicate(filter);
+                                if (!filteredMoves.isEmpty()) {
+                                    moveComboBoxes[index].show();
+                                }
+                            });
+                            return null;
                         }
-                        return move.getName().toLowerCase().contains(newValue.toLowerCase());
-                    });
-
-                    isUpdating[0] = false;
-                }
-
-                if (!filteredMoves.isEmpty() && !movesComboBox.isShowing()) {
-                    movesComboBox.show();
+                    };
+                    filterTask.setOnSucceeded(e -> isUpdating[0] = false);
+                    new Thread(filterTask).start();
                 }
             });
+            moveComboBoxes[index].valueProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null && !isUpdating[0]) {
+                    isUpdating[0] = true;
+                    Platform.runLater(() -> {
+                        moveComboBoxes[index].getEditor().setText(newValue.getName());
+                        isUpdating[0] = false;
+                    });
+                }
+            });
+            moveComboBoxes[index].setOnAction(event -> {
+                Moves selectedMove = moveComboBoxes[index].getValue();
+                if (selectedMove != null && !isUpdating[0]) {
+                    isUpdating[0] = true;
+                    moveComboBoxes[index].getEditor().setText(selectedMove.getName());
+                    isUpdating[0] = false;
+                }
+            });
+            moveComboBoxes[index].setOnHidden(event -> isShowing[0] = false);
 
-            movesComboBox.setOnHidden(event -> isShowing[0] = false);
-
-            movesPane.getChildren().add(movesComboBox);
-
+            movesPane.getChildren().add(moveComboBoxes[index]);
         }
 
         ScrollPane movesScrollPane = new ScrollPane(movesPane);
@@ -325,6 +354,7 @@ public class PokemonBuilder {
                     setGraphic(hBox);
                     setText(null);
                 }
+
             }
         });
 
@@ -346,8 +376,26 @@ public class PokemonBuilder {
         });
         return moveComboBox;
     }
+    public List<Moves> getSelectedMoves() {
+        List<Moves> selectedMoves = new ArrayList<>();
+        for (ComboBox<Moves> comboBox : moveComboBoxes) {
+            Moves move = comboBox.getValue();
+            System.out.println("Ausgewählter Move: " + (move != null ? move.getName() : "null"));
+            if (move != null) {
+                selectedMoves.add(move);
+            }
+        }
+        return selectedMoves;
+    }
+    public void saveSelectedMoves() {
+        List<Moves> selectedMoves = getSelectedMoves();
+        pokemon.setMoves(selectedMoves);
+        if (editListener != null) {
+            editListener.onPokemonEdited(pokemon, pokemonIndex, isTeam1);
+        }
+    }
 
-
+    // Ev Pane
 
     private VBox createEvPane() {
         VBox evPane = new VBox(10);
@@ -645,6 +693,10 @@ public class PokemonBuilder {
     }
     private int increasedStats(int evs) {
         return evs / 8;
+    }
+
+    public void setEditListener(PokemonEditListener listener) {
+        this.editListener = listener;
     }
 
 

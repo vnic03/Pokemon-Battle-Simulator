@@ -33,4 +33,9 @@ public enum PokeTyping {
     public Image getImage() {
         return new Image(Objects.requireNonNull(getClass().getResourceAsStream(this.imagePath)));
     }
+
+    @Override
+    public String toString() {
+        return name().toLowerCase();
+    }
 }

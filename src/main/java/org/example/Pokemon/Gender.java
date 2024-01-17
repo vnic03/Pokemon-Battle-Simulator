@@ -16,6 +16,10 @@ public enum Gender {
         return String.valueOf(symbol);
     }
 
+    public String getColor() {
+        return color;
+    }
+
     public String getStyledSymbol() {
         return "-fx-text-fill: " + color + ";";
     }

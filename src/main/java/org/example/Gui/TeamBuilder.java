@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -20,6 +21,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import javafx.stage.Stage;
+import org.example.Pokemon.Moves;
 import org.example.Pokemon.PokeTyping;
 import org.example.Pokemon.Pokemon;
 import org.example.Pokemon.PokemonRepository;
@@ -222,7 +224,12 @@ public class TeamBuilder {
                 pokemonIcon.setFitHeight(iconView.getFitHeight());
                 pokemonIcon.setVisible(true);
 
-                HBox typeIconBox = new HBox(5);
+                HBox typeIconBox;
+                if (slot.getChildren().size() > 2 && slot.getChildren().get(1) instanceof HBox) {
+                    slot.getChildren().remove(1);
+                }
+
+                typeIconBox = new HBox(5);
                 for (PokeTyping typing : pokemon.getTyping()) {
                     ImageView typeIcon = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/types/" + typing.name().toLowerCase() + ".png")).toExternalForm()));
                     typeIcon.setFitWidth(45);
@@ -230,11 +237,15 @@ public class TeamBuilder {
                     typeIconBox.getChildren().add(typeIcon);
                 }
 
-                Label nameLabel = (Label) slot.getChildren().get(1);
-                nameLabel.setText(pokemonName);
-                Button editButton = (Button) slot.getChildren().get(2);
-                editButton.setDisable(false);
+                Label nameLabel = findLabelInSlot(slot);
+                if (nameLabel != null) {
+                    nameLabel.setText(pokemonName);
+                }
 
+                Button editButton = findButtonInSlot(slot);
+                if (editButton != null) {
+                    editButton.setDisable(false);
+                }
                 slot.getChildren().add(1, typeIconBox);
 
                 updateStartBattleButton();
@@ -252,17 +263,18 @@ public class TeamBuilder {
 
         if (targetTeam.getPokemons().size() <= index) return;
 
-        Pokemon pokemon = targetTeam.getPokemons().get(index);
+        Pokemon pokemonToEdit = isTeam1 ? team1.getPokemons().get(index) : team2.getPokemons().get(index);
 
-        if (pokemon == null) {
+        if (pokemonToEdit == null) {
             return;
         }
 
         final Tab pokemonBuilderTab = tabPane.getTabs().stream().filter(
                 t -> t.getText().equals("E")).findFirst().orElseGet(() -> {
 
-            PokemonBuilder pokemonBuilder = new PokemonBuilder(pokemon);
+            PokemonBuilder pokemonBuilder = new PokemonBuilder(pokemonToEdit, index, isTeam1);
             Tab newTab = new Tab("E", pokemonBuilder.getView());
+            newTab.setUserData(pokemonBuilder);
             newTab.getStyleClass().add("edit-pokemon-tab");
             tabPane.getTabs().add(newTab);
 
@@ -286,10 +298,26 @@ public class TeamBuilder {
     private void finishEditingPokemon(int index, boolean isTeam1, Tab pokemonBuilderTab) {
 
         isEditingPokemon.set(false);
-
         updateStartBattleButton();
 
-        // save changes of the Pokémon for fight later
+        if (pokemonBuilderTab.getUserData() instanceof PokemonBuilder) {
+            PokemonBuilder pokemonBuilder = (PokemonBuilder) pokemonBuilderTab.getUserData();
+            List<Moves> selectedMoves = pokemonBuilder.getSelectedMoves();
+
+            selectedMoves.forEach(move -> System.out.println(move.getName()));
+
+            Pokemon editedPokemon = isTeam1 ? team1.getPokemons().get(index) : team2.getPokemons().get(index);
+
+            editedPokemon.clearMoves();
+
+            for (Moves move : selectedMoves) {
+                if (move != null) {
+                    editedPokemon.addMove(move);
+                }
+            }
+            pokemonBuilder.saveSelectedMoves();
+            updatePokemonSlot(index, editedPokemon.getName(), isTeam1);
+        }
 
         tabPane.getTabs().remove(pokemonBuilderTab);
         tabPane.getSelectionModel().selectFirst();
@@ -338,5 +366,22 @@ public class TeamBuilder {
         imageView.setPreserveRatio(true);
 
         return imageView;
+    }
+
+    private Label findLabelInSlot(HBox slot) {
+        for (Node node : slot.getChildren()) {
+            if (node instanceof Label) {
+                return (Label) node;
+            }
+        }
+        return null;
+    }
+    private Button findButtonInSlot(HBox slot) {
+        for (Node node : slot.getChildren()) {
+            if (node instanceof Button) {
+                return (Button) node;
+            }
+        }
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 .battle-view {
     -fx-background-image: url('battleViewBackground.png');
     -fx-background-position: center center;
@@ -14,11 +14,166 @@
 .pokemon-status-bar {
     -fx-padding: 5;
     -fx-alignment: center-left;
+    -fx-background-color: #121212;
+    -fx-border-color: #431c58;
+    -fx-border-width: 2;
 }
 
-.pokemon-name {}
-.pokemon-level{}
-.pokemon-gender{}
-.pokemon-hp-bar .bar{}
-.pokemon-hp-bar .track {}
-.pokemon-hp-label{}
+.pokemon-name {
+    -fx-font-weight: bold;
+    -fx-text-fill: #e4d0ff;
+}
+.pokemon-level{
+    -fx-text-fill: #c7a2ff;
+}
+.pokemon-gender{
+    -fx-font-style: italic;
+}
+.pokemon-hp-bar {
+    -fx-pref-width: 300;
+    -fx-pref-height: 20;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0, 1;
+    -fx-background-color:
+            linear-gradient(from 0% 50% to 100% 50%, #a685e2, #805edb);
+}
+.pokemon-hp-bar .bar{
+    -fx-background-color:
+            linear-gradient(from 0% 50% to 100% 50%, #dcb5ff, #a685e2);
+    -fx-background-insets: 0.25, 0.5;
+    -fx-background-radius: 4;
+}
+.pokemon-hp-bar .track {
+    -fx-background-color: #2e1a47;
+}
+.pokemon-hp-label{
+    -fx-text-fill: #e4d0ff;
+    -fx-font-size: 15px;
+    -fx-alignment: center;
+}
+.pokemon-status-bar-shape {
+    -fx-fill: #333333;
+    -fx-stroke:  #7d5ba6;
+    -fx-stroke-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 10);
+}
+
+.switch-button {
+    -fx-background-color: red;
+    -fx-color: white;
+    -fx-border: 2px solid white;
+    -fx-font-family: 'Press Start 2P', cursive;
+    -fx-text-fill: white;
+    -fx-text-transform: uppercase;
+    -fx-padding: 10px 20px;
+    -fx-margin: 5px;
+    -fx-border-radius: 5px;
+    -fx-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.75);
+}
+.switch-button:hover {
+    -fx-background-color: darkred;
+    -fx-translate-y: -2px;
+    -fx-box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+.move-button{
+    -fx-background-color: #2a2a2a;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-padding: 10 20;
+}
+.move-button.bug {
+    -fx-border-color: #ACC23E;
+    -fx-text-fill: #ACC23E;
+    -fx-border-width: 3;
+}
+.move-button.fairy {
+    -fx-border-color: #E8B0EB;
+    -fx-text-fill:#E8B0EB ;
+    -fx-border-width: 3;
+}
+.move-button.dark {
+    -fx-border-color:  #79726B;
+    -fx-text-fill:  #79726B;
+    -fx-border-width: 3;
+}
+.move-button.dragon {
+    -fx-border-color: #8572C8;
+    -fx-text-fill: #8572C8;
+    -fx-border-width: 3;
+}
+.move-button.electric {
+    -fx-border-color: #E7C536;
+    -fx-text-fill: #E7C536;
+    -fx-border-width: 3;
+}
+.move-button.fighting {
+    -fx-border-color:  #C45D4C;
+    -fx-text-fill: #C45D4C ;
+    -fx-border-width: 3;
+}
+
+.move-button.fire {
+    -fx-border-color: #E87A3D;
+    -fx-text-fill: #E87A3D;
+    -fx-border-width: 3;
+}
+.move-button.flying {
+    -fx-border-color: #90AAD7;
+    -fx-text-fill: #90AAD7;
+    -fx-border-width: 3;
+}
+.move-button.ghost {
+    -fx-border-color: #816DB6;
+    -fx-text-fill: #816DB6;
+    -fx-border-width: 3;
+}
+.move-button.grass {
+    -fx-border-color: #82C95B;
+    -fx-text-fill: #82C95B;
+    -fx-border-width: 3;
+}
+.move-button.ground {
+    -fx-border-color: #CEB250;
+    -fx-text-fill: #CEB250;
+    -fx-border-width: 3;
+}
+
+.move-button.ice {
+    -fx-border-color: #81CFD7;
+    -fx-text-fill: #81CFD7;
+    -fx-border-width: 3;
+}
+.move-button.normal {
+    -fx-border-color: #ACAD99;
+    -fx-text-fill: #ACAD99;
+    -fx-border-width: 3;
+}
+.move-button.poison {
+    -fx-border-color: #B369AF;
+    -fx-text-fill: #B369AF;
+    -fx-border-width: 3;
+}
+.move-button.psychic {
+    -fx-border-color: #E96C95;
+    -fx-text-fill:  #E96C95;
+    -fx-border-width: 3;
+}
+.move-button.rock {
+    -fx-border-color: #BAA85E;
+    -fx-text-fill: #BAA85E;
+    -fx-border-width: 3;
+}
+.move-button.steel {
+    -fx-border-color: #9FA9AF;
+    -fx-text-fill: #9FA9AF;
+    -fx-border-width: 3;
+}
+.move-button.water {
+    -fx-border-color: #639CE4;
+    -fx-text-fill: #639CE4;
+    -fx-border-width: 3;
+}
+
