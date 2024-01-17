@@ -1,0 +1,24 @@
+
+.battle-view {
+    -fx-background-image: url('battleViewBackground.png');
+    -fx-background-position: center center;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}
+
+.team-container {
+    -fx-padding: 10;
+    -fx-spacing: 5;
+}
+
+.pokemon-status-bar {
+    -fx-padding: 5;
+    -fx-alignment: center-left;
+}
+
+.pokemon-name {}
+.pokemon-level{}
+.pokemon-gender{}
+.pokemon-hp-bar .bar{}
+.pokemon-hp-bar .track {}
+.pokemon-hp-label{}

@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
 public class Pokemon {
     String name;
 
-    private String frontSpritePath;
-    private String backSpritePath;
-    private String iconSpritePath;
+    private final String frontSpritePath;
+    private final String backSpritePath;
+    private final String iconSpritePath;
 
-    private String typeString;
+    private final String typeString;
     private Gender gender;
-    private List<PokeTyping> typing;
+    private final List<PokeTyping> typing;
     private final int level = 50;
     private Stats stats;
     private List<Moves> moves;

@@ -1,9 +1,12 @@
 package org.example.Gui;
 
+import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -21,17 +24,17 @@ import org.example.Pokemon.PokeTyping;
 import org.example.Pokemon.Pokemon;
 import org.example.Pokemon.PokemonRepository;
 import org.example.teams.Team;
+import org.jetbrains.annotations.NotNull;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class TeamBuilder {
 
     private final VBox teamBuilderLayout = new VBox(10);
     private final HBox[] team1Slots = new HBox[6];
     private final HBox[] team2Slots = new HBox[6];
+    private BattleStartListener battleStartListener;
     private final Stage stage;
     private final TabPane tabPane = new TabPane();
     private Team team1, team2;
@@ -79,12 +82,17 @@ public class TeamBuilder {
         startBattleButton.managedProperty().bind(startBattleButton.visibleProperty());
         startButtonBox.managedProperty().bind(startBattleButton.visibleProperty());
 
-        // startBattleButton.setOnAction(e -> startBattle());
+        startBattleButton.setOnAction(e -> {
+            if (battleStartListener != null) {
+                battleStartListener.onBattleStart(team1, team2);
+            }
+        });
 
         startBattleButton.visibleProperty().bind(isEditingPokemon.not().and(Bindings.createBooleanBinding(
-                () -> team1.getObservablePokemons().isEmpty() && team2.getObservablePokemons().isEmpty(),
-                team1.getObservablePokemons(),
-                team2.getObservablePokemons())
+                () -> !team1.getPokemons().isEmpty() && !team2.getPokemons().isEmpty() &&
+                team1.hasAtLeastOnePokemon() && team2.hasAtLeastOnePokemon(),
+                team1.getPokemons(),
+                team2.getPokemons())
         ));
 
         spacer.visibleProperty().bind(startBattleButton.visibleProperty());
@@ -251,11 +259,13 @@ public class TeamBuilder {
         }
 
         final Tab pokemonBuilderTab = tabPane.getTabs().stream().filter(
-                t -> t.getText().equals("Edit Pokemon")).findFirst().orElseGet(() -> {
+                t -> t.getText().equals("E")).findFirst().orElseGet(() -> {
 
             PokemonBuilder pokemonBuilder = new PokemonBuilder(pokemon);
-            Tab newTab = new Tab("Edit Pokemon", pokemonBuilder.getView());
+            Tab newTab = new Tab("E", pokemonBuilder.getView());
+            newTab.getStyleClass().add("edit-pokemon-tab");
             tabPane.getTabs().add(newTab);
+
             return newTab;
         });
 
@@ -286,13 +296,17 @@ public class TeamBuilder {
     }
 
     private void createNewTeam() {
-        team1 = new Team(new ArrayList<>());
-        team2 = new Team(new ArrayList<>());
+
+        ObservableList<Pokemon> team1Pokemons = FXCollections.observableArrayList();
+        ObservableList<Pokemon> team2Pokemons = FXCollections.observableArrayList();
+
 
         for (int i = 0; i < 6; i++) {
-            team1.getPokemons().add(null);
-            team2.getPokemons().add(null);
+            team1Pokemons.add(null);
+            team2Pokemons.add(null);
         }
+        team1 = new Team(team1Pokemons);
+        team2 = new Team(team2Pokemons);
     }
 
     private void updateStartBattleButton() {
@@ -304,6 +318,10 @@ public class TeamBuilder {
     public VBox getBuilderView() {
         teamBuilderLayout.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/teamBuilderStyle.css")).toExternalForm());
         return teamBuilderLayout;
+    }
+
+    public void setBattleStartListener(BattleStartListener listener) {
+        this.battleStartListener = listener;
     }
 
     public static ImageView createPokemonIconView(Image pokemonImage) {

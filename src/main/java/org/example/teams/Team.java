@@ -9,23 +9,19 @@ import java.util.Objects;
 
 public class Team {
 
-    private List<Pokemon> pokemons;
-    private ObservableList<Pokemon> observablePokemons = FXCollections.observableArrayList();
+    private ObservableList<Pokemon> pokemons = FXCollections.observableArrayList();
+    private int activePokemonIndex = 0;
 
-    public Team(List<Pokemon> pokemons) {
+    public Team(ObservableList<Pokemon> pokemons) {
         this.pokemons = pokemons;
+        this.activePokemonIndex = 0;
     }
 
-    public List<Pokemon> getPokemons() {
+    public ObservableList<Pokemon> getPokemons() {
         return pokemons;
     }
 
-    public ObservableList<Pokemon> getObservablePokemons() {
-        return observablePokemons;
-    }
-
-
-    public void setPokemons(List<Pokemon> pokemons) {
+    public void setPokemons(ObservableList<Pokemon> pokemons) {
         this.pokemons = pokemons;
     }
 
@@ -40,4 +36,14 @@ public class Team {
     public boolean hasAtLeastOnePokemon() {
         return pokemons.stream().anyMatch(Objects::nonNull);
     }
+    public int getActivePokemonIndex() {
+        return this.activePokemonIndex;
+    }
+    public void setActivePokemonIndex(int index) {
+        if (index >= 0 && index < pokemons.size()) {
+            this.activePokemonIndex = index;
+        }
+    }
+
+
 }

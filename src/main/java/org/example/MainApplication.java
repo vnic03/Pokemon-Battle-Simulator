@@ -11,16 +11,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.Gui.BattleStartListener;
 import org.example.Gui.TeamBuilder;
+import org.example.Gui.battleScene.BattleView;
 import org.example.Gui.firstPage.BattleButton;
 import org.example.Gui.firstPage.TeamBuilderButton;
+import org.example.teams.Team;
 
 public class MainApplication extends Application {
 
     private final TabPane tabPane = new TabPane();
     private final StackPane rootPane = new StackPane();
-
     private Stage primaryStage;
+    private BattleView battleView;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -84,8 +87,17 @@ public class MainApplication extends Application {
         Scene teamBuilderScene = new Scene(teamBuilder.getBuilderView());
         primaryStage.setScene(teamBuilderScene);
         primaryStage.setFullScreen(true);
-    }
 
+        teamBuilder.setBattleStartListener(new BattleStartListener() {
+            @Override
+            public void onBattleStart(Team team1, Team team2) {
+                battleView = new BattleView(team1, team2);
+                battleView.loadTeams(team1, team2);
+                primaryStage.setScene(battleView.createScene());
+                primaryStage.setFullScreen(true);
+            }
+        });
+    }
 }
 
 

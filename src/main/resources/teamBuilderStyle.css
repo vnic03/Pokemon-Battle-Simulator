@@ -6,6 +6,52 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+
+.tab-pane {
+    -fx-background-color: #2C2F33;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab {
+    -fx-background-color: #23272A;
+    -fx-padding: 5px;
+    -fx-border-color: #7289DA;
+    -fx-border-width: 0 0 2px 0;
+    -fx-text-fill: #FFFFFF;
+    -fx-transition: all 0.3s ease;
+}
+
+.tab:selected {
+    -fx-background-color: #7289DA;
+    -fx-border-color: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0.5, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.tab .tab-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab-pane .tab.edit-pokemon-tab {
+    -fx-padding: 0;
+    -fx-text-fill: transparent;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+    -fx-opacity: 0;
+}
+
+.tab-pane .tab.edit-pokemon-tab .tab-container {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-text-fill: transparent;}
+
 .grid-pane {
     -fx-alignment: center;
 }
@@ -17,7 +63,16 @@
 }
 
 .pokemon-name-label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #333333;
+    -fx-padding: 5px;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 5);
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
 }
 
 .combo-box {
@@ -207,7 +262,7 @@
 .stat-label {
     -fx-font-size: 0.8em;
     -fx-font-weight: normal;
-    -fx-text-fill: #f8f8ff;  /* 8f8fff coole farbe fuer spaeter */
+    -fx-text-fill: #f8f8ff;  /* 8f8fff cool color for later */
 }
 
 .final-stat-label {

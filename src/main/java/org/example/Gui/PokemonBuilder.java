@@ -7,13 +7,12 @@ import javafx.collections.transformation.FilteredList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -99,9 +98,11 @@ public class PokemonBuilder {
     private GridPane createDetailsPane() {
         GridPane detailsPane = new GridPane();
 
-        detailsPane.setHgap(10);
-        detailsPane.setVgap(10);
+        detailsPane.setHgap(20);
+        detailsPane.setVgap(20);
         detailsPane.setPadding(new Insets(10, 10, 10, 10));
+
+        detailsPane.setAlignment(Pos.CENTER);
 
         ImageView pokemonSprite = createPokemonImage(pokemon.getFrontSprite().getUrl());
         detailsPane.add(pokemonSprite, 0, 0, 1, 2);
@@ -111,7 +112,7 @@ public class PokemonBuilder {
         pokemonName.getStyleClass().add("pokemon-name-label");
         pokemonName.setFont(Font.font("Arial", FontWeight.BOLD ,14));
         GridPane.setHalignment(pokemonName, HPos.LEFT);
-        detailsPane.add(pokemonName, 0, 0);
+        detailsPane.add(pokemonName, 0, 2);
 
 
         HBox typeBox = new HBox(5);
