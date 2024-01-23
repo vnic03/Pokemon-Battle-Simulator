@@ -2,6 +2,8 @@ package org.example.Pokemon;
 
 import javafx.scene.image.Image;
 import org.example.Battle.DamageCalculator;
+import org.example.Gui.battleScene.BattleRoundResult;
+import org.example.teams.Team;
 
 import javax.swing.*;
 import java.util.*;
@@ -197,34 +199,37 @@ public class Pokemon {
         return this.isParalyzed;
     }
 
-    public boolean canAct() {
+    public boolean canAct(BattleRoundResult result) {
 
         if (isFrozen) {
             if (random.nextDouble() < CHANCE_TO_THAW) {
-                isFrozen =false;
+                isFrozen = false;
                 System.out.println(this.name + " has thawed out !");
-
+                result.setMessage(this.name + " has thawed out !");
             } else {
                 System.out.println(this.name + " is frozen solid !");
+                result.setMessage(this.name + " is frozen solid !");
                 return false;
             }
         }
-
         if (isParalyzed) {
             if (random.nextDouble() > 0.25) {
                 System.out.println(this.name + " is paralyzed and can't move !");
+                result.setMessage(this.name + " is paralyzed and can't move !");
                 return false;
             }
         }
 
         if (isAsleep) {
             System.out.println(this.name + " is fast asleep.");
+            result.setMessage(this.name + " is fast asleep.");
             decrementSleepTurns();
             return false;
         }
 
         if (isFlinching) {
             System.out.println(this.name + " flinched and couldn't move !");
+            result.setMessage(this.name + " flinched and couldn't move !");
             isFlinching = false;
             return false;
         }
@@ -511,6 +516,9 @@ public class Pokemon {
             abilities = new ArrayList<>();
         }
         abilities.add(ability);
+    }
+    public boolean belongsTo(Team team) {
+        return team.containsPokemon(this);
     }
 
     public String toString() {

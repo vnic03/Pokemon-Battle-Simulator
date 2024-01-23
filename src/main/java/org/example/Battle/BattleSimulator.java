@@ -1,5 +1,6 @@
 package org.example.Battle;
 
+import org.example.Gui.battleScene.BattleRoundResult;
 import org.example.Pokemon.*;
 import org.example.Pokemon.Effects.MoveEffect;
 import org.example.Pokemon.Effects.MoveEffectWithDamage;
@@ -158,9 +159,9 @@ public class BattleSimulator {
 
     private void doAttack(Pokemon attacker, Pokemon defender, String moveName) {
 
-        if (!attacker.canAct()) {
-            return;
-        }
+        //if (!attacker.canAct()) {
+          //  return;
+        //}
 
         Moves move = attacker.chooseMoveByName(moveName);
 

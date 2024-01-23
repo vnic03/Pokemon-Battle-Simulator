@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.Gui.BattleStartListener;
 import org.example.Gui.TeamBuilder;
+import org.example.Gui.battleScene.BattleLogic;
 import org.example.Gui.battleScene.BattleView;
 import org.example.Gui.firstPage.BattleButton;
 import org.example.Gui.firstPage.TeamBuilderButton;
@@ -92,9 +93,17 @@ public class MainApplication extends Application {
             @Override
             public void onBattleStart(Team team1, Team team2) {
                 battleView = new BattleView(team1, team2);
+                BattleLogic logic = new BattleLogic(team1, team2);
+
+                battleView.setBattleLogic(logic);
+                logic.setBattleView(battleView);
+
                 battleView.loadTeams(team1, team2);
+
                 primaryStage.setScene(battleView.createScene());
                 primaryStage.setFullScreen(true);
+
+                logic.initiateRound();
             }
         });
     }

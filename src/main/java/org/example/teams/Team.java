@@ -1,15 +1,17 @@
 package org.example.teams;
 
-import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
+import org.example.Pokemon.Moves;
+import org.example.Pokemon.MovesRepository;
 import org.example.Pokemon.Pokemon;
 
-import java.util.List;
+
 import java.util.Objects;
 
 public class Team {
 
-    private ObservableList<Pokemon> pokemons = FXCollections.observableArrayList();
+    private ObservableList<Pokemon> pokemons;
     private int activePokemonIndex = 0;
 
     public Team(ObservableList<Pokemon> pokemons) {
@@ -44,6 +46,26 @@ public class Team {
             this.activePokemonIndex = index;
         }
     }
-
-
+    public Moves getFirstAvailableMove() {
+        for (Pokemon pokemon : pokemons) {
+            for (Moves move : pokemon.getMoves()) {
+                if (move.getCurrentPP() > 0) {
+                    return move;
+                }
+            }
+        }
+        return MovesRepository.getMoveByName("Struggle");
+    }
+    public Pokemon getActivePokemon() {
+        if (activePokemonIndex >= 0 && activePokemonIndex < pokemons.size()) {
+            return pokemons.get(activePokemonIndex);
+        }
+        throw new NoActivePokemonException("No active Pokemon in team");
+    }
+    public boolean hasAlivePokemon() {
+        return pokemons.stream().anyMatch(pokemon -> pokemon.getStats().getHp() > 0);
+    }
+    public boolean containsPokemon(Pokemon pokemon) {
+        return pokemons.contains(pokemon);
+    }
 }
