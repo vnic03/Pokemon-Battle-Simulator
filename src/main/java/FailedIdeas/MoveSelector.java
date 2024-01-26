@@ -1,4 +1,9 @@
-package org.example.Pokemon;
+package FailedIdeas;
+
+import org.example.Pokemon.Moves;
+import org.example.Pokemon.MovesRepository;
+import org.example.Pokemon.Nature;
+import org.example.Pokemon.Pokemon;
 
 import java.util.Scanner;
 

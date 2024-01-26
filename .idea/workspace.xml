@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Abilities still not tested, updated UI, added bridge between BattleView and BattleLogic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Battle/BattleSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Battle/BattleSimulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/MoveSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FailedIdeas/MoveSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PokemonCreatorTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,6 +119,9 @@
       <recent name="$PROJECT_DIR$/frontend/src" />
       <recent name="$PROJECT_DIR$/frontend/public" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="FailedIdeas" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainApplication">
@@ -261,7 +267,7 @@
       <workItem from="1706080598587" duration="57000" />
       <workItem from="1706128002096" duration="32000" />
       <workItem from="1706216704540" duration="600000" />
-      <workItem from="1706253728283" duration="1856000" />
+      <workItem from="1706253728283" duration="3709000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -647,7 +653,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705969963298</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Abilities still not tested, updated UI, added bridge between BattleView and BattleLogic">
+      <option name="closed" value="true" />
+      <created>1706255691959</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1706255691959</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
