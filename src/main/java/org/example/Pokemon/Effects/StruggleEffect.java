@@ -1,11 +1,12 @@
 package org.example.Pokemon.Effects;
 
+import org.example.Gui.battleScene.BattleRoundResult;
 import org.example.Pokemon.Pokemon;
 
 public class StruggleEffect implements MoveEffect {
 
     @Override
-    public void apply(Pokemon user, Pokemon target) {
+    public void apply(Pokemon user, Pokemon target, BattleRoundResult result) {
 
         int struggleDamage = calculateStruggleDamage(user);
         target.takeDamage(struggleDamage);

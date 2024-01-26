@@ -1,5 +1,8 @@
 package org.example.Gui.battleScene;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -8,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;
+import javafx.util.Duration;
 import org.example.Pokemon.Gender;
 import org.example.Pokemon.Pokemon;
 
@@ -48,7 +52,6 @@ public class PokemonStatusBar extends StackPane {
         contentBox.setLayoutX(10); // ggf. anpassen für die X-Position
         contentBox.setLayoutY(10); // ggf. anpassen für die Y-Position
 
-
         this.getStylesheets().add(getClass().getResource("/battleViewStyles/battleViewStyle.css").toExternalForm());
         nameLabel.getStyleClass().add("pokemon-name");
         levelLabel.getStyleClass().add("pokemon-level");
@@ -63,6 +66,18 @@ public class PokemonStatusBar extends StackPane {
         statusBarShapeContainer.getChildren().add(contentBox);
 
         this.getChildren().addAll(statusBarShapeContainer);
+    }
+    public void updateHp(int currentHp, int maxHp) {
+        double progress = (double) currentHp / maxHp;
+
+        Timeline timeline = new Timeline();
+        KeyValue keyValue = new KeyValue(hpBar.progressProperty(), progress);
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
+
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.play();
+
+        hpLabel.setText("HP: " + currentHp + " / " + maxHp);
     }
 
     private Polygon createStatusBarShape() {

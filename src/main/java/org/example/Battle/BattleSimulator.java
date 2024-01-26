@@ -9,6 +9,7 @@ import org.example.Pokemon.Effects.MultiHitMoveEffect;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class BattleSimulator {
 
     private final static BattleSimulator instance = new BattleSimulator();
@@ -159,6 +160,8 @@ public class BattleSimulator {
 
     private void doAttack(Pokemon attacker, Pokemon defender, String moveName) {
 
+        BattleRoundResult result = new BattleRoundResult("", 0, false, false);
+
         //if (!attacker.canAct()) {
           //  return;
         //}
@@ -189,13 +192,13 @@ public class BattleSimulator {
 
         if (effect instanceof MultiHitMoveEffect) {
             MultiHitMoveEffect multiHitMoveEffect = (MultiHitMoveEffect) effect;
-            int totalDamage = multiHitMoveEffect.applyMultiHitDamage(attacker, defender, move, currentWeather);
+            int totalDamage = multiHitMoveEffect.applyMultiHitDamage(attacker, defender, move, currentWeather, result);
             System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + totalDamage + " damage.");
             isDamageApplied = true;
 
         } else if (effect instanceof MoveEffectWithDamage) {
             MoveEffectWithDamage effectWithDamage = (MoveEffectWithDamage) effect;
-            effectWithDamage.applyWithDamage(attacker, defender, move, currentWeather);
+            effectWithDamage.applyWithDamage(attacker, defender, move, currentWeather, result);
             isDamageApplied = true;
 
         } else {
@@ -209,17 +212,14 @@ public class BattleSimulator {
                 System.out.println(attacker.getName() + " used Snowscape !");
             }
 
-            effect.apply(attacker, defender);
+            effect.apply(attacker, defender, result);
 
             if (moveName.equalsIgnoreCase("Struggle")) {
                 isDamageApplied = true;
             }
-
         }
-
         if (!isDamageApplied && move.getCategory() != MoveCategory.STATUS) {
-
-            int damage = DamageCalculator.calculateDamage(attacker, defender, move, currentWeather);
+            int damage = DamageCalculator.calculateDamage(attacker, defender, move, currentWeather, result);
             defender.takeDamage(damage);
             System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + damage + " damage.");
         }
@@ -378,3 +378,5 @@ public class BattleSimulator {
         }
     }
 }
+
+

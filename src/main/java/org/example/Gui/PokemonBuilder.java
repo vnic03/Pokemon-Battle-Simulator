@@ -22,6 +22,7 @@ import org.example.Pokemon.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.function.Predicate;
 
 
@@ -380,7 +381,6 @@ public class PokemonBuilder {
         List<Moves> selectedMoves = new ArrayList<>();
         for (ComboBox<Moves> comboBox : moveComboBoxes) {
             Moves move = comboBox.getValue();
-            System.out.println("Ausgewählter Move: " + (move != null ? move.getName() : "null"));
             if (move != null) {
                 selectedMoves.add(move);
             }
@@ -389,9 +389,28 @@ public class PokemonBuilder {
     }
     public void saveSelectedMoves() {
         List<Moves> selectedMoves = getSelectedMoves();
+
+        while (selectedMoves.size() < 4) {
+            Moves randomMove = getRandomMove();
+            if (!selectedMoves.contains(randomMove)) {
+                selectedMoves.add(randomMove);
+            }
+        }
         pokemon.setMoves(selectedMoves);
         if (editListener != null) {
             editListener.onPokemonEdited(pokemon, pokemonIndex, isTeam1);
+        }
+        updateMoveComboBoxes();
+    }
+    private Moves getRandomMove() {
+        List<Moves> allMoves = MovesRepository.getAllMoves();
+        int random = new Random().nextInt(allMoves.size());
+        return allMoves.get(random);
+    }
+    private void updateMoveComboBoxes() {
+        List<Moves> moves = pokemon.getMoves();
+        for (int i = 0; i < moveComboBoxes.length; i++) {
+            moveComboBoxes[i].setValue(moves.get(i));
         }
     }
 
@@ -698,9 +717,6 @@ public class PokemonBuilder {
     public void setEditListener(PokemonEditListener listener) {
         this.editListener = listener;
     }
-
-
-
 
     public VBox getView() {
         return pokemonBuilderLayout;

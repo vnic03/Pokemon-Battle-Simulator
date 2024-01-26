@@ -3,6 +3,7 @@ package org.example.Gui.battleScene;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -15,10 +16,7 @@ import org.example.Pokemon.Moves;
 import org.example.Pokemon.Pokemon;
 import org.example.teams.Team;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class BattleView extends AnchorPane {
     private BattleLogic battleLogic;
@@ -38,6 +36,7 @@ public class BattleView extends AnchorPane {
     private VBox movesLayoutTeam2;
     private Label timerLabelTeam1;
     private Label timerLabelTeam2;
+    private HashMap<Pokemon, PokemonStatusBar> statusBarMap = new HashMap<>();
 
     public BattleView(Team team1, Team team2) {
         this.team1 = team1;
@@ -115,12 +114,18 @@ public class BattleView extends AnchorPane {
             team2Container.getChildren().clear();
             team2Container.getChildren().addAll(newStatusBar, newSpriteView);
         }
+        PokemonStatusBar statusBar = statusBarMap.get(newPokemon);
+        if (statusBar == null) {
+            statusBar = new PokemonStatusBar(newPokemon);
+            statusBarMap.put(newPokemon, statusBar);
+        }
     }
 
     public void handlePokemonChangeRequest(Team team, int pokemonIndex, boolean isTeam1) {
         if (canPokemonSwitch(team.getPokemons().get(pokemonIndex))) {
 
             changePokemon(team, pokemonIndex, isTeam1);
+            hideButtons(isTeam1);
             team.setActivePokemonIndex(pokemonIndex);
             updateTeamView(isTeam1 ? team1Container : team2Container, team, isTeam1);
 
@@ -199,21 +204,33 @@ public class BattleView extends AnchorPane {
             for (Moves move : activePokemon.getMoves()) {
                 Button moveButton = new Button(move.getName() + " / pp." + move.getCurrentPP());
                 moveButton.getStyleClass().addAll("move-button", move.getType().toString());
-                //moveButton.setOnAction(event -> handleMoveSelection(move, activePokemon, isTeam1));
+                moveButton.setOnAction(event -> handleMoveSelection(move, activePokemon));
                 moveButtons.add(moveButton);
             }
         }
         return moveButtons;
     }
     private void handleMoveSelection(Moves move, Pokemon activePokemon) {
-        // for later: what happens when a move gets chosen
         boolean isTeam1 = activePokemon.belongsTo(team1);
-        BattleRoundResult result = battleLogic.processMoveSelection(move, activePokemon);
+        Team otherTeam = isTeam1 ? team2 : team1;
 
-        //battleLogic.receivedMoveSelection(move, );
+        battleLogic.receivedMoveSelection(move, isTeam1 ? team1 : team2);
+
+        if (battleLogic.areMovesSelected(isTeam1)) {
+            hideButtons(isTeam1);
+        }
+
+        Pokemon opponent = otherTeam.getActivePokemon();
+        PokemonStatusBar opponentStatusBar = statusBarMap.get(opponent);
+
+        if (opponentStatusBar != null) {
+            opponentStatusBar.updateHp(opponent.getStats().getHp(), opponent.getStats().getMaxHp());
+        }
     }
 
-    private void updateUIWithBattleResult(BattleRoundResult result) {}
+    private void updateUIWithBattleResult(BattleRoundResult result) {
+
+    }
 
     private void initializeBattleLog() {
         battleLog.setEditable(false);
@@ -231,6 +248,9 @@ public class BattleView extends AnchorPane {
         battleLog.setText(currentText + "\n" + result.getMessage());
 
         battleLog.setScrollTop(Double.MAX_VALUE);
+    }
+    public void setBattleLogic(BattleLogic battleLogic) {
+        this.battleLogic = battleLogic;
     }
 
     private void updateMovesLayout(List<Button> moveButtons, Button switchButton, VBox movesLayout) {
@@ -262,6 +282,7 @@ public class BattleView extends AnchorPane {
                 spriteView.setPreserveRatio(true);
                 spriteView.setSmooth(true);
                 PokemonStatusBar statusBar = new PokemonStatusBar(pokemon);
+                statusBarMap.put(pokemon, statusBar);
                 teamContainer.getChildren().addAll(spriteView, statusBar);
 
                 List<Button> moveButtons = createMovesButtonForTeam(pokemon);
@@ -286,11 +307,20 @@ public class BattleView extends AnchorPane {
     public void showNewRoundStarted() {
         battleLog.appendText("-"); // fix later
     }
+    public void hideButtons(boolean isTeam1) {
+        VBox movesLayout = isTeam1 ? movesLayoutTeam1 : movesLayoutTeam2;
+        movesLayout.setVisible(false);
+        Label timerLabel = isTeam1 ? timerLabelTeam1 : timerLabelTeam2;
+        timerLabel.setVisible(false);
+    }
+    public void showButtons() {
+        movesLayoutTeam1.setVisible(true);
+        movesLayoutTeam2.setVisible(true);
+        timerLabelTeam1.setVisible(true);
+        timerLabelTeam2.setVisible(true);
+    }
+
     public Scene createScene() {
         return new Scene(this);
     }
-    public void setBattleLogic(BattleLogic battleLogic) {
-        this.battleLogic = battleLogic;
-    }
-
 }

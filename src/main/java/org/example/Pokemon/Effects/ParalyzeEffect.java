@@ -1,5 +1,6 @@
 package org.example.Pokemon.Effects;
 
+import org.example.Gui.battleScene.BattleRoundResult;
 import org.example.Pokemon.Moves;
 import org.example.Pokemon.PokeTyping;
 import org.example.Pokemon.Pokemon;
@@ -7,7 +8,7 @@ import org.example.Pokemon.Pokemon;
 public class ParalyzeEffect implements MoveEffect {
 
     @Override
-    public void apply(Pokemon user, Pokemon target) {
+    public void apply(Pokemon user, Pokemon target, BattleRoundResult result) {
 
         if (target.hasStatusCondition()) {
             System.out.println(target.getName() + " is already affected by a status condition!");

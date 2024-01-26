@@ -1,5 +1,6 @@
 package org.example.Battle;
 
+import org.example.Gui.battleScene.BattleRoundResult;
 import org.example.Pokemon.*;
 
 import java.util.HashMap;
@@ -11,7 +12,7 @@ public class DamageCalculator {
 
     private static final double CRITICAL_HIT_CHANCE = 0.0417;
 
-    public static int calculateDamage(Pokemon attacker, Pokemon defender, Moves attack, Weather weather) {
+    public static int calculateDamage(Pokemon attacker, Pokemon defender, Moves attack, Weather weather, BattleRoundResult result) {
 
         Stats attackStats = attacker.getStats();
         Stats defenderStats = defender.getStats();
@@ -21,11 +22,11 @@ public class DamageCalculator {
         double typeAdvantage = getTypeAdvantage(attack.getType(), defender.getTyping(), attackerTypes);
 
         if (typeAdvantage == 2.0) {
-            System.out.println("It's super effective !");
+            result.setMessage("It's super effective !");
         } else if (typeAdvantage < 1.0 && typeAdvantage > 0) {
-            System.out.println("It's not very effective...");
+            result.setMessage("It's not very effective. . .");
         } else if (typeAdvantage == 0) {
-            System.out.println("It had no effect...");
+            result.setMessage("It had no effect on" + defender.getName());
         }
 
         double randomFactor = 0.85 + Math.random() * 0.15;
@@ -54,6 +55,7 @@ public class DamageCalculator {
 
         if (isCriticalHit() && !defender.hasActiveAbility("Battle Armor")) {
             finalDamage = (int) (finalDamage * 1.5);
+            result.setMessage("CRITICAL HIT !");
             System.out.println("\u001B[31m" + "CRITICAL HIT !" + "\u001B[0m"); // color = red
         }
 
