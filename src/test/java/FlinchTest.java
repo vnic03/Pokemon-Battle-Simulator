@@ -1,15 +1,3 @@
-import org.example.Pokemon.*;
-import org.example.Pokemon.Effects.MayFlinchEffect;
-import org.example.Pokemon.Effects.MoveEffect;
-
-import org.junit.jupiter.api.Test;
-
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 /*
 public class FlinchTest {
 

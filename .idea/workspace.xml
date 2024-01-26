@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Abilities still not tested, updated UI">
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Abilities still not tested, fixed the Ev pane, needs styling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Battle/BattleSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Battle/BattleSimulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/EvConfigWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/EvConfigWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/PokemonBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/PokemonBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/battleScene/BattleLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/battleScene/BattleLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Stats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/teamBuilderStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/teamBuilderStyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +53,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "vnic03"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="b2c1a416-3a03-45f3-b1b1-438d915a1765" />
+        <option name="url" value="https://github.com/vnic03/Pokemon-Battle-Simulator.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -130,11 +141,11 @@
   </component>
   <component name="RunManager" selected="Application.MainApplication">
     <configuration name="ChoosePokemon" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.Gui.ChoosePokemon" />
+      <option name="MAIN_CLASS_NAME" value="org.example.screens.ChoosePokemon" />
       <module name="PokeDuelByNico.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.Gui.*" />
+          <option name="PATTERN" value="org.example.screens.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -147,7 +158,7 @@
       <module name="PokeDuelByNico.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.Gui.*" />
+          <option name="PATTERN" value="org.example.screens.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -273,15 +284,7 @@
       <workItem from="1706216704540" duration="600000" />
       <workItem from="1706253728283" duration="5277000" />
       <workItem from="1706260686355" duration="3931000" />
-      <workItem from="1706264635241" duration="7598000" />
-    </task>
-    <task id="LOCAL-00002" summary="Day 2, added some moves and tried testing the PokemonCreator, but it failed">
-      <option name="closed" value="true" />
-      <created>1703771320890</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1703771320890</updated>
+      <workItem from="1706264635241" duration="8941000" />
     </task>
     <task id="LOCAL-00003" summary="CreatePokemon tests succeeded">
       <option name="closed" value="true" />
@@ -667,7 +670,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706257643724</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Abilities still not tested, fixed the Ev pane, needs styling">
+      <option name="closed" value="true" />
+      <created>1706275100921</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1706275100922</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -686,7 +697,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Did weather tests,added Struggle and did output updates" />
     <MESSAGE value="Added effectiveness output" />
     <MESSAGE value="Added Flinch effect" />
     <MESSAGE value="Added Critical Hits" />
@@ -711,7 +721,8 @@
     <MESSAGE value="Abilities still not tested, updated UI, added bridge between TeamBuilder and BattleView" />
     <MESSAGE value="Abilities still not tested, updated UI, added bridge between BattleView and BattleLogic" />
     <MESSAGE value="Abilities still not tested, updated UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Abilities still not tested, updated UI" />
+    <MESSAGE value="Abilities still not tested, fixed the Ev pane, needs styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Abilities still not tested, fixed the Ev pane, needs styling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -2,9 +2,9 @@ package org.example.teams;
 
 
 import javafx.collections.ObservableList;
-import org.example.Pokemon.Moves;
-import org.example.Pokemon.MovesRepository;
-import org.example.Pokemon.Pokemon;
+import org.example.pokemon.Moves;
+import org.example.pokemon.MovesRepository;
+import org.example.pokemon.Pokemon;
 
 
 import java.util.Objects;

@@ -11,12 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.Gui.BattleStartListener;
-import org.example.Gui.TeamBuilder;
-import org.example.Gui.battleScene.BattleLogic;
-import org.example.Gui.battleScene.BattleView;
-import org.example.Gui.firstPage.BattleButton;
-import org.example.Gui.firstPage.TeamBuilderButton;
+import org.example.screens.BattleStartListener;
+import org.example.screens.TeamBuilder;
+import org.example.screens.battleScene.BattleLogic;
+import org.example.screens.battleScene.BattleView;
+import org.example.screens.firstPage.BattleButton;
+import org.example.screens.firstPage.TeamBuilderButton;
 import org.example.teams.Team;
 
 public class MainApplication extends Application {
@@ -72,9 +72,7 @@ public class MainApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Pokémon Battle Simulator by Nico");
         primaryStage.show();
-
     }
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -108,6 +106,3 @@ public class MainApplication extends Application {
         });
     }
 }
-
-
-

@@ -1,14 +1,5 @@
 
 
-import org.example.Pokemon.Nature;
-import org.example.Pokemon.PokeTyping;
-import org.example.Pokemon.Pokemon;
-import org.example.Pokemon.Stats;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
