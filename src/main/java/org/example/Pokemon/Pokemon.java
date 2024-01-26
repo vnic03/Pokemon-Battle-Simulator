@@ -48,6 +48,7 @@ public class Pokemon {
     private int lastDamageTaken;
 
     private final int[] evs = new int[6];
+    private boolean statsCalculated = false;
 
     private boolean thickFatActive;
 
@@ -465,8 +466,15 @@ public class Pokemon {
             evs[4] = spDefenseEvs;
             evs[5] = speedEvs;
 
+            this.statsCalculated = false;
         } else {
             throw new IllegalArgumentException("Invalid Ev spread !");
+        }
+    }
+    public void calculateStatsIfNecessary() {
+        if (!this.statsCalculated) {
+            this.stats.calculateFinalStats(this);
+            this.statsCalculated = true;
         }
     }
 

@@ -1,5 +1,8 @@
 package org.example.Pokemon;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Stats {
 
     private int hp;
@@ -86,6 +89,7 @@ public class Stats {
     public void calculateFinalStats(Pokemon pokemon) {
 
         this.hp = pokemon.getEVs()[0] > 3 ? pokemon.getStats().getMaxHp() + increasedStats(pokemon.getEVs()[0]) + 1 : pokemon.getStats().getMaxHp();
+        this.maxHp = this.hp;
         this.attack = pokemon.getEVs()[1] > 3 ? pokemon.getStats().getAttack() + increasedStats(pokemon.getEVs()[1]) + 1 : pokemon.getStats().getAttack();
         this.defense = pokemon.getEVs()[2] > 3 ? pokemon.getStats().getDefense() + increasedStats(pokemon.getEVs()[2]) + 1 : pokemon.getStats().getDefense();
         this.specialAttack = pokemon.getEVs()[3] > 3 ? pokemon.getStats().getSpecialAttack() + increasedStats(pokemon.getEVs()[3]) + 1 : pokemon.getStats().getSpecialAttack();
@@ -95,6 +99,17 @@ public class Stats {
 
     private int increasedStats(int evs) {
         return evs / 8;
+    }
+
+    public Map<String, Integer> getFinalStats() {
+        Map<String, Integer> finalStats = new HashMap<>();
+        finalStats.put("HP", this.maxHp);
+        finalStats.put("Attack", this.attack);
+        finalStats.put("Defense", this.defense);
+        finalStats.put("Sp.Atk", this.specialAttack);
+        finalStats.put("Sp.Def", this.specialDefense);
+        finalStats.put("Speed", this.speed);
+        return finalStats;
     }
 
 

@@ -234,8 +234,8 @@
     -fx-padding: 20px;
     -fx-border-radius: 15px;
     -fx-background-radius: 15px;
+    -fx-min-width: 800px;
 }
-
 
 .ev-slider .track {
     -fx-background-color: linear-gradient(to right, #7c538c, #6a0dad);
@@ -247,7 +247,8 @@
 
 .ev-text-field {
     -fx-min-height: 30px;
-    -fx-font-size: 14px;
+    -fx-font-size: 16px;
+
     -fx-background-color: #2C2F33;
     -fx-border-color:  #40444B;
     -fx-border-radius: 15px;
@@ -260,13 +261,13 @@
 }
 
 .stat-label {
-    -fx-font-size: 0.8em;
+    -fx-font-size: 16px;
     -fx-font-weight: normal;
     -fx-text-fill: #f8f8ff;  /* 8f8fff cool color for later */
 }
 
 .final-stat-label {
-    -fx-font-size: 1em;
+    -fx-font-size: 16px;
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #333333;
     -fx-padding: 5px;
@@ -296,15 +297,14 @@
     -fx-padding: 20px;
 }
 
-.ev-slider, .ev-progress-bar, .ev-text-field {
+.ev-slider, .ev-progress-bar {
     -fx-pref-width: 100%;
 }
 
 
 .label, .ev-text-field, .button {
-    -fx-padding: 0.5em 1em;
+    -fx-padding: 10px;
 }
-
 
 
 .scroll-pane {

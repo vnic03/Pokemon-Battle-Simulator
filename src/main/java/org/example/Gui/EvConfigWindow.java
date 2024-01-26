@@ -82,7 +82,7 @@ public class EvConfigWindow {
 
                     pokemon.setEvs(hpEvs, attackEvs, defenseEvs, spAttackEvs, spDefenseEvs, speedEvs);
 
-                    pokemon.getStats().calculateFinalStats(pokemon);
+                    pokemon.calculateStatsIfNecessary();
 
                     Alert confirmation = new Alert(Alert.AlertType.INFORMATION, "EVs successfully assigned!");
                     confirmation.setHeaderText(null);

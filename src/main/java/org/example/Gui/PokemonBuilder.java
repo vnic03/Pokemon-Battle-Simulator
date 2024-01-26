@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Predicate;
 
-
 public class PokemonBuilder {
 
     private VBox pokemonBuilderLayout = new VBox(10);
@@ -321,7 +320,6 @@ public class PokemonBuilder {
         return movesScrollPane;
     }
 
-
     private ComboBox<Moves> createComboBox() {
         ComboBox<Moves> moveComboBox = new ComboBox<>();
         moveComboBox.setCellFactory(param -> new ListCell<Moves>() {
@@ -414,7 +412,8 @@ public class PokemonBuilder {
         }
     }
 
-    // Ev Pane
+
+    //Ev Pane
 
     private VBox createEvPane() {
         VBox evPane = new VBox(10);
@@ -424,13 +423,28 @@ public class PokemonBuilder {
 
         initializeEvComponents(pokemon);
 
-        evPane.getChildren().addAll( hpBaseLabel, hpProgressBar, hpSlider, hpTextField, hpFinalLabel,
-                attackBaseLabel, attackProgressBar, attackSlider, attackTextField, attackFinalLabel,
-                defenseBaseLabel, defenseProgressBar, defenseSlider, defenseTextField, defenseFinalLabel,
-                spABaseLabel, spAttackProgressBar, spAttackSlider, spAttackTextField, spAFinalLabel,
-                spDBaseLabel, spDefenseProgressBar, spDefenseSlider, spDefenseTextField, spDFinalLabel,
-                speedBaseLabel, speedProgressBar, speedSlider, speedTextField, speedFinalLabel,
-                remainingEvsLabel, submitButton);
+        HBox box1 = new HBox(15, hpBaseLabel, hpProgressBar, hpTextField, hpSlider, hpFinalLabel);
+        HBox box2 = new HBox(15, attackBaseLabel, attackProgressBar, attackTextField, attackSlider, attackFinalLabel);
+        HBox box3 = new HBox(15, defenseBaseLabel, defenseProgressBar, defenseTextField, defenseSlider,defenseFinalLabel, remainingEvsLabel);
+        HBox box4 = new HBox(15, spABaseLabel, spAttackProgressBar, spAttackTextField, spAttackSlider, spAFinalLabel);
+        HBox box5 = new HBox(15, spDBaseLabel, spDefenseProgressBar, spDefenseTextField, spDefenseSlider, spDFinalLabel);
+        HBox box6 = new HBox(15, speedBaseLabel, speedProgressBar, speedTextField, speedSlider, speedFinalLabel, submitButton);
+
+        HBox.setHgrow(hpSlider, Priority.ALWAYS);
+        HBox.setHgrow(attackSlider, Priority.ALWAYS);
+        HBox.setHgrow(defenseSlider, Priority.ALWAYS);
+        HBox.setHgrow(spAttackSlider, Priority.ALWAYS);
+        HBox.setHgrow(spDefenseSlider, Priority.ALWAYS);
+        HBox.setHgrow(speedSlider, Priority.ALWAYS);
+
+        HBox.setHgrow(hpProgressBar, Priority.ALWAYS);
+        HBox.setHgrow(attackProgressBar, Priority.ALWAYS);
+        HBox.setHgrow(defenseProgressBar, Priority.ALWAYS);
+        HBox.setHgrow(spDefenseProgressBar, Priority.ALWAYS);
+        HBox.setHgrow(spAttackProgressBar, Priority.ALWAYS);
+        HBox.setHgrow(speedProgressBar, Priority.ALWAYS);
+
+        evPane.getChildren().addAll(box1, box2, box3, box4, box5, box6);
 
         ScrollPane scrollPane = new ScrollPane(evPane);
         scrollPane.setFitToWidth(true);
@@ -438,7 +452,6 @@ public class PokemonBuilder {
 
         return evPane;
     }
-
 
     private void initializeEvComponents(Pokemon pokemon) {
         Map<String, Integer> baseStats = EvConfigWindow.getPokemonBaseStats(pokemon);
@@ -488,21 +501,27 @@ public class PokemonBuilder {
 
         hpSlider = createSlider();
         hpSlider.getStyleClass().add("ev-slider");
+        hpSlider.setMaxWidth(500);
 
         attackSlider = createSlider();
         attackSlider.getStyleClass().add("ev-slider");
+        attackSlider.setMaxWidth(500);
 
         defenseSlider = createSlider();
         defenseSlider.getStyleClass().add("ev-slider");
+        defenseSlider.setMaxWidth(500);
 
         spAttackSlider = createSlider();
         spAttackSlider.getStyleClass().add("ev-slider");
+        spAttackSlider.setMaxWidth(500);
 
         spDefenseSlider = createSlider();
         spDefenseSlider.getStyleClass().add("ev-slider");
+        spDefenseSlider.setMaxWidth(500);
 
         speedSlider = createSlider();
         speedSlider.getStyleClass().add("ev-slider");
+        speedSlider.setMaxWidth(500);
 
         // TextFields
 
@@ -528,21 +547,27 @@ public class PokemonBuilder {
 
         hpProgressBar = new ProgressBar(0);
         hpProgressBar.getStyleClass().add("ev-progress-bar");
+        hpProgressBar.setMaxWidth(400);
 
         attackProgressBar = new ProgressBar(0);
         attackProgressBar.getStyleClass().add("ev-progress-bar");
+        attackProgressBar.setMaxWidth(400);
 
         defenseProgressBar = new ProgressBar(0);
         defenseProgressBar.getStyleClass().add("ev-progress-bar");
+        defenseProgressBar.setMaxWidth(400);
 
         spAttackProgressBar = new ProgressBar(0);
         spAttackProgressBar.getStyleClass().add("ev-progress-bar");
+        spAttackProgressBar.setMaxWidth(400);
 
         spDefenseProgressBar = new ProgressBar(0);
         spDefenseProgressBar.getStyleClass().add("ev-progress-bar");
+        spDefenseProgressBar.setMaxWidth(400);
 
         speedProgressBar = new ProgressBar(0);
         speedProgressBar.getStyleClass().add("ev-progress-bar");
+        speedProgressBar.setMaxWidth(400);
 
 
         hpProgressBar.setProgress(baseStats.get("HP") / 255.0);
@@ -570,7 +595,6 @@ public class PokemonBuilder {
     }
 
     private Slider createSlider() {
-
         Slider slider = new Slider(0, MAX_EVS, 0);
 
         slider.setMajorTickUnit(4);
@@ -587,7 +611,6 @@ public class PokemonBuilder {
                 slider.setValue(roundedValue);
             }
         });
-
         return slider;
     }
 
@@ -603,31 +626,34 @@ public class PokemonBuilder {
     private void submitEvConfiguration() {
 
         try {
-            int hpEvs = Integer.parseInt(hpTextField.getText());
-            int attackEvs = Integer.parseInt(attackTextField.getText());
-            int defenseEvs = Integer.parseInt(defenseTextField.getText());
-            int spAttackEvs = Integer.parseInt(spAttackTextField.getText());
-            int spDefenseEvs = Integer.parseInt(spDefenseTextField.getText());
-            int speedEvs = Integer.parseInt(speedTextField.getText());
+            int hpEvs = parseEvValue(hpTextField.getText());
+            int attackEvs =parseEvValue(attackTextField.getText());
+            int defenseEvs = parseEvValue(defenseTextField.getText());
+            int spAttackEvs = parseEvValue(spAttackTextField.getText());
+            int spDefenseEvs = parseEvValue(spDefenseTextField.getText());
+            int speedEvs = parseEvValue(speedTextField.getText());
 
             int totalEvs = hpEvs + attackEvs + defenseEvs + spAttackEvs + spDefenseEvs + speedEvs;
 
-            if (totalEvs <= TOTAl_EVS) {
+            if (totalEvs <= TOTAl_EVS &&
+                    hpEvs <= MAX_EVS && attackEvs <= MAX_EVS && defenseEvs <= MAX_EVS &&
+                    spAttackEvs <= MAX_EVS && spDefenseEvs <= MAX_EVS && speedEvs <= MAX_EVS) {
 
                 pokemon.setEvs(hpEvs, attackEvs, defenseEvs, spAttackEvs, spDefenseEvs, speedEvs);
-
-                pokemon.getStats().calculateFinalStats(pokemon);
+                pokemon.calculateStatsIfNecessary();
 
                 updateProgressBars();
-
                 displayFinalStat();
 
-
-
+                if (editListener != null) {
+                    editListener.onPokemonEdited(pokemon, pokemonIndex, isTeam1);
+                }
             }
-        } catch (NumberFormatException e) {
-
-        }
+        } catch (NumberFormatException e) {/* something */}
+    }
+    private int parseEvValue(String text) {
+        int value = Integer.parseInt(text);
+        return Math.min(MAX_EVS, Math.max(value, 0));
     }
 
     private void setupSliderTextFieldBinding(Slider slider, TextField textField, ProgressBar progressBar,Label baselabel, Label finalLabel, String statName) {
@@ -636,10 +662,8 @@ public class PokemonBuilder {
             textField.setText(String.format("%d", newVal.intValue()));
             progressBar.setProgress(newVal.doubleValue() / MAX_EVS);
             updateTotalEvs();
-            updateFinalStatsLabel(finalLabel, statName, newVal.intValue());
+            updateFinalStatsLabel(finalLabel, statName);
         });
-
-
         textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
                 try {
@@ -655,10 +679,8 @@ public class PokemonBuilder {
     }
 
     private void updateTotalEvs() {
-
         int totalEvs = (int) (hpSlider.getValue() + attackSlider.getValue() + defenseSlider.getValue() +
                 spAttackSlider.getValue() + spDefenseSlider.getValue() + speedSlider.getValue());
-
 
         int remainingEvs = TOTAl_EVS - totalEvs;
 
@@ -683,29 +705,22 @@ public class PokemonBuilder {
             submitButton.setDisable(false);
         }
     }
-
     private void displayFinalStat() {
 
-        updateFinalStatsLabel(hpFinalLabel, "HP", Integer.parseInt(hpTextField.getText()));
-        updateFinalStatsLabel(attackFinalLabel, "Attack", Integer.parseInt(hpTextField.getText()));
-        updateFinalStatsLabel(defenseFinalLabel, "Defense", Integer.parseInt(hpTextField.getText()));
-        updateFinalStatsLabel(spAFinalLabel, "Sp.Atk", Integer.parseInt(hpTextField.getText()));
-        updateFinalStatsLabel(spDFinalLabel, "Sp.Def", Integer.parseInt(hpTextField.getText()));
-        updateFinalStatsLabel(speedFinalLabel, "Speed", Integer.parseInt(hpTextField.getText()));
+        updateFinalStatsLabel(hpFinalLabel, "HP");
+        updateFinalStatsLabel(attackFinalLabel, "Attack");
+        updateFinalStatsLabel(defenseFinalLabel, "Defense");
+        updateFinalStatsLabel(spAFinalLabel, "Sp.Atk");
+        updateFinalStatsLabel(spDFinalLabel, "Sp.Def");
+        updateFinalStatsLabel(speedFinalLabel, "Speed");
     }
 
-    private void updateFinalStatsLabel(Label finalLabel, String statName, int evValue) {
+    private void updateFinalStatsLabel(Label finalLabel, String statName) {
+        Map<String, Integer> finalStats = pokemon.getStats().getFinalStats();
 
-        Map<String, Integer> baseStats = EvConfigWindow.getPokemonBaseStats(pokemon);
-
-        if (baseStats.containsKey(statName) && baseStats.get(statName) != null) {
-            int baseValue = baseStats.get(statName);
-
-            int increasedValue = evValue > 3 ? increasedStats(evValue) + 1 : 0;
-
-            int finalValue = baseValue + increasedValue;
-            finalLabel.setText(String.valueOf(finalValue));
-
+        if (finalStats.containsKey(statName) && finalStats.get(statName) != null) {
+            int value = finalStats.get(statName);
+            finalLabel.setText(String.valueOf(value));
         } else {
             finalLabel.setText("N/A");
         }

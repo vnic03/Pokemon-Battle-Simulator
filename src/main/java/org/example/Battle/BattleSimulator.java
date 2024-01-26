@@ -36,8 +36,8 @@ public class BattleSimulator {
         pokemon1.saveOriginalStats();
         pokemon2.saveOriginalStats();
 
-        pokemon1.getStats().calculateFinalStats(pokemon1);
-        pokemon2.getStats().calculateFinalStats(pokemon2);
+        pokemon1.calculateStatsIfNecessary();
+        pokemon2.calculateStatsIfNecessary();
 
         System.out.println("/=====================! BATTLE BEGINS  !============================/");
 

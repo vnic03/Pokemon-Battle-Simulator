@@ -47,14 +47,14 @@ public class BattleLogic {
             Pokemon pokemon = team1.getPokemons().get(i);
             if (pokemon != null) {
                 pokemon.saveOriginalStats();
-                pokemon.getStats().calculateFinalStats(pokemon);
+                pokemon.calculateStatsIfNecessary();
             }
         }
         for (int i = 0; i < team2.getPokemons().size(); i++) {
             Pokemon pokemon = team2.getPokemons().get(i);
             if (pokemon != null) {
                 pokemon.saveOriginalStats();
-                pokemon.getStats().calculateFinalStats(pokemon);
+                pokemon.calculateStatsIfNecessary();
             }
         }
         startMoveSelectionTimer();
