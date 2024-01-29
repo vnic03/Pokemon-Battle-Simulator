@@ -40,5 +40,14 @@ public class StarterEffect implements AbilityEffect {
                 }
             }
         }
+        if (pokemon.getStats().getHp() <= lowHp && pokemon.getTyping().contains(PokeTyping.BUG)) {
+
+            for (Moves move : pokemon.getMoves()) {
+                if (move.getType() == PokeTyping.BUG) {
+                    move.saveOriginalPower();
+                    move.setPower((int) (move.getPower() * 1.5));
+                }
+            }
+        }
     }
 }

@@ -15,8 +15,10 @@ import javafx.util.Duration;
 import org.example.pokemon.Gender;
 import org.example.pokemon.Pokemon;
 
+import java.util.Objects;
+
 public class PokemonStatusBar extends StackPane {
-    private static final double POLYGON_WIDTH = 420;
+    private static final double POLYGON_WIDTH = 460;
     private static final double POLYGON_HEIGHT = 80;
     private Label nameLabel;
     private Label levelLabel;
@@ -49,10 +51,10 @@ public class PokemonStatusBar extends StackPane {
 
         HBox contentBox = new HBox(leftSide, rightSide);
         contentBox.setSpacing(20);
-        contentBox.setLayoutX(10); // ggf. anpassen für die X-Position
-        contentBox.setLayoutY(10); // ggf. anpassen für die Y-Position
+        contentBox.setLayoutX(10);
+        contentBox.setLayoutY(10);
 
-        this.getStylesheets().add(getClass().getResource("/battleViewStyles/battleViewStyle.css").toExternalForm());
+        this.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/battleViewStyles/battleViewStyle.css")).toExternalForm());
         nameLabel.getStyleClass().add("pokemon-name");
         levelLabel.getStyleClass().add("pokemon-level");
         genderLabel.getStyleClass().add("pokemon-gender");
@@ -84,12 +86,12 @@ public class PokemonStatusBar extends StackPane {
         Polygon polygon = new Polygon();
         double angle = 20;
 
-        polygon.getPoints().addAll(new Double[]{
+        polygon.getPoints().addAll(
                 0.0, 0.0,
                 POLYGON_WIDTH - angle, 0.0,
                 POLYGON_WIDTH, POLYGON_HEIGHT,
                 angle, POLYGON_HEIGHT
-        });
+        );
         return polygon;
     }
 }

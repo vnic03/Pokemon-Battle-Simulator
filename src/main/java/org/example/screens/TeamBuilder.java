@@ -8,8 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.geometry.Side;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import org.example.pokemon.Moves;
 import org.example.pokemon.PokeTyping;
 import org.example.pokemon.Pokemon;
-import org.example.pokemon.PokemonRepository;
+import org.example.pokemon.repositories.PokemonRepository;
 import org.example.teams.Team;
 
 
@@ -44,6 +44,12 @@ public class TeamBuilder {
     private final VBox startButtonBox = new VBox();
     private final Region spacer;
     private final BooleanProperty isEditingPokemon = new SimpleBooleanProperty(false);
+
+    private VBox menuItemsContainer = new VBox();
+    private int currentPage = 0;
+    private final int itemsInPage = 10;
+    private List<Pokemon> allPokemons;
+    private ContextMenu contextMenu;
 
 
     public TeamBuilder(Stage stage) {
@@ -119,17 +125,18 @@ public class TeamBuilder {
 
     private HBox createPokemonSlot(int index, boolean isTeam1) {
 
-        HBox slot = new HBox(10);
+        HBox slot = new HBox(20);
         slot.getStyleClass().add("pokemon-slot");
         slot.setPadding(new Insets(5,5,5,5));
 
         ImageView pokemonIcon = new ImageView();
-        pokemonIcon.setFitWidth(40);
-        pokemonIcon.setFitHeight(45);
+        pokemonIcon.setFitWidth(50);
+        pokemonIcon.setFitHeight(50);
         pokemonIcon.setVisible(false);
 
         Label nameLabel = new Label("Empty Slot");
-        nameLabel.setOnMouseClicked(event -> choosePokemonForSlot(index, isTeam1));
+        nameLabel.setOnMouseClicked(event -> choosePokemonForSlot(index, isTeam1, nameLabel));
+        nameLabel.getStyleClass().add("pokemon-name-label");
 
         Button editButton = new Button("Edit");
         editButton.setOnAction(event -> openPokemonEditor(index, isTeam1));
@@ -140,64 +147,71 @@ public class TeamBuilder {
         return slot;
     }
 
-    private void choosePokemonForSlot(int index, boolean isTeam1) {
-        List<String> allPokemons = PokemonRepository.getAllPokemonNames();
+    private void choosePokemonForSlot(int index, boolean isTeam1, Node node) {
+        allPokemons = PokemonRepository.getAllPokemons();
+        allPokemons.sort(Comparator.comparingInt(Pokemon::getPokeDex));
 
-        Stage selection = new Stage();
-        VBox layout = new VBox(10);
-        Scene scene = new Scene(layout, 500, 300);
+        updateMenuItems(index, isTeam1);
 
-        ComboBox<String> comboBox = new ComboBox<>();
-        comboBox.setItems(FXCollections.observableArrayList(allPokemons));
+        Button prevButton = new Button("<-");
+        prevButton.setOnAction(event -> {
+            if (currentPage > 0) {
+                currentPage--;
+                updateMenuItems(index, isTeam1);
+            }
+        });
+        Button nextButton = new Button("->");
+        nextButton.setOnAction(event -> {
+            int totalPages = (int) (Math.ceil((double) allPokemons.size() / itemsInPage));
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                updateMenuItems(index, isTeam1);
+            }
+        });
+        HBox navigationButtons = new HBox(prevButton, nextButton);
+        navigationButtons.setAlignment(Pos.CENTER);
 
-        comboBox.setCellFactory(lv -> new ListCell<>() {
-            private final ImageView imageView = new ImageView();
-            private final Label typeLabel = new Label();
+        menuItemsContainer.setId("myListView");
+        menuItemsContainer.getStyleClass().add("mySpecialClass");
 
-            @Override
-            protected void updateItem(String pokemonName, boolean empty) {
-                super.updateItem(pokemonName, empty);
+        VBox mainContainer = new VBox(menuItemsContainer, navigationButtons);
+        mainContainer.getStyleClass().add("hBox");
+        contextMenu = new ContextMenu(new CustomMenuItem(mainContainer, false));
+        contextMenu.show(node, Side.RIGHT, 0, 0);
+    }
+    private void updateMenuItems(int index, boolean isTeam1) {
+        menuItemsContainer.getChildren().clear();
+        int start = currentPage * itemsInPage;
+        int end = Math.min(start + itemsInPage, allPokemons.size());
 
-                if (empty || pokemonName == null) {
-                    setGraphic(null);
-                } else {
-                    Pokemon pokemon = PokemonRepository.getPokemon(pokemonName);
+        for (int i = start; i < end; i++) {
+            Pokemon pokemon = allPokemons.get(i);
+            String pokemonName = pokemon.getName();
+            Image image = pokemon.getIconSprite();
+            ImageView imageView = createPokemonIconView(image);
+            imageView.setFitHeight(50);
+            imageView.setFitWidth(50);
 
-                    Image image = pokemon.getFrontSprite();
-                    String spritePath = pokemon.getFrontSprite().toString();
-
-                    if (image == null) {
-                        System.err.println("Image not found: " + spritePath);
-                        setGraphic(null);
-                    } else {
-                        imageView.setImage(image);
-                        imageView.setFitWidth(60);
-                        imageView.setFitHeight(60);
-                        imageView.setPreserveRatio(true);
-
-                        typeLabel.setText(pokemon.getTypeString());
-
-                        HBox hBox = new HBox(imageView, new Label(pokemonName), typeLabel);
-                        hBox.setSpacing(10);
-                        setGraphic(hBox);
-                    }
-                }
+            HBox typeIconBox = new HBox(5);
+            for (PokeTyping type : pokemon.getTyping()) {
+                Image typeImage = new Image(Objects.requireNonNull(getClass().getResource("/types/" + type.name().toLowerCase() + ".png")).toExternalForm());
+                ImageView typeImageView = new ImageView(typeImage);
+                typeImageView.setFitWidth(60);
+                typeImageView.setFitHeight(35);
+                typeIconBox.getChildren().add(typeImageView);
             }
 
-        });
-
-        Button selectButton = new Button("Select");
-        selectButton.setOnAction(e -> {
-            String selectedPokemonName = comboBox.getSelectionModel().getSelectedItem();
-            updatePokemonSlot(index, selectedPokemonName, isTeam1);
-            updateStartBattleButton();
-            selection.close();
-        });
-
-        layout.getChildren().addAll(comboBox, selectButton);
-        selection.setScene(scene);
-        selection.setTitle("Choose a Pokemon");
-        selection.showAndWait();
+            Label nameLabel = new Label(pokemonName);
+            HBox hBox = new HBox(imageView, nameLabel, typeIconBox);
+            hBox.getStyleClass().add("hBox");
+            hBox.setSpacing(10);
+            hBox.setOnMouseClicked(event -> {
+                updatePokemonSlot(index, pokemon.getName(), isTeam1);
+                updateStartBattleButton();
+                contextMenu.hide();
+            });
+            menuItemsContainer.getChildren().add(hBox);
+        }
     }
 
     private void updatePokemonSlot(int index, String pokemonName, boolean isTeam1) {
@@ -229,8 +243,8 @@ public class TeamBuilder {
                 typeIconBox = new HBox(5);
                 for (PokeTyping typing : pokemon.getTyping()) {
                     ImageView typeIcon = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/types/" + typing.name().toLowerCase() + ".png")).toExternalForm()));
-                    typeIcon.setFitWidth(45);
-                    typeIcon.setFitHeight(25);
+                    typeIcon.setFitWidth(55);
+                    typeIcon.setFitHeight(35);
                     typeIconBox.getChildren().add(typeIcon);
                 }
 
@@ -277,8 +291,6 @@ public class TeamBuilder {
 
             return newTab;
         });
-
-
         tabPane.getSelectionModel().select(pokemonBuilderTab);
 
         boolean doneButtonExists = ((VBox) pokemonBuilderTab.getContent()).getChildren().stream()
@@ -321,10 +333,8 @@ public class TeamBuilder {
     }
 
     private void createNewTeam() {
-
         ObservableList<Pokemon> team1Pokemons = FXCollections.observableArrayList();
         ObservableList<Pokemon> team2Pokemons = FXCollections.observableArrayList();
-
 
         for (int i = 0; i < 6; i++) {
             team1Pokemons.add(null);

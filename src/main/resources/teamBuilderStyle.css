@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 .root {
-    -fx-font-family: 'Arial';
+    -fx-font-family: 'Press Start 2P', cursive;
     -fx-background-image: url('/teambuilderBackground.jpg');
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
@@ -347,11 +348,58 @@
     -fx-unit-increment: 5;
     -fx-block-increment: 10;
 }
-
 .moves-list .list-cell, .move-input, .scroll-pane {
     -fx-overflow: hidden;
 }
 
+.hBox {
+    -fx-background-color: transparent;
+}
+
+.hBox:hover {
+    -fx-background-color: #333333;
+}
+
+.hBox Label:hover {
+    -fx-background-color: #5d4777;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-font-weight: bold;
+    -fx-padding: 5px;
+}
+.hBox ImageView:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.button:hover {
+    -fx-background-color: #2C2F33;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #7c538c;
+}
+
+.pokemon-name-label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.context-menu {
+    -fx-background-color: #333333;
+    -fx-border-color: #7c538c;
+    -fx-border-width: 2px;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+.context-menu .list-cell,  #myListview .list-cell:hover, .mySpecialClass .list-cell:hover {
+    -fx-background-color: #2C2F33;
+    -fx-text-fill: #f8f8ff;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+.context-menu .list-cell:hover {
+    -fx-background-color: #5d4777;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
 
 .start-battle-button {
     -fx-background-color: linear-gradient(to bottom, #dc143c, #a40000);

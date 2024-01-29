@@ -1,5 +1,6 @@
 package org.example;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,17 +11,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.example.screens.BattleStartListener;
+import javafx.util.Duration;
 import org.example.screens.TeamBuilder;
 import org.example.screens.battleScene.BattleLogic;
 import org.example.screens.battleScene.BattleView;
-import org.example.screens.firstPage.BattleButton;
 import org.example.screens.firstPage.TeamBuilderButton;
-import org.example.teams.Team;
+import javafx.scene.shape.Rectangle;
+
+import java.util.Objects;
 
 public class MainApplication extends Application {
-
     private final TabPane tabPane = new TabPane();
     private final StackPane rootPane = new StackPane();
     private Stage primaryStage;
@@ -31,14 +33,17 @@ public class MainApplication extends Application {
 
         this.primaryStage = primaryStage;
 
-
         primaryStage.setFullScreen(true);
 
         primaryStage.setMinWidth(1100);
         primaryStage.setMinHeight(800);
 
+        Rectangle blackScreen = new Rectangle();
+        blackScreen.setFill(Color.BLACK);
+        blackScreen.widthProperty().bind(primaryStage.widthProperty());
+        blackScreen.heightProperty().bind(primaryStage.heightProperty());
 
-        Image background = new Image(getClass().getResourceAsStream("/mainBackground.jpg"));
+        Image background = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/mainBackground.jpg")));
 
         ImageView backgroundView = new ImageView(background);
 
@@ -50,28 +55,30 @@ public class MainApplication extends Application {
         teambuilderButton.getStyleClass().add("button");
         teambuilderButton.setOnAction(event -> openTeamBuilder());
 
-        BattleButton bBC = new BattleButton(this);
-        Button battleButton = bBC.createButton();
-        battleButton.getStyleClass().add("button");
-
         VBox buttonBox = new VBox(10);
-        buttonBox.getChildren().addAll(teambuilderButton, battleButton);
+        buttonBox.getChildren().addAll(teambuilderButton);
         buttonBox.setAlignment(Pos.TOP_CENTER);
 
-        VBox.setMargin(teambuilderButton, new Insets(300, 0, 0, 0));
-
+        VBox.setMargin(teambuilderButton, new Insets(380, 0, 0, 0));
 
         rootPane.getChildren().add(backgroundView);
 
         rootPane.getChildren().add(tabPane);
         rootPane.getChildren().add(buttonBox);
 
+        rootPane.getChildren().add(blackScreen);
 
         Scene scene = new Scene(rootPane);
-        scene.getStylesheets().add(getClass().getResource("/mainApplication.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/mainApplication.css")).toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Pokémon Battle Simulator by Nico");
         primaryStage.show();
+
+        FadeTransition transition = new FadeTransition(Duration.seconds(3), blackScreen);
+        transition.setFromValue(1.0);
+        transition.setToValue(0.0);
+        transition.setOnFinished(event -> rootPane.getChildren().remove(blackScreen));
+        transition.play();
     }
     public static void main(String[] args) {
         launch(args);
@@ -87,22 +94,19 @@ public class MainApplication extends Application {
         primaryStage.setScene(teamBuilderScene);
         primaryStage.setFullScreen(true);
 
-        teamBuilder.setBattleStartListener(new BattleStartListener() {
-            @Override
-            public void onBattleStart(Team team1, Team team2) {
-                battleView = new BattleView(team1, team2);
-                BattleLogic logic = new BattleLogic(team1, team2);
+        teamBuilder.setBattleStartListener((team1, team2) -> {
 
-                battleView.setBattleLogic(logic);
-                logic.setBattleView(battleView);
+            battleView = new BattleView(team1, team2);
+            BattleLogic logic = new BattleLogic(team1, team2);
 
-                battleView.loadTeams(team1, team2);
+            battleView.setBattleLogic(logic);
+            logic.setBattleView(battleView);
 
-                primaryStage.setScene(battleView.createScene());
-                primaryStage.setFullScreen(true);
+            battleView.loadTeams(team1, team2);
+            primaryStage.setScene(battleView.createScene());
+            primaryStage.setFullScreen(true);
 
-                logic.initiateRound();
-            }
+            logic.initiateRound();
         });
     }
 }

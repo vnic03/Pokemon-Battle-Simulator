@@ -8,8 +8,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Pokemon {
-    String name;
-
+    private final String name;
+    private int pokeDex;
     private final String frontSpritePath;
     private final String backSpritePath;
     private final String iconSpritePath;
@@ -52,8 +52,9 @@ public class Pokemon {
 
     private Map<Moves, Integer> disabledMoves = new HashMap<>();
 
-    public Pokemon(String name, List<PokeTyping> typing, Stats stats, Nature nature, List<Ability> abilities, String frontSpritePath, String backSpritePath, String iconSpritePath, List<Moves> moves) {
+    public Pokemon(String name, int pokeDex ,List<PokeTyping> typing, Stats stats, Nature nature, List<Ability> abilities, String frontSpritePath, String backSpritePath, String iconSpritePath, List<Moves> moves) {
         this.name = name;
+        this.pokeDex = pokeDex;
         this.gender = randomGender();
         this.typing = typing;
         this.typeString = typing.stream().map(PokeTyping::name).collect(Collectors.joining(", ")); // showing the type
@@ -66,20 +67,18 @@ public class Pokemon {
         this.backSpritePath = backSpritePath;
         this.iconSpritePath = iconSpritePath;
 
-
         this.moves = moves;
-
 
         if (this.nature != null) {
             applyNatureEffects();
         }
-
         this.thickFatActive = false;
     }
 
     public String getName(){
         return name;
     }
+    public int getPokeDex() { return pokeDex; }
     public int getLevel() {
         return level;
     }
@@ -418,6 +417,10 @@ public class Pokemon {
         this.getStats().setSpecialDefense(this.originalSpDefense);
         this.getStats().setSpeed(this.originalSpeed);
     }
+    public void resetAttack() {
+        this.getStats().setAttack(this.originalAttack);
+    }
+
 
     public boolean allMovesOutOfPP() {
         for (Moves move : this.moves) {

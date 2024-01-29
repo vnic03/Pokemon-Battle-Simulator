@@ -6,7 +6,7 @@ import java.util.Objects;
 public enum PokeTyping {
 
     NORMAL("normal.png"),
-    FIGHTING("fight.png"),
+    FIGHTING("fighting.png"),
     FLYING("flying.png"),
     POISON("poison.png"),
     GROUND("ground.png"),

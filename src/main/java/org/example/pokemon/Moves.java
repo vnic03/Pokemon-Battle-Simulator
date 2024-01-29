@@ -1,7 +1,7 @@
 package org.example.pokemon;
 
-import org.example.pokemon.effects.MoveEffect;
-import org.example.pokemon.effects.MoveEffectWithDamage;
+import org.example.pokemon.moveEffects.MoveEffect;
+import org.example.pokemon.moveEffects.MoveEffectWithDamage;
 
 public class Moves {
 

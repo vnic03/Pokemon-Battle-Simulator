@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.StringConverter;
 import org.example.pokemon.*;
+import org.example.pokemon.repositories.MovesRepository;
 
 import java.util.ArrayList;
 import java.util.List;

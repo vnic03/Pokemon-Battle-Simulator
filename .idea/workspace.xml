@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Abilities still not tested, fixed the Ev pane, needs styling">
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="fixed packages name">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Gui/PokemonBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Gui/PokemonBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pokemon/Pokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,12 +51,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "vnic03"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vnic03&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -284,15 +281,9 @@
       <workItem from="1706216704540" duration="600000" />
       <workItem from="1706253728283" duration="5277000" />
       <workItem from="1706260686355" duration="3931000" />
-      <workItem from="1706264635241" duration="8941000" />
-    </task>
-    <task id="LOCAL-00003" summary="CreatePokemon tests succeeded">
-      <option name="closed" value="true" />
-      <created>1703772330914</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1703772330914</updated>
+      <workItem from="1706264635241" duration="9878000" />
+      <workItem from="1706283519245" duration="168000" />
+      <workItem from="1706286433724" duration="532000" />
     </task>
     <task id="LOCAL-00004" summary="Added a simple BattleSimulator, some MoveEffects and more moves.">
       <option name="closed" value="true" />
@@ -678,7 +669,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706275100922</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="fixed packages name">
+      <option name="closed" value="true" />
+      <created>1706276526638</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1706276526638</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -697,7 +696,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added effectiveness output" />
     <MESSAGE value="Added Flinch effect" />
     <MESSAGE value="Added Critical Hits" />
     <MESSAGE value="Added Gender" />
@@ -722,7 +720,8 @@
     <MESSAGE value="Abilities still not tested, updated UI, added bridge between BattleView and BattleLogic" />
     <MESSAGE value="Abilities still not tested, updated UI" />
     <MESSAGE value="Abilities still not tested, fixed the Ev pane, needs styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Abilities still not tested, fixed the Ev pane, needs styling" />
+    <MESSAGE value="fixed packages name" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed packages name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

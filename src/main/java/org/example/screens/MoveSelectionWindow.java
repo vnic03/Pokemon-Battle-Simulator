@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.pokemon.Moves;
-import org.example.pokemon.MovesRepository;
+import org.example.pokemon.repositories.MovesRepository;
 import org.example.pokemon.PokeTyping;
 import org.example.pokemon.Pokemon;
 import java.util.ArrayList;

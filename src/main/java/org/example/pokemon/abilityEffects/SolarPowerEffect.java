@@ -1,6 +1,6 @@
 package org.example.pokemon.abilityEffects;
 
-import org.example.battle.Weather;
+import org.example.screens.battle.Weather;
 import org.example.pokemon.Pokemon;
 
 public class SolarPowerEffect implements AbilityEffectWeather {

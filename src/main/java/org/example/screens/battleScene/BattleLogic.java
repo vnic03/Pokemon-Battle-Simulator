@@ -1,13 +1,13 @@
 package org.example.screens.battleScene;
 
-import org.example.battle.DamageCalculator;
-import org.example.battle.Weather;
-import org.example.pokemon.effects.MoveEffect;
-import org.example.pokemon.effects.MoveEffectWithDamage;
-import org.example.pokemon.effects.MultiHitMoveEffect;
+import org.example.screens.battle.DamageCalculator;
+import org.example.screens.battle.Weather;
+import org.example.pokemon.moveEffects.MoveEffect;
+import org.example.pokemon.moveEffects.MoveEffectWithDamage;
+import org.example.pokemon.moveEffects.MultiHitMoveEffect;
 import org.example.pokemon.MoveCategory;
 import org.example.pokemon.Moves;
-import org.example.pokemon.MovesRepository;
+import org.example.pokemon.repositories.MovesRepository;
 import org.example.pokemon.Pokemon;
 import org.example.teams.Team;
 
