@@ -4,37 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated UI, added new Pokemon and abilities">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated UI">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/preview/BattlePreview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/preview/MovesPreview.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/preview/TeamBuilderPreview.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Moves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Moves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Stat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Stat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Stats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Typing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Typing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/StarterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/StarterEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/ThickFatEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/ThickFatEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/BadlyPoisonedEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/BadlyPoisonedEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/BurnEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/BurnEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayBurnEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayBurnEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayFreezeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayFreezeEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayParalyzeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayParalyzeEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayPoisonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayPoisonEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/ParalyzeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/ParalyzeEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/PoisonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/PoisonEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/SleepPowderEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/SleepPowderEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/MovesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/PokemonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/MoveSelectionWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/MoveSelectionWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/TeamBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/TeamBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/BattleSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/BattleSimulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/DamageCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/DamageCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BeforeBattleAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BeforeBattleAnimation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/battleViewStyles/bBAnimationStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/battleViewStyles/bBAnimationStyles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/battleViewStyles/battleViewStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/battleViewStyles/battleViewStyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,48 +86,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build PokeDuelByNico.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FlinchTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.MayBurnEffectTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.NatureTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokeDuelByNico [:ChoosePokemon.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokeDuelByNico [:EvDistributionFx.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokeDuelByNico [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokeDuelByNico [:MainApplication.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokeDuelByNico [:fxTest.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PokemonCreatorTest.testCreatePokemon.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.Debug Application.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.MainApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.MainApplication.executor": "Run",
+    "Gradle.Build PokeDuelByNico.executor": "Run",
+    "Gradle.FlinchTest.executor": "Run",
+    "Gradle.MayBurnEffectTest.executor": "Run",
+    "Gradle.NatureTest.executor": "Run",
+    "Gradle.PokeDuelByNico [:ChoosePokemon.main()].executor": "Run",
+    "Gradle.PokeDuelByNico [:EvDistributionFx.main()].executor": "Run",
+    "Gradle.PokeDuelByNico [:Main.main()].executor": "Run",
+    "Gradle.PokeDuelByNico [:MainApplication.main()].executor": "Run",
+    "Gradle.PokeDuelByNico [:fxTest.main()].executor": "Run",
+    "Gradle.PokemonCreatorTest.testCreatePokemon.executor": "Run",
+    "JavaScript Debug.Debug Application.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.MainApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "21",
+    "kotlin-language-version-configured": "true",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.start.executor": "Run",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/pokemonSprites/machamp" />
@@ -245,10 +221,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ChoosePokemon" />
-        <item itemvalue="Application.EvDistributionFx" />
-        <item itemvalue="Application.fxTest" />
         <item itemvalue="Gradle.PokemonCreatorTest.testCreatePokemon" />
+        <item itemvalue="Application.fxTest" />
+        <item itemvalue="Application.EvDistributionFx" />
+        <item itemvalue="Application.ChoosePokemon" />
       </list>
     </recent_temporary>
   </component>
@@ -324,15 +300,7 @@
       <workItem from="1707238331178" duration="31000" />
       <workItem from="1707736507850" duration="102000" />
       <workItem from="1708011206898" duration="1414000" />
-      <workItem from="1708542542036" duration="728000" />
-    </task>
-    <task id="LOCAL-00005" summary="DamageCalculator expanded and improved.">
-      <option name="closed" value="true" />
-      <created>1703811489699</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1703811489699</updated>
+      <workItem from="1708542542036" duration="3392000" />
     </task>
     <task id="LOCAL-00006" summary="PokemonRepository added">
       <option name="closed" value="true" />
@@ -718,7 +686,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706552888466</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Updated UI">
+      <option name="closed" value="true" />
+      <created>1708543409806</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1708543409806</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -737,7 +713,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added Critical Hits" />
     <MESSAGE value="Added Gender" />
     <MESSAGE value="Flinch effect fixed" />
     <MESSAGE value="Added first Gui, added functioning Evs, weather needs fixing" />
@@ -762,7 +737,8 @@
     <MESSAGE value="Abilities still not tested, fixed the Ev pane, needs styling" />
     <MESSAGE value="fixed packages name" />
     <MESSAGE value="Updated UI, added new Pokemon and abilities" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated UI, added new Pokemon and abilities" />
+    <MESSAGE value="Updated UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
