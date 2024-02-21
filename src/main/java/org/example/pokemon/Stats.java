@@ -30,11 +30,7 @@ public class Stats {
     public void setHp(int hp) {
         if (hp < 0) {
             this.hp = 0;
-        } else if (hp > this.maxHp) {
-            this.hp = this.maxHp;
-        } else {
-            this.hp = hp;
-        }
+        } else this.hp = Math.min(hp, this.maxHp);
     }
 
     public int getMaxHp() {

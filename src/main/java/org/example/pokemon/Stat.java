@@ -6,7 +6,6 @@ public enum Stat {
     DEFENSE,
     SPECIAL_ATTACK,
     SPECIAL_DEFENSE,
-    SPEED;
-
+    SPEED
 }
 

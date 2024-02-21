@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.battle-background {
+    -fx-background-image: url('bBAnimation-Backround.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.fight-label {
+    -fx-font-size: 40px;
+
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 15, 0, 0, 1);
+    -fx-font-family: 'Press Start 2P', cursive;
+}

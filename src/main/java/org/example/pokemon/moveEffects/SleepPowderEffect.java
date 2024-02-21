@@ -1,7 +1,7 @@
 package org.example.pokemon.moveEffects;
 
+import org.example.pokemon.Typing;
 import org.example.screens.battleScene.BattleRoundResult;
-import org.example.pokemon.PokeTyping;
 import org.example.pokemon.Pokemon;
 
 import java.util.Random;
@@ -13,7 +13,7 @@ public class SleepPowderEffect implements MoveEffect {
     @Override
     public void apply(Pokemon user, Pokemon target, BattleRoundResult result) {
 
-        if (target.hasStatusCondition() || target.getTyping().contains(PokeTyping.GRASS)) {
+        if (target.hasStatusCondition() || target.getTyping().contains(Typing.GRASS)) {
             System.out.println(target.getName() + " can't be affected !");
             return;
         }

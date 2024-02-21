@@ -1,7 +1,7 @@
 package org.example.pokemon.moveEffects;
 
+import org.example.pokemon.Typing;
 import org.example.screens.battleScene.BattleRoundResult;
-import org.example.pokemon.PokeTyping;
 import org.example.pokemon.Pokemon;
 
 public class BadlyPoisonedEffect implements MoveEffect {
@@ -14,7 +14,7 @@ public class BadlyPoisonedEffect implements MoveEffect {
             return;
         }
 
-        if (target.getTyping().contains(PokeTyping.POISON)) {
+        if (target.getTyping().contains(Typing.POISON)) {
             System.out.println(target.getName() + " can't be poisoned");
             return;
         }

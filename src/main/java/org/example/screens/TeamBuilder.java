@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
 
 import javafx.stage.Stage;
 import org.example.pokemon.Moves;
-import org.example.pokemon.PokeTyping;
+import org.example.pokemon.Typing;
 import org.example.pokemon.Pokemon;
 import org.example.pokemon.repositories.PokemonRepository;
 import org.example.teams.Team;
@@ -45,7 +45,7 @@ public class TeamBuilder {
     private final Region spacer;
     private final BooleanProperty isEditingPokemon = new SimpleBooleanProperty(false);
 
-    private VBox menuItemsContainer = new VBox();
+    private final VBox menuItemsContainer = new VBox();
     private int currentPage = 0;
     private final int itemsInPage = 10;
     private List<Pokemon> allPokemons;
@@ -188,12 +188,12 @@ public class TeamBuilder {
             Pokemon pokemon = allPokemons.get(i);
             String pokemonName = pokemon.getName();
             Image image = pokemon.getIconSprite();
-            ImageView imageView = createPokemonIconView(image);
+            ImageView imageView = editPokemonIcon(image);
             imageView.setFitHeight(50);
             imageView.setFitWidth(50);
 
             HBox typeIconBox = new HBox(5);
-            for (PokeTyping type : pokemon.getTyping()) {
+            for (Typing type : pokemon.getTyping()) {
                 Image typeImage = new Image(Objects.requireNonNull(getClass().getResource("/types/" + type.name().toLowerCase() + ".png")).toExternalForm());
                 ImageView typeImageView = new ImageView(typeImage);
                 typeImageView.setFitWidth(60);
@@ -226,9 +226,9 @@ public class TeamBuilder {
                 HBox[] targetSlots = isTeam1 ? team1Slots : team2Slots;
                 HBox slot = targetSlots[index];
 
-                ImageView pokemonIcon = (ImageView) slot.getChildren().get(0);
+                ImageView pokemonIcon = (ImageView) slot.getChildren().getFirst();
                 Image iconImage = pokemon.getIconSprite();
-                ImageView iconView = createPokemonIconView(iconImage);
+                ImageView iconView = editPokemonIcon(iconImage);
                 pokemonIcon.setImage(iconView.getImage());
                 pokemonIcon.setViewport(iconView.getViewport());
                 pokemonIcon.setFitWidth(iconView.getFitWidth());
@@ -241,7 +241,7 @@ public class TeamBuilder {
                 }
 
                 typeIconBox = new HBox(5);
-                for (PokeTyping typing : pokemon.getTyping()) {
+                for (Typing typing : pokemon.getTyping()) {
                     ImageView typeIcon = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/types/" + typing.name().toLowerCase() + ".png")).toExternalForm()));
                     typeIcon.setFitWidth(55);
                     typeIcon.setFitHeight(35);
@@ -309,8 +309,7 @@ public class TeamBuilder {
         isEditingPokemon.set(false);
         updateStartBattleButton();
 
-        if (pokemonBuilderTab.getUserData() instanceof PokemonBuilder) {
-            PokemonBuilder pokemonBuilder = (PokemonBuilder) pokemonBuilderTab.getUserData();
+        if (pokemonBuilderTab.getUserData() instanceof PokemonBuilder pokemonBuilder) {
             List<Moves> selectedMoves = pokemonBuilder.getSelectedMoves();
 
             selectedMoves.forEach(move -> System.out.println(move.getName()));
@@ -359,7 +358,7 @@ public class TeamBuilder {
         this.battleStartListener = listener;
     }
 
-    public static ImageView createPokemonIconView(Image pokemonImage) {
+    public static ImageView editPokemonIcon(Image pokemonImage) {
         ImageView imageView = new ImageView(pokemonImage);
 
         double width = pokemonImage.getWidth();

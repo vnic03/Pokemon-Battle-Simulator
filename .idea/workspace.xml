@@ -4,9 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="fixed packages name">
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated UI, added new Pokemon and abilities">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Moves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Moves.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Stat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Stat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Stats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Typing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Typing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/StarterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/StarterEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/ThickFatEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/ThickFatEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/BadlyPoisonedEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/BadlyPoisonedEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/BurnEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/BurnEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayBurnEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayBurnEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayFreezeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayFreezeEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayParalyzeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayParalyzeEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayPoisonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/MayPoisonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/ParalyzeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/ParalyzeEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/PoisonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/PoisonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/SleepPowderEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/moveEffects/SleepPowderEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/MovesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/PokemonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/MoveSelectionWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/MoveSelectionWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/TeamBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/TeamBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/BattleSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/BattleSimulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/DamageCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/DamageCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BeforeBattleAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BeforeBattleAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/battleViewStyles/bBAnimationStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/battleViewStyles/bBAnimationStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/battleViewStyles/battleViewStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/battleViewStyles/battleViewStyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +70,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="CSS File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -126,11 +154,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/pokemonSprites/machamp" />
       <recent name="$PROJECT_DIR$/src/main/resources/battleViewStyles" />
       <recent name="$PROJECT_DIR$/src/main/resources/moveCategory" />
       <recent name="$PROJECT_DIR$/frontend/src" />
       <recent name="$PROJECT_DIR$/frontend/public" />
-      <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="FailedIdeas" />
@@ -284,14 +312,19 @@
       <workItem from="1706264635241" duration="9878000" />
       <workItem from="1706283519245" duration="168000" />
       <workItem from="1706286433724" duration="532000" />
-    </task>
-    <task id="LOCAL-00004" summary="Added a simple BattleSimulator, some MoveEffects and more moves.">
-      <option name="closed" value="true" />
-      <created>1703804244440</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1703804244440</updated>
+      <workItem from="1706528487668" duration="25928000" />
+      <workItem from="1706560876899" duration="761000" />
+      <workItem from="1706601505419" duration="190000" />
+      <workItem from="1706698591570" duration="617000" />
+      <workItem from="1706706126148" duration="83000" />
+      <workItem from="1706724908148" duration="118000" />
+      <workItem from="1706807233467" duration="287000" />
+      <workItem from="1706885814253" duration="9828000" />
+      <workItem from="1707156648193" duration="3256000" />
+      <workItem from="1707238331178" duration="31000" />
+      <workItem from="1707736507850" duration="102000" />
+      <workItem from="1708011206898" duration="1414000" />
+      <workItem from="1708542542036" duration="728000" />
     </task>
     <task id="LOCAL-00005" summary="DamageCalculator expanded and improved.">
       <option name="closed" value="true" />
@@ -677,7 +710,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706276526638</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Updated UI, added new Pokemon and abilities">
+      <option name="closed" value="true" />
+      <created>1706552888465</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1706552888466</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -696,7 +737,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added Flinch effect" />
     <MESSAGE value="Added Critical Hits" />
     <MESSAGE value="Added Gender" />
     <MESSAGE value="Flinch effect fixed" />
@@ -721,7 +761,8 @@
     <MESSAGE value="Abilities still not tested, updated UI" />
     <MESSAGE value="Abilities still not tested, fixed the Ev pane, needs styling" />
     <MESSAGE value="fixed packages name" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed packages name" />
+    <MESSAGE value="Updated UI, added new Pokemon and abilities" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated UI, added new Pokemon and abilities" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

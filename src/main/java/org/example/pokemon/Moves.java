@@ -7,7 +7,7 @@ public class Moves {
 
     private Pokemon attacker;
     private final String name;
-    private PokeTyping type;
+    private Typing type;
     private  MoveCategory category;
     private int power;
     private int originalPower;
@@ -16,7 +16,7 @@ public class Moves {
     private final MoveEffect effect;
     private MoveEffectWithDamage effectWithDamage;
 
-    public Moves(String name, PokeTyping type,MoveCategory category, int power, int accuracy, int initialPP, MoveEffect moveEffect){
+    public Moves(String name, Typing type, MoveCategory category, int power, int accuracy, int initialPP, MoveEffect moveEffect){
         this.name = name;
         this.type = type;
         this.category = category;
@@ -30,8 +30,7 @@ public class Moves {
         return name;
     }
 
-
-    public PokeTyping getType(){
+    public Typing getType(){
         return type;
     }
     public int getPower(){
@@ -39,7 +38,7 @@ public class Moves {
     }
     public int getAccuracy() {
         return accuracy; }
-    public void setType(PokeTyping type) { this.type = type; }
+    public void setType(Typing type) { this.type = type; }
     public void setPower(int power) { this.power = power; }
     public void saveOriginalPower() {
         this.originalPower = this.power;

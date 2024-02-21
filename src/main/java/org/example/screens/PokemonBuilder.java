@@ -20,10 +20,7 @@ import javafx.util.StringConverter;
 import org.example.pokemon.*;
 import org.example.pokemon.repositories.MovesRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class PokemonBuilder {
@@ -54,7 +51,8 @@ public class PokemonBuilder {
         this.pokemonIndex = pokemonIndex;
         this.isTeam1 = isTeam1;
         initializeLayout();
-        pokemonBuilderLayout.getStylesheets().add(getClass().getResource("/teamBuilderStyle.css").toExternalForm());
+        pokemonBuilderLayout.getStylesheets().add(
+                Objects.requireNonNull(getClass().getResource("/teamBuilderStyle.css")).toExternalForm());
     }
 
     private void initializeLayout() {
@@ -121,8 +119,8 @@ public class PokemonBuilder {
 
 
         HBox typeBox = new HBox(5);
-        for (PokeTyping type : pokemon.getTyping()) {
-            Image typeImage = new Image(getClass().getResource("/types/" + type.name().toLowerCase() + ".png").toExternalForm());
+        for (Typing type : pokemon.getTyping()) {
+            Image typeImage = new Image(Objects.requireNonNull(getClass().getResource("/types/" + type.name().toLowerCase() + ".png")).toExternalForm());
             ImageView typeIconView = new ImageView(typeImage);
             typeIconView.setFitWidth(50);
             typeIconView.setFitHeight(30);
@@ -144,7 +142,7 @@ public class PokemonBuilder {
         genderComboBox.getItems().addAll(Gender.MALE, Gender.FEMALE, Gender.NONE);
         genderComboBox.setValue(Gender.NONE); // standard
 
-        genderComboBox.setCellFactory(lv -> new ListCell<Gender>() {
+        genderComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Gender item, boolean empty) {
                 super.updateItem(item, empty);
@@ -175,7 +173,7 @@ public class PokemonBuilder {
 
         ComboBox<Ability> abilityComboBox = new ComboBox<>();
         abilityComboBox.getItems().addAll(pokemon.getAbilities());
-        abilityComboBox.setCellFactory(lv -> new ListCell<Ability>() {
+        abilityComboBox.setCellFactory(lv -> new ListCell<>() {
 
             protected void updateItem(Ability item, boolean empty) {
                 super.updateItem(item, empty);
@@ -231,7 +229,7 @@ public class PokemonBuilder {
 
             moveComboBoxes[index].setItems(filteredMoves);
 
-            moveComboBoxes[index].setConverter(new StringConverter<Moves>() {
+            moveComboBoxes[index].setConverter(new StringConverter<>() {
                 @Override
                 public String toString(Moves move) {
                     return move != null ? move.getName() : "";
@@ -271,9 +269,9 @@ public class PokemonBuilder {
             moveComboBoxes[index].getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
                 if (!isUpdating[0] && (newValue == null || !newValue.equals(oldValue))) {
                     isUpdating[0] = true;
-                    Task<Void> filterTask = new Task<Void>() {
+                    Task<Void> filterTask = new Task<>() {
                         @Override
-                        protected Void call() throws Exception {
+                        protected Void call() {
                             Predicate<Moves> filter = move -> {
                                 if (newValue == null || newValue.isEmpty()) {
                                     return true;
@@ -323,7 +321,7 @@ public class PokemonBuilder {
 
     private ComboBox<Moves> createComboBox() {
         ComboBox<Moves> moveComboBox = new ComboBox<>();
-        moveComboBox.setCellFactory(param -> new ListCell<Moves>() {
+        moveComboBox.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(Moves move, boolean empty) {
                 super.updateItem(move, empty);
@@ -358,7 +356,7 @@ public class PokemonBuilder {
             }
         });
 
-        moveComboBox.setButtonCell(new ListCell<Moves>() {
+        moveComboBox.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(Moves move, boolean empty) {
                 super.updateItem(move, empty);

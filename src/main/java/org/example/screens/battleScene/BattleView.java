@@ -171,7 +171,7 @@ public class BattleView extends AnchorPane {
                    MenuItem menuItem = new MenuItem(pokemon.getName() + " - HP: " + pokemon.getStats().getHp());
 
                    Image pokemonImage = new Image(pokemon.getIconSprite().getUrl());
-                   ImageView pokemonIconView = TeamBuilder.createPokemonIconView(pokemonImage);
+                   ImageView pokemonIconView = TeamBuilder.editPokemonIcon(pokemonImage);
                    pokemonIconView.setFitWidth(40);
                    pokemonIconView.setFitHeight(40);
 

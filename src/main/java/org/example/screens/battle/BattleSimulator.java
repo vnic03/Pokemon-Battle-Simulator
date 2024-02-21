@@ -288,12 +288,12 @@ public class BattleSimulator {
         switch (currentWeather) {
             case SANDSTORM:
                 applySandstormDamage(pokemon);
-                if (pokemon.getTyping().contains(PokeTyping.ROCK)) {
+                if (pokemon.getTyping().contains(Typing.ROCK)) {
                     pokemon.getStats().setSpecialDefense((int) (pokemon.getStats().getSpecialDefense() * 1.5));
                 }
                 break;
             case SNOW:
-                if (pokemon.getTyping().contains(PokeTyping.ICE)) {
+                if (pokemon.getTyping().contains(Typing.ICE)) {
                     pokemon.getStats().setDefense((int) (pokemon.getStats().getDefense() * 1.5));
                 }
                 break;
@@ -301,9 +301,9 @@ public class BattleSimulator {
     }
 
     private void applySandstormDamage(Pokemon pokemon) {
-        if (!pokemon.getTyping().contains(PokeTyping.ROCK) &&
-                !pokemon.getTyping().contains(PokeTyping.GROUND) &&
-                !pokemon.getTyping().contains(PokeTyping.STEEL)) {
+        if (!pokemon.getTyping().contains(Typing.ROCK) &&
+                !pokemon.getTyping().contains(Typing.GROUND) &&
+                !pokemon.getTyping().contains(Typing.STEEL)) {
 
             int damage = pokemon.getStats().getMaxHp() / 16;
             pokemon.takeDamage(damage);

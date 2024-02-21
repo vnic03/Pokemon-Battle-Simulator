@@ -11,15 +11,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.pokemon.Moves;
+import org.example.pokemon.Typing;
 import org.example.pokemon.repositories.MovesRepository;
-import org.example.pokemon.PokeTyping;
 import org.example.pokemon.Pokemon;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
+
 
 public class MoveSelectionWindow {
 
@@ -42,7 +42,7 @@ public class MoveSelectionWindow {
         typesLayout.setAlignment(Pos.CENTER);
 
 
-        Map<PokeTyping, List<String>> movesByType = new HashMap<>();
+        Map<Typing, List<String>> movesByType = new HashMap<>();
 
         for (Moves move : MovesRepository.getAllMoves()) {
             movesByType.computeIfAbsent(move.getType(), k -> new ArrayList<>()).add(move.getName());
@@ -53,13 +53,14 @@ public class MoveSelectionWindow {
 
         Consumer<Void> updateCurrentMovesDisplay = (v) -> {
             currentMovesList.getItems().clear();
-            currentMovesList.getItems().addAll(pokemon.getMoves().stream().map(Moves::getName).collect(Collectors.toList()));
+            currentMovesList.getItems()
+                    .addAll(pokemon.getMoves().stream().map(Moves::getName).toList());
         };
 
         updateCurrentMovesDisplay.accept(null);
 
 
-        for (Map.Entry<PokeTyping, List<String>> entry : movesByType.entrySet()) {
+        for (Map.Entry<Typing, List<String>> entry : movesByType.entrySet()) {
 
             VBox typeLayout = new VBox(5);
             typeLayout.setAlignment(Pos.CENTER);

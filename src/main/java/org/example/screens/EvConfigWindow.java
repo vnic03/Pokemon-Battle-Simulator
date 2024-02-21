@@ -12,6 +12,7 @@ import org.example.pokemon.Stats;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EvConfigWindow {
 
@@ -104,7 +105,8 @@ public class EvConfigWindow {
 
         Scene scene = new Scene(grid, 630, 260);
         stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        scene.getStylesheets().add(
+                Objects.requireNonNull(getClass().getResource("/style.css")).toExternalForm());
         stage.show();
     }
 

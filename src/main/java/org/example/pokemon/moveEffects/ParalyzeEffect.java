@@ -1,7 +1,7 @@
 package org.example.pokemon.moveEffects;
 
+import org.example.pokemon.Typing;
 import org.example.screens.battleScene.BattleRoundResult;
-import org.example.pokemon.PokeTyping;
 import org.example.pokemon.Pokemon;
 
 public class ParalyzeEffect implements MoveEffect {
@@ -14,7 +14,7 @@ public class ParalyzeEffect implements MoveEffect {
             return;
         }
 
-        if (target.getTyping().contains(PokeTyping.ELECTRIC) || target.getTyping().contains(PokeTyping.GROUND)) {
+        if (target.getTyping().contains(Typing.ELECTRIC) || target.getTyping().contains(Typing.GROUND)) {
             System.out.println(target.getName() + " can't be paralyzed!");
             return;
         }

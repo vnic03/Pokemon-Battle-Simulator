@@ -1,10 +1,10 @@
 package org.example.pokemon.moveEffects;
 
+import org.example.pokemon.Typing;
 import org.example.screens.battle.DamageCalculator;
 import org.example.screens.battle.Weather;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.pokemon.Moves;
-import org.example.pokemon.PokeTyping;
 import org.example.pokemon.Pokemon;
 
 import java.util.Random;
@@ -26,7 +26,7 @@ public class MayPoisonEffect implements MoveEffectWithDamage {
        target.takeDamage(damage);
         System.out.println(user.getName() + " hits " + target.getName() + " with " + move.getName() + " for " + damage + " damage !");
 
-        if (target.hasStatusCondition() || target.getTyping().contains(PokeTyping.POISON)) {
+        if (target.hasStatusCondition() || target.getTyping().contains(Typing.POISON)) {
             return;
         }
 

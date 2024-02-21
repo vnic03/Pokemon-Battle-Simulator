@@ -74,19 +74,21 @@
 .switch-button {
     -fx-background-color: red;
     -fx-color: white;
-    -fx-border: 2px solid white;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
     -fx-font-family: 'Press Start 2P', cursive;
     -fx-text-fill: white;
     -fx-text-transform: uppercase;
     -fx-padding: 10px 20px;
     -fx-margin: 5px;
     -fx-border-radius: 5px;
-    -fx-box-shadow: 3px 3px 10px #000000;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 .switch-button:hover {
     -fx-background-color: darkred;
     -fx-translate-y: -2px;
-    -fx-box-shadow: 5px 5px 10px #000000;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 .move-button{
     -fx-background-color: #2a2a2a;

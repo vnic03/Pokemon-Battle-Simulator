@@ -9,16 +9,16 @@ import java.util.stream.Collectors;
 
 public class Pokemon {
     private final String name;
-    private int pokeDex;
+    private final int pokeDex;
     private final String frontSpritePath;
     private final String backSpritePath;
     private final String iconSpritePath;
 
     private final String typeString;
     private Gender gender;
-    private final List<PokeTyping> typing;
+    private final List<Typing> typing;
     private final int level = 50;
-    private Stats stats;
+    private final Stats stats;
     private List<Moves> moves;
     private Nature nature;
     private List<Ability> abilities;
@@ -50,14 +50,17 @@ public class Pokemon {
 
     private boolean thickFatActive;
 
-    private Map<Moves, Integer> disabledMoves = new HashMap<>();
+    private final  Map<Moves, Integer> disabledMoves = new HashMap<>();
 
-    public Pokemon(String name, int pokeDex ,List<PokeTyping> typing, Stats stats, Nature nature, List<Ability> abilities, String frontSpritePath, String backSpritePath, String iconSpritePath, List<Moves> moves) {
+    public Pokemon(
+            String name, int pokeDex , List<Typing> typing, Stats stats, Nature nature, List<Ability> abilities,
+            String frontSpritePath, String backSpritePath, String iconSpritePath, List<Moves> moves) {
+
         this.name = name;
         this.pokeDex = pokeDex;
         this.gender = randomGender();
         this.typing = typing;
-        this.typeString = typing.stream().map(PokeTyping::name).collect(Collectors.joining(", ")); // showing the type
+        this.typeString = typing.stream().map(Typing::name).collect(Collectors.joining(", ")); // showing the type
         this.stats = stats;
         this.nature = nature;
         this.abilities = abilities;
@@ -109,7 +112,7 @@ public class Pokemon {
         this.gender = newGender;
     }
 
-    public List<PokeTyping> getTyping(){
+    public List<Typing> getTyping(){
         return typing;
     }
 
@@ -478,10 +481,7 @@ public class Pokemon {
     }
 
     public boolean hasActiveAbility(String abilityName) {
-        if (activeAbility != null && activeAbility.getName().equalsIgnoreCase(abilityName)) {
-            return true;
-        }
-        return false;
+        return activeAbility != null && activeAbility.getName().equalsIgnoreCase(abilityName);
     }
 
     public void setThickFatActive(boolean isActive) {
@@ -517,7 +517,7 @@ public class Pokemon {
 
     public String toString() {
 
-        String typeString = typing.stream().map(PokeTyping::name).collect(Collectors.joining(", "));
+        String typeString = typing.stream().map(Typing::name).collect(Collectors.joining(", "));
         String moveString = moves.stream().map(Moves::getName).collect(Collectors.joining(", "));
 
         return "Pokemon{" +

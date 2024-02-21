@@ -3,7 +3,7 @@ package org.example.pokemon;
 import javafx.scene.image.Image;
 import java.util.Objects;
 
-public enum PokeTyping {
+public enum Typing {
 
     NORMAL("normal.png"),
     FIGHTING("fighting.png"),
@@ -26,7 +26,7 @@ public enum PokeTyping {
 
     private final String imagePath;
 
-    PokeTyping(String imagePath) {
+    Typing(String imagePath) {
         this.imagePath = "/types/" + imagePath;
     }
 

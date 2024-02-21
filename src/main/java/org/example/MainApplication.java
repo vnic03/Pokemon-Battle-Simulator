@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import org.example.screens.TeamBuilder;
 import org.example.screens.battleScene.BattleLogic;
 import org.example.screens.battleScene.BattleView;
+import org.example.screens.battleScene.BeforeBattleAnimation;
 import org.example.screens.firstPage.TeamBuilderButton;
 import javafx.scene.shape.Rectangle;
 
@@ -102,11 +103,21 @@ public class MainApplication extends Application {
             battleView.setBattleLogic(logic);
             logic.setBattleView(battleView);
 
-            battleView.loadTeams(team1, team2);
-            primaryStage.setScene(battleView.createScene());
+            Scene battleScene = battleView.createScene();
+
+            BeforeBattleAnimation animation = new BeforeBattleAnimation(primaryStage, battleScene, team1,team2);
+
+            Scene animationScene = new Scene(animation, primaryStage.getWidth(), primaryStage.getHeight());
+            animationScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/battleViewStyles/bBAnimationStyles.css")).toExternalForm());
+            primaryStage.setScene(animationScene);
             primaryStage.setFullScreen(true);
 
-            logic.initiateRound();
+            animation.setOnAnimationFinished(() -> {
+                battleView.loadTeams(team1, team2);
+                primaryStage.setScene(battleScene);
+                primaryStage.setFullScreen(true);
+                logic.initiateRound();
+            });
         });
     }
 }

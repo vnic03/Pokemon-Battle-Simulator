@@ -1,7 +1,7 @@
 package org.example.pokemon.moveEffects;
 
 import org.example.screens.battleScene.BattleRoundResult;
-import org.example.pokemon.PokeTyping;
+import org.example.pokemon.Typing;
 import org.example.pokemon.Pokemon;
 
 public class BurnEffect implements MoveEffect {
@@ -14,7 +14,7 @@ public class BurnEffect implements MoveEffect {
             return;
         }
 
-        if (target.getTyping().contains(PokeTyping.FIRE)) {
+        if (target.getTyping().contains(Typing.FIRE)) {
             System.out.println(target.getName() +" can't be burned !");
             return;
         }

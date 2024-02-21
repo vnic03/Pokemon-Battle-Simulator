@@ -17,7 +17,7 @@ public class DamageCalculator {
         Stats attackStats = attacker.getStats();
         Stats defenderStats = defender.getStats();
 
-        List<PokeTyping> attackerTypes = attacker.getTyping();
+        List<Typing> attackerTypes = attacker.getTyping();
 
         double typeAdvantage = getTypeAdvantage(attack.getType(), defender.getTyping(), attackerTypes);
 
@@ -47,7 +47,7 @@ public class DamageCalculator {
         int damage = (int) ((((2 * attacker.getLevel() / 5 + 2) * attack.getPower() * attackStat /
                 defenseStat) / 50 + 2) * typeAdvantage * randomFactor);
 
-        if (defender.hasActiveAbility("Thick Fat") && (attack.getType() == PokeTyping.FIRE || attack.getType() == PokeTyping.ICE)) {
+        if (defender.hasActiveAbility("Thick Fat") && (attack.getType() == Typing.FIRE || attack.getType() == Typing.ICE)) {
             damage = (int) (damage * 0.5);
         }
 
@@ -67,218 +67,218 @@ public class DamageCalculator {
     }
 
 
-    public static double getTypeAdvantage(PokeTyping attackType, List<PokeTyping> defenderTypes, List<PokeTyping> attackerType){
+    public static double getTypeAdvantage(Typing attackType, List<Typing> defenderTypes, List<Typing> attackerType){
 
         double typeEffectiveness = 1.0;
 
         if (attackerType.contains(attackType)){
             typeEffectiveness *= 1.5;
         }
-        for (PokeTyping defenderType : defenderTypes) {
+        for (Typing defenderType : defenderTypes) {
             typeEffectiveness *= getEffectiveness(attackType, defenderType);
         }
 
         return typeEffectiveness;
     }
 
-    private static double getEffectiveness(PokeTyping attackType, PokeTyping defenderType){
+    private static double getEffectiveness(Typing attackType, Typing defenderType){
 
-        Map<PokeTyping, Map<PokeTyping, Double>> typeChart = new HashMap<>();
+        Map<Typing, Map<Typing, Double>> typeChart = new HashMap<>();
 
-        Map<PokeTyping, Double> normal = new HashMap<>();
+        Map<Typing, Double> normal = new HashMap<>();
 
-        normal.put(PokeTyping.GHOST, 0.0);
-        normal.put(PokeTyping.STEEL, 0.5);
-        normal.put(PokeTyping.ROCK, 0.5);
+        normal.put(Typing.GHOST, 0.0);
+        normal.put(Typing.STEEL, 0.5);
+        normal.put(Typing.ROCK, 0.5);
 
-        Map<PokeTyping, Double> fighting = new HashMap<>();
+        Map<Typing, Double> fighting = new HashMap<>();
 
-        fighting.put(PokeTyping.NORMAL, 2.0);
-        fighting.put(PokeTyping.FLYING, 0.5);
-        fighting.put(PokeTyping.POISON, 0.5);
-        fighting.put(PokeTyping.ROCK, 2.0);
-        fighting.put(PokeTyping.BUG, 0.5);
-        fighting.put(PokeTyping.GHOST, 0.0);
-        fighting.put(PokeTyping.STEEL, 2.0);
-        fighting.put(PokeTyping.PSYCHIC, 0.5);
-        fighting.put(PokeTyping.ICE, 2.0);
-        fighting.put(PokeTyping.DARK, 2.0);
-        fighting.put(PokeTyping.FAIRY, 0.5);
+        fighting.put(Typing.NORMAL, 2.0);
+        fighting.put(Typing.FLYING, 0.5);
+        fighting.put(Typing.POISON, 0.5);
+        fighting.put(Typing.ROCK, 2.0);
+        fighting.put(Typing.BUG, 0.5);
+        fighting.put(Typing.GHOST, 0.0);
+        fighting.put(Typing.STEEL, 2.0);
+        fighting.put(Typing.PSYCHIC, 0.5);
+        fighting.put(Typing.ICE, 2.0);
+        fighting.put(Typing.DARK, 2.0);
+        fighting.put(Typing.FAIRY, 0.5);
 
-        Map<PokeTyping, Double> flying = new HashMap<>();
+        Map<Typing, Double> flying = new HashMap<>();
 
-        flying.put(PokeTyping.FIGHTING, 2.0);
-        flying.put(PokeTyping.ROCK, 0.5);
-        flying.put(PokeTyping.BUG, 2.0);
-        flying.put(PokeTyping.STEEL, 0.5);
-        flying.put(PokeTyping.GRASS, 2.0);
-        flying.put(PokeTyping.ELECTRIC, 0.5);
+        flying.put(Typing.FIGHTING, 2.0);
+        flying.put(Typing.ROCK, 0.5);
+        flying.put(Typing.BUG, 2.0);
+        flying.put(Typing.STEEL, 0.5);
+        flying.put(Typing.GRASS, 2.0);
+        flying.put(Typing.ELECTRIC, 0.5);
 
-        Map<PokeTyping, Double> poison = new HashMap<>();
+        Map<Typing, Double> poison = new HashMap<>();
 
-        poison.put(PokeTyping.POISON, 0.5);
-        poison.put(PokeTyping.GROUND, 0.5);
-        poison.put(PokeTyping.ROCK, 0.5);
-        poison.put(PokeTyping.GHOST, 0.5);
-        poison.put(PokeTyping.STEEL, 0.0);
-        poison.put(PokeTyping.GRASS, 2.0);
-        poison.put(PokeTyping.FAIRY, 2.0);
+        poison.put(Typing.POISON, 0.5);
+        poison.put(Typing.GROUND, 0.5);
+        poison.put(Typing.ROCK, 0.5);
+        poison.put(Typing.GHOST, 0.5);
+        poison.put(Typing.STEEL, 0.0);
+        poison.put(Typing.GRASS, 2.0);
+        poison.put(Typing.FAIRY, 2.0);
 
-        Map<PokeTyping, Double> ground = new HashMap<>();
+        Map<Typing, Double> ground = new HashMap<>();
 
-        ground.put(PokeTyping.FLYING, 0.0);
-        ground.put(PokeTyping.POISON, 2.0);
-        ground.put(PokeTyping.ROCK, 2.0);
-        ground.put(PokeTyping.BUG, 0.5);
-        ground.put(PokeTyping.STEEL, 2.0);
-        ground.put(PokeTyping.FIRE, 2.0);
-        ground.put(PokeTyping.GRASS, 0.5);
-        ground.put(PokeTyping.ELECTRIC, 2.0);
+        ground.put(Typing.FLYING, 0.0);
+        ground.put(Typing.POISON, 2.0);
+        ground.put(Typing.ROCK, 2.0);
+        ground.put(Typing.BUG, 0.5);
+        ground.put(Typing.STEEL, 2.0);
+        ground.put(Typing.FIRE, 2.0);
+        ground.put(Typing.GRASS, 0.5);
+        ground.put(Typing.ELECTRIC, 2.0);
 
-        Map<PokeTyping, Double> rock = new HashMap<>();
+        Map<Typing, Double> rock = new HashMap<>();
 
-        rock.put(PokeTyping.FIGHTING, 0.5);
-        rock.put(PokeTyping.FLYING, 2.0);
-        rock.put(PokeTyping.GROUND, 0.5);
-        rock.put(PokeTyping.BUG, 2.0);
-        rock.put(PokeTyping.STEEL, 0.5);
-        rock.put(PokeTyping.FIRE, 2.0);
-        rock.put(PokeTyping.ICE, 2.0);
+        rock.put(Typing.FIGHTING, 0.5);
+        rock.put(Typing.FLYING, 2.0);
+        rock.put(Typing.GROUND, 0.5);
+        rock.put(Typing.BUG, 2.0);
+        rock.put(Typing.STEEL, 0.5);
+        rock.put(Typing.FIRE, 2.0);
+        rock.put(Typing.ICE, 2.0);
 
-        Map<PokeTyping, Double> bug = new HashMap<>();
+        Map<Typing, Double> bug = new HashMap<>();
 
-        bug.put(PokeTyping.FIGHTING, 0.5);
-        bug.put(PokeTyping.FLYING, 0.5);
-        bug.put(PokeTyping.POISON, 0.5);
-        bug.put(PokeTyping.GHOST, 0.5);
-        bug.put(PokeTyping.STEEL, 0.5);
-        bug.put(PokeTyping.FIRE, 0.5);
-        bug.put(PokeTyping.GRASS, 2.0);
-        bug.put(PokeTyping.PSYCHIC, 2.0);
-        bug.put(PokeTyping.DARK, 2.0);
-        bug.put(PokeTyping.FAIRY, 0.5);
+        bug.put(Typing.FIGHTING, 0.5);
+        bug.put(Typing.FLYING, 0.5);
+        bug.put(Typing.POISON, 0.5);
+        bug.put(Typing.GHOST, 0.5);
+        bug.put(Typing.STEEL, 0.5);
+        bug.put(Typing.FIRE, 0.5);
+        bug.put(Typing.GRASS, 2.0);
+        bug.put(Typing.PSYCHIC, 2.0);
+        bug.put(Typing.DARK, 2.0);
+        bug.put(Typing.FAIRY, 0.5);
 
-        Map<PokeTyping, Double> ghost = new HashMap<>();
+        Map<Typing, Double> ghost = new HashMap<>();
 
-        ghost.put(PokeTyping.NORMAL, 0.0);
-        ghost.put(PokeTyping.GHOST, 2.0);
-        ghost.put(PokeTyping.PSYCHIC, 2.0);
-        ghost.put(PokeTyping.DARK, 0.5);
+        ghost.put(Typing.NORMAL, 0.0);
+        ghost.put(Typing.GHOST, 2.0);
+        ghost.put(Typing.PSYCHIC, 2.0);
+        ghost.put(Typing.DARK, 0.5);
 
-        Map<PokeTyping, Double> steel = new HashMap<>();
+        Map<Typing, Double> steel = new HashMap<>();
 
-        steel.put(PokeTyping.ROCK, 2.0);
-        steel.put(PokeTyping.STEEL, 0.5);
-        steel.put(PokeTyping.FIRE, 0.5);
-        steel.put(PokeTyping.WATER, 0.5);
-        steel.put(PokeTyping.ELECTRIC, 0.5);
-        steel.put(PokeTyping.ICE, 2.0);
-        steel.put(PokeTyping.FAIRY, 2.0);
+        steel.put(Typing.ROCK, 2.0);
+        steel.put(Typing.STEEL, 0.5);
+        steel.put(Typing.FIRE, 0.5);
+        steel.put(Typing.WATER, 0.5);
+        steel.put(Typing.ELECTRIC, 0.5);
+        steel.put(Typing.ICE, 2.0);
+        steel.put(Typing.FAIRY, 2.0);
 
-        Map<PokeTyping, Double> fire = new HashMap<>();
+        Map<Typing, Double> fire = new HashMap<>();
 
-        fire.put(PokeTyping.ROCK, 0.5);
-        fire.put(PokeTyping.STEEL, 2.0);
-        fire.put(PokeTyping.BUG, 2.0);
-        fire.put(PokeTyping.FIRE, 0.5);
-        fire.put(PokeTyping.WATER, 0.5);
-        fire.put(PokeTyping.GRASS, 2.0);
-        fire.put(PokeTyping.DRAGON, 0.5);
-        fire.put(PokeTyping.ICE, 2.0);
+        fire.put(Typing.ROCK, 0.5);
+        fire.put(Typing.STEEL, 2.0);
+        fire.put(Typing.BUG, 2.0);
+        fire.put(Typing.FIRE, 0.5);
+        fire.put(Typing.WATER, 0.5);
+        fire.put(Typing.GRASS, 2.0);
+        fire.put(Typing.DRAGON, 0.5);
+        fire.put(Typing.ICE, 2.0);
 
-        Map<PokeTyping, Double> water = new HashMap<>();
+        Map<Typing, Double> water = new HashMap<>();
 
-        water.put(PokeTyping.GROUND, 2.0);
-        water.put(PokeTyping.ROCK, 2.0);
-        water.put(PokeTyping.FIRE, 2.0);
-        water.put(PokeTyping.GRASS, 0.5);
-        water.put(PokeTyping.WATER, 0.5);
-        water.put(PokeTyping.DRAGON, 0.5);
+        water.put(Typing.GROUND, 2.0);
+        water.put(Typing.ROCK, 2.0);
+        water.put(Typing.FIRE, 2.0);
+        water.put(Typing.GRASS, 0.5);
+        water.put(Typing.WATER, 0.5);
+        water.put(Typing.DRAGON, 0.5);
 
-        Map<PokeTyping, Double> grass = new HashMap<>();
+        Map<Typing, Double> grass = new HashMap<>();
 
-        grass.put(PokeTyping.FLYING, 0.5);
-        grass.put(PokeTyping.POISON, 0.5);
-        grass.put(PokeTyping.GROUND, 2.0);
-        grass.put(PokeTyping.ROCK, 2.0);
-        grass.put(PokeTyping.BUG, 0.5);
-        grass.put(PokeTyping.STEEL, 0.5);
-        grass.put(PokeTyping.FIRE, 0.5);
-        grass.put(PokeTyping.GRASS, 0.5);
-        grass.put(PokeTyping.WATER, 2.0);
-        grass.put(PokeTyping.DRAGON, 0.5);
+        grass.put(Typing.FLYING, 0.5);
+        grass.put(Typing.POISON, 0.5);
+        grass.put(Typing.GROUND, 2.0);
+        grass.put(Typing.ROCK, 2.0);
+        grass.put(Typing.BUG, 0.5);
+        grass.put(Typing.STEEL, 0.5);
+        grass.put(Typing.FIRE, 0.5);
+        grass.put(Typing.GRASS, 0.5);
+        grass.put(Typing.WATER, 2.0);
+        grass.put(Typing.DRAGON, 0.5);
 
-        Map<PokeTyping, Double> electric = new HashMap<>();
+        Map<Typing, Double> electric = new HashMap<>();
 
-        electric.put(PokeTyping.FLYING, 2.0);
-        electric.put(PokeTyping.GROUND, 0.0);
-        electric.put(PokeTyping.WATER, 2.0);
-        electric.put(PokeTyping.GRASS, 0.5);
-        electric.put(PokeTyping.ELECTRIC, 0.5);
-        electric.put(PokeTyping.DRAGON, 0.5);
+        electric.put(Typing.FLYING, 2.0);
+        electric.put(Typing.GROUND, 0.0);
+        electric.put(Typing.WATER, 2.0);
+        electric.put(Typing.GRASS, 0.5);
+        electric.put(Typing.ELECTRIC, 0.5);
+        electric.put(Typing.DRAGON, 0.5);
 
-        Map<PokeTyping, Double> psychic = new HashMap<>();
+        Map<Typing, Double> psychic = new HashMap<>();
 
-        psychic.put(PokeTyping.FIGHTING, 2.0);
-        psychic.put(PokeTyping.POISON, 2.0);
-        psychic.put(PokeTyping.STEEL, 0.5);
-        psychic.put(PokeTyping.PSYCHIC, 0.5);
-        psychic.put(PokeTyping.DARK, 0.0);
+        psychic.put(Typing.FIGHTING, 2.0);
+        psychic.put(Typing.POISON, 2.0);
+        psychic.put(Typing.STEEL, 0.5);
+        psychic.put(Typing.PSYCHIC, 0.5);
+        psychic.put(Typing.DARK, 0.0);
 
-        Map<PokeTyping, Double> ice = new HashMap<>();
+        Map<Typing, Double> ice = new HashMap<>();
 
-        ice.put(PokeTyping.FLYING, 2.0);
-        ice.put(PokeTyping.GROUND, 2.0);
-        ice.put(PokeTyping.GRASS, 2.0);
-        ice.put(PokeTyping.STEEL, 0.5);
-        ice.put(PokeTyping.FIRE, 0.5);
-        ice.put(PokeTyping.WATER, 0.5);
-        ice.put(PokeTyping.ICE, 0.5);
-        ice.put(PokeTyping.DRAGON, 2.0);
+        ice.put(Typing.FLYING, 2.0);
+        ice.put(Typing.GROUND, 2.0);
+        ice.put(Typing.GRASS, 2.0);
+        ice.put(Typing.STEEL, 0.5);
+        ice.put(Typing.FIRE, 0.5);
+        ice.put(Typing.WATER, 0.5);
+        ice.put(Typing.ICE, 0.5);
+        ice.put(Typing.DRAGON, 2.0);
 
-        Map<PokeTyping, Double> dragon = new HashMap<>();
+        Map<Typing, Double> dragon = new HashMap<>();
 
-        dragon.put(PokeTyping.STEEL, 0.5);
-        dragon.put(PokeTyping.DRAGON, 2.0);
-        dragon.put(PokeTyping.FAIRY, 0.0);
+        dragon.put(Typing.STEEL, 0.5);
+        dragon.put(Typing.DRAGON, 2.0);
+        dragon.put(Typing.FAIRY, 0.0);
 
-        Map<PokeTyping, Double> dark = new HashMap<>();
+        Map<Typing, Double> dark = new HashMap<>();
 
-        dark.put(PokeTyping.FIGHTING, 0.5);
-        dark.put(PokeTyping.GHOST, 2.0);
-        dark.put(PokeTyping.PSYCHIC, 2.0);
-        dark.put(PokeTyping.DARK, 0.5);
-        dark.put(PokeTyping.FAIRY, 0.5);
+        dark.put(Typing.FIGHTING, 0.5);
+        dark.put(Typing.GHOST, 2.0);
+        dark.put(Typing.PSYCHIC, 2.0);
+        dark.put(Typing.DARK, 0.5);
+        dark.put(Typing.FAIRY, 0.5);
 
-        Map<PokeTyping, Double> fairy = new HashMap<>();
+        Map<Typing, Double> fairy = new HashMap<>();
 
-        fairy.put(PokeTyping.FIGHTING, 2.0);
-        fairy.put(PokeTyping.POISON, 0.5);
-        fairy.put(PokeTyping.STEEL, 0.5);
-        fairy.put(PokeTyping.FIRE, 0.5);
-        fairy.put(PokeTyping.DRAGON, 2.0);
-        fairy.put(PokeTyping.DARK, 2.0);
+        fairy.put(Typing.FIGHTING, 2.0);
+        fairy.put(Typing.POISON, 0.5);
+        fairy.put(Typing.STEEL, 0.5);
+        fairy.put(Typing.FIRE, 0.5);
+        fairy.put(Typing.DRAGON, 2.0);
+        fairy.put(Typing.DARK, 2.0);
 
 
 
-        typeChart.put(PokeTyping.NORMAL, normal);
-        typeChart.put(PokeTyping.FIGHTING, fighting);
-        typeChart.put(PokeTyping.FLYING, flying);
-        typeChart.put(PokeTyping.POISON, poison);
-        typeChart.put(PokeTyping.GROUND, ground);
-        typeChart.put(PokeTyping.ROCK, rock);
-        typeChart.put(PokeTyping.BUG, bug);
-        typeChart.put(PokeTyping.GHOST, ghost);
-        typeChart.put(PokeTyping.STEEL, steel);
-        typeChart.put(PokeTyping.FIRE, fire);
-        typeChart.put(PokeTyping.WATER, water);
-        typeChart.put(PokeTyping.GRASS, grass);
-        typeChart.put(PokeTyping.ELECTRIC, electric);
-        typeChart.put(PokeTyping.PSYCHIC, psychic);
-        typeChart.put(PokeTyping.ICE, ice);
-        typeChart.put(PokeTyping.DRAGON, dragon);
-        typeChart.put(PokeTyping.DARK, dark);
-        typeChart.put(PokeTyping.FAIRY, fairy);
+        typeChart.put(Typing.NORMAL, normal);
+        typeChart.put(Typing.FIGHTING, fighting);
+        typeChart.put(Typing.FLYING, flying);
+        typeChart.put(Typing.POISON, poison);
+        typeChart.put(Typing.GROUND, ground);
+        typeChart.put(Typing.ROCK, rock);
+        typeChart.put(Typing.BUG, bug);
+        typeChart.put(Typing.GHOST, ghost);
+        typeChart.put(Typing.STEEL, steel);
+        typeChart.put(Typing.FIRE, fire);
+        typeChart.put(Typing.WATER, water);
+        typeChart.put(Typing.GRASS, grass);
+        typeChart.put(Typing.ELECTRIC, electric);
+        typeChart.put(Typing.PSYCHIC, psychic);
+        typeChart.put(Typing.ICE, ice);
+        typeChart.put(Typing.DRAGON, dragon);
+        typeChart.put(Typing.DARK, dark);
+        typeChart.put(Typing.FAIRY, fairy);
 
         return typeChart.getOrDefault(attackType, Collections.emptyMap()).getOrDefault(defenderType, 1.0);
     }
@@ -292,18 +292,18 @@ public class DamageCalculator {
 
         switch (weather) {
             case SUN:
-                if (attack.getType() == PokeTyping.FIRE) {
+                if (attack.getType() == Typing.FIRE) {
                     return (int) (baseDamage * 1.5);
                 }
-                if (attack.getType() == PokeTyping.WATER) {
+                if (attack.getType() == Typing.WATER) {
                     return (int) (baseDamage * 0.5);
                 }
                 break;
             case RAIN:
-                if (attack.getType() == PokeTyping.WATER) {
+                if (attack.getType() == Typing.WATER) {
                     return (int) (baseDamage * 1.5);
                 }
-                if (attack.getType() == PokeTyping.FIRE) {
+                if (attack.getType() == Typing.FIRE) {
                     return (int) (baseDamage * 0.5);
                 }
                 break;
