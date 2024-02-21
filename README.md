@@ -12,7 +12,7 @@ Currently, in development.
 
 ## Preview
 
-### TeamSelection
+### Team-Selection
 ![TeamBuilder](src/main/resources/preview/TeamBuilderPreview.png)
 
 *This showcases the team selection page, where players can choose and customize their Pokémon team before heading into battle.*

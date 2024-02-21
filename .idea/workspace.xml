@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated UI">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/preview/BattlePreview.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/preview/MovesPreview.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/preview/TeamBuilderPreview.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/MoveSelectionWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/MoveSelectionWindow.java" afterDir="false" />
-    </list>
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated read me file" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -300,15 +293,7 @@
       <workItem from="1707238331178" duration="31000" />
       <workItem from="1707736507850" duration="102000" />
       <workItem from="1708011206898" duration="1414000" />
-      <workItem from="1708542542036" duration="3392000" />
-    </task>
-    <task id="LOCAL-00006" summary="PokemonRepository added">
-      <option name="closed" value="true" />
-      <created>1703877925871</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1703877925871</updated>
+      <workItem from="1708542542036" duration="3775000" />
     </task>
     <task id="LOCAL-00007" summary="MoveSelector added, simple Battle test">
       <option name="closed" value="true" />
@@ -694,7 +679,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708543409806</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Updated read me file">
+      <option name="closed" value="true" />
+      <created>1708546290246</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1708546290246</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -713,7 +706,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added Gender" />
     <MESSAGE value="Flinch effect fixed" />
     <MESSAGE value="Added first Gui, added functioning Evs, weather needs fixing" />
     <MESSAGE value="Fixed Weather" />
@@ -738,7 +730,8 @@
     <MESSAGE value="fixed packages name" />
     <MESSAGE value="Updated UI, added new Pokemon and abilities" />
     <MESSAGE value="Updated UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated UI" />
+    <MESSAGE value="Updated read me file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated read me file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
