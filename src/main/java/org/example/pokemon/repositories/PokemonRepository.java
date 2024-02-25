@@ -12,7 +12,8 @@ public class PokemonRepository {
     private final static Map<String, Pokemon> pokemonMap = new HashMap<>();
     private final static AbilityRepository aR = new AbilityRepository();
 
-    static {
+    static
+    {
 
         pokemonMap.put("Pikachu",
                 new Pokemon("Pikachu", 25,Collections.singletonList(Typing.ELECTRIC), new Stats(110, 75, 60, 70, 70, 110), Nature.SERIOUS, Arrays.asList(aR.getAbility("Static")),"/pokemonSprites/pikachu/front.png","/pokemonSprites/pikachu/back.png", "/pokemonSprites/pikachu/icon.png",new ArrayList<>()));

@@ -1,6 +1,9 @@
 package org.example.pokemon;
 
 import javafx.scene.image.Image;
+
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 
 public enum Typing {
@@ -25,13 +28,24 @@ public enum Typing {
     FAIRY("contest_cute.png");
 
     private final String imagePath;
+    private static final Map<Typing, Image> imageCache = new EnumMap<>(Typing.class);
+
+    static
+    {
+        for (Typing type: Typing.values()) {
+            imageCache.put(type, loadImage(type.imagePath));
+        }
+    }
 
     Typing(String imagePath) {
         this.imagePath = "/types/" + imagePath;
     }
 
+    private static Image loadImage(String path) {
+        return new Image(Objects.requireNonNull(Typing.class.getResourceAsStream(path)));
+    }
     public Image getImage() {
-        return new Image(Objects.requireNonNull(getClass().getResourceAsStream(this.imagePath)));
+        return imageCache.get(this);
     }
 
     @Override
