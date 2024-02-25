@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated read me file">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/teams/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/teams/Team.java" afterDir="false" />
-    </list>
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated read me file" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -300,7 +296,7 @@
       <workItem from="1708542542036" duration="4759000" />
       <workItem from="1708604259752" duration="12000" />
       <workItem from="1708871865712" duration="1755000" />
-      <workItem from="1708892525292" duration="3572000" />
+      <workItem from="1708892525292" duration="3802000" />
     </task>
     <task id="LOCAL-00007" summary="MoveSelector added, simple Battle test">
       <option name="closed" value="true" />

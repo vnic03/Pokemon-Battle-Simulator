@@ -87,15 +87,15 @@ public class Pokemon {
     }
 
     public Image getFrontSprite() {
-        return SpriteManger.loadImage(frontSpritePath);
+        return SpriteManager.loadImage(frontSpritePath);
     }
 
     public Image getBackSprite() {
-        return SpriteManger.loadImage(backSpritePath);
+        return SpriteManager.loadImage(backSpritePath);
     }
 
     public Image getIconSprite() {
-        return SpriteManger.loadImage(iconSpritePath);
+        return SpriteManager.loadImage(iconSpritePath);
     }
 
     public String getTypeString() {
@@ -473,7 +473,7 @@ public class Pokemon {
         return team.containsPokemon(this);
     }
 
-    private static class SpriteManger {
+    private static class SpriteManager {
         private static final Map<String, Image> imageCache = new HashMap<>();
 
         public static Image loadImage(String path) {
