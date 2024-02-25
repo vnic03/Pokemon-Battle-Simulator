@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Team {
 
     private ObservableList<Pokemon> pokemons;
-    private int activePokemonIndex = 0;
+    private int activePokemonIndex;
 
     public Team(ObservableList<Pokemon> pokemons) {
         this.pokemons = pokemons;

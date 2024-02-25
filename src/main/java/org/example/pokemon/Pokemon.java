@@ -87,15 +87,15 @@ public class Pokemon {
     }
 
     public Image getFrontSprite() {
-        return new Image(frontSpritePath);
+        return SpriteManger.loadImage(frontSpritePath);
     }
 
     public Image getBackSprite() {
-        return new Image(backSpritePath);
+        return SpriteManger.loadImage(backSpritePath);
     }
 
     public Image getIconSprite() {
-        return new Image(iconSpritePath);
+        return SpriteManger.loadImage(iconSpritePath);
     }
 
     public String getTypeString() {
@@ -299,79 +299,39 @@ public class Pokemon {
             }
         }
     }
+
     public void applyNatureEffects() {
-        double increase = 1.1;
-        double decrease = 0.9;
+        final double INCREASE = 1.1;
+        final double DECREASE = 0.9;
 
         if (nature.getIncreasedStat() != null) {
-            switch (nature.getIncreasedStat()) {
-                case ATTACK -> stats.setAttack((int) (stats.getAttack() * increase));
-                case DEFENSE -> stats.setDefense((int) (stats.getDefense() * increase));
-                case SPECIAL_ATTACK -> stats.setSpecialAttack((int) (stats.getSpecialAttack() * increase));
-                case SPECIAL_DEFENSE -> stats.setSpecialDefense((int) (stats.getSpecialDefense() * increase));
-                case SPEED -> stats.setSpeed((int) (stats.getSpeed() * increase));
-            }
+            updateStat(nature.getIncreasedStat(), INCREASE);
         }
         if (nature.getDecreasedStat() != null) {
-            switch (nature.getDecreasedStat()) {
-                case ATTACK -> stats.setAttack((int) (stats.getAttack() * decrease));
-                case DEFENSE -> stats.setDefense((int) (stats.getDefense() * decrease));
-                case SPECIAL_ATTACK -> stats.setSpecialAttack((int) (stats.getSpecialAttack() * decrease));
-                case SPECIAL_DEFENSE -> stats.setSpecialDefense((int) (stats.getSpecialDefense() * decrease));
-                case SPEED -> stats.setSpeed((int) (stats.getSpeed() * decrease));
-            }
+            updateStat(nature.getDecreasedStat(), DECREASE);
+        }
+    }
+    private void updateStat(Stat stat, double multiplier) {
+        switch (stat) {
+            case ATTACK -> stats.setAttack((int) (stats.getAttack() * multiplier));
+            case DEFENSE -> stats.setDefense((int) (stats.getDefense() * multiplier));
+            case SPECIAL_ATTACK -> stats.setSpecialAttack((int) (stats.getSpecialAttack() * multiplier));
+            case SPECIAL_DEFENSE -> stats.setSpecialDefense((int) (stats.getSpecialDefense() * multiplier));
+            case SPEED -> stats.setSpeed((int) (stats.getSpeed() * multiplier));
         }
     }
     public Stats getStatsAfterNatureEffects() {
-        if (this.nature == null) {
-            return this.stats;
-        }
         Stats modifiedStats = new Stats(
-                this.stats.getHp(),
-                this.stats.getAttack(),
-                this.stats.getDefense(),
-                this.stats.getSpecialAttack(),
-                this.stats.getSpecialDefense(),
-                this.stats.getSpeed()
+                this.stats.getMaxHp(), this.stats.getAttack(), this.stats.getDefense(),
+                this.stats.getSpecialAttack(), this.stats.getSpecialDefense(), this.stats.getSpeed()
         );
-        double increase = 1.1;
-        double decrease = 0.9;
+        Pokemon temp = new Pokemon(
+                this.name, this.pokeDex, this.typing, modifiedStats, this.nature, this.abilities,
+                this.frontSpritePath, this.backSpritePath, this.iconSpritePath, this.moves
+        );
+        temp.applyNatureEffects();
 
-        switch (this.nature.getIncreasedStat()) {
-            case ATTACK:
-                modifiedStats.setAttack((int) (modifiedStats.getAttack() * increase));
-                break;
-            case DEFENSE:
-                modifiedStats.setDefense((int) (modifiedStats.getDefense() * increase));
-                break;
-            case SPECIAL_ATTACK:
-                modifiedStats.setSpecialAttack((int) (modifiedStats.getSpecialAttack() * increase));
-                break;
-            case SPECIAL_DEFENSE:
-                modifiedStats.setSpecialDefense((int) (modifiedStats.getSpecialDefense() * increase));
-                break;
-            case SPEED:
-                modifiedStats.setSpeed((int) (modifiedStats.getSpeed() * increase));
-                break;
-        }
-        switch (this.nature.getDecreasedStat()) {
-            case ATTACK:
-                modifiedStats.setAttack((int) (modifiedStats.getAttack() * decrease));
-                break;
-            case DEFENSE:
-                modifiedStats.setDefense((int) (modifiedStats.getDefense() * decrease));
-                break;
-            case SPECIAL_ATTACK:
-                modifiedStats.setSpecialAttack((int) (modifiedStats.getSpecialAttack() * decrease));
-                break;
-            case SPECIAL_DEFENSE:
-                modifiedStats.setSpecialDefense((int) (modifiedStats.getSpecialDefense() * decrease));
-                break;
-            case SPEED:
-                modifiedStats.setSpeed((int) (modifiedStats.getSpeed() * decrease));
-                break;
-        }
-        return modifiedStats;
+        return temp.getStats();
     }
 
     public void heal(int amount) {
@@ -409,7 +369,6 @@ public class Pokemon {
         this.originalSpAttack = this.getStats().getSpecialAttack();
         this.originalSpDefense = this.getStats().getSpecialDefense();
         this.originalSpeed = this.getStats().getSpeed();
-
     }
 
     public void resetStats() {
@@ -423,7 +382,6 @@ public class Pokemon {
     public void resetAttack() {
         this.getStats().setAttack(this.originalAttack);
     }
-
 
     public boolean allMovesOutOfPP() {
         for (Moves move : this.moves) {
@@ -513,6 +471,14 @@ public class Pokemon {
     }
     public boolean belongsTo(Team team) {
         return team.containsPokemon(this);
+    }
+
+    private static class SpriteManger {
+        private static final Map<String, Image> imageCache = new HashMap<>();
+
+        public static Image loadImage(String path) {
+            return imageCache.computeIfAbsent(path, Image::new);
+        }
     }
 
     public String toString() {
