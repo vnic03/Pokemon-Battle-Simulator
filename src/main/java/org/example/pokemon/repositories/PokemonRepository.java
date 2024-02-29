@@ -113,4 +113,9 @@ public class PokemonRepository {
         String formattedName = name.toLowerCase().replaceAll("\\W+", "_");
         return "/pokemonSprites/" + formattedName + "/" + type + ".png";
     }
+
+    @SuppressWarnings("unused")
+    public static int countPokemon() {
+        return pokemonMap.size();
+    }
 }

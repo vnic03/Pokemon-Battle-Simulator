@@ -4,11 +4,18 @@ Pokémon Battle Simulator: A dynamic two-player game where players select their 
 Built with JavaFX, this project offers an interactive gaming experience, emphasizing strategy and player choice. 
 Currently, in development.
 
-## Features
+## Core Features
 
 - **Team Selection:** Choose your team from a diverse roster of Pokémon, each with its unique abilities and stats.
 - **Do It Yourself** Create each Pokémon individually, by choosing its ability, moves, EVs and more !
 - **Battles:** Engage in exciting battles that unfold just like in the real game, offering a blend of strategy and fun.
+
+## Introducing a Game-Changing Feature
+
+### Unlimited Move Sets
+One of the standout features of my Pokémon Battle Simulator is the **Unlimited Move Sets** mechanic. 
+Unlike traditional Pokémon games, where each Pokémon is limited to moves within its move pool, this game breaks these boundaries. 
+Here, **every Pokémon can learn any move**, giving players unmatched freedom to customize their team's strategy and synergy.
 
 ## Preview
 

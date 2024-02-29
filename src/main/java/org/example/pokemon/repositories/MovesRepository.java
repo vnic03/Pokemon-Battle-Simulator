@@ -233,11 +233,13 @@ public class MovesRepository {
         return null;
     }
 
+    @SuppressWarnings("unused")
     public static int countAllMoves() {
         List<Moves> allMoves = getAllMoves();
         return allMoves.size();
     }
 
+    @SuppressWarnings("unused")
     public static List<String> getAllMoveNames() {
         return getAllMoves().stream()
                 .map(Moves::getName)
