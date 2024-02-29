@@ -61,7 +61,6 @@ public class MovesRepository {
         MoveEffect priority_one = new PriorityOne();
 
 
-
         List<Moves> allMoves = new ArrayList<>();
 
         // struggle
@@ -254,8 +253,4 @@ public class MovesRepository {
             System.out.println("move not found"); return null;
         }
     }
-
-
-
-
 }

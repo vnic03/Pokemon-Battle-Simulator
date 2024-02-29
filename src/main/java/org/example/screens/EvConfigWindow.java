@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.example.pokemon.Pokemon;
-import org.example.pokemon.Stats;
+import org.example.pokemon.stats.Stats;
 
 import java.util.HashMap;
 import java.util.Map;

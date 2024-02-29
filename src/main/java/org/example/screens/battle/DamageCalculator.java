@@ -1,5 +1,6 @@
 package org.example.screens.battle;
 
+import org.example.pokemon.stats.Stats;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.pokemon.*;
 
@@ -12,72 +13,69 @@ public class DamageCalculator {
 
     private static final double CRITICAL_HIT_CHANCE = 0.0417;
 
-    public static int calculateDamage(Pokemon attacker, Pokemon defender, Moves attack, Weather weather, BattleRoundResult result) {
+    public static int calculateDamage(Pokemon attacker, Pokemon defender, Moves move, Weather weather, BattleRoundResult result) {
 
         Stats attackStats = attacker.getStats();
         Stats defenderStats = defender.getStats();
 
         List<Typing> attackerTypes = attacker.getTyping();
 
-        double typeAdvantage = getTypeAdvantage(attack.getType(), defender.getTyping(), attackerTypes);
-
-        if (typeAdvantage == 2.0) {
-            result.setMessage("It's super effective !");
-        } else if (typeAdvantage < 1.0 && typeAdvantage > 0) {
-            result.setMessage("It's not very effective. . .");
-        } else if (typeAdvantage == 0) {
-            result.setMessage("It had no effect on" + defender.getName());
-        }
+        double typeAdvantage = getTypeAdvantage(move.getType(), defender.getTyping(), attackerTypes);
+        setTypeAdvantageMsg(typeAdvantage, defender, result);
 
         double randomFactor = 0.85 + Math.random() * 0.15;
 
         int attackStat;
         int defenseStat;
-
-        if (attack.getCategory() == MoveCategory.PHYSICAL) {
+        if (move.getCategory() == MoveCategory.PHYSICAL) {
             attackStat = attackStats.getAttack();
             defenseStat = defenderStats.getDefense();
-        } else if (attack.getCategory() == MoveCategory.SPECIAL) {
+        } else if (move.getCategory() == MoveCategory.SPECIAL) {
             attackStat = attackStats.getSpecialAttack();
             defenseStat = defenderStats.getSpecialDefense();
         } else {
-            throw new IllegalArgumentException(attack.getCategory() + " does not exist!");
+            throw new IllegalArgumentException(move.getCategory() + " does not exist!");
         }
 
-        int damage = (int) ((((2 * attacker.getLevel() / 5 + 2) * attack.getPower() * attackStat /
+        int damage = (int) ((((2 * attacker.getLevel() / 5 + 2) * move.getPower() * attackStat /
                 defenseStat) / 50 + 2) * typeAdvantage * randomFactor);
 
-        if (defender.hasActiveAbility("Thick Fat") && (attack.getType() == Typing.FIRE || attack.getType() == Typing.ICE)) {
-            damage = (int) (damage * 0.5);
+        damage = applyAbilities(damage, attacker, defender, move);
+
+        damage = applyWeather(damage, attacker, defender, move, weather);
+
+        if (isCriticalHit(defender)) {
+            damage = (int) (damage * 1.5);
+            result.setMessage("\u001B[31m"+ "CRITICAL HIT !" + "\u001B[0m");
         }
 
-        int finalDamage = applyWeather(damage, attacker, defender, attack, weather);
+        return damage;
+    }
 
-        if (isCriticalHit() && !defender.hasActiveAbility("Battle Armor")) {
-            finalDamage = (int) (finalDamage * 1.5);
-            result.setMessage("CRITICAL HIT !");
-            System.out.println("\u001B[31m" + "CRITICAL HIT !" + "\u001B[0m"); // color = red
+    private static void setTypeAdvantageMsg(double typeAdvantage, Pokemon defender, BattleRoundResult result) {
+        if (typeAdvantage == 2.0) {
+            result.setMessage("It's super effective !");
+        } else if (typeAdvantage < 1.0 && typeAdvantage > 0) {
+            result.setMessage("It's not very effective. . .");
+        } else if (typeAdvantage == 0) {
+            result.setMessage("It had no effect on " + defender.getName());
         }
-
-        return finalDamage;
     }
 
-    private static boolean isCriticalHit() {
-        return Math.random() < CRITICAL_HIT_CHANCE;
+    private static boolean isCriticalHit(Pokemon defender) {
+        return Math.random() < CRITICAL_HIT_CHANCE &&
+                !defender.hasActiveAbility("Battle Armor");
     }
 
-
-    public static double getTypeAdvantage(Typing attackType, List<Typing> defenderTypes, List<Typing> attackerType){
-
+    private static double getTypeAdvantage(Typing attackType, List<Typing> defenderTypes, List<Typing> attackerTypes) {
         double typeEffectiveness = 1.0;
 
-        if (attackerType.contains(attackType)){
+        if (attackerTypes.contains(attackType)) {
             typeEffectiveness *= 1.5;
         }
         for (Typing defenderType : defenderTypes) {
             typeEffectiveness *= getEffectiveness(attackType, defenderType);
         }
-
         return typeEffectiveness;
     }
 
@@ -284,9 +282,9 @@ public class DamageCalculator {
     }
 
 
-    public static int applyWeather(int baseDamage, Pokemon attacker,Pokemon defender ,Moves attack, Weather weather) {
+    private static int applyWeather(int baseDamage, Pokemon attacker,Pokemon defender ,Moves attack, Weather weather) {
 
-        if (weather == null) {
+        if (weather == null || weather == Weather.NONE) {
             return baseDamage;
         }
 
@@ -309,5 +307,14 @@ public class DamageCalculator {
                 break;
         }
         return baseDamage;
+    }
+
+    private static int applyAbilities(int damage, Pokemon attacker, Pokemon defender, Moves move) {
+        double modifiedDamage = damage;
+
+        if (defender.hasActiveAbility("Thick Fat") && (move.getType() == Typing.FIRE || move.getType() == Typing.ICE)) {
+            modifiedDamage *= 0.5;
+        }
+        return (int) modifiedDamage;
     }
 }

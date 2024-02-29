@@ -3,7 +3,7 @@ package org.example.pokemon.repositories;
 import org.example.pokemon.Nature;
 import org.example.pokemon.Typing;
 import org.example.pokemon.Pokemon;
-import org.example.pokemon.Stats;
+import org.example.pokemon.stats.Stats;
 
 import java.util.*;
 

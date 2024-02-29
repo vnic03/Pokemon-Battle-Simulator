@@ -1,6 +1,8 @@
 package org.example.pokemon;
 
 import javafx.scene.image.Image;
+import org.example.pokemon.stats.Stat;
+import org.example.pokemon.stats.Stats;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.teams.Team;
 
@@ -9,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class Pokemon {
     private final String name;
+    private String nickname = null;
     private final int pokeDex;
     private final String frontSpritePath;
     private final String backSpritePath;
@@ -79,7 +82,17 @@ public class Pokemon {
     }
 
     public String getName(){
+        if (this.nickname != null && !this.nickname.isEmpty()) {
+            return this.nickname;
+        } else {
+            return name;
+        }
+    }
+    public String getBaseName() {
         return name;
+    }
+    public void setNickname(String name) {
+        this.nickname = name;
     }
     public int getPokeDex() { return pokeDex; }
     public int getLevel() {

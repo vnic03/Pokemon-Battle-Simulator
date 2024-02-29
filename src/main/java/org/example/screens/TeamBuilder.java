@@ -186,7 +186,7 @@ public class TeamBuilder {
 
         for (int i = start; i < end; i++) {
             Pokemon pokemon = allPokemons.get(i);
-            String pokemonName = pokemon.getName();
+            String pokemonName = pokemon.getBaseName();
             Image image = pokemon.getIconSprite();
             ImageView imageView = editPokemonIcon(image);
             imageView.setFitHeight(50);
@@ -216,7 +216,6 @@ public class TeamBuilder {
 
     private void updatePokemonSlot(int index, String pokemonName, boolean isTeam1) {
         if (pokemonName != null) {
-
             Pokemon pokemon = PokemonRepository.getPokemon(pokemonName);
 
             if (pokemon != null) {
@@ -229,6 +228,7 @@ public class TeamBuilder {
                 ImageView pokemonIcon = (ImageView) slot.getChildren().getFirst();
                 Image iconImage = pokemon.getIconSprite();
                 ImageView iconView = editPokemonIcon(iconImage);
+
                 pokemonIcon.setImage(iconView.getImage());
                 pokemonIcon.setViewport(iconView.getViewport());
                 pokemonIcon.setFitWidth(iconView.getFitWidth());
@@ -242,7 +242,10 @@ public class TeamBuilder {
 
                 typeIconBox = new HBox(5);
                 for (Typing typing : pokemon.getTyping()) {
-                    ImageView typeIcon = new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/types/" + typing.name().toLowerCase() + ".png")).toExternalForm()));
+                    ImageView typeIcon = new ImageView(new Image(
+                            Objects.requireNonNull(
+                                    getClass().getResource(
+                                            "/types/" + typing.name().toLowerCase() + ".png")).toExternalForm()));
                     typeIcon.setFitWidth(55);
                     typeIcon.setFitHeight(35);
                     typeIconBox.getChildren().add(typeIcon);
@@ -250,7 +253,7 @@ public class TeamBuilder {
 
                 Label nameLabel = findLabelInSlot(slot);
                 if (nameLabel != null) {
-                    nameLabel.setText(pokemonName);
+                    nameLabel.setText(pokemon.getName());
                 }
 
                 Button editButton = findButtonInSlot(slot);
@@ -324,6 +327,12 @@ public class TeamBuilder {
                 }
             }
             pokemonBuilder.saveSelectedMoves();
+
+            String nickname = pokemonBuilder.getNickName();
+            if (!nickname.isEmpty()) {
+                editedPokemon.setNickname(nickname);
+            }
+            System.out.println(editedPokemon.getName());
             updatePokemonSlot(index, editedPokemon.getName(), isTeam1);
         }
 

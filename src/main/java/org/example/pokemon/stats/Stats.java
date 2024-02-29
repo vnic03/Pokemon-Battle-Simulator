@@ -1,4 +1,6 @@
-package org.example.pokemon;
+package org.example.pokemon.stats;
+
+import org.example.pokemon.Pokemon;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package org.example.pokemon;
+package org.example.pokemon.stats;
 
 public enum Stat {
     HP,

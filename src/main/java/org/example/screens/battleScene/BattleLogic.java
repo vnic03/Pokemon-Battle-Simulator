@@ -16,8 +16,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class BattleLogic {
-    private Team team1;
-    private Team team2;
+    private final Team team1;
+    private final Team team2;
     private static final int ROUND_DURATION = 60;
     private Weather currentWeather;
     private Moves selectedMoveTeam1;
@@ -129,8 +129,7 @@ public class BattleLogic {
             int totalDamage = multiHitMoveEffect.applyMultiHitDamage(attacker, defender, move, currentWeather, result);
             // show how many times the move hits
             isDamageApplied = true;
-        } else if (effect instanceof MoveEffectWithDamage) {
-            MoveEffectWithDamage effectWithDamage = (MoveEffectWithDamage) effect;
+        } else if (effect instanceof MoveEffectWithDamage effectWithDamage) {
             effectWithDamage.applyWithDamage(attacker, defender, move, currentWeather, result);
             isDamageApplied = true;
         } else {

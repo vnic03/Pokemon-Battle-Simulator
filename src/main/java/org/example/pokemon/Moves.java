@@ -1,7 +1,6 @@
 package org.example.pokemon;
 
 import org.example.pokemon.moveEffects.MoveEffect;
-import org.example.pokemon.moveEffects.MoveEffectWithDamage;
 
 public class Moves {
 
@@ -14,7 +13,6 @@ public class Moves {
     private int accuracy;
     private int currentPP;
     private final MoveEffect effect;
-    private MoveEffectWithDamage effectWithDamage;
 
     public Moves(String name, Typing type, MoveCategory category, int power, int accuracy, int initialPP, MoveEffect moveEffect){
         this.name = name;
@@ -69,9 +67,6 @@ public class Moves {
 
     public MoveEffect getEffect() {
         return effect;
-    }
-    public MoveEffectWithDamage getEffectWithDamage() {
-        return effectWithDamage;
     }
 
     public void setAttacker(Pokemon attacker) {

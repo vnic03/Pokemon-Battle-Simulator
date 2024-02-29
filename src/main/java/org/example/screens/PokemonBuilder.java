@@ -32,6 +32,7 @@ public class PokemonBuilder {
     private PokemonEditListener editListener;
     private final int pokemonIndex;
     private final boolean isTeam1;
+    private TextField nicknameField;
 
     //Ev Configuration
 
@@ -196,10 +197,27 @@ public class PokemonBuilder {
             pokemon.setActiveAbility(selectedAbility);
         });
 
+        nicknameField = new TextField();
+        nicknameField.setPromptText("nickname ?");
+        nicknameField.setText(pokemon.getName());
+        GridPane.setHalignment(nicknameField, HPos.LEFT);
+
+        nicknameField.setOnAction(event -> {
+            String nickname = nicknameField.getText().trim();
+            if (nickname.isEmpty()) {
+                pokemon.setNickname(nickname);
+                pokemonName.setText(pokemon.getName());
+            }
+        });
+
         detailsPane.add(abilityLabel, 1, 3);
         detailsPane.add(abilityComboBox, 2, 3);
+        detailsPane.add(nicknameField, 1, 4);
 
         return detailsPane;
+    }
+    public String getNickName() {
+        return nicknameField.getText().trim();
     }
 
 

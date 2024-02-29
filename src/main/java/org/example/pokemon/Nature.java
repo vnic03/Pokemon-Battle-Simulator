@@ -1,5 +1,7 @@
 package org.example.pokemon;
 
+import org.example.pokemon.stats.Stat;
+
 public enum Nature {
     ADAMANT(Stat.ATTACK, Stat.SPECIAL_ATTACK),
     NAUGHTY(Stat.ATTACK, Stat.SPECIAL_DEFENSE),
