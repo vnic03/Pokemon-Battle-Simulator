@@ -25,7 +25,7 @@ public enum Typing {
     ICE("ice.png"),
     DRAGON("dragon.png"),
     DARK("dark.png"),
-    FAIRY("contest_cute.png");
+    FAIRY("fairy.png");
 
     private final String imagePath;
     private static final Map<Typing, Image> imageCache = new EnumMap<>(Typing.class);

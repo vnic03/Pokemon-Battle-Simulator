@@ -1,5 +1,6 @@
 package org.example.pokemon.repositories;
 
+import org.example.pokemon.Ability;
 import org.example.pokemon.Nature;
 import org.example.pokemon.Typing;
 import org.example.pokemon.Pokemon;
@@ -10,66 +11,57 @@ import java.util.*;
 public class PokemonRepository {
 
     private final static Map<String, Pokemon> pokemonMap = new HashMap<>();
-    private final static AbilityRepository aR = new AbilityRepository();
+    private final static AbilityRepository AR = new AbilityRepository();
 
     static
     {
+        pokemon("Pikachu", 25, Typing.ELECTRIC, new Stats(110, 75, 60, 70, 70, 110), new String[]{"Static"});
 
-        pokemonMap.put("Pikachu",
-                new Pokemon("Pikachu", 25,Collections.singletonList(Typing.ELECTRIC), new Stats(110, 75, 60, 70, 70, 110), Nature.SERIOUS, Arrays.asList(aR.getAbility("Static")),"/pokemonSprites/pikachu/front.png","/pokemonSprites/pikachu/back.png", "/pokemonSprites/pikachu/icon.png",new ArrayList<>()));
+        pokemon("Cubone", 104, Typing.GROUND, new Stats(125, 70, 115, 60, 70, 55), new String[]{"Battle Armor"});
 
-        pokemonMap.put("Cubone",
-                new Pokemon("Cubone", 104,Collections.singletonList(Typing.GROUND), new Stats(125, 70, 115, 60, 70, 55),Nature.SERIOUS, Arrays.asList(aR.getAbility("Battle Armor")), "/pokemonSprites/cubone/front.png","/pokemonSprites/cubone/back.png", "/pokemonSprites/cubone/icon.png" ,new ArrayList<>()));
-        pokemonMap.put("Snorlax",
-                new Pokemon("Snorlax", 143,Collections.singletonList(Typing.NORMAL), new Stats(235, 130, 85, 85, 130, 50),Nature.SERIOUS, Arrays.asList(aR.getAbility("Thick Fat")) , "/pokemonSprites/snorlax/front.png","/pokemonSprites/snorlax/back.png", "/pokemonSprites/snorlax/icon.png" ,new ArrayList<>()));
+        pokemon("Snorlax", 143, Typing.NORMAL, new Stats(235, 130, 85, 85, 130, 50), new String[]{"Thick Fat"});
 
+        pokemon("Bulbasaur", 1, Typing.GRASS, Typing.POISON, new Stats(120, 69, 69, 85, 85, 65), new String[]{"Overgrow", "Chlorophyll"});
+        pokemon("Ivysaur", 2, Typing.GRASS, Typing.POISON, new Stats(135, 82, 83, 100, 100, 80), new String[]{"Overgrow", "Chlorophyll"});
+        pokemon("Venusaur", 3, Typing.GRASS, Typing.POISON, new Stats(155, 102, 103, 120, 120, 100), new String[]{"Overgrow", "Chlorophyll"});
 
-        pokemonMap.put("Bulbasaur",
-                new Pokemon("Bulbasaur", 1, Arrays.asList(Typing.GRASS, Typing.POISON), new Stats(120,69,69,85,85,65),Nature.SERIOUS, Arrays.asList(aR.getAbility("Overgrow"), aR.getAbility("Chlorophyll")), "/pokemonSprites/bulbasaur/front.png","/pokemonSprites/bulbasaur/back.png", "/pokemonSprites/bulbasaur/icon.png" ,new ArrayList<>()));
-        pokemonMap.put("Ivysaur",
-                new Pokemon("Ivysaur",2, Arrays.asList(Typing.GRASS, Typing.POISON), new Stats(135,82,83,100,100,80), Nature.SERIOUS,  Arrays.asList(aR.getAbility("Overgrow"), aR.getAbility("Chlorophyll")), "/pokemonSprites/ivysaur/front.png","/pokemonSprites/ivysaur/back.png", "/pokemonSprites/ivysaur/icon.png" ,new ArrayList<>()));
-        pokemonMap.put("Venusaur",
-                new Pokemon("Venusaur",3, Arrays.asList(Typing.GRASS, Typing.POISON), new Stats(155,102,103, 120,120,100),Nature.SERIOUS,  Arrays.asList(aR.getAbility("Overgrow"), aR.getAbility("Chlorophyll")), "/pokemonSprites/venusaur/front.png","/pokemonSprites/venusaur/back.png", "/pokemonSprites/venusaur/icon.png" ,new ArrayList<>()));
-
-
-        pokemonMap.put("Charmander",
-                new Pokemon("Charmander", 4,Collections.singletonList(Typing.FIRE), new Stats(114,72,63,80,70,85),Nature.SERIOUS, Arrays.asList(aR.getAbility("Blaze"), aR.getAbility("Solar Power")), "/pokemonSprites/charmander/front.png","/pokemonSprites/charmander/back.png", "/pokemonSprites/charmander/icon.png" ,new ArrayList<>()));
-        pokemonMap.put("Charmeleon",
-                new Pokemon("Charmeleon", 5,Collections.singletonList(Typing.FIRE), new Stats(133, 84,78,100,85,100), Nature.SERIOUS, Arrays.asList(aR.getAbility("Blaze"), aR.getAbility("Solar Power")), "/pokemonSprites/charmeleon/front.png","/pokemonSprites/charmeleon/back.png", "/pokemonSprites/charmeleon/icon.png", new ArrayList<>()));
-        pokemonMap.put("Charizard",
-                new Pokemon("Charizard", 6,Arrays.asList(Typing.FIRE, Typing.FLYING), new Stats(153,104,98,129,105,120),Nature.SERIOUS, Arrays.asList(aR.getAbility("Blaze"), aR.getAbility("Solar Power")), "/pokemonSprites/charizard/front.png","/pokemonSprites/charizard/back.png", "/pokemonSprites/charizard/icon.png",new ArrayList<>()));
+        pokemon("Charmander", 4, Typing.FIRE, new Stats(114, 72, 63, 80, 70, 85), new String[]{"Blaze", "Solar Power"});
+        pokemon("Charmeleon", 5, Typing.FIRE, new Stats(133, 84, 78, 100, 85, 100), new String[]{"Blaze", "Solar Power"});
+        pokemon("Charizard", 6, Typing.FIRE, Typing.FLYING, new Stats(153, 104, 98, 129, 105, 120), new String[]{"Blaze", "Solar Power"});
 
         //Squirtle
         //Wartortle
-        pokemonMap.put("Blastoise",
-                new Pokemon("Blastoise", 9,Collections.singletonList(Typing.WATER), new Stats(154,103,120, 105, 125,98),Nature.SERIOUS, Arrays.asList(aR.getAbility("Torrent")), "/pokemonSprites/blastoise/front.png","/pokemonSprites/blastoise/back.png", "/pokemonSprites/blastoise/icon.png" ,new ArrayList<>()));
-
-        /*
-        pokemonMap.put("Growlithe", new Pokemon("Growlithe", Collections.singletonList(PokeTyping.FIRE), new Stats(130,90,65,90,70,80),Nature.SERIOUS ,new ArrayList<>()));
-        pokemonMap.put("Arcanine", new Pokemon("Arcanine", Collections.singletonList(PokeTyping.FIRE), new Stats(165,130,100,120,100,115),Nature.SERIOUS ,new ArrayList<>()));
-        */
+        pokemon("Blastoise", 9, Typing.WATER, new Stats(154, 103, 120, 105, 125, 98), new String[]{"Torrent"});
 
         // Machop
         // Machoke
-        pokemonMap.put("Machamp",
-                new Pokemon("Machamp",68 ,Collections.singletonList(Typing.FIGHTING), new Stats(165, 150,100,85,105, 75),Nature.SERIOUS, Arrays.asList(aR.getAbility("Guts"), aR.getAbility("No Guard")),"/pokemonSprites/machamp/front.png","/pokemonSprites/machamp/back.png","/pokemonSprites/machamp/icon.png" ,new ArrayList<>()));
+        pokemon("Machamp", 68, Typing.FIGHTING, new Stats(165, 150, 100, 85, 105, 75), new String[]{"Guts", "No Guard"});
 
         // Gastly
         // Haunter
-        pokemonMap.put("Gengar",
-                new Pokemon("Gengar", 94,Arrays.asList(Typing.GHOST, Typing.POISON), new Stats(135, 85, 80,150,95,130),Nature.SERIOUS, Arrays.asList(aR.getAbility("Cursed Body")), "/pokemonSprites/gengar/front.png","/pokemonSprites/gengar/back.png", "/pokemonSprites/gengar/icon.png",new ArrayList<>()));
+        pokemon("Gengar", 94, Typing.GHOST, Typing.POISON, new Stats(135, 85, 80, 150, 95, 130), new String[]{"Cursed Body"});
 
-        // Koffing
-        //pokemonMap.put("Weezing", new Pokemon("Weezing", Collections.singletonList(PokeTyping.POISON), new Stats(140,110, 140, 105, 90, 80),Nature.SERIOUS ,new ArrayList<>()));
+        pokemon("Scyther", 123, Typing.BUG, Typing.FLYING, new Stats(145, 130, 100, 75, 100, 125), new String[]{"Swarm", "Technician"});
 
-        pokemonMap.put("Scyther",
-                new Pokemon("Scyther", 123, Arrays.asList(Typing.BUG, Typing.FLYING), new Stats(145,130,100, 75, 100, 125), Nature.SERIOUS, Arrays.asList(aR.getAbility("Swarm"), aR.getAbility("Technician")),"/pokemonSprites/scyther/front.png", "/pokemonSprites/scyther/back.png", "/pokemonSprites/scyther/icon.png", new ArrayList<>()));
+        pokemon("Magmar", 126, Typing.FIRE, new Stats(140, 115, 77, 120, 105, 103), new String[]{"Flame Body"});
 
-        pokemonMap.put("Magmar",
-                new Pokemon("Magmar", 126, Collections.singletonList(Typing.FIRE), new Stats(140,115,77,120,105,103), Nature.SERIOUS, Arrays.asList(aR.getAbility("Flame Body")), "/pokemonSprites/magmar/front.png", "/pokemonSprites/magmar/back.png", "/pokemonSprites/magmar/icon.png", new ArrayList<>()));
+        pokemon("Pidgeot", 18, Typing.NORMAL, Typing.FLYING, new Stats(158, 100, 95, 90, 90, 121), new String[]{"Keen Eye"});
 
-        pokemonMap.put("Pidgeot",
-                new Pokemon("Pidgeot",18, Arrays.asList(Typing.NORMAL, Typing.FLYING), new Stats(158,100,95,90,90, 121), Nature.SERIOUS, Arrays.asList(aR.getAbility("Keen Eye")), "/pokemonSprites/pidgeot/front.png", "/pokemonSprites/pidgeot/back.png", "/pokemonSprites/pidgeot/icon.png", new ArrayList<>()));
+        pokemon("Mr.Mime", 122, Typing.PSYCHIC, Typing.FAIRY, new Stats(115, 65, 85, 120, 140, 110), new String[]{"Filter", "Soundproof", "Technician"});
+
+        pokemon("Whismur", 293, Typing.NORMAL, new Stats(139, 71, 43, 71, 43, 48), new String[]{"Soundproof"});
+        pokemon("Exploud", 295, Typing.NORMAL, new Stats(179, 111, 83, 111, 93, 88), new String[]{"Soundproof", "Scrappy"});
+
+        pokemon("Tyranitar", 248, Typing.ROCK, Typing.DARK, new Stats(175, 154, 130, 115, 120, 81), new String[]{"Sand Stream"});
+
+        pokemon("Gyarados", 130, Typing.WATER, Typing.FLYING, new Stats(170, 145, 99, 80, 120, 101), new String[]{"Intimidate", "Moxie"});
+
+
+        // Legendary Pokemon
+
+        pokemon("Mew", 151, Typing.PSYCHIC, new Stats(175, 120, 120, 120, 120, 120), new String[]{"Synchro"});
+
+        pokemon("Rayquaza", 384, Typing.DRAGON, Typing.FLYING, new Stats(180, 170, 110, 170, 110, 115), new String[]{"Air Lock"});
     }
     public static List<String> getAllPokemonNames() {
         return new ArrayList<>(pokemonMap.keySet());
@@ -81,5 +73,44 @@ public class PokemonRepository {
 
     public static List<Pokemon> getAllPokemons() {
         return new ArrayList<>(pokemonMap.values());
+    }
+
+    private static void pokemon(
+            String name, int dex, Typing typing, Stats stats, String[] abilityNames)
+    {
+        List<Typing> typings = Collections.singletonList(typing);
+        List<Ability> abilities = Arrays.stream(abilityNames).map(AR::getAbility).toList();
+
+        String frontSprite = spritePath(name, "front");
+        String backSprite = spritePath(name, "back");
+        String iconSprite = spritePath(name, "icon");
+
+        Pokemon pokemon = new Pokemon(
+                name, dex, typings, stats, Nature.SERIOUS, abilities,
+                frontSprite, backSprite, iconSprite,
+                new ArrayList<>());
+        pokemonMap.put(name, pokemon);
+    }
+
+    private static void pokemon(
+            String name, int dex, Typing typing1, Typing typing2,Stats stats, String[] abilityNames)
+    {
+        List<Typing> typings = Arrays.asList(typing1, typing2);
+        List<Ability> abilities = Arrays.stream(abilityNames).map(AR::getAbility).toList();
+
+        String frontSprite = spritePath(name, "front");
+        String backSprite = spritePath(name, "back");
+        String iconSprite = spritePath(name, "icon");
+
+        Pokemon pokemon = new Pokemon(
+                name, dex, typings, stats, Nature.SERIOUS, abilities,
+                frontSprite, backSprite, iconSprite,
+                new ArrayList<>());
+        pokemonMap.put(name, pokemon);
+    }
+
+    private static String spritePath(String name, String type) {
+        String formattedName = name.toLowerCase().replaceAll("\\W+", "_");
+        return "/pokemonSprites/" + formattedName + "/" + type + ".png";
     }
 }

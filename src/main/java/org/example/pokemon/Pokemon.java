@@ -6,6 +6,7 @@ import org.example.pokemon.stats.Stats;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.teams.Team;
 
+import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -488,7 +489,17 @@ public class Pokemon {
         private static final Map<String, Image> imageCache = new HashMap<>();
 
         public static Image loadImage(String path) {
-            return imageCache.computeIfAbsent(path, Image::new);
+            return imageCache.computeIfAbsent(path, p -> {
+                try {
+                    URL url = SpriteManager.class.getResource(p);
+                    if (url == null) {
+                        throw new IllegalArgumentException("Resource not found: " + p);
+                    }
+                    return new Image(url.toString());
+                } catch (Exception e) {
+                    throw new RuntimeException("Failed to load image: " + p, e);
+                }
+            });
         }
     }
 

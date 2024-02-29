@@ -28,6 +28,14 @@ public class AbilityRepository {
     AbilityEffect technicianEffect = new TechnicianEffect();
     AbilityEffect flameBodyEffect = new FlameBodyEffect();
     AbilityEffect keenEyeEffect = new KeenEyeEffect();
+    AbilityEffect synchroEffect = new SynchroEffect();
+    AbilityEffect soundproofEffect = new SoundProofEffect();
+    AbilityEffect filterEffect = new FilterEffect();
+    AbilityEffect scrappyEffect = new ScrappyEffect();
+    AbilityEffect airlockEffect = new AirLockEffect();
+    AbilityEffect weatherEffect = new WeatherEffect();
+    AbilityEffect intimidateEffect = new IntimidateEffect();
+    AbilityEffect moxieEffect = new MoxieEffect();
 
     private void initializeAbilities() {
 
@@ -62,6 +70,21 @@ public class AbilityRepository {
 
         abilities.put("Keen Eye", new Ability("Keen Eye", "Prevents loss of accuracy.", keenEyeEffect));
 
+        abilities.put("Synchro", new Ability("Synchro", "Passes on a burn, poison, or paralysis to the foe.", synchroEffect));
+
+        abilities.put("Soundproof", new Ability("Soundproof", "Gives full immunity to all sound-based moves.", soundproofEffect));
+
+        abilities.put("Filter", new Ability("Filter", "Powers down super-effective moves", filterEffect));
+
+        abilities.put("Scrappy", new Ability("Scrappy", "Enables moves to hit Ghost-type foes.", scrappyEffect));
+
+        abilities.put("Air Lock", new Ability("Air Lock", "Negates weather effects.", airlockEffect));
+
+        abilities.put("Sand Stream", new Ability("Sand Stream", "Summons a sandstorm.", weatherEffect));
+
+        abilities.put("Moxie", new Ability("Moxie", "Boosts Attack after knocking out any Pokémon.", moxieEffect));
+
+        abilities.put("Intimidate", new Ability("Intimidate", "Lowers the foe's Attack stat.", intimidateEffect));
     }
 
     public Ability getAbility(String name) {
