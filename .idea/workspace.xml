@@ -5,10 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated read me file">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/ClearBodyEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/CompetitiveEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/HydrationEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/InnerFocusEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/MarvelScaleEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/MultiScaleEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/WaterAbsorbEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/dragonite/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/dragonite/front.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/dragonite/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/lapras/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/lapras/front.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/lapras/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/metagross/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/metagross/front.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/metagross/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/milotic/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/milotic/front.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/milotic/icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/MovesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/AbilityEffectWithMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/AbilityEffectWithMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/BattleArmorEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/PreventCritsEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/CursedBodyEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/CursedBodyEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/FilterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/FilterEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/FlameBodyEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/FlameBodyEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/NoGuardEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/NoGuardEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/StaticEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/StaticEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/TechnicianEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/TechnicianEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/ThickFatEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/ThickFatEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/AbilityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/AbilityRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/PokemonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/BattleSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/BattleSimulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/DamageCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/DamageCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleRoundResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleRoundResult.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,9 +74,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
         <option value="CSS File" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -138,7 +169,7 @@
       <recent name="FailedIdeas" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MainApplication">
     <configuration name="ChoosePokemon" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.screens.ChoosePokemon" />
       <module name="PokeDuelByNico.main" />
@@ -278,7 +309,7 @@
       <workItem from="1708953294223" duration="114000" />
       <workItem from="1708953710828" duration="7000" />
       <workItem from="1709198717840" duration="18136000" />
-      <workItem from="1709228227575" duration="7508000" />
+      <workItem from="1709228227575" duration="15538000" />
     </task>
     <task id="LOCAL-00007" summary="MoveSelector added, simple Battle test">
       <option name="closed" value="true" />

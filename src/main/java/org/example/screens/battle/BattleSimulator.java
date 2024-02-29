@@ -162,7 +162,7 @@ public class BattleSimulator {
 
     private void doAttack(Pokemon attacker, Pokemon defender, String moveName) {
 
-        BattleRoundResult result = new BattleRoundResult("", 0, false, false);
+        BattleRoundResult result = new BattleRoundResult("", 0, false, false, currentWeather);
 
         //if (!attacker.canAct()) {
           //  return;

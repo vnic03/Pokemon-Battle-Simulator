@@ -1,16 +1,20 @@
 package org.example.screens.battleScene;
 
+import org.example.screens.battle.Weather;
+
 public class BattleRoundResult {
     private String message;
     private int damageDealt;
     private boolean wasSuccessful;
     private boolean didFaint;
+    private Weather currentWeather;
 
-    public BattleRoundResult(String message, int damageDealt, boolean wasSuccessful, boolean didFaint) {
+    public BattleRoundResult(String message, int damageDealt, boolean wasSuccessful, boolean didFaint, Weather weather) {
         this.message = message;
         this.damageDealt = damageDealt;
         this.wasSuccessful = wasSuccessful;
         this.didFaint = didFaint;
+        this.currentWeather = weather;
     }
 
     public String getMessage() {
@@ -38,5 +42,13 @@ public class BattleRoundResult {
     }
     public void setDidFaint(boolean didFaint) {
         this.didFaint = didFaint;
+    }
+
+    public Weather getCurrentWeather() {
+        return currentWeather;
+    }
+
+    public void setCurrentWeather(Weather currentWeather) {
+        this.currentWeather = currentWeather;
     }
 }

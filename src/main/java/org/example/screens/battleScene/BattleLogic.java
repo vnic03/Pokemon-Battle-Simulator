@@ -102,7 +102,7 @@ public class BattleLogic {
     }
 
     private BattleRoundResult performAttack(Pokemon attacker, Pokemon defender, Moves move) {
-        BattleRoundResult result = new BattleRoundResult("", 0, false, false);
+        BattleRoundResult result = new BattleRoundResult("", 0, false, false, currentWeather);
         if (!attacker.canAct(result)) {
             return result;
         }
@@ -224,7 +224,7 @@ public class BattleLogic {
     }
 
     public BattleRoundResult processMoveSelection(Moves move, Pokemon activePokemon) {
-        BattleRoundResult result = new BattleRoundResult("", 0, false, false);
+        BattleRoundResult result = new BattleRoundResult("", 0, false, false, currentWeather);
 
         if (!activePokemon.canAct(result)) {
             return result;
