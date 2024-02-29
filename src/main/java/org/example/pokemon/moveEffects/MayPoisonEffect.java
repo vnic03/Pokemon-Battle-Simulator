@@ -18,35 +18,26 @@ public class MayPoisonEffect implements MoveEffectWithDamage {
     @Override
     public void apply(Pokemon user, Pokemon target, BattleRoundResult result) {}
 
-
     @Override
     public void applyWithDamage(Pokemon user, Pokemon target, Moves move, Weather weather, BattleRoundResult result) {
 
        int damage = DamageCalculator.calculateDamage(user, target, move, weather, result);
        target.takeDamage(damage);
-        System.out.println(user.getName() + " hits " + target.getName() + " with " + move.getName() + " for " + damage + " damage !");
+       result.setMessage(user.getName() + " hits " + target.getName() + " with " + move.getName() + " for " + damage + " damage !");
 
         if (target.hasStatusCondition() || target.getTyping().contains(Typing.POISON)) {
             return;
         }
 
-        double chanceToPoison;
-
-        switch (move.getName().toLowerCase()) {
-            case "smog":
-                chanceToPoison = SMOG;
-                break;
-            case "sludge wave":
-                chanceToPoison = SLUDGE_WAVE;
-                break;
-            default:
-                chanceToPoison = CHANCE_TO_POISON;
-                break;
-        }
+        double chanceToPoison = switch (move.getName().toLowerCase()) {
+            case "smog" -> SMOG;
+            case "sludge wave" -> SLUDGE_WAVE;
+            default -> CHANCE_TO_POISON;
+        };
 
         if (new Random().nextDouble() < chanceToPoison) {
             target.setPoisoned(true);
-            System.out.println(target.getName() + " got poisoned !");
+            result.setMessage(target.getName() + " got poisoned !");
         }
     }
 

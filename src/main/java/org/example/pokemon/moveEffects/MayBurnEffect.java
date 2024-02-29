@@ -21,14 +21,14 @@ public class MayBurnEffect implements MoveEffectWithDamage {
 
         int damage = DamageCalculator.calculateDamage(user, target, move, weather, result);
         target.takeDamage(damage);
-        System.out.println(user.getName() + " hits " + target.getName() + " with " + move.getName() + " for " + damage + " damage !");
+        result.setMessage(user.getName() + " hits " + target.getName() + " with " + move.getName() + " for " + damage + " damage !");
 
         if (target.hasStatusCondition() || target.getTyping().contains(Typing.FIRE)) {
             return;
         }
         if (new Random().nextDouble() < CHANCE_TO_BURN) {
             target.setBurned(true);
-            System.out.println(target.getName() + " got burned!");
+            result.setMessage(target.getName() + " got burned!");
         }
     }
 

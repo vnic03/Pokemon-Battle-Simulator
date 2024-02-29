@@ -20,11 +20,11 @@ import java.util.Objects;
 public class PokemonStatusBar extends StackPane {
     private static final double POLYGON_WIDTH = 460;
     private static final double POLYGON_HEIGHT = 80;
-    private Label nameLabel;
-    private Label levelLabel;
-    private Label genderLabel;
-    private ProgressBar hpBar;
-    private Label hpLabel;
+    private final Label nameLabel;
+    private final Label levelLabel;
+    private final Label genderLabel;
+    private final ProgressBar hpBar;
+    private final Label hpLabel;
 
     public PokemonStatusBar(Pokemon pokemon) {
         nameLabel = new Label(" " + pokemon.getName());
@@ -54,7 +54,9 @@ public class PokemonStatusBar extends StackPane {
         contentBox.setLayoutX(10);
         contentBox.setLayoutY(10);
 
-        this.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/battleViewStyles/battleViewStyle.css")).toExternalForm());
+        this.getStylesheets().add(Objects.requireNonNull(
+                getClass().getResource("/battleViewStyles/battleViewStyle.css")).toExternalForm());
+
         nameLabel.getStyleClass().add("pokemon-name");
         levelLabel.getStyleClass().add("pokemon-level");
         genderLabel.getStyleClass().add("pokemon-gender");

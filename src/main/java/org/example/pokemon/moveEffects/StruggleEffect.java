@@ -10,12 +10,11 @@ public class StruggleEffect implements MoveEffect {
 
         int struggleDamage = calculateStruggleDamage(user);
         target.takeDamage(struggleDamage);
-        System.out.println(user.getName() + " hits " + target.getName() + " with Struggle for " + struggleDamage + " damage !");
+        result.setMessage(user.getName() + " hits " + target.getName() + " with Struggle for " + struggleDamage + " damage !");
 
         int recoilDamage = (int) (struggleDamage * 1.5);
         user.takeDamage(recoilDamage);
-        System.out.println(user.getName() + " is hit with recoil for " + recoilDamage + " damage !");
-
+        result.setMessage(user.getName() + " is hit with recoil for " + recoilDamage + " damage !");
     }
 
     private int calculateStruggleDamage(Pokemon user) {

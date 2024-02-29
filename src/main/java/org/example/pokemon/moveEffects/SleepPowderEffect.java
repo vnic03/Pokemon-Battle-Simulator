@@ -14,13 +14,13 @@ public class SleepPowderEffect implements MoveEffect {
     public void apply(Pokemon user, Pokemon target, BattleRoundResult result) {
 
         if (target.hasStatusCondition() || target.getTyping().contains(Typing.GRASS)) {
-            System.out.println(target.getName() + " can't be affected !");
+            result.setMessage(target.getName() + " can't be affected !");
             return;
         }
 
         int sleepTurns = new Random().nextInt(MAX_SLEEP_TURNS) + 1;
         target.setAsleep(true, sleepTurns);
-        System.out.println(target.getName() + " is fast asleep !");
+        result.setMessage(target.getName() + " is fast asleep !");
     }
 
     @Override

@@ -35,18 +35,15 @@ public class HitsMoreTimesEffect implements MultiHitMoveEffect {
             target.takeDamage(damage);
             totalDamage += damage;
 
-
             successfulHits++;
 
-            System.out.println("hits");
-
+            result.setMessage("hits");
 
             if (!target.isAlive()){
                 break;
             }
         }
-
-        System.out.println("Hit " + successfulHits + " time(s)!");
+        result.setMessage("Hit " + successfulHits + " time(s)!");
 
         return totalDamage;
     }

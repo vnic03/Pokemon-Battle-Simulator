@@ -26,8 +26,8 @@ public class BeforeBattleAnimation extends AnchorPane {
     private final Image unown = new Image(
             Objects.requireNonNull(getClass().getResourceAsStream("/pokemonSprites/unown/icon.png")));
 
-    private Stage stage;
-    private Scene nextScene;
+    private final Stage stage;
+    private final Scene nextScene;
     private Runnable onAnimationFinished;
 
     public BeforeBattleAnimation(Stage stage, Scene nextScene, Team team1, Team team2) {

@@ -9,16 +9,13 @@ public class ChangeWeatherEffect implements MoveEffect {
 
     private final Weather weatherToChange;
 
-
     public ChangeWeatherEffect(Weather changeWeather) {
         this.weatherToChange = changeWeather;
     }
 
     @Override
     public void apply(Pokemon user, Pokemon target, BattleRoundResult result) {
-
         BattleSimulator.getInstance().setWeather(weatherToChange);
-
     }
 
     @Override

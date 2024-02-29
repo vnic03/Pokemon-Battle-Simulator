@@ -1,6 +1,7 @@
 package org.example.pokemon;
 
 import org.example.pokemon.abilityEffects.AbilityEffect;
+import org.example.screens.battleScene.BattleRoundResult;
 
 public class Ability {
 
@@ -15,8 +16,8 @@ public class Ability {
         this.effect = effect;
     }
 
-    public void activate(Pokemon pokemon) {
-        effect.applyEffect(pokemon);
+    public void activate(Pokemon pokemon, BattleRoundResult result) {
+        effect.applyEffect(pokemon, result);
     }
 
     public String getName() {

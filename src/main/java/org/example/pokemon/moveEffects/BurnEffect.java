@@ -10,22 +10,22 @@ public class BurnEffect implements MoveEffect {
     public void apply(Pokemon user, Pokemon target, BattleRoundResult result) {
 
         if (target.hasStatusCondition()) {
-            System.out.println(target.getName() + " is already affected by a status condition!");
+            result.setMessage(target.getName() + " is already affected by a status condition!");
             return;
         }
 
         if (target.getTyping().contains(Typing.FIRE)) {
-            System.out.println(target.getName() +" can't be burned !");
+            result.setMessage(target.getName() +" can't be burned !");
             return;
         }
 
         if (target.isBurned()) {
-            System.out.println(target.getName() + " is already burned !");
+            result.setMessage(target.getName() + " is already burned !");
             return;
         }
 
         target.setBurned(true);
-        System.out.println(target.getName() + " got burned !");
+        result.setMessage(target.getName() + " got burned !");
     }
 
     @Override

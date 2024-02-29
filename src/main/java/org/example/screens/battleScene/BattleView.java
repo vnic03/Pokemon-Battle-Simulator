@@ -19,13 +19,13 @@ import java.util.*;
 
 public class BattleView extends AnchorPane {
     private BattleLogic battleLogic;
-    private Team team1;
-    private Team team2;
-    private HBox team1Container = new HBox(10);
-    private HBox team2Container = new HBox(10);
-    private VBox playerOneView = new VBox(10);
-    private VBox playerTwoView = new VBox(10);
-    private TextArea battleLog = new TextArea();
+    private final Team team1;
+    private final Team team2;
+    private final HBox team1Container = new HBox(10);
+    private final HBox team2Container = new HBox(10);
+    private final VBox playerOneView = new VBox(10);
+    private final VBox playerTwoView = new VBox(10);
+    private final TextArea battleLog = new TextArea();
     private ContextMenu switchMenu;
     private Button switchButtonTeam1;
     private Button switchButtonTeam2;
@@ -35,14 +35,15 @@ public class BattleView extends AnchorPane {
     private VBox movesLayoutTeam2;
     private Label timerLabelTeam1;
     private Label timerLabelTeam2;
-    private HashMap<Pokemon, PokemonStatusBar> statusBarMap = new HashMap<>();
+    private final HashMap<Pokemon, PokemonStatusBar> statusBarMap = new HashMap<>();
 
     public BattleView(Team team1, Team team2) {
         this.team1 = team1;
         this.team2 = team2;
 
         initializeBattleField();
-        this.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/battleViewStyles/battleViewStyle.css")).toExternalForm());
+        this.getStylesheets().add(Objects.requireNonNull(
+                getClass().getResource("/battleViewStyles/battleViewStyle.css")).toExternalForm());
         this.getStyleClass().add("battle-view");
     }
 
@@ -294,14 +295,10 @@ public class BattleView extends AnchorPane {
         }
     }
     public void updateTimerTeam1(int remainingTime) {
-        Platform.runLater(() -> {
-            timerLabelTeam1.setText(String.valueOf(remainingTime));
-        });
+        Platform.runLater(() -> timerLabelTeam1.setText(String.valueOf(remainingTime)));
     }
     public void updateTimerTeam2(int remainingTime) {
-        Platform.runLater(() -> {
-            timerLabelTeam2.setText(String.valueOf(remainingTime));
-        });
+        Platform.runLater(() -> timerLabelTeam2.setText(String.valueOf(remainingTime)));
     }
     public void showNewRoundStarted() {
         battleLog.appendText("-"); // fix later

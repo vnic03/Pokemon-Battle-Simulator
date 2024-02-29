@@ -265,7 +265,7 @@ public class BattleSimulator {
             System.out.println(pokemon.getName() + " is hurt by bad poison !");
         }
 
-        pokemon.decrementSleepTurns();
+        // pokemon.decrementSleepTurns();
 
         if (pokemon.hasActiveAbility("Solar Power") && currentWeather == Weather.SUN) {
             int solarPowerDamage = (int) (pokemon.getStats().getMaxHp() * 0.1);

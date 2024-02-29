@@ -3,11 +3,12 @@ package org.example.pokemon.abilityEffects;
 import org.example.pokemon.Moves;
 import org.example.pokemon.Typing;
 import org.example.pokemon.Pokemon;
+import org.example.screens.battleScene.BattleRoundResult;
 
 public class StarterEffect implements AbilityEffect {
 
     @Override
-    public void applyEffect(Pokemon pokemon) {
+    public void applyEffect(Pokemon pokemon, BattleRoundResult result) {
 
         int lowHp = (int) (pokemon.getStats().getMaxHp() * 0.33);
 

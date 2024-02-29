@@ -164,7 +164,7 @@ public class Pokemon {
         if (this.moves.size() < 4) {
             this.moves.add(move);
         } else {
-            System.out.println(this.name + " moves slots are full !");
+            System.err.println(this.name + " moves slots are full !");
         }
     }
     public void clearMoves() {
@@ -186,11 +186,9 @@ public class Pokemon {
     }
 
     public void takeDamage(int damage){
-
         this.lastDamageTaken = damage;
 
         int currentHP = stats.getHp() - damage;
-
 
         if (currentHP < 0) {
             currentHP = 0;
@@ -237,7 +235,7 @@ public class Pokemon {
         if (isAsleep) {
             System.out.println(this.name + " is fast asleep.");
             result.setMessage(this.name + " is fast asleep.");
-            decrementSleepTurns();
+            decrementSleepTurns(result);
             return false;
         }
 
@@ -302,13 +300,13 @@ public class Pokemon {
         sleepTurns = asleep ? turns : 0;
     }
 
-    public void decrementSleepTurns() {
+    public void decrementSleepTurns(BattleRoundResult result) {
 
         if (isAsleep) {
             sleepTurns--;
             if (sleepTurns <= 0) {
                 isAsleep = false;
-                System.out.println(this.name + " woke up !");
+                result.setMessage(this.name + " woke up !");
             }
         }
     }

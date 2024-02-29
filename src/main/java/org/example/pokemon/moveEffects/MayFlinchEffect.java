@@ -21,7 +21,10 @@ public class MayFlinchEffect implements MoveEffectWithDamage {
 
     @Override
     public void applyWithDamage(Pokemon user, Pokemon target, Moves move, Weather weather, BattleRoundResult result) {
-        if (BattleSimulator.getInstance().doesTargetActAfterAttacker(user, target, move.getEffect(), move.getEffect()) && new Random().nextDouble() < chanceToFlinch) {
+        if (BattleSimulator.getInstance()
+                .doesTargetActAfterAttacker(user, target, move.getEffect(), move.getEffect()) &&
+                new Random().nextDouble() < chanceToFlinch)
+        {
             target.setFlinching(true);
         }
     }

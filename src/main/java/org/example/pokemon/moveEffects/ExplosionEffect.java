@@ -8,7 +8,7 @@ public class ExplosionEffect implements MoveEffect {
     @Override
     public void apply(Pokemon user, Pokemon target, BattleRoundResult result) {
         user.takeDamage(1000);
-        System.out.println(user.getName() + " didn't wanna be around anymore :(");
+        result.setMessage(user.getName() + " pulled a 'Team Rocket' and blasted off!");
     }
 
     @Override
