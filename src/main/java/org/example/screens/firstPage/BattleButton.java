@@ -1,7 +1,7 @@
 package org.example.screens.firstPage;
 
 import javafx.scene.control.Button;
-import org.example.screens.ChoosePokemonX;
+import org.example.screens.ChoosePokemon;
 import org.example.MainApplication;
 
 public class BattleButton {
@@ -17,7 +17,7 @@ public class BattleButton {
         Button battleButton = new Button("Battle");
 
         battleButton.setOnAction(e -> {
-            ChoosePokemonX choosePokemon = new ChoosePokemonX();
+            ChoosePokemon choosePokemon = new ChoosePokemon();
             mainApp.setMainContent(choosePokemon.getView());
         });
 

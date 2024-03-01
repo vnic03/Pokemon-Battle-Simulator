@@ -36,7 +36,7 @@ public class PokemonBuilder {
 
     //Ev Configuration
 
-    private final static int MAX_EVS = 252;
+    private static final int MAX_EVS = 252;
     private static final int TOTAl_EVS = 508;
     private Slider hpSlider, attackSlider, defenseSlider, spAttackSlider, spDefenseSlider, speedSlider;
     private ProgressBar hpProgressBar, attackProgressBar, defenseProgressBar, spAttackProgressBar, spDefenseProgressBar, speedProgressBar;
@@ -74,17 +74,15 @@ public class PokemonBuilder {
 
         final int width = 150;
         final int height = 150;
+
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         imageView.setPreserveRatio(true);
 
-        Rectangle clip = new Rectangle(
-                width, height
-        );
+        Rectangle clip = new Rectangle(width, height);
         clip.setArcWidth(20);
         clip.setArcHeight(20);
         imageView.setClip(clip);
-
 
         DropShadow shadow = new DropShadow();
         shadow.setRadius(5.0);
@@ -121,7 +119,9 @@ public class PokemonBuilder {
 
         HBox typeBox = new HBox(5);
         for (Typing type : pokemon.getTyping()) {
-            Image typeImage = new Image(Objects.requireNonNull(getClass().getResource("/types/" + type.name().toLowerCase() + ".png")).toExternalForm());
+            Image typeImage = new Image(Objects.requireNonNull(
+                    getClass().getResource(
+                            "/types/" + type.name().toLowerCase() + ".png")).toExternalForm());
             ImageView typeIconView = new ImageView(typeImage);
             typeIconView.setFitWidth(50);
             typeIconView.setFitHeight(30);
@@ -134,7 +134,6 @@ public class PokemonBuilder {
         levelLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
         GridPane.setHalignment(levelLabel, HPos.RIGHT);
         detailsPane.add(levelLabel, 1, 0);
-
 
         Label genderLabel = new Label("Gender: ");
         genderLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
@@ -166,7 +165,6 @@ public class PokemonBuilder {
         GridPane.setHalignment(genderComboBox, HPos.RIGHT);
         detailsPane.add(genderLabel, 1, 1);
         detailsPane.add(genderComboBox, 2, 1);
-
 
 
         Label abilityLabel = new Label("Ability: ");
@@ -370,10 +368,8 @@ public class PokemonBuilder {
                     setGraphic(hBox);
                     setText(null);
                 }
-
             }
         });
-
         moveComboBox.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(Moves move, boolean empty) {

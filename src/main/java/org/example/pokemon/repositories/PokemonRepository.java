@@ -14,7 +14,6 @@ public class PokemonRepository {
     private final static AbilityRepository AR = new AbilityRepository();
 
     static {
-
         pokemon("Pikachu", 25, Typing.ELECTRIC, new Stats(110, 75, 60, 70, 70, 110), "Static");
 
         pokemon("Cubone", 104, Typing.GROUND, new Stats(125, 70, 115, 60, 70, 55), "Battle Armor");
@@ -29,8 +28,8 @@ public class PokemonRepository {
         pokemon("Charmeleon", 5, Typing.FIRE, new Stats(133, 84, 78, 100, 85, 100), "Blaze", "Solar Power");
         pokemon("Charizard", 6, Typing.FIRE, Typing.FLYING, new Stats(153, 104, 98, 129, 105, 120), "Blaze", "Solar Power");
 
-        //Squirtle
-        //Wartortle
+        pokemon("Squirtle", 7, Typing.WATER, new Stats(119, 68, 85, 70, 84, 63), "Torrent");
+        pokemon("Wartortle", 8, Typing.WATER, new Stats(134, 83, 100, 85, 100, 78), "Torrent");
         pokemon("Blastoise", 9, Typing.WATER, new Stats(154, 103, 120, 105, 125, 98), "Torrent");
 
         // Machop
@@ -90,14 +89,10 @@ public class PokemonRepository {
         List<Typing> typings = Collections.singletonList(typing);
         List<Ability> abilities = Arrays.stream(abilityNames).map(AR::getAbility).toList();
 
-        String frontSprite = spritePath(name, "front");
-        String backSprite = spritePath(name, "back");
-        String iconSprite = spritePath(name, "icon");
-
         Pokemon pokemon = new Pokemon(
                 name, dex, typings, stats, Nature.SERIOUS, abilities,
-                frontSprite, backSprite, iconSprite,
-                new ArrayList<>());
+                spritePath(name, "front"), spritePath(name, "back"), spritePath(name, "icon"),
+                new ArrayList<>()); // moves
         pokemonMap.put(name, pokemon);
     }
 
@@ -107,14 +102,10 @@ public class PokemonRepository {
         List<Typing> typings = Arrays.asList(typing1, typing2);
         List<Ability> abilities = Arrays.stream(abilityNames).map(AR::getAbility).toList();
 
-        String frontSprite = spritePath(name, "front");
-        String backSprite = spritePath(name, "back");
-        String iconSprite = spritePath(name, "icon");
-
         Pokemon pokemon = new Pokemon(
                 name, dex, typings, stats, Nature.SERIOUS, abilities,
-                frontSprite, backSprite, iconSprite,
-                new ArrayList<>());
+                spritePath(name, "front"), spritePath(name, "back"), spritePath(name, "icon"),
+                new ArrayList<>()); // moves
         pokemonMap.put(name, pokemon);
     }
 

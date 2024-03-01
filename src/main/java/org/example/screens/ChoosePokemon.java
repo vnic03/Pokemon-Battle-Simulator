@@ -1,34 +1,29 @@
 package org.example.screens;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import org.example.screens.battle.BattleSimulator;
 import org.example.pokemon.Pokemon;
 import org.example.pokemon.repositories.PokemonRepository;
-import javafx.scene.image.Image;
 
 import java.io.InputStream;
 
+public class ChoosePokemon {
 
-public class ChoosePokemon extends Application {
+    private GridPane grid;
 
-    private Stage primaryStage;
+    public ChoosePokemon() {
+        initializeUI();
+    }
 
-    private ComboBox<String> pokemon1ComboBox;
-    private ComboBox<String> pokemon2ComboBox;
+    private void initializeUI() {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        this.primaryStage = stage;
-
-        GridPane grid = new GridPane();
+        grid = new GridPane();
         grid.getStyleClass().add("grid-pane");
 
         grid.setHgap(10);
@@ -44,8 +39,8 @@ public class ChoosePokemon extends Application {
         pokemon1ComboBox.getItems().addAll(PokemonRepository.getAllPokemonNames());
 
         pokemon1ComboBox.setCellFactory(lv -> new ListCell<String>() {
-            private ImageView imageView = new ImageView();
-            private Label typeLabel = new Label();
+            private final ImageView imageView = new ImageView();
+            private final Label typeLabel = new Label();
 
             @Override
             protected void updateItem(String pokemonName, boolean empty) {
@@ -96,8 +91,8 @@ public class ChoosePokemon extends Application {
         pokemon2ComboBox.getItems().addAll(PokemonRepository.getAllPokemonNames());
 
         pokemon2ComboBox.setCellFactory(lv -> new ListCell<String>() {
-            private ImageView imageView = new ImageView();
-            private Label typeLabel = new Label();
+            private final ImageView imageView = new ImageView();
+            private final Label typeLabel = new Label();
 
             @Override
             protected void updateItem(String pokemonName, boolean empty) {
@@ -193,13 +188,10 @@ public class ChoosePokemon extends Application {
 
         });
 
-        Scene scene = new Scene(grid, 600, 200);
-        scene.getStylesheets().add(getClass().getResource("/choosePokemonStyle.css").toExternalForm());
+    }
 
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Pokémon Battle Setup");
-        primaryStage.show();
-
+    public Node getView() {
+        return grid;
     }
 
     private void openEvConfigWindow(String pokemonName) {
