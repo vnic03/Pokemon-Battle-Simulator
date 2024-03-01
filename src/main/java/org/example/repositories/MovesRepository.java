@@ -1,4 +1,4 @@
-package org.example.pokemon.repositories;
+package org.example.repositories;
 
 import org.example.pokemon.MoveCategory;
 import org.example.pokemon.Moves;

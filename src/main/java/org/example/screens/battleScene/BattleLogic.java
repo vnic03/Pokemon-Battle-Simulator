@@ -7,7 +7,7 @@ import org.example.pokemon.moveEffects.MoveEffectWithDamage;
 import org.example.pokemon.moveEffects.MultiHitMoveEffect;
 import org.example.pokemon.MoveCategory;
 import org.example.pokemon.Moves;
-import org.example.pokemon.repositories.MovesRepository;
+import org.example.repositories.MovesRepository;
 import org.example.pokemon.Pokemon;
 import org.example.teams.Team;
 

@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import org.example.screens.battle.BattleSimulator;
 import org.example.pokemon.Pokemon;
-import org.example.pokemon.repositories.PokemonRepository;
+import org.example.repositories.PokemonRepository;
 
 import java.io.InputStream;
 

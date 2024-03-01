@@ -1,7 +1,7 @@
 package failedIdeas;
 
 import org.example.pokemon.Moves;
-import org.example.pokemon.repositories.MovesRepository;
+import org.example.repositories.MovesRepository;
 import org.example.pokemon.Nature;
 import org.example.pokemon.Pokemon;
 

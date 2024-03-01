@@ -12,7 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.pokemon.Moves;
 import org.example.pokemon.Typing;
-import org.example.pokemon.repositories.MovesRepository;
+import org.example.repositories.MovesRepository;
 import org.example.pokemon.Pokemon;
 import java.util.ArrayList;
 import java.util.HashMap;

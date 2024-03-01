@@ -1,7 +1,7 @@
 package org.example.screens.battle;
 
 import failedIdeas.MoveSelector;
-import org.example.pokemon.repositories.MovesRepository;
+import org.example.repositories.MovesRepository;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.pokemon.*;
 import org.example.pokemon.moveEffects.MoveEffect;

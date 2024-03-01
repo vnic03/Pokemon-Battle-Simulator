@@ -2,7 +2,6 @@ package org.example.pokemon.abilityEffects;
 
 import org.example.pokemon.Moves;
 import org.example.pokemon.Pokemon;
-import org.example.pokemon.repositories.PokemonRepository;
 import org.example.screens.battle.Weather;
 import org.example.screens.battleScene.BattleRoundResult;
 

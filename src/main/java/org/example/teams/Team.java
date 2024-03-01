@@ -3,7 +3,7 @@ package org.example.teams;
 
 import javafx.collections.ObservableList;
 import org.example.pokemon.Moves;
-import org.example.pokemon.repositories.MovesRepository;
+import org.example.repositories.MovesRepository;
 import org.example.pokemon.Pokemon;
 
 

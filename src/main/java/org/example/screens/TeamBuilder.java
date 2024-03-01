@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import org.example.pokemon.Moves;
 import org.example.pokemon.Typing;
 import org.example.pokemon.Pokemon;
-import org.example.pokemon.repositories.PokemonRepository;
+import org.example.repositories.PokemonRepository;
 import org.example.teams.Team;
 
 

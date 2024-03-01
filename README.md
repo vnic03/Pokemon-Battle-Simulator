@@ -36,3 +36,8 @@ Please note that as the game is still in development, some features might not be
 Can only be played by cloning this repository. Once the development is complete, I will release a downloadable version of the game, 
 making it easier for everyone to access and enjoy!
 
+### Feedback & Suggestions
+
+If you have any ideas on how to enhance the game or if you've encountered any issues while playing, please don't hesitate to share your thoughts. 
+You can open an issue on this repository to discuss any feedback you might have.
+

@@ -1,4 +1,4 @@
-package org.example.pokemon.repositories;
+package org.example.repositories;
 
 import org.example.pokemon.Ability;
 import org.example.pokemon.Nature;
