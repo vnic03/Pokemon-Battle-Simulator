@@ -5,19 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated read me file">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/failedIdeas/MoveSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/failedIdeas/MoveSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/AbilityEffectWithMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/AbilityEffectWithMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/AbilityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/AbilityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/MovesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/repositories/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/ChoosePokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/ChoosePokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/MoveSelectionWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/MoveSelectionWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/AngerPointEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/MagmaArmorEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/RainDishEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/RoughSkinEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/SpeedBoostEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/camerupt/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/camerupt/front.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/camerupt/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/sharpedo/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/sharpedo/front.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemonSprites/sharpedo/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/failedIdeas/EvDistributionFirstTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/failedIdeas/EvDistributionFx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/failedIdeas/MoveFetcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/failedIdeas/MoveSelector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/failedIdeas/PokeApiFetcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/failedIdeas/PokemonCreator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/FilterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/abilityEffects/DamageReductionEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/AbilityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/AbilityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/MovesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/ChoosePokemon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/EvConfigWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/MoveSelectionWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/NatureSelection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/NatureSelectionWindow.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/TeamBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/TeamBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/BattleSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battle/BattleSimulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/teams/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/teams/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/firstPage/BattleButton.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

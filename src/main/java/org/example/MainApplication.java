@@ -2,9 +2,9 @@ package org.example;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -30,7 +30,7 @@ public class MainApplication extends Application {
     private BattleView battleView;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         this.primaryStage = primaryStage;
 
@@ -80,13 +80,16 @@ public class MainApplication extends Application {
         transition.setToValue(0.0);
         transition.setOnFinished(event -> rootPane.getChildren().remove(blackScreen));
         transition.play();
-    }
-    public static void main(String[] args) {
-        launch(args);
+
+        primaryStage.setOnCloseRequest(event -> {
+            System.out.println("Exit application");
+            Platform.exit();
+            System.exit(0);
+        });
     }
 
-    public void setMainContent(Node node) {
-        rootPane.getChildren().setAll(node);
+    public static void main(String[] args) {
+        launch(args);
     }
 
     private void openTeamBuilder() {

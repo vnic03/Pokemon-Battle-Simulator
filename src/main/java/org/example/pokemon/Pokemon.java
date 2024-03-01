@@ -503,6 +503,20 @@ public class Pokemon {
         }
     }
 
+    public static Map<String, Integer> getPokemonBaseStats(Pokemon pokemon) {
+        Stats base = pokemon.getStats();
+        Map<String, Integer> stats = new HashMap<>();
+
+        stats.put("HP", base.getMaxHp());
+        stats.put("Attack", base.getAttack());
+        stats.put("Defense", base.getDefense());
+        stats.put("Sp.Atk", base.getSpecialAttack());
+        stats.put("Sp.Def", base.getSpecialDefense());
+        stats.put("Speed", base.getSpeed());
+
+        return stats;
+    }
+
     public String toString() {
 
         String typeString = typing.stream().map(Typing::name).collect(Collectors.joining(", "));

@@ -1,6 +1,5 @@
 package org.example.screens.battle;
 
-import failedIdeas.MoveSelector;
 import org.example.repositories.MovesRepository;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.pokemon.*;
@@ -28,6 +27,7 @@ public class BattleSimulator {
         return instance;
     }
 
+    /*
 
     public void simulateBattle(Pokemon pokemon1, Pokemon pokemon2) {
 
@@ -109,6 +109,8 @@ public class BattleSimulator {
         resetPokemonMoves(pokemon1);
         resetPokemonMoves(pokemon2);
     }
+
+     */
 
     private Pokemon determineFirstAttacker(Pokemon pokemon1, Pokemon pokemon2, MoveEffect move1, MoveEffect move2) {
 

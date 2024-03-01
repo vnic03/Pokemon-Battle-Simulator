@@ -246,6 +246,7 @@ public class MovesRepository {
                 .collect(Collectors.toList());
     }
 
+    @SuppressWarnings("unused")
     public static MoveEffect getMoveEffectByName(String moveName) {
         Moves move = getMoveByName(moveName);
 

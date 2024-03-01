@@ -26,7 +26,7 @@ public class AbilityRepository {
 
         ability("Chlorophyll", "Boosts the Pokémon's Speed stat in sunshine.", new ChlorophyllEffect());
         ability("Solar Power", "Boosts the Sp. Atk stat in sunny weather, but HP decreases every turn.", new SolarPowerEffect());
-        //abilities.put("Rain Dish", new Ability("Rain Dish", "The Pokémon gradually regains HP in rain."));
+        ability("Rain Dish", "The Pokémon gradually regains HP in rain.", new RainDishEffect());
 
 
         //abilities.put("Levitate", new Ability("Levitate", "By floating in the air, the Pokémon receives full immunity to all Ground-type moves."));
@@ -54,7 +54,8 @@ public class AbilityRepository {
 
         ability("Soundproof", "Gives full immunity to all sound-based moves.", new SoundProofEffect());
 
-        ability("Filter", "Powers down super-effective moves.", new FilterEffect());
+        ability("Filter", "Powers down super-effective moves.", new DamageReductionEffect());
+        ability("Solid Rock", "Powers down super-effective moves.", new DamageReductionEffect());
 
         ability("Scrappy", "Enables moves to hit Ghost-type foes.", new ScrappyEffect());
 
@@ -81,6 +82,14 @@ public class AbilityRepository {
         ability("Marvel Scale", "Boosts Defense if there is a status problem", new MarvelScaleEffect());
 
         ability("Competitive", "Boosts the Sp. Atk stat when a stat is lowered.", new CompetitiveEffect());
+
+        ability("Magma Armor", "Prevents freezing.", new MagmaArmorEffect());
+
+        ability("Anger Point", "Raises Attack upon taking a critical hit.", new AngerPointEffect());
+
+        ability("Rough Skin", "Hurts to touch.", new RoughSkinEffect());
+
+        ability("Speed Boost", "Gradually boosts Speed.", new SpeedBoostEffect());
     }
 
     public Ability getAbility(String name) {

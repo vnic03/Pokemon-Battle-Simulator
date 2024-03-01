@@ -28,9 +28,9 @@ public class PokemonRepository {
         pokemon("Charmeleon", 5, Typing.FIRE, new Stats(133, 84, 78, 100, 85, 100), "Blaze", "Solar Power");
         pokemon("Charizard", 6, Typing.FIRE, Typing.FLYING, new Stats(153, 104, 98, 129, 105, 120), "Blaze", "Solar Power");
 
-        pokemon("Squirtle", 7, Typing.WATER, new Stats(119, 68, 85, 70, 84, 63), "Torrent");
-        pokemon("Wartortle", 8, Typing.WATER, new Stats(134, 83, 100, 85, 100, 78), "Torrent");
-        pokemon("Blastoise", 9, Typing.WATER, new Stats(154, 103, 120, 105, 125, 98), "Torrent");
+        pokemon("Squirtle", 7, Typing.WATER, new Stats(119, 68, 85, 70, 84, 63), "Torrent", "Rain Dish");
+        pokemon("Wartortle", 8, Typing.WATER, new Stats(134, 83, 100, 85, 100, 78), "Torrent", "Rain Dish");
+        pokemon("Blastoise", 9, Typing.WATER, new Stats(154, 103, 120, 105, 125, 98), "Torrent", "Rain Dish");
 
         // Machop
         // Machoke
@@ -63,6 +63,9 @@ public class PokemonRepository {
 
         pokemon("Milotic", 350, Typing.WATER, new Stats(170, 80, 99, 120, 145, 101), "Marvel Scale", "Competitive");
 
+        pokemon("Camerupt", 323, Typing.FIRE, Typing.GROUND, new Stats(145, 120, 90, 125, 90, 60), "Magma Armor", "Solid Rock", "Anger Point");
+        pokemon("Sharpedo", 319, Typing.WATER, Typing.DARK, new Stats(145, 140, 60, 115, 60, 115), "Rough Skin", "Speed Boost");
+
 
         // Legendary Pokemon
 
@@ -71,6 +74,7 @@ public class PokemonRepository {
         pokemon("Rayquaza", 384, Typing.DRAGON, Typing.FLYING, new Stats(180, 170, 110, 170, 110, 115), "Air Lock");
     }
 
+    @SuppressWarnings("unused")
     public static List<String> getAllPokemonNames() {
         return new ArrayList<>(pokemonMap.keySet());
     }

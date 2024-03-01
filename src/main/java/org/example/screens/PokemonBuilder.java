@@ -467,7 +467,7 @@ public class PokemonBuilder {
     }
 
     private void initializeEvComponents(Pokemon pokemon) {
-        Map<String, Integer> baseStats = EvConfigWindow.getPokemonBaseStats(pokemon);
+        Map<String, Integer> baseStats = Pokemon.getPokemonBaseStats(pokemon);
 
         // Stat Labels
 
