@@ -1,7 +1,5 @@
-package org.example.screens.battleScene;
+package org.example.battle;
 
-import org.example.screens.battle.DamageCalculator;
-import org.example.screens.battle.Weather;
 import org.example.pokemon.move_effects.MoveEffect;
 import org.example.pokemon.move_effects.MoveEffectWithDamage;
 import org.example.pokemon.move_effects.MultiHitMoveEffect;
@@ -9,6 +7,8 @@ import org.example.pokemon.MoveCategory;
 import org.example.pokemon.Moves;
 import org.example.repositories.MovesRepository;
 import org.example.pokemon.Pokemon;
+import org.example.screens.battleScene.BattleRoundResult;
+import org.example.screens.battleScene.BattleView;
 import org.example.teams.Team;
 
 import java.util.Random;

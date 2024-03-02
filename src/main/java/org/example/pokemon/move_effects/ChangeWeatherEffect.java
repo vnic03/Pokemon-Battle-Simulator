@@ -1,7 +1,6 @@
 package org.example.pokemon.move_effects;
 
-import org.example.screens.battle.BattleSimulator;
-import org.example.screens.battle.Weather;
+import org.example.battle.Weather;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.pokemon.Pokemon;
 
@@ -15,7 +14,7 @@ public class ChangeWeatherEffect implements MoveEffect {
 
     @Override
     public void apply(Pokemon user, Pokemon target, BattleRoundResult result) {
-        BattleSimulator.getInstance().setWeather(weatherToChange);
+        result.setCurrentWeather(weatherToChange);
     }
 
     @Override

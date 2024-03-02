@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.screens.TeamBuilder;
-import org.example.screens.battleScene.BattleLogic;
+import org.example.battle.BattleLogic;
 import org.example.screens.battleScene.BattleView;
 import org.example.screens.battleScene.BeforeBattleAnimation;
 import org.example.screens.firstPage.TeamBuilderButton;

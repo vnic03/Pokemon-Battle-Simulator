@@ -29,7 +29,6 @@ public class AbilityRepository {
         ability("Solar Power", "Boosts the Sp. Atk stat in sunny weather, but HP decreases every turn.", new SolarPowerEffect());
         ability("Rain Dish", "The Pokémon gradually regains HP in rain.", new RainDishEffect());
 
-
         //abilities.put("Levitate", new Ability("Levitate", "By floating in the air, the Pokémon receives full immunity to all Ground-type moves."));
         ability("Cursed Body", "May disable a move used on the Pokémon.", new CursedBodyEffect());
 

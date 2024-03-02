@@ -1,4 +1,4 @@
-package org.example.screens.battle;
+package org.example.battle;
 
 public enum Weather {
     SUN,

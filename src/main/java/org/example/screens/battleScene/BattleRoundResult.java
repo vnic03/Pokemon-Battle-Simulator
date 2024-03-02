@@ -1,6 +1,6 @@
 package org.example.screens.battleScene;
 
-import org.example.screens.battle.Weather;
+import org.example.battle.Weather;
 
 public class BattleRoundResult {
     private String message;

@@ -3,7 +3,7 @@ package org.example.repositories;
 import org.example.pokemon.MoveCategory;
 import org.example.pokemon.Moves;
 import org.example.pokemon.Typing;
-import org.example.screens.battle.Weather;
+import org.example.battle.Weather;
 import org.example.pokemon.move_effects.*;
 import org.example.pokemon.move_effects.priority.PriorityOne;
 

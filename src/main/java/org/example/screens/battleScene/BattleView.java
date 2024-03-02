@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import org.example.screens.TeamBuilder;
 import org.example.pokemon.Moves;
 import org.example.pokemon.Pokemon;
+import org.example.battle.BattleLogic;
 import org.example.teams.Team;
 
 import java.util.*;
