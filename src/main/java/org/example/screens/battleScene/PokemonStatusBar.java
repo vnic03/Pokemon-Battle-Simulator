@@ -55,7 +55,7 @@ public class PokemonStatusBar extends StackPane {
         contentBox.setLayoutY(10);
 
         this.getStylesheets().add(Objects.requireNonNull(
-                getClass().getResource("/battleViewStyles/battleViewStyle.css")).toExternalForm());
+                getClass().getResource("/battle_view_styles/battleViewStyle.css")).toExternalForm());
 
         nameLabel.getStyleClass().add("pokemon-name");
         levelLabel.getStyleClass().add("pokemon-level");

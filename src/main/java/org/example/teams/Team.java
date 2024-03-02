@@ -1,6 +1,5 @@
 package org.example.teams;
 
-
 import javafx.collections.ObservableList;
 import org.example.pokemon.Moves;
 import org.example.repositories.MovesRepository;

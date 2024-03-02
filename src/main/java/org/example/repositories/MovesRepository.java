@@ -4,8 +4,8 @@ import org.example.pokemon.MoveCategory;
 import org.example.pokemon.Moves;
 import org.example.pokemon.Typing;
 import org.example.screens.battle.Weather;
-import org.example.pokemon.moveEffects.*;
-import org.example.pokemon.moveEffects.priority.PriorityOne;
+import org.example.pokemon.move_effects.*;
+import org.example.pokemon.move_effects.priority.PriorityOne;
 
 import java.util.ArrayList;
 import java.util.List;

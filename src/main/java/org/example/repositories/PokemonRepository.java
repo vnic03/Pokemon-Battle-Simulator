@@ -7,6 +7,7 @@ import org.example.pokemon.Pokemon;
 import org.example.pokemon.stats.Stats;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PokemonRepository {
 
@@ -14,64 +15,93 @@ public class PokemonRepository {
     private final static AbilityRepository AR = new AbilityRepository();
 
     static {
-        pokemon("Pikachu", 25, Typing.ELECTRIC, new Stats(110, 75, 60, 70, 70, 110), "Static");
 
-        pokemon("Cubone", 104, Typing.GROUND, new Stats(125, 70, 115, 60, 70, 55), "Battle Armor");
+        // Bug
+        pokemon("Scyther", 123, Typing.BUG, Typing.FLYING, stats(145, 130, 100, 75, 100, 125), "Swarm", "Technician");
 
-        pokemon("Snorlax", 143, Typing.NORMAL, new Stats(235, 130, 85, 85, 130, 50), "Thick Fat");
+        // Dark
+        pokemon("Houndoom", 229, Typing.DARK, Typing.FIRE, stats(150, 110, 70, 130, 100, 115), "Flash Fire");
 
-        pokemon("Bulbasaur", 1, Typing.GRASS, Typing.POISON, new Stats(120, 69, 69, 85, 85, 65), "Overgrow", "Chlorophyll");
-        pokemon("Ivysaur", 2, Typing.GRASS, Typing.POISON, new Stats(135, 82, 83, 100, 100, 80), "Overgrow", "Chlorophyll");
-        pokemon("Venusaur", 3, Typing.GRASS, Typing.POISON, new Stats(155, 102, 103, 120, 120, 100), "Overgrow", "Chlorophyll");
+        // Dragon
+        pokemon("Dragonite", 149, Typing.DRAGON, Typing.FLYING, stats(166, 154, 115, 120, 120, 100), "Inner Focus", "Multiscale");
 
-        pokemon("Charmander", 4, Typing.FIRE, new Stats(114, 72, 63, 80, 70, 85), "Blaze", "Solar Power");
-        pokemon("Charmeleon", 5, Typing.FIRE, new Stats(133, 84, 78, 100, 85, 100), "Blaze", "Solar Power");
-        pokemon("Charizard", 6, Typing.FIRE, Typing.FLYING, new Stats(153, 104, 98, 129, 105, 120), "Blaze", "Solar Power");
+        // Electric
+        pokemon("Pikachu", 25, Typing.ELECTRIC, stats(110, 75, 60, 70, 70, 110), "Static");
 
-        pokemon("Squirtle", 7, Typing.WATER, new Stats(119, 68, 85, 70, 84, 63), "Torrent", "Rain Dish");
-        pokemon("Wartortle", 8, Typing.WATER, new Stats(134, 83, 100, 85, 100, 78), "Torrent", "Rain Dish");
-        pokemon("Blastoise", 9, Typing.WATER, new Stats(154, 103, 120, 105, 125, 98), "Torrent", "Rain Dish");
+        // Fairy
+        pokemon("Granbull", 210, Typing.FAIRY, stats(165, 140, 95, 80, 80, 65), "Intimidate", "Rough Skin");
 
-        // Machop
-        // Machoke
-        pokemon("Machamp", 68, Typing.FIGHTING, new Stats(165, 150, 100, 85, 105, 75), "Guts", "No Guard");
+        // Fighting
+        pokemon("Machamp", 68, Typing.FIGHTING, stats(165, 150, 100, 85, 105, 75), "Guts", "No Guard");
 
-        // Gastly
-        // Haunter
-        pokemon("Gengar", 94, Typing.GHOST, Typing.POISON, new Stats(135, 85, 80, 150, 95, 130), "Cursed Body");
+        // Fire
+        pokemon("Charmander", 4, Typing.FIRE, stats(114, 72, 63, 80, 70, 85), "Blaze", "Solar Power");
+        pokemon("Charmeleon", 5, Typing.FIRE, stats(133, 84, 78, 100, 85, 100), "Blaze", "Solar Power");
+        pokemon("Charizard", 6, Typing.FIRE, Typing.FLYING, stats(153, 104, 98, 129, 105, 120), "Blaze", "Solar Power");
 
-        pokemon("Scyther", 123, Typing.BUG, Typing.FLYING, new Stats(145, 130, 100, 75, 100, 125), "Swarm", "Technician");
+        pokemon("Magmar", 126, Typing.FIRE, stats(140, 115, 77, 120, 105, 103), "Flame Body");
 
-        pokemon("Magmar", 126, Typing.FIRE, new Stats(140, 115, 77, 120, 105, 103), "Flame Body");
+        pokemon("Camerupt", 323, Typing.FIRE, Typing.GROUND, stats(145, 120, 90, 125, 90, 60), "Magma Armor", "Solid Rock", "Anger Point");
 
-        pokemon("Pidgeot", 18, Typing.NORMAL, Typing.FLYING, new Stats(158, 100, 95, 90, 90, 121), "Keen Eye");
+        // Flying
 
-        pokemon("Mr.Mime", 122, Typing.PSYCHIC, Typing.FAIRY, new Stats(115, 65, 85, 120, 140, 110), "Filter", "Soundproof", "Technician");
+        // Ghost
+        pokemon("Gengar", 94, Typing.GHOST, Typing.POISON, stats(135, 85, 80, 150, 95, 130), "Cursed Body");
 
-        pokemon("Whismur", 293, Typing.NORMAL, new Stats(139, 71, 43, 71, 43, 48), "Soundproof");
-        pokemon("Exploud", 295, Typing.NORMAL, new Stats(179, 111, 83, 111, 93, 88), "Soundproof", "Scrappy");
+        // Grass
+        pokemon("Bulbasaur", 1, Typing.GRASS, Typing.POISON, stats(120, 69, 69, 85, 85, 65), "Overgrow", "Chlorophyll");
+        pokemon("Ivysaur", 2, Typing.GRASS, Typing.POISON, stats(135, 82, 83, 100, 100, 80), "Overgrow", "Chlorophyll");
+        pokemon("Venusaur", 3, Typing.GRASS, Typing.POISON, stats(155, 102, 103, 120, 120, 100), "Overgrow", "Chlorophyll");
 
-        pokemon("Tyranitar", 248, Typing.ROCK, Typing.DARK, new Stats(175, 154, 130, 115, 120, 81), "Sand Stream");
+        pokemon("Exeguttor", 103, Typing.GRASS, Typing.PSYCHIC, stats(170, 115, 105, 145, 95, 75), "Chlorophyll");
 
-        pokemon("Gyarados", 130, Typing.WATER, Typing.FLYING, new Stats(170, 145, 99, 80, 120, 101), "Intimidate", "Moxie");
+        // Ground
+        pokemon("Cubone", 104, Typing.GROUND, stats(125, 70, 115, 60, 70, 55), "Battle Armor");
 
-        pokemon("Metagross", 376, Typing.STEEL, Typing.PSYCHIC, new Stats(155, 155, 150,115, 110, 90), "Clear Body");
+        // Ice
+        pokemon("Jynx", 124, Typing.ICE, Typing.PSYCHIC, stats(140, 70,55, 135, 115, 115), "Dry Skin", "Fore Warn");
 
-        pokemon("Lapras", 131, Typing.WATER, Typing.ICE, new Stats(205, 105, 100, 105, 115, 80), "Water Absorb", "Shell Armor", "Hydration");
+        // Normal
+        pokemon("Snorlax", 143, Typing.NORMAL, stats(235, 130, 85, 85, 130, 50), "Thick Fat");
 
-        pokemon("Dragonite", 149, Typing.DRAGON, Typing.FLYING, new Stats(166, 154, 115, 120, 120, 100), "Inner Focus", "Multiscale");
+        pokemon("Pidgeot", 18, Typing.NORMAL, Typing.FLYING, stats(158, 100, 95, 90, 90, 121), "Keen Eye");
 
-        pokemon("Milotic", 350, Typing.WATER, new Stats(170, 80, 99, 120, 145, 101), "Marvel Scale", "Competitive");
+        pokemon("Whismur", 293, Typing.NORMAL, stats(139, 71, 43, 71, 43, 48), "Soundproof");
+        pokemon("Exploud", 295, Typing.NORMAL, stats(179, 111, 83, 111, 93, 88), "Soundproof", "Scrappy");
 
-        pokemon("Camerupt", 323, Typing.FIRE, Typing.GROUND, new Stats(145, 120, 90, 125, 90, 60), "Magma Armor", "Solid Rock", "Anger Point");
-        pokemon("Sharpedo", 319, Typing.WATER, Typing.DARK, new Stats(145, 140, 60, 115, 60, 115), "Rough Skin", "Speed Boost");
+        // Poison
+        pokemon("Crobat", 169, Typing.POISON, Typing.FLYING, stats(160,110, 100, 90, 100, 150), "Inner Focus");
 
+        // Psychic
+        pokemon("Mr.Mime", 122, Typing.PSYCHIC, Typing.FAIRY, stats(115, 65, 85, 120, 140, 110), "Filter", "Soundproof", "Technician");
+
+        // Rock
+        pokemon("Tyranitar", 248, Typing.ROCK, Typing.DARK, stats(175, 154, 130, 115, 120, 81), "Sand Stream");
+
+        // Steel
+        pokemon("Metagross", 376, Typing.STEEL, Typing.PSYCHIC, stats(155, 155, 150,115, 110, 90), "Clear Body");
+
+        // Water
+        pokemon("Squirtle", 7, Typing.WATER, stats(119, 68, 85, 70, 84, 63), "Torrent", "Rain Dish");
+        pokemon("Wartortle", 8, Typing.WATER, stats(134, 83, 100, 85, 100, 78), "Torrent", "Rain Dish");
+        pokemon("Blastoise", 9, Typing.WATER, stats(154, 103, 120, 105, 125, 98), "Torrent", "Rain Dish");
+
+        pokemon("Gyarados", 130, Typing.WATER, Typing.FLYING, stats(170, 145, 99, 80, 120, 101), "Intimidate", "Moxie");
+
+        pokemon("Lapras", 131, Typing.WATER, Typing.ICE, stats(205, 105, 100, 105, 115, 80), "Water Absorb", "Shell Armor", "Hydration");
+
+        pokemon("Milotic", 350, Typing.WATER, stats(170, 80, 99, 120, 145, 101), "Marvel Scale", "Competitive");
+
+        pokemon("Sharpedo", 319, Typing.WATER, Typing.DARK, stats(145, 140, 60, 115, 60, 115), "Rough Skin", "Speed Boost");
 
         // Legendary Pokemon
 
-        pokemon("Mew", 151, Typing.PSYCHIC, new Stats(175, 120, 120, 120, 120, 120), "Synchro");
+        pokemon("Mew", 151, Typing.PSYCHIC, stats(175, 120, 120, 120, 120, 120), "Synchro");
 
-        pokemon("Rayquaza", 384, Typing.DRAGON, Typing.FLYING, new Stats(180, 170, 110, 170, 110, 115), "Air Lock");
+        pokemon("Rayquaza", 384, Typing.DRAGON, Typing.FLYING, stats(180, 170, 110, 170, 110, 115), "Air Lock");
+
+        pokemon("Kyogre", 382, Typing.WATER, stats(175, 120,110, 170,160, 110), "Drizzle");
+        pokemon("Groudon", 383, Typing.GROUND, stats(175, 170, 160, 120, 110, 110), "Drought");
     }
 
     @SuppressWarnings("unused")
@@ -115,7 +145,18 @@ public class PokemonRepository {
 
     private static String spritePath(String name, String type) {
         String formattedName = name.toLowerCase().replaceAll("\\W+", "_");
-        return "/pokemonSprites/" + formattedName + "/" + type + ".png";
+        return "/pokemon/" + formattedName + "/" + type + ".png";
+    }
+
+    private static Stats stats(int hp, int a, int d, int spA, int spD, int speed) {
+        return new Stats(hp, a, d, spA, spD, speed);
+    }
+
+    @SuppressWarnings("unused")
+    public static List<Pokemon> getAllPokemonByType(Typing type) {
+        return pokemonMap.values().stream()
+                .filter(pokemon -> pokemon.getTyping().contains(type))
+                .collect(Collectors.toList());
     }
 
     @SuppressWarnings("unused")

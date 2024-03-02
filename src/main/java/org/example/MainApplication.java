@@ -111,7 +111,7 @@ public class MainApplication extends Application {
             BeforeBattleAnimation animation = new BeforeBattleAnimation(primaryStage, battleScene, team1,team2);
 
             Scene animationScene = new Scene(animation, primaryStage.getWidth(), primaryStage.getHeight());
-            animationScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/battleViewStyles/bBAnimationStyles.css")).toExternalForm());
+            animationScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/battle_view_styles/bBAnimationStyles.css")).toExternalForm());
             primaryStage.setScene(animationScene);
             primaryStage.setFullScreen(true);
 

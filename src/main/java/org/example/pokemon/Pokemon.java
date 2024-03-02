@@ -25,7 +25,7 @@ public class Pokemon {
     private final Stats stats;
     private List<Moves> moves;
     private Nature nature;
-    private List<Ability> abilities;
+    private final List<Ability> abilities;
     private Ability activeAbility;
     private boolean isParalyzed;
     private boolean isBurned;
@@ -172,14 +172,9 @@ public class Pokemon {
         this.moves.clear();
     }
 
-    public Moves chooseMoveByName(String moveName) {
-        for (Moves move : this.moves) {
-            if (move.getName().equalsIgnoreCase(moveName)) {
-                return move;
-            }
-        }
-        System.out.println("Move not found!");
-        return null;
+    public Optional<Moves> chooseMoveByName(String moveName) {
+        return moves.stream()
+                .filter(move -> move.getName().equalsIgnoreCase(moveName)).findFirst();
     }
 
     public boolean isAlive() {
@@ -426,8 +421,6 @@ public class Pokemon {
             evs[5] = speedEvs;
 
             this.statsCalculated = false;
-        } else {
-            throw new IllegalArgumentException("Invalid Ev spread !");
         }
     }
     public void calculateStatsIfNecessary() {
@@ -475,12 +468,6 @@ public class Pokemon {
         return disabledMoves.containsKey(move) && disabledMoves.get(move) > 0;
     }
 
-    public void addAbility(Ability ability) {
-        if (abilities == null) {
-            abilities = new ArrayList<>();
-        }
-        abilities.add(ability);
-    }
     public boolean belongsTo(Team team) {
         return team.containsPokemon(this);
     }
@@ -491,7 +478,7 @@ public class Pokemon {
         public static Image loadImage(String path) {
             return imageCache.computeIfAbsent(path, p -> {
                 try {
-                    URL url = SpriteManager.class.getResource(p);
+                    final URL url = SpriteManager.class.getResource(p);
                     if (url == null) {
                         throw new IllegalArgumentException("Resource not found: " + p);
                     }

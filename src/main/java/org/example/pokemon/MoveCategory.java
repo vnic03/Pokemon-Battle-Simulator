@@ -23,7 +23,7 @@ public enum MoveCategory {
     }
 
     MoveCategory(String imagePath) {
-        this.imagePath = "/moveCategory/" + imagePath;
+        this.imagePath = "/move_categories/" + imagePath;
     }
     public static Image loadImage(String path) {
         return new Image(Objects.requireNonNull(MoveCategory.class.getResourceAsStream(path)));

@@ -43,7 +43,7 @@ public class BattleView extends AnchorPane {
 
         initializeBattleField();
         this.getStylesheets().add(Objects.requireNonNull(
-                getClass().getResource("/battleViewStyles/battleViewStyle.css")).toExternalForm());
+                getClass().getResource("/battle_view_styles/battleViewStyle.css")).toExternalForm());
         this.getStyleClass().add("battle-view");
     }
 

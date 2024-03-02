@@ -2,7 +2,7 @@ package org.example.repositories;
 
 import org.example.pokemon.Ability;
 import org.example.pokemon.Pokemon;
-import org.example.pokemon.abilityEffects.*;
+import org.example.pokemon.ability_effects.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +17,7 @@ public class AbilityRepository {
     }
 
     AbilityEffect starterEffect = new StarterEffect();
+    AbilityEffect weather = new WeatherEffect();
 
     private void initializeAbilities() {
 
@@ -61,7 +62,9 @@ public class AbilityRepository {
 
         ability("Air Lock", "Negates weather effects.", new AirLockEffect());
 
-        ability("Sand Stream", "Summons a sandstorm.", new WeatherEffect());
+        ability("Sand Stream", "Summons a sandstorm.", weather);
+        ability("Drought", "Summons sunlight in battle.", weather);
+        ability("Drizzle", "Summons rain in battle.", weather);
 
         ability("Moxie", "Boosts Attack after knocking out any Pokémon.", new MoxieEffect());
 
@@ -90,6 +93,12 @@ public class AbilityRepository {
         ability("Rough Skin", "Hurts to touch.", new RoughSkinEffect());
 
         ability("Speed Boost", "Gradually boosts Speed.", new SpeedBoostEffect());
+
+        ability("Dry Skin", "Reduces HP if it is hot. Water restores HP.", new DrySkinEffect());
+
+        ability("Fore Warn", "Determines what moves the foe has.", new ForeWarnEffect());
+
+        ability("Flash Fire", "Powers up if hit by fire.", new FlashFireEffect());
     }
 
     public Ability getAbility(String name) {
@@ -97,7 +106,11 @@ public class AbilityRepository {
     }
 
     private void ability(String name, String description, AbilityEffect effect) {
-        abilities.put(name, new Ability(name, description, effect));
+        if (!abilities.containsKey(name)) {
+            abilities.put(name, new Ability(name, description, effect));
+        } else {
+            System.out.println("Ability " + name + " already exists.");
+        }
     }
 
     public void assignAbilityToPokemon(Pokemon pokemon, String abilityName) {

@@ -1,6 +1,6 @@
 package org.example.screens.battle;
 
-import org.example.pokemon.abilityEffects.PreventCritsEffect;
+import org.example.pokemon.ability_effects.PreventCritsEffect;
 import org.example.pokemon.stats.Stats;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.pokemon.*;

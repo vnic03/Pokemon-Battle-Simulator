@@ -3,10 +3,11 @@ package org.example.screens.battle;
 import org.example.repositories.MovesRepository;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.pokemon.*;
-import org.example.pokemon.moveEffects.MoveEffect;
-import org.example.pokemon.moveEffects.MoveEffectWithDamage;
-import org.example.pokemon.moveEffects.MultiHitMoveEffect;
+import org.example.pokemon.move_effects.MoveEffect;
+import org.example.pokemon.move_effects.MoveEffectWithDamage;
+import org.example.pokemon.move_effects.MultiHitMoveEffect;
 
+import java.util.Optional;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -170,62 +171,66 @@ public class BattleSimulator {
           //  return;
         //}
 
-        Moves move = attacker.chooseMoveByName(moveName);
+        Optional<Moves> oMove = attacker.chooseMoveByName(moveName);
 
-        if (move == null || !move.useMove()) {
-            if (attacker.allMovesOutOfPP()) {
-                System.out.println(attacker.getName() + " has no moves left !");
-                move = MovesRepository.getMoveByName("Struggle");
-            } else {
-                System.out.println("Move has no PP");
+        if (oMove.isPresent()) {
+            Moves move = oMove.get();
+
+            if (move == null || !move.useMove()) {
+                if (attacker.allMovesOutOfPP()) {
+                    System.out.println(attacker.getName() + " has no moves left !");
+                    move = MovesRepository.getMoveByName("Struggle");
+                } else {
+                    System.out.println("Move has no PP");
+                    return;
+                }
+            }
+
+            move.setAttacker(attacker);
+
+            if (!doesMoveHit(move, attacker, defender)) {
+                System.out.println(attacker.getName() + " missed " + defender.getName());
                 return;
             }
-        }
 
-        move.setAttacker(attacker);
+            boolean isDamageApplied = false;
 
-        if (!doesMoveHit(move, attacker, defender)) {
-            System.out.println(attacker.getName() + " missed " + defender.getName());
-            return;
-        }
-
-        boolean isDamageApplied = false;
-
-        MoveEffect effect = move.getEffect();
+            MoveEffect effect = move.getEffect();
 
 
-        if (effect instanceof MultiHitMoveEffect) {
-            MultiHitMoveEffect multiHitMoveEffect = (MultiHitMoveEffect) effect;
-            int totalDamage = multiHitMoveEffect.applyMultiHitDamage(attacker, defender, move, currentWeather, result);
-            System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + totalDamage + " damage.");
-            isDamageApplied = true;
-
-        } else if (effect instanceof MoveEffectWithDamage) {
-            MoveEffectWithDamage effectWithDamage = (MoveEffectWithDamage) effect;
-            effectWithDamage.applyWithDamage(attacker, defender, move, currentWeather, result);
-            isDamageApplied = true;
-
-        } else {
-            if (move.getName().equalsIgnoreCase("Sunny Day")) {
-                System.out.println(attacker.getName() + " used Sunny Day !");
-            } else if (move.getName().equalsIgnoreCase("Rain Dance")) {
-                System.out.println(attacker.getName() + " used Rain Dance !");
-            } else if (move.getName().equalsIgnoreCase("SandStorm")) {
-                System.out.println(attacker.getName() + " used Sandstorm !");
-            } else if (move.getName().equalsIgnoreCase("Snowscape")) {
-                System.out.println(attacker.getName() + " used Snowscape !");
-            }
-
-            effect.apply(attacker, defender, result);
-
-            if (moveName.equalsIgnoreCase("Struggle")) {
+            if (effect instanceof MultiHitMoveEffect) {
+                MultiHitMoveEffect multiHitMoveEffect = (MultiHitMoveEffect) effect;
+                int totalDamage = multiHitMoveEffect.applyMultiHitDamage(attacker, defender, move, currentWeather, result);
+                System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + totalDamage + " damage.");
                 isDamageApplied = true;
+
+            } else if (effect instanceof MoveEffectWithDamage) {
+                MoveEffectWithDamage effectWithDamage = (MoveEffectWithDamage) effect;
+                effectWithDamage.applyWithDamage(attacker, defender, move, currentWeather, result);
+                isDamageApplied = true;
+
+            } else {
+                if (move.getName().equalsIgnoreCase("Sunny Day")) {
+                    System.out.println(attacker.getName() + " used Sunny Day !");
+                } else if (move.getName().equalsIgnoreCase("Rain Dance")) {
+                    System.out.println(attacker.getName() + " used Rain Dance !");
+                } else if (move.getName().equalsIgnoreCase("SandStorm")) {
+                    System.out.println(attacker.getName() + " used Sandstorm !");
+                } else if (move.getName().equalsIgnoreCase("Snowscape")) {
+                    System.out.println(attacker.getName() + " used Snowscape !");
+                }
+
+                effect.apply(attacker, defender, result);
+
+                if (moveName.equalsIgnoreCase("Struggle")) {
+                    isDamageApplied = true;
+                }
             }
-        }
-        if (!isDamageApplied && move.getCategory() != MoveCategory.STATUS) {
-            int damage = DamageCalculator.calculateDamage(attacker, defender, move, currentWeather, result);
-            defender.takeDamage(damage);
-            System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + damage + " damage.");
+            if (!isDamageApplied && move.getCategory() != MoveCategory.STATUS) {
+                int damage = DamageCalculator.calculateDamage(attacker, defender, move, currentWeather, result);
+                defender.takeDamage(damage);
+                System.out.println(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + damage + " damage.");
+            }
         }
     }
 
