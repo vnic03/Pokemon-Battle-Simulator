@@ -33,10 +33,7 @@ public class DamageCalculator {
 
         damage = applyWeather(damage, attacker, defender, move, weather);
 
-        if (isCriticalHit(defender)) {
-            damage = (int) (damage * 1.5);
-            result.setMessage("\u001B[31m"+ "CRITICAL HIT !" + "\u001B[0m");
-        }
+        damage = isCriticalHit(damage, defender, result);
 
         return damage;
     }
@@ -51,9 +48,14 @@ public class DamageCalculator {
         }
     }
 
-    private static boolean isCriticalHit(Pokemon defender) {
-        return Math.random() < CRITICAL_HIT_CHANCE &&
-                !(defender.getActiveAbility().getEffect() instanceof PreventCritsEffect);
+    private static int isCriticalHit(int damage, Pokemon defender, BattleRoundResult result) {
+        if (Math.random() < CRITICAL_HIT_CHANCE &&
+                !(defender.getActiveAbility().getEffect() instanceof PreventCritsEffect))
+        {
+            result.setMessage("\u001B[31m" + "CRITICAL HIT !" + "\u001B[0m");
+            return (int) (damage * 1.5);
+        }
+        return damage;
     }
 
     private static double getTypeAdvantage(Typing attackType, List<Typing> defenderTypes, List<Typing> attackerTypes) {

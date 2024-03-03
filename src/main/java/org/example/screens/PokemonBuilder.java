@@ -192,7 +192,18 @@ public class PokemonBuilder {
 
         abilityComboBox.setOnAction(event -> {
             Ability selectedAbility = abilityComboBox.getValue();
-            pokemon.setActiveAbility(selectedAbility);
+            if (selectedAbility != null) {
+                pokemon.setActiveAbility(selectedAbility);
+            } else {
+                List<Ability> abilities = pokemon.getAbilities();
+                if (!abilities.isEmpty()) {
+                    Random random = new Random();
+                    int index = random.nextInt(abilities.size());
+                    Ability randomAbility = abilities.get(index);
+                    pokemon.setActiveAbility(randomAbility);
+                    abilityComboBox.setValue(randomAbility);
+                }
+            }
         });
 
         nicknameField = new TextField();
@@ -241,7 +252,7 @@ public class PokemonBuilder {
             //moveComboBoxes[index].hide();
 
             FilteredList<Moves> filteredMoves = new FilteredList<>(
-                    FXCollections.observableArrayList(MovesRepository.getAllMoves()), p -> true);
+                    FXCollections.observableArrayList(MovesRepository.getMoves()), p -> true);
 
             moveComboBoxes[index].setItems(filteredMoves);
 
@@ -257,7 +268,7 @@ public class PokemonBuilder {
                         return null;
                     }
 
-                    Moves move = MovesRepository.getAllMoves().stream()
+                    Moves move = MovesRepository.getMoves().stream()
                             .filter(m -> m.getName().equalsIgnoreCase(string.trim()))
                             .findFirst()
                             .orElse(null);
@@ -359,7 +370,7 @@ public class PokemonBuilder {
                     Label nameLabel = new Label(move.getName());
 
                     Label categorylabel = new Label("Cat: ");
-                    Label powerLabel = new Label("Power: " + move.getPower());
+                    Label powerLabel = new Label("Power: " + (move.getPower() != 0 ? move.getPower() : "-"));
                     Label accuracyLabel = new Label("Acc: " + move.getAccuracy());
                     Label ppLabel = new Label("PP: " + move.getPp());
 
@@ -414,7 +425,7 @@ public class PokemonBuilder {
         updateMoveComboBoxes();
     }
     private Moves getRandomMove() {
-        List<Moves> allMoves = MovesRepository.getAllMoves();
+        List<Moves> allMoves = MovesRepository.getMoves();
         int random = new Random().nextInt(allMoves.size());
         return allMoves.get(random);
     }

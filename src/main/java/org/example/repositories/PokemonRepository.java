@@ -9,7 +9,7 @@ import org.example.pokemon.stats.Stats;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class PokemonRepository {
+public abstract class PokemonRepository {
 
     private final static Map<String, Pokemon> pokemonMap = new HashMap<>();
     private final static AbilityRepository AR = new AbilityRepository();

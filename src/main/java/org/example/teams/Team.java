@@ -11,10 +11,10 @@ import java.util.Objects;
 public class Team {
 
     private ObservableList<Pokemon> pokemons;
-    private int activePokemonIndex;
+    private int activePokemonIndex = -1;
 
     public Team(ObservableList<Pokemon> pokemons) {
-        this.pokemons = pokemons;
+        setPokemons(pokemons);
         this.activePokemonIndex = 0;
     }
 
@@ -27,6 +27,9 @@ public class Team {
     }
 
     public void addPokemon(Pokemon pokemon) {
+        if (pokemon == null) {
+            throw new IllegalArgumentException("Pokémon is null.");
+        }
         this.pokemons.add(pokemon);
     }
 
@@ -41,17 +44,18 @@ public class Team {
         return this.activePokemonIndex;
     }
     public void setActivePokemonIndex(int index) {
-        if (index >= 0 && index < pokemons.size()) {
-            this.activePokemonIndex = index;
+        if (index < 0 || index >= pokemons.size() || pokemons.get(index).getStats().getHp() <= 0) {
+            throw new IllegalArgumentException("Invalid index or the selected Pokémon is not able to battle.");
         }
+        this.activePokemonIndex = index;
     }
     public Moves getFirstAvailableMove() {
-        for (Pokemon pokemon : pokemons) {
-            for (Moves move : pokemon.getMoves()) {
-                if (move.getCurrentPP() > 0) {
-                    return move;
-                }
-            }
+        if (activePokemonIndex >= 0 && activePokemonIndex < pokemons.size()) {
+            Pokemon activePokemon = pokemons.get(activePokemonIndex);
+            return activePokemon.getMoves().stream()
+                    .filter(move -> move.getCurrentPP() > 0)
+                    .findFirst()
+                    .orElse(MovesRepository.getMoveByName("Struggle"));
         }
         return MovesRepository.getMoveByName("Struggle");
     }
@@ -62,7 +66,9 @@ public class Team {
         throw new NoActivePokemonException("No active Pokemon in team");
     }
     public boolean hasAlivePokemon() {
-        return pokemons.stream().anyMatch(pokemon -> pokemon.getStats().getHp() > 0);
+        return pokemons.stream()
+                .filter(Objects::nonNull)
+                .anyMatch(pokemon -> pokemon.getStats().getHp() > 0);
     }
     public boolean containsPokemon(Pokemon pokemon) {
         return pokemons.contains(pokemon);

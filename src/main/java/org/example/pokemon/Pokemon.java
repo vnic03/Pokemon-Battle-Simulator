@@ -212,31 +212,26 @@ public class Pokemon {
         if (isFrozen) {
             if (random.nextDouble() < CHANCE_TO_THAW) {
                 isFrozen = false;
-                System.out.println(this.name + " has thawed out !");
                 result.setMessage(this.name + " has thawed out !");
             } else {
-                System.out.println(this.name + " is frozen solid !");
                 result.setMessage(this.name + " is frozen solid !");
                 return false;
             }
         }
         if (isParalyzed) {
             if (random.nextDouble() > 0.25) {
-                System.out.println(this.name + " is paralyzed and can't move !");
                 result.setMessage(this.name + " is paralyzed and can't move !");
                 return false;
             }
         }
 
         if (isAsleep) {
-            System.out.println(this.name + " is fast asleep.");
             result.setMessage(this.name + " is fast asleep.");
             decrementSleepTurns(result);
             return false;
         }
 
         if (isFlinching) {
-            System.out.println(this.name + " flinched and couldn't move !");
             result.setMessage(this.name + " flinched and couldn't move !");
             isFlinching = false;
             return false;
