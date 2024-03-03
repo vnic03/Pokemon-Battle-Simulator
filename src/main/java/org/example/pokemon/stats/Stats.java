@@ -25,6 +25,16 @@ public class Stats {
         this.speed = speed;
     }
 
+    public Stats(Stats other) {
+        this.maxHp = other.maxHp;
+        this.hp = other.hp;
+        this.attack = other.attack;
+        this.defense = other.defense;
+        this.specialAttack = other.specialAttack;
+        this.specialDefense = other.specialDefense;
+        this.speed = other.speed;
+    }
+
     public int getHp() {
         return hp;
     }
@@ -109,7 +119,6 @@ public class Stats {
         finalStats.put("Speed", this.speed);
         return finalStats;
     }
-
 
     @Override
     public String toString() {

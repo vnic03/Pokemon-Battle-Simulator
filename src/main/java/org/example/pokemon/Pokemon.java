@@ -172,9 +172,9 @@ public class Pokemon {
         this.moves.clear();
     }
 
-    public Optional<Moves> chooseMoveByName(String moveName) {
+    public Moves chooseMoveByName(String moveName) {
         return moves.stream()
-                .filter(move -> move.getName().equalsIgnoreCase(moveName)).findFirst();
+                .filter(move -> move.getName().equalsIgnoreCase(moveName)).findFirst().orElse(null);
     }
 
     public boolean isAlive() {

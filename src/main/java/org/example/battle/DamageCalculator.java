@@ -14,7 +14,7 @@ public class DamageCalculator {
     public static int calculateDamage(Pokemon attacker, Pokemon defender, Moves move, Weather weather, BattleRoundResult result) {
 
         Stats attackStats = attacker.getStats();
-        Stats defenderStats = defender.getStats();
+        Stats defenderStats = adjustDefForWeather(defender, weather);
 
         List<Typing> attackerTypes = attacker.getTyping();
 
@@ -23,17 +23,8 @@ public class DamageCalculator {
 
         double randomFactor = 0.85 + Math.random() * 0.15;
 
-        int attackStat;
-        int defenseStat;
-        if (move.getCategory() == MoveCategory.PHYSICAL) {
-            attackStat = attackStats.getAttack();
-            defenseStat = defenderStats.getDefense();
-        } else if (move.getCategory() == MoveCategory.SPECIAL) {
-            attackStat = attackStats.getSpecialAttack();
-            defenseStat = defenderStats.getSpecialDefense();
-        } else {
-            throw new IllegalArgumentException(move.getCategory() + " does not exist!");
-        }
+        int attackStat = relevantStats(attackStats, move.getCategory(), true);
+        int defenseStat = relevantStats(defenderStats, move.getCategory(), false);
 
         int damage = (int) ((((2 * attacker.getLevel() / 5 + 2) * move.getPower() * attackStat /
                 defenseStat) / 50 + 2) * typeAdvantage * randomFactor);
@@ -66,42 +57,55 @@ public class DamageCalculator {
     }
 
     private static double getTypeAdvantage(Typing attackType, List<Typing> defenderTypes, List<Typing> attackerTypes) {
-        double typeEffectiveness = 1.0;
+        double typeEffectiveness = attackerTypes.contains(attackType) ? 1.5 : 1.0;
 
-        if (attackerTypes.contains(attackType)) {
-            typeEffectiveness *= 1.5;
-        }
         for (Typing defenderType : defenderTypes) {
             typeEffectiveness *= TypeChart.getEffectiveness(attackType, defenderType);
         }
         return typeEffectiveness;
     }
 
-    private static int applyWeather(int baseDamage, Pokemon attacker,Pokemon defender ,Moves attack, Weather weather) {
-
-        if (weather == null || weather == Weather.NONE) {
-            return baseDamage;
+    public static int relevantStats(Stats stats, MoveCategory category, boolean isAttack) {
+        switch (category) {
+            case PHYSICAL -> { return isAttack ? stats.getAttack() : stats.getDefense(); }
+            case SPECIAL -> { return isAttack ? stats.getSpecialAttack() : stats.getSpecialDefense(); }
+            default -> throw new IllegalArgumentException(category + " does not exist!");
         }
+    }
 
-        switch (weather) {
-            case SUN:
+    private static int applyWeather(int damage, Pokemon attacker, Pokemon defender , Moves attack, Weather weather) {
+        return switch (weather) {
+            case SUN -> {
                 if (attack.getType() == Typing.FIRE) {
-                    return (int) (baseDamage * 1.5);
+                    yield (int) (damage * 1.5);
                 }
                 if (attack.getType() == Typing.WATER) {
-                    return (int) (baseDamage * 0.5);
+                    yield (int) (damage * 0.5);
                 }
-                break;
-            case RAIN:
+                yield damage;
+            }
+            case RAIN -> {
                 if (attack.getType() == Typing.WATER) {
-                    return (int) (baseDamage * 1.5);
+                    yield (int) (damage * 1.5);
                 }
                 if (attack.getType() == Typing.FIRE) {
-                    return (int) (baseDamage * 0.5);
+                    yield (int) (damage * 0.5);
                 }
-                break;
+                yield damage;
+            }
+            default -> damage;
+        };
+    }
+
+    private static Stats adjustDefForWeather(Pokemon defender, Weather weather) {
+        Stats base  = new Stats(defender.getStats());
+
+        if (weather == Weather.SANDSTORM && defender.getTyping().contains(Typing.ROCK)) {
+            base.setSpecialDefense((int) (base.getSpecialDefense() * 1.5));
+        } else if (weather == Weather.SNOW && defender.getTyping().contains(Typing.ICE)) {
+            base.setDefense((int) (base.getDefense() * 1.5));
         }
-        return baseDamage;
+        return base;
     }
 
     private static int applyAbilities(int damage, Pokemon attacker, Pokemon defender, Moves move) {
