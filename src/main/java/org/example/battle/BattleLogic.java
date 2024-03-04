@@ -11,6 +11,7 @@ import org.example.screens.battleScene.BattleRoundResult;
 import org.example.screens.battleScene.BattleView;
 import org.example.teams.Team;
 
+import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -73,6 +74,7 @@ public class BattleLogic {
             checkAndPerformRound();
         }
     }
+
     public void checkAndPerformRound() {
 
         if (moveSelectedTeam1 && moveSelectedTeam2) {
@@ -94,9 +96,14 @@ public class BattleLogic {
             checkEndGame();
         }
     }
+
     private void resetRound() {
         moveSelectedTeam1 = false;
         moveSelectedTeam2 = false;
+
+        team1.getPokemons().stream().filter(Objects::nonNull).forEach(Pokemon::updateDisabledMoves);
+        team2.getPokemons().stream().filter(Objects::nonNull).forEach(Pokemon::updateDisabledMoves);
+
         startMoveSelectionTimer();
         battleView.showButtons();
     }
@@ -151,38 +158,21 @@ public class BattleLogic {
         return result;
     }
 
-    private Pokemon determineFirstAttacker(Pokemon pokemon1, Pokemon pokemon2, MoveEffect move1, MoveEffect move2) {
+    private Pokemon determineFirstAttacker
+            (Pokemon pokemon1, Pokemon pokemon2, MoveEffect move1, MoveEffect move2)
+    {
+        int priority = move1.getPriority() - move2.getPriority();
+        int speed = pokemon1.getStats().getSpeed() - pokemon2.getStats().getSpeed();
 
-        int priority1 = move1.getPriority();
-        int priority2 = move2.getPriority();
-
-        if (priority1 > priority2) {
-            return pokemon1;
-        } else if (priority2 > priority1) {
-            return pokemon2;
-        } else {
-            int pokemonSpeed1 = pokemon1.getStats().getSpeed();
-            int pokemonSpeed2 = pokemon2.getStats().getSpeed();
-
-            if (pokemonSpeed1 > pokemonSpeed2) {
-                return pokemon1;
-            } else if (pokemonSpeed2 > pokemonSpeed1) {
-                return pokemon2;
-            } else {
-                return Math.random() < 0.5 ? pokemon1 : pokemon2;
-            }
-        }
+        return priority != 0 ? (priority > 0 ? pokemon1 : pokemon2) : // priority-check
+                speed != 0 ? (speed > 0 ? pokemon1 : pokemon2) : // speed-check
+                        Math.random() < 0.5 ? pokemon1 : pokemon2; // speed-Tie
     }
 
     private void endGame() {
         // logic for winning and playing again with the same team
-        //if not playing again {
-        for (int i = 0; i < team1.getPokemons().size(); i++) {
-            team1.getPokemons().get(i).resetStats();
-        }
-        for (int i = 0; i < team2.getPokemons().size(); i++) {
-            team2.getPokemons().get(i).resetStats();
-        }
+        team1.getPokemons().stream().filter(Objects::nonNull).forEach(Pokemon::resetStats);
+        team2.getPokemons().stream().filter(Objects::nonNull).forEach(Pokemon::resetStats);
     }
 
     private void startMoveSelectionTimer() {
@@ -202,6 +192,7 @@ public class BattleLogic {
             }
         }, 0, 1000);
     }
+
     private void onTimeExpired() {
         boolean roundPerformed = false;
 
@@ -219,6 +210,7 @@ public class BattleLogic {
             checkAndPerformRound();
         }
     }
+
     private Moves chooseDefaultMove(Team team) {
         return team.getFirstAvailableMove();
     }
@@ -234,9 +226,7 @@ public class BattleLogic {
 
     private boolean doesMoveHit(Moves move, Pokemon attacker, Pokemon defender) {
         Random random = new Random();
-        int accuracy = move.getAccuracy();
-        int hitRoll = random.nextInt(100) + 1;
-        return hitRoll <= accuracy;
+        return random.nextInt(100) + 1 <= move.getAccuracy();
     }
 
     public void setBattleView(BattleView battleView) {
@@ -248,6 +238,7 @@ public class BattleLogic {
             endGame();
         }
     }
+
     public boolean areMovesSelected(boolean isTeam1) {
         return moveSelectedTeam1 ? isTeam1 : moveSelectedTeam2;
     }

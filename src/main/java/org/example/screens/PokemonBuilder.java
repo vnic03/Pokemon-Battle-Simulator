@@ -181,8 +181,8 @@ public class PokemonBuilder {
                     setText(null);
                     setTooltip(null);
                 } else {
-                    setText(item.getName());
-                    Tooltip tooltip = new Tooltip(item.getDescription());
+                    setText(item.name());
+                    Tooltip tooltip = new Tooltip(item.description());
                     tooltip.setWrapText(true);
                     tooltip.setMaxWidth(300);
                     setTooltip(tooltip);

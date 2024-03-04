@@ -189,7 +189,6 @@ public class Pokemon {
         if (currentHP < 0) {
             currentHP = 0;
         }
-
         stats.setHp(currentHP);
     }
 
@@ -386,12 +385,7 @@ public class Pokemon {
     }
 
     public boolean allMovesOutOfPP() {
-        for (Moves move : this.moves) {
-            if (move.getCurrentPP() > 0) {
-                return false;
-            }
-        }
-        return true;
+        return moves.stream().allMatch(move -> move.getCurrentPP() <= 0);
     }
 
     public void setFlinching(boolean flinching) {
@@ -430,16 +424,12 @@ public class Pokemon {
     }
 
     public boolean hasAbility(String abilityName) {
-        for (Ability ability : abilities) {
-            if (ability.getName().equalsIgnoreCase(abilityName)) {
-                return true;
-            }
-        }
-        return false;
+        return abilities.stream()
+                .anyMatch(ability -> ability.name().equalsIgnoreCase(abilityName));
     }
 
     public boolean hasActiveAbility(String abilityName) {
-        return activeAbility != null && activeAbility.getName().equalsIgnoreCase(abilityName);
+        return activeAbility != null && activeAbility.name().equalsIgnoreCase(abilityName);
     }
 
     public void setThickFatActive(boolean isActive) {
@@ -500,19 +490,13 @@ public class Pokemon {
     }
 
     public String toString() {
+        String type = typing.stream().map(Typing::name).collect(Collectors.joining(", "));
 
-        String typeString = typing.stream().map(Typing::name).collect(Collectors.joining(", "));
-        String moveString = moves.stream().map(Moves::getName).collect(Collectors.joining(", "));
-
-        return "Pokemon{" +
-                "name='" + name + '\'' +
-                ", gender= " + gender.getSymbol() +
-                ", typing=" + typeString +
-                ", level=" + level +
-                ", abilities=" + abilities +
-                ", nature=" + nature +
-                ", stats=" + stats +
-                ", moves=" + moveString +
-                '}';
+        return "Pokemon {" +
+                "name: " + name + '\'' +
+                ", gender: " + gender.getSymbol() +
+                ", typing: " + type +
+                ", abilities: " + abilities +
+                ", " + stats + " }";
     }
 }

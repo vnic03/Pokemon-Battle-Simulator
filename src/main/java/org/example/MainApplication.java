@@ -44,7 +44,8 @@ public class MainApplication extends Application {
         blackScreen.widthProperty().bind(primaryStage.widthProperty());
         blackScreen.heightProperty().bind(primaryStage.heightProperty());
 
-        Image background = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/mainBackground.jpg")));
+        Image background = new Image(Objects.requireNonNull(
+                getClass().getResourceAsStream("/mainBackground.jpg")));
 
         ImageView backgroundView = new ImageView(background);
 
@@ -70,7 +71,10 @@ public class MainApplication extends Application {
         rootPane.getChildren().add(blackScreen);
 
         Scene scene = new Scene(rootPane);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/mainApplication.css")).toExternalForm());
+
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource
+                ("/mainApplication.css")).toExternalForm());
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("Pokémon Battle Simulator by Nico");
         primaryStage.show();
@@ -111,7 +115,10 @@ public class MainApplication extends Application {
             BeforeBattleAnimation animation = new BeforeBattleAnimation(primaryStage, battleScene, team1,team2);
 
             Scene animationScene = new Scene(animation, primaryStage.getWidth(), primaryStage.getHeight());
-            animationScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/battle_view_styles/bBAnimationStyles.css")).toExternalForm());
+
+            animationScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource
+                    ("/battle_view_styles/bBAnimationStyles.css")).toExternalForm());
+
             primaryStage.setScene(animationScene);
             primaryStage.setFullScreen(true);
 

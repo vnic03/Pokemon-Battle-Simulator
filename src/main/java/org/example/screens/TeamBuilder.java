@@ -27,6 +27,7 @@ import org.example.teams.Team;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TeamBuilder {
 
@@ -179,6 +180,7 @@ public class TeamBuilder {
         contextMenu = new ContextMenu(new CustomMenuItem(mainContainer, false));
         contextMenu.show(node, Side.RIGHT, 0, 0);
     }
+
     private void updateMenuItems(int index, boolean isTeam1) {
         menuItemsContainer.getChildren().clear();
         int start = currentPage * itemsInPage;
@@ -391,6 +393,7 @@ public class TeamBuilder {
         }
         return null;
     }
+
     private Button findButtonInSlot(HBox slot) {
         for (Node node : slot.getChildren()) {
             if (node instanceof Button) {

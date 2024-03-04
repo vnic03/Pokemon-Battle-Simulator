@@ -7,13 +7,6 @@
     <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Updated read me file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/battle/DamageCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/battle/DamageCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/MovesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/teams/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/teams/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/FlinchTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/NatureTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -294,7 +287,8 @@
       <workItem from="1709398185260" duration="5923000" />
       <workItem from="1709422653863" duration="4177000" />
       <workItem from="1709426853484" duration="664000" />
-      <workItem from="1709461429271" duration="14268000" />
+      <workItem from="1709461429271" duration="15044000" />
+      <workItem from="1709559528501" duration="763000" />
     </task>
     <task id="LOCAL-00007" summary="MoveSelector added, simple Battle test">
       <option name="closed" value="true" />

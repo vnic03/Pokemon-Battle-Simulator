@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public abstract class PokemonRepository {
 
-    private final static Map<String, Pokemon> pokemonMap = new HashMap<>();
+    private final static Map<String, Pokemon> POKEMON = new HashMap<>();
     private final static AbilityRepository AR = new AbilityRepository();
 
     static {
@@ -70,16 +70,20 @@ public abstract class PokemonRepository {
         pokemon("Exploud", 295, Typing.NORMAL, stats(179, 111, 83, 111, 93, 88), "Soundproof", "Scrappy");
 
         // Poison
-        pokemon("Crobat", 169, Typing.POISON, Typing.FLYING, stats(160,110, 100, 90, 100, 150), "Inner Focus");
+        pokemon("Crobat", 169, Typing.POISON, Typing.FLYING, stats(160, 110, 100, 90, 100, 150), "Inner Focus");
 
         // Psychic
         pokemon("Mr.Mime", 122, Typing.PSYCHIC, Typing.FAIRY, stats(115, 65, 85, 120, 140, 110), "Filter", "Soundproof", "Technician");
+
+        pokemon("Alakazam", 65, Typing.PSYCHIC, stats(130, 70, 65, 155, 115, 140), "Synchronize", "Inner Focus", "Magic Guard");
 
         // Rock
         pokemon("Tyranitar", 248, Typing.ROCK, Typing.DARK, stats(175, 154, 130, 115, 120, 81), "Sand Stream");
 
         // Steel
         pokemon("Metagross", 376, Typing.STEEL, Typing.PSYCHIC, stats(155, 155, 150,115, 110, 90), "Clear Body");
+
+        pokemon("Steelix", 208, Typing.STEEL, Typing.GROUND, stats(150, 105, 220, 75, 85, 50), "Sturdy");
 
         // Water
         pokemon("Squirtle", 7, Typing.WATER, stats(119, 68, 85, 70, 84, 63), "Torrent", "Rain Dish");
@@ -96,7 +100,7 @@ public abstract class PokemonRepository {
 
         // Legendary Pokemon
 
-        pokemon("Mew", 151, Typing.PSYCHIC, stats(175, 120, 120, 120, 120, 120), "Synchro");
+        pokemon("Mew", 151, Typing.PSYCHIC, stats(175, 120, 120, 120, 120, 120), "Synchronize");
 
         pokemon("Rayquaza", 384, Typing.DRAGON, Typing.FLYING, stats(180, 170, 110, 170, 110, 115), "Air Lock");
 
@@ -106,15 +110,15 @@ public abstract class PokemonRepository {
 
     @SuppressWarnings("unused")
     public static List<String> getAllPokemonNames() {
-        return new ArrayList<>(pokemonMap.keySet());
+        return new ArrayList<>(POKEMON.keySet());
     }
 
     public static Pokemon getPokemon(String name) {
-        return pokemonMap.get(name);
+        return POKEMON.get(name);
     }
 
     public static List<Pokemon> getAllPokemons() {
-        return new ArrayList<>(pokemonMap.values());
+        return new ArrayList<>(POKEMON.values());
     }
 
     private static void pokemon(
@@ -127,7 +131,8 @@ public abstract class PokemonRepository {
                 name, dex, typings, stats, Nature.SERIOUS, abilities,
                 spritePath(name, "front"), spritePath(name, "back"), spritePath(name, "icon"),
                 new ArrayList<>()); // moves
-        pokemonMap.put(name, pokemon);
+
+        POKEMON.put(name, pokemon);
     }
 
     private static void pokemon(
@@ -140,7 +145,8 @@ public abstract class PokemonRepository {
                 name, dex, typings, stats, Nature.SERIOUS, abilities,
                 spritePath(name, "front"), spritePath(name, "back"), spritePath(name, "icon"),
                 new ArrayList<>()); // moves
-        pokemonMap.put(name, pokemon);
+
+        POKEMON.put(name, pokemon);
     }
 
     private static String spritePath(String name, String type) {
@@ -154,13 +160,20 @@ public abstract class PokemonRepository {
 
     @SuppressWarnings("unused")
     public static List<Pokemon> getAllPokemonByType(Typing type) {
-        return pokemonMap.values().stream()
+        return POKEMON.values().stream()
                 .filter(pokemon -> pokemon.getTyping().contains(type))
                 .collect(Collectors.toList());
     }
 
     @SuppressWarnings("unused")
     public static int countPokemon() {
-        return pokemonMap.size();
+        return POKEMON.size();
+    }
+
+    @SuppressWarnings("unused")
+    public static void display()
+    {
+        POKEMON.values().stream().sorted(Comparator.comparingInt(Pokemon::getPokeDex))
+                .forEach(pokemon -> System.out.println(pokemon.getPokeDex() + ": " + pokemon.getName()));
     }
 }

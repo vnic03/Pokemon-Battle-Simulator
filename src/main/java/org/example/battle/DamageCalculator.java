@@ -11,8 +11,9 @@ public class DamageCalculator {
 
     private static final double CRITICAL_HIT_CHANCE = 0.0417;
 
-    public static int calculateDamage(Pokemon attacker, Pokemon defender, Moves move, Weather weather, BattleRoundResult result) {
-
+    public static int calculateDamage
+            (Pokemon attacker, Pokemon defender, Moves move, Weather weather, BattleRoundResult result)
+    {
         Stats attackStats = attacker.getStats();
         Stats defenderStats = adjustDefForWeather(defender, weather);
 
@@ -50,7 +51,7 @@ public class DamageCalculator {
 
     private static int isCriticalHit(int damage, Pokemon defender, BattleRoundResult result) {
         if (Math.random() < CRITICAL_HIT_CHANCE &&
-                !(defender.getActiveAbility().getEffect() instanceof PreventCritsEffect))
+                !(defender.getActiveAbility().effect() instanceof PreventCritsEffect))
         {
             result.setMessage("\u001B[31m" + "CRITICAL HIT !" + "\u001B[0m");
             return (int) (damage * 1.5);
@@ -67,7 +68,7 @@ public class DamageCalculator {
         return typeEffectiveness;
     }
 
-    public static int relevantStats(Stats stats, MoveCategory category, boolean isAttack) {
+    private static int relevantStats(Stats stats, MoveCategory category, boolean isAttack) {
         switch (category) {
             case PHYSICAL -> { return isAttack ? stats.getAttack() : stats.getDefense(); }
             case SPECIAL -> { return isAttack ? stats.getSpecialAttack() : stats.getSpecialDefense(); }

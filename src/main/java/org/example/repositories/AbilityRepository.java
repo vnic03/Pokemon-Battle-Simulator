@@ -16,8 +16,8 @@ public class AbilityRepository {
         initializeAbilities();
     }
 
-    AbilityEffect starterEffect = new StarterEffect();
-    AbilityEffect weather = new WeatherEffect();
+    private final AbilityEffect starterEffect = new StarterEffect();
+    private final AbilityEffect weather = new WeatherEffect();
 
     private void initializeAbilities() {
 
@@ -50,7 +50,7 @@ public class AbilityRepository {
 
         ability("Keen Eye", "Prevents loss of accuracy.", new KeenEyeEffect());
 
-        ability("Synchro", "Passes on a burn, poison, or paralysis to the foe.", new SynchroEffect());
+        ability("Synchronize", "Passes on a burn, poison, or paralysis to the foe.", new SynchronizeEffect());
 
         ability("Soundproof", "Gives full immunity to all sound-based moves.", new SoundProofEffect());
 
@@ -98,6 +98,10 @@ public class AbilityRepository {
         ability("Fore Warn", "Determines what moves the foe has.", new ForeWarnEffect());
 
         ability("Flash Fire", "Powers up if hit by fire.", new FlashFireEffect());
+
+        ability("Magic Guard", "The Pokémon only takes damage from attacks.", new MagicGuardEffect());
+
+        ability("Sturdy", "Negates 1-hit KO attacks.", new SturdyEffect());
     }
 
     public Ability getAbility(String name) {
@@ -108,7 +112,7 @@ public class AbilityRepository {
         if (!abilities.containsKey(name)) {
             abilities.put(name, new Ability(name, description, effect));
         } else {
-            System.out.println("Ability " + name + " already exists.");
+            System.err.println("Ability " + name + " already exists.");
         }
     }
 
