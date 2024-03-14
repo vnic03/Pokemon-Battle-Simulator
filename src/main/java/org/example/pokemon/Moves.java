@@ -1,6 +1,6 @@
 package org.example.pokemon;
 
-import org.example.pokemon.move_effects.MoveEffect;
+import org.example.pokemon.effects.move_effects.MoveEffect;
 
 public class Moves {
 
@@ -14,14 +14,14 @@ public class Moves {
     private int currentPP;
     private final MoveEffect effect;
 
-    public Moves(String name, Typing type, MoveCategory category, int power, int accuracy, int initialPP, MoveEffect moveEffect){
+    public Moves(String name, Typing type, MoveCategory category, int power, int accuracy, int initialPP, MoveEffect effect){
         this.name = name;
         this.type = type;
         this.category = category;
         this.power = power;
         this.accuracy = accuracy;
         this.currentPP = initialPP;
-        this.effect = moveEffect;
+        this.effect = effect;
     }
 
     public String getName(){

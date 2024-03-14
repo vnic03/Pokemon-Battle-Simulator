@@ -2,13 +2,23 @@ package org.example.repositories;
 
 import org.example.pokemon.MoveCategory;
 import org.example.pokemon.Moves;
+import org.example.pokemon.Pokemon;
 import org.example.pokemon.Typing;
 import org.example.battle.Weather;
-import org.example.pokemon.move_effects.*;
-import org.example.pokemon.move_effects.priority.PriorityOne;
+import org.example.pokemon.effects.move_effects.MoveEffect;
+import org.example.pokemon.effects.move_effects.status_condition.*;
+import org.example.pokemon.effects.move_effects.absorb.AbsorbEffect;
+import org.example.pokemon.effects.move_effects.flinch.MayFlinchEffect;
+import org.example.pokemon.effects.move_effects.multiple.HitsMoreTimesEffect;
+import org.example.pokemon.effects.move_effects.special.NoEffect;
+import org.example.pokemon.effects.move_effects.special.StruggleEffect;
+import org.example.pokemon.effects.move_effects.special.ExplosionEffect;
+import org.example.pokemon.effects.move_effects.weather.ChangeWeatherEffect;
+import org.example.screens.battleScene.BattleRoundResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public abstract class MovesRepository {
@@ -21,13 +31,19 @@ public abstract class MovesRepository {
 
         MoveEffect nothing = new NoEffect();
 
+        // Priority
+        MoveEffect one = new MoveEffect(1) {
+            @Override
+            public void apply(Pokemon user, Pokemon target, BattleRoundResult result) { }
+        };
+
         MoveEffect struggleEffect = new StruggleEffect();
 
         MoveEffect May_paralyze_the_target = new MayParalyzeEffect();
 
         MoveEffect paralyzes_opponent = new ParalyzeEffect();
 
-        MoveEffectWithDamage absorbs_hp = new AbsorbEffect();
+        MoveEffect absorbs_hp = new AbsorbEffect();
 
         MoveEffect may_cause_flinching_10 = new MayFlinchEffect(0.10);
         MoveEffect may_cause_flinching_20 = new MayFlinchEffect(0.20);
@@ -48,8 +64,7 @@ public abstract class MovesRepository {
         MoveEffect may_freeze_opponent = new MayFreezeEffect();
 
         MoveEffect puts_opponent_to_sleep = new SleepEffect();
-
-        MoveEffect puts_opponent_to_sleep_no_grass = new SleepPowderEffect();
+        MoveEffect puts_opponent_to_sleep_no_grass = new SleepEffect(Set.of(Typing.GRASS));
 
         MoveEffect makes_it_sunny = new ChangeWeatherEffect(Weather.SUN);
 
@@ -60,9 +75,6 @@ public abstract class MovesRepository {
         MoveEffect snow = new ChangeWeatherEffect(Weather.SNOW);
 
         MoveEffect user_faints = new ExplosionEffect();
-
-        MoveEffect priority_one = new PriorityOne();
-
 
         // no Effect
 
@@ -210,10 +222,9 @@ public abstract class MovesRepository {
 
         // Priority Moves
 
-        move("Quick Attack", Typing.NORMAL, MoveCategory.PHYSICAL, 40, 100, 30, priority_one);
-        move("Extreme Speed", Typing.NORMAL, MoveCategory.PHYSICAL, 80, 100, 5, priority_one);
-        move("Mach Punch", Typing.FIGHTING, MoveCategory.PHYSICAL, 40, 100, 20, priority_one);
-
+        move("Quick Attack", Typing.NORMAL, MoveCategory.PHYSICAL, 40, 100, 30, one );
+        move("Extreme Speed", Typing.NORMAL, MoveCategory.PHYSICAL, 80, 100, 5, one);
+        move("Mach Punch", Typing.FIGHTING, MoveCategory.PHYSICAL, 40, 100, 20, one);
 
         // struggle
         move("Struggle", Typing.NORMAL, MoveCategory.PHYSICAL, 50, 100, 1000, struggleEffect);

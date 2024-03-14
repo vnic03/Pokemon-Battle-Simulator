@@ -2,7 +2,7 @@ package org.example.repositories;
 
 import org.example.pokemon.Ability;
 import org.example.pokemon.Pokemon;
-import org.example.pokemon.ability_effects.*;
+import org.example.pokemon.effects.ability_effects.*;
 
 import java.util.HashMap;
 import java.util.Map;

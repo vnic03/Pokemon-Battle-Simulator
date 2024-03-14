@@ -83,6 +83,8 @@ public abstract class PokemonRepository {
         // Steel
         pokemon("Metagross", 376, Typing.STEEL, Typing.PSYCHIC, stats(155, 155, 150,115, 110, 90), "Clear Body");
 
+        pokemon("Aggron", 306, Typing.STEEL, Typing.ROCK, stats(145, 130, 200, 80, 80, 70), "Sturdy");
+
         pokemon("Steelix", 208, Typing.STEEL, Typing.GROUND, stats(150, 105, 220, 75, 85, 50), "Sturdy");
 
         // Water

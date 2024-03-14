@@ -1,8 +1,7 @@
 package org.example.battle;
 
-import org.example.pokemon.move_effects.MoveEffect;
-import org.example.pokemon.move_effects.MoveEffectWithDamage;
-import org.example.pokemon.move_effects.MultiHitMoveEffect;
+import org.example.pokemon.effects.move_effects.multiple.HitsMoreTimesEffect;
+import org.example.pokemon.effects.move_effects.MoveEffect;
 import org.example.pokemon.MoveCategory;
 import org.example.pokemon.Moves;
 import org.example.repositories.MovesRepository;
@@ -132,29 +131,35 @@ public class BattleLogic {
 
         MoveEffect effect = move.getEffect();
 
-        if (effect instanceof MultiHitMoveEffect multiHitMoveEffect) {
-            int totalDamage = multiHitMoveEffect.applyMultiHitDamage(attacker, defender, move, currentWeather, result);
-            // show how many times the move hits
-            isDamageApplied = true;
-        } else if (effect instanceof MoveEffectWithDamage effectWithDamage) {
-            effectWithDamage.applyWithDamage(attacker, defender, move, currentWeather, result);
-            isDamageApplied = true;
-        } else {
-            effect.apply(attacker, defender,result);
-            if (move.equals(MovesRepository.getMoveByName("Struggle"))) {
+        if (effect instanceof HitsMoreTimesEffect) {
+            int totalDamage = effect.applyMultiHitDamage(attacker, defender, move, currentWeather, result);
+            if (totalDamage > 0) {
                 isDamageApplied = true;
+            }
+        } else {
+            if (effect != null) {
+                effect.applyWithDamage(attacker, defender, move, currentWeather, result);
+                if (!result.getMessage().isEmpty() || result.getDamageDealt() > 0) {
+                    isDamageApplied = true;
+                }
+                if (!isDamageApplied) {
+                    effect.apply(attacker, defender, result);
+                }
             }
         }
         if (!isDamageApplied && move.getCategory() != MoveCategory.STATUS) {
             int damage = DamageCalculator.calculateDamage(attacker, defender, move, currentWeather, result);
             defender.takeDamage(damage);
+
             result.setDamageDealt(damage);
             result.setMessage(attacker.getName() + " hits " + defender.getName() + " with " + move.getName() + " for " + damage + " Damage.");
             result.setWasSuccessful(true);
         }
+
         if (!defender.isAlive()) {
             result.setDidFaint(true);
         }
+
         return result;
     }
 

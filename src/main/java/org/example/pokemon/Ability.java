@@ -1,6 +1,6 @@
 package org.example.pokemon;
 
-import org.example.pokemon.ability_effects.AbilityEffect;
+import org.example.pokemon.effects.ability_effects.AbilityEffect;
 import org.example.screens.battleScene.BattleRoundResult;
 
 public record Ability
