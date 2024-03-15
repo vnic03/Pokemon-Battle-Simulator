@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -27,7 +26,6 @@ import org.example.teams.Team;
 
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TeamBuilder {
 
@@ -131,8 +129,8 @@ public class TeamBuilder {
         slot.setPadding(new Insets(5,5,5,5));
 
         ImageView pokemonIcon = new ImageView();
-        pokemonIcon.setFitWidth(50);
-        pokemonIcon.setFitHeight(50);
+        pokemonIcon.setFitWidth(90);
+        pokemonIcon.setFitHeight(60);
         pokemonIcon.setVisible(false);
 
         Label nameLabel = new Label("Empty Slot");
@@ -190,7 +188,7 @@ public class TeamBuilder {
             Pokemon pokemon = allPokemons.get(i);
             String pokemonName = pokemon.getBaseName();
             Image image = pokemon.getIconSprite();
-            ImageView imageView = editPokemonIcon(image);
+            ImageView imageView = new ImageView(image);
             imageView.setFitHeight(50);
             imageView.setFitWidth(50);
 
@@ -229,12 +227,10 @@ public class TeamBuilder {
 
                 ImageView pokemonIcon = (ImageView) slot.getChildren().getFirst();
                 Image iconImage = pokemon.getIconSprite();
-                ImageView iconView = editPokemonIcon(iconImage);
 
-                pokemonIcon.setImage(iconView.getImage());
-                pokemonIcon.setViewport(iconView.getViewport());
-                pokemonIcon.setFitWidth(iconView.getFitWidth());
-                pokemonIcon.setFitHeight(iconView.getFitHeight());
+                pokemonIcon.setImage(iconImage);
+                pokemonIcon.setFitWidth(80);
+                pokemonIcon.setFitHeight(50);
                 pokemonIcon.setVisible(true);
 
                 HBox typeIconBox;
@@ -367,22 +363,6 @@ public class TeamBuilder {
 
     public void setBattleStartListener(BattleStartListener listener) {
         this.battleStartListener = listener;
-    }
-
-    public static ImageView editPokemonIcon(Image pokemonImage) {
-        ImageView imageView = new ImageView(pokemonImage);
-
-        double width = pokemonImage.getWidth();
-        double height = pokemonImage.getHeight() / 2;
-
-        Rectangle2D viewport = new Rectangle2D(0, 0, width, height);
-        imageView.setViewport(viewport);
-
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-        imageView.setPreserveRatio(true);
-
-        return imageView;
     }
 
     private Label findLabelInSlot(HBox slot) {

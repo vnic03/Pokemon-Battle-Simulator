@@ -14,7 +14,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.pokemon.Pokemon;
-import org.example.screens.TeamBuilder;
 import org.example.teams.Team;
 
 import java.util.List;
@@ -103,7 +102,7 @@ public class BeforeBattleAnimation extends AnchorPane {
             } else {
                 pokemonImage = unown;
             }
-            ImageView icon = TeamBuilder.editPokemonIcon(pokemonImage);
+            ImageView icon = new ImageView(pokemonImage);
 
             icon.setFitWidth(120);
             icon.setFitHeight(120);

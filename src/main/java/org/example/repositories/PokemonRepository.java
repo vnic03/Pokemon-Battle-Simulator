@@ -5,6 +5,7 @@ import org.example.pokemon.Nature;
 import org.example.pokemon.Typing;
 import org.example.pokemon.Pokemon;
 import org.example.pokemon.stats.Stats;
+import org.example.repositories.api.PokeApiClient;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -44,6 +45,7 @@ public abstract class PokemonRepository {
         pokemon("Camerupt", 323, Typing.FIRE, Typing.GROUND, stats(145, 120, 90, 125, 90, 60), "Magma Armor", "Solid Rock", "Anger Point");
 
         // Flying
+        pokemon("Corviknight", 823, Typing.FLYING, Typing.STEEL, stats(173, 107, 125, 73, 105, 87), "Mirror Armor");
 
         // Ghost
         pokemon("Gengar", 94, Typing.GHOST, Typing.POISON, stats(135, 85, 80, 150, 95, 130), "Cursed Body");
@@ -53,7 +55,7 @@ public abstract class PokemonRepository {
         pokemon("Ivysaur", 2, Typing.GRASS, Typing.POISON, stats(135, 82, 83, 100, 100, 80), "Overgrow", "Chlorophyll");
         pokemon("Venusaur", 3, Typing.GRASS, Typing.POISON, stats(155, 102, 103, 120, 120, 100), "Overgrow", "Chlorophyll");
 
-        pokemon("Exeguttor", 103, Typing.GRASS, Typing.PSYCHIC, stats(170, 115, 105, 145, 95, 75), "Chlorophyll");
+        pokemon("Exeggutor", 103, Typing.GRASS, Typing.PSYCHIC, stats(170, 115, 105, 145, 95, 75), "Chlorophyll");
 
         // Ground
         pokemon("Cubone", 104, Typing.GROUND, stats(125, 70, 115, 60, 70, 55), "Battle Armor");
@@ -100,14 +102,16 @@ public abstract class PokemonRepository {
 
         pokemon("Sharpedo", 319, Typing.WATER, Typing.DARK, stats(145, 140, 60, 115, 60, 115), "Rough Skin", "Speed Boost");
 
+        pokemon("Greninja", 658, Typing.WATER, Typing.DARK, stats(147, 115, 87, 123, 91, 142), "Torrent");
+
         // Legendary Pokemon
 
-        pokemon("Mew", 151, Typing.PSYCHIC, stats(175, 120, 120, 120, 120, 120), "Synchronize");
+        pokemon("Mew", 1000, Typing.PSYCHIC, stats(175, 120, 120, 120, 120, 120), "Synchronize");
 
-        pokemon("Rayquaza", 384, Typing.DRAGON, Typing.FLYING, stats(180, 170, 110, 170, 110, 115), "Air Lock");
+        pokemon("Rayquaza", 1003, Typing.DRAGON, Typing.FLYING, stats(180, 170, 110, 170, 110, 115), "Air Lock");
 
-        pokemon("Kyogre", 382, Typing.WATER, stats(175, 120,110, 170,160, 110), "Drizzle");
-        pokemon("Groudon", 383, Typing.GROUND, stats(175, 170, 160, 120, 110, 110), "Drought");
+        pokemon("Kyogre", 1001, Typing.WATER, stats(175, 120,110, 170,160, 110), "Drizzle");
+        pokemon("Groudon", 1002, Typing.GROUND, stats(175, 170, 160, 120, 110, 110), "Drought");
     }
 
     @SuppressWarnings("unused")
@@ -158,6 +162,13 @@ public abstract class PokemonRepository {
 
     private static Stats stats(int hp, int a, int d, int spA, int spD, int speed) {
         return new Stats(hp, a, d, spA, spD, speed);
+    }
+
+    // Creates the sprites for a Pokémon
+    public static void main(String[] args) {
+        final String pokemon = "";
+        String data = PokeApiClient.fetchData(pokemon);
+        PokeApiClient.createSprites(data, pokemon);
     }
 
     @SuppressWarnings("unused")

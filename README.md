@@ -28,6 +28,11 @@ Here, **every Pokémon can learn any move**, giving players unmatched freedom to
 ![Battle](src/main/resources/preview/BattlePreview.png)
 *This shows the battle in action, showing an encounter between two Pokémon, complete with strategic gameplay elements just like the real game.*
 
+## Sprites
+
+In this project, sprites are directly sourced from the [PokéAPI](https://pokeapi.co/).
+The `PokeApiClient` class within the project is responsible for fetching data from the PokéAPI.
+
 ## Note
 Please note that as the game is still in development, some features might not be fully implemented, and you may encounter bugs. 
 

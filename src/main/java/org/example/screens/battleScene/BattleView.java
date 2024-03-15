@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.example.screens.TeamBuilder;
 import org.example.pokemon.Moves;
 import org.example.pokemon.Pokemon;
 import org.example.battle.BattleLogic;
@@ -173,7 +172,7 @@ public class BattleView extends AnchorPane {
                    MenuItem menuItem = new MenuItem(pokemon.getName() + " - HP: " + pokemon.getStats().getHp());
 
                    Image pokemonImage = new Image(pokemon.getIconSprite().getUrl());
-                   ImageView pokemonIconView = TeamBuilder.editPokemonIcon(pokemonImage);
+                   ImageView pokemonIconView = new ImageView(pokemonImage);
                    pokemonIconView.setFitWidth(40);
                    pokemonIconView.setFitHeight(40);
 

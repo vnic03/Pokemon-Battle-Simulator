@@ -17,11 +17,9 @@ public class Pokemon {
     private final String frontSpritePath;
     private final String backSpritePath;
     private final String iconSpritePath;
-
     private final String typeString;
     private Gender gender;
     private final List<Typing> typing;
-    private final int level = 50;
     private final Stats stats;
     private List<Moves> moves;
     private Nature nature;
@@ -37,7 +35,6 @@ public class Pokemon {
     private boolean isAsleep;
     private int sleepTurns;
     private static final Random random = new Random();
-
     private boolean isFlinching = false;
 
     private int originalHp;
@@ -58,8 +55,8 @@ public class Pokemon {
 
     public Pokemon(
             String name, int pokeDex , List<Typing> typing, Stats stats, Nature nature, List<Ability> abilities,
-            String frontSpritePath, String backSpritePath, String iconSpritePath, List<Moves> moves) {
-
+            String frontSpritePath, String backSpritePath, String iconSpritePath, List<Moves> moves)
+    {
         this.name = name;
         this.pokeDex = pokeDex;
         this.gender = randomGender();
@@ -97,7 +94,7 @@ public class Pokemon {
     }
     public int getPokeDex() { return pokeDex; }
     public int getLevel() {
-        return level;
+        return 50;
     }
 
     public Image getFrontSprite() {
