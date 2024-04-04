@@ -1,27 +1,19 @@
-import com.moowork.gradle.node.npm.NpmTask
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("java")
     kotlin("jvm") version "1.6.10"
     id("org.openjfx.javafxplugin") version "0.1.0"
-    id("com.moowork.node") version "1.3.1"
     id("org.springframework.boot") version "2.6.3"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("com.github.johnrengelman.shadow") version "7.1.0"
+    id("application")
 }
 
 javafx {
     version="21.0.1"
     modules = listOf("javafx.controls", "javafx.fxml")
 }
-
-
-node {
-    version ="20.10.0"
-    npmVersion = "10.2.3"
-    download = true
-}
-
-
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
@@ -34,15 +26,20 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation(kotlin("stdlib"))
-    implementation("org.json:json:20231013")
+    implementation("org.json:json:20240303")
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.register<JavaExec>("run") {
-     mainClass.set("org.example.Main")
+application {
+    mainClass.set("org.example.MainApplication")
 }
 
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("Pokemon-Battle-Simulator")
+    archiveClassifier.set("")
+    archiveVersion.set("1.0")
+}
 
 tasks.test {
     useJUnitPlatform()
@@ -59,6 +56,3 @@ sourceSets {
 tasks.processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
-
-
-

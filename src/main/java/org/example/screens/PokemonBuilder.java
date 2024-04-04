@@ -22,6 +22,7 @@ import org.example.repositories.MovesRepository;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class PokemonBuilder {
 
@@ -181,7 +182,10 @@ public class PokemonBuilder {
                     setText(null);
                     setTooltip(null);
                 } else {
-                    setText(item.name());
+                    setText(Arrays.stream(item.name().split(" "))
+                            .map(w -> w.substring(0, 1).toUpperCase() + w.substring(1).toLowerCase())
+                            .collect(Collectors.joining(" ")));
+
                     Tooltip tooltip = new Tooltip(item.description());
                     tooltip.setWrapText(true);
                     tooltip.setMaxWidth(300);

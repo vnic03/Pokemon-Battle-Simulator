@@ -6,7 +6,7 @@ import org.example.battle.DamageCalculator;
 import org.example.battle.Weather;
 import org.example.screens.battleScene.BattleRoundResult;
 
-public class MultiScaleEffect implements AbilityEffectWithMove {
+public class MultiscaleEffect implements AbilityEffectWithMove {
 
     @Override
     public void applyEffect(Pokemon pokemon, BattleRoundResult result) {}

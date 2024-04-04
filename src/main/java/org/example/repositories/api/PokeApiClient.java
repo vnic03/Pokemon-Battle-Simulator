@@ -1,41 +1,37 @@
 package org.example.repositories.api;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.stream.Collectors;
 
 public class PokeApiClient {
 
     public static String fetchData(String pokemonName) {
         final String baseUrl = "https://pokeapi.co/api/v2/pokemon/";
-        StringBuilder result = new StringBuilder();
 
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + pokemonName.toLowerCase()))
+                .GET()
+                .build();
         try {
-            URL url = new URL(baseUrl + pokemonName.toLowerCase());
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.connect();
-
-            int responseCode = connection.getResponseCode();
-            if (responseCode != HttpURLConnection.HTTP_OK) {
-                throw new IOException("HTTP Response Code: " + responseCode);
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return response.body();
+            } else {
+                throw new IOException("HTTP Response Code: " + response.statusCode());
             }
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-            }
-            return result.toString();
-        } catch (IOException e) {
-            System.out.println("Error: " + e);
+        } catch (IOException | InterruptedException e) {
+            System.err.println("Error: " + e.getMessage());
+            Thread.currentThread().interrupt();
             return null;
         }
     }
@@ -62,28 +58,106 @@ public class PokeApiClient {
             System.out.println("Image URL for " + imageName + " does not exist. . .");
             return;
         }
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(imageUrl))
+                .GET()
+                .build();
         try {
-            URL url = new URL(imageUrl);
-            BufferedImage img = ImageIO.read(url);
+            HttpResponse<InputStream> response = client.send(request, HttpResponse.BodyHandlers.ofInputStream());
+            if (response.statusCode() == 200) {
+                BufferedImage img = ImageIO.read(response.body());
 
-            final String directoryPath = "src/main/resources/pokemon/" + pokemonName;
-            File directory = new File(directoryPath);
+                final String directoryPath = "src/main/resources/pokemon/" + pokemonName;
+                File directory = new File(directoryPath);
 
-            if (!directory.exists()) {
-                boolean created = directory.mkdirs();
-                if (!created) {
-                    System.out.println("Could not create directory: " + directoryPath);
-                    return;
+                if (!directory.exists()) {
+                    boolean created = directory.mkdirs();
+                    if (!created) {
+                        System.out.println("Could not create directory: " + directoryPath);
+                        return;
+                    }
                 }
+                final String path = directoryPath + "/" + imageName + ".png";
+                File file = new File(path);
+
+                ImageIO.write(img, "png", file);
+                System.out.println("Saved: " + path);
+
+            } else {
+                System.err.println("Failed to fetch image. HTTP Response Code: " + response.statusCode());
             }
-            final String path = directoryPath + "/" + imageName + ".png";
-            File file = new File(path);
-
-            ImageIO.write(img, "png", file);
-
-            System.out.println("Saved: " + path);
-        } catch (IOException e) {
-            System.err.println("Error: " + e);
+        }  catch (IOException | InterruptedException e) {
+            System.err.println("Error: " + e.getMessage());
+            Thread.currentThread().interrupt();
         }
+    }
+
+    public static void saveAbilities(String... abilities) {
+        final String path = "src/main/java/org/example/repositories/ability/abilities.json";
+        JSONObject abilitiesJson = loadExisting(path);
+
+        for (String name : abilities) {
+            String description = fetchAbilityDescription(
+                    "https://pokeapi.co/api/v2/ability/" + name + "/", name);
+            if (!"Not Found".equals(description)) {
+                abilitiesJson.put(name, clean(description));
+            }
+        }
+        try (FileWriter file = new FileWriter(path)) {
+            file.write(abilitiesJson.toString(4));
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String fetchAbilityDescription(final String abilityUrl, String name) {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(abilityUrl))
+                .GET()
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                JSONObject obj = new JSONObject(response.body());
+                JSONArray a = obj.getJSONArray("flavor_text_entries");
+                for (int i = 0; i < a.length(); i++) {
+                    JSONObject entry = a.getJSONObject(i);
+                    String language = entry.getJSONObject("language").getString("name");
+
+                    if ("en".equals(language)) {
+                        return entry.getString("flavor_text");
+                    }
+                }
+            } else {
+                if (response.statusCode() == 404)  System.err.println("Fetching failed: " + name);
+                else throw new IOException("HTTP Response Code: " + response.statusCode());
+            }
+        } catch (IOException | InterruptedException e) {
+            System.err.println("Error fetching description: " + e.getMessage());
+        }
+        return "Not Found";
+    }
+
+    private static JSONObject loadExisting(String path) {
+        File file = new File(path);
+        if (file.exists()) {
+            try (FileReader reader = new FileReader(path)) {
+                String content = new BufferedReader(reader)
+                        .lines().collect(Collectors.joining("\n"));
+                return new JSONObject(content);
+            } catch (IOException e) {
+                System.err.println("Failed to read file: " + e.getMessage());
+            }
+        }
+        return new JSONObject();
+    }
+
+    private static String clean(String description) {
+        return description.replace("\n", " ")
+                .replace("’", "'")
+                .replace("\u00AD", "");
     }
 }
