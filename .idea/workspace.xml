@@ -5,19 +5,77 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Refactor move effect interfaces into a single abstract class">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/ability/AbilityRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/ability/abilities.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/AbilityEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/AbilityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/EffectHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/ForeWarnEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/ForewarnEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/MultiScaleEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/MultiscaleEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/SoundProofEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/SoundproofEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/AbilityRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/battle/BattleLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/battle/BattleLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/battle/DamageCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/battle/DamageCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Ability.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Ability.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Moves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Moves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/AbilityEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/AbilityEffectWeather.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/AbilityEffectWithMove.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/AirLockEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/AngerPointEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/ChlorophyllEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/ClearBodyEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/CompetitiveEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/CursedBodyEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/DamageReductionEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/DrySkinEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/FlameBodyEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/FlashFireEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/ForewarnEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/GutsEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/HydrationEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/InnerFocusEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/IntimidateEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/KeenEyeEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/MagicGuardEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/MagmaArmorEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/MarvelScaleEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/MoxieEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/MultiscaleEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/NoGuardEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/PreventCritsEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/RainDishEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/RoughSkinEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/ScrappyEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/SolarPowerEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/SoundproofEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/SpeedBoostEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/StarterEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/StaticEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/SturdyEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/SynchronizeEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/TechnicianEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/ThickFatEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/WaterAbsorbEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/ability_effects/WeatherEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/MoveEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/MoveEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/absorb/AbsorbEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/absorb/AbsorbEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/flinch/MayFlinchEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/flinch/MayFlinchEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/multiple/HitsMoreTimesEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/multiple/HitsMoreTimesEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/special/ExplosionEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/special/ExplosionEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/special/NoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/special/NoEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/special/StruggleEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/special/StruggleEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/status_condition/BadlyPoisonedEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/status_condition/BadlyPoisonedEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/status_condition/BurnEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/status_condition/BurnEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/status_condition/MayBurnEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/status_condition/MayBurnEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/status_condition/MayFreezeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/status_condition/MayFreezeEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/status_condition/MayParalyzeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/status_condition/MayParalyzeEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/status_condition/MayPoisonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/status_condition/MayPoisonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/status_condition/ParalyzeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/status_condition/ParalyzeEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/status_condition/PoisonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/status_condition/PoisonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/status_condition/SleepEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/status_condition/SleepEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/effects/move_effects/weather/ChangeWeatherEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/move_effects/weather/ChangeWeatherEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/MovesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/MovesRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/ability/AbilityRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/ability/abilities.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/abilities.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/api/PokeApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/api/PokeApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/PokemonBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +185,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Shell Script.run.sh.executor": "Debug",
     "Spring Boot.MainApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "jdk.selected.JAVA_MODULE": "21",
@@ -158,11 +217,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources/preview" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/org/example/ability" />
       <recent name="$PROJECT_DIR$/src/main/java/org/example/repositories/ability" />
       <recent name="$PROJECT_DIR$/src/main/java/org/example/repositories" />
       <recent name="$PROJECT_DIR$/src/main/resources/pokemonSprites/machamp" />
       <recent name="$PROJECT_DIR$/src/main/resources/battleViewStyles" />
-      <recent name="$PROJECT_DIR$/src/main/resources/moveCategory" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="FailedIdeas" />
@@ -184,7 +243,7 @@
       <module name="PokeDuelByNico.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.repositories.ability.*" />
+          <option name="PATTERN" value="org.example.ability.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>

@@ -1,6 +1,5 @@
 package org.example.battle;
 
-import org.example.pokemon.effects.ability_effects.PreventCritsEffect;
 import org.example.pokemon.stats.Stats;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.pokemon.*;
@@ -50,8 +49,9 @@ public class DamageCalculator {
     }
 
     private static int isCriticalHit(int damage, Pokemon defender, BattleRoundResult result) {
+        String defAbility = defender.getActiveAbility().name();
         if (Math.random() < CRITICAL_HIT_CHANCE &&
-                !(defender.getActiveAbility().effect() instanceof PreventCritsEffect))
+                !("battle armor".equals(defAbility) || "shell armor".equals(defAbility)))
         {
             result.setMessage("\u001B[31m" + "CRITICAL HIT !" + "\u001B[0m");
             return (int) (damage * 1.5);

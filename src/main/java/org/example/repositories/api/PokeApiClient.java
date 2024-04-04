@@ -94,7 +94,7 @@ public class PokeApiClient {
     }
 
     public static void saveAbilities(String... abilities) {
-        final String path = "src/main/java/org/example/repositories/ability/abilities.json";
+        final String path = "src/main/java/org/example/pokemon/ability/abilities.json";
         JSONObject abilitiesJson = loadExisting(path);
 
         for (String name : abilities) {

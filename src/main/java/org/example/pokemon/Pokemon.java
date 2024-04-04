@@ -50,6 +50,7 @@ public class Pokemon {
     private boolean statsCalculated = false;
 
     private boolean thickFatActive;
+    private boolean isGutsActive = false;
 
     private final  Map<Moves, Integer> disabledMoves = new HashMap<>();
 
@@ -435,6 +436,14 @@ public class Pokemon {
 
     public boolean isThickFatActive() {
         return this.thickFatActive;
+    }
+
+    public boolean isGutsActivated() {
+        return isGutsActive;
+    }
+
+    public void setGutsActivated(boolean gutsActivated) {
+        this.isGutsActive = gutsActivated;
     }
 
     public void disableMove(Moves move, int duration) {

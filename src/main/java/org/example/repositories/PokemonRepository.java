@@ -5,7 +5,7 @@ import org.example.pokemon.Nature;
 import org.example.pokemon.Typing;
 import org.example.pokemon.Pokemon;
 import org.example.pokemon.stats.Stats;
-import org.example.repositories.ability.AbilityRepository;
+import org.example.pokemon.ability.AbilityRepository;
 import org.example.repositories.api.PokeApiClient;
 
 import java.util.*;

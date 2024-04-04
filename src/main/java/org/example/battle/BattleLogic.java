@@ -1,7 +1,7 @@
 package org.example.battle;
 
-import org.example.pokemon.effects.move_effects.multiple.HitsMoreTimesEffect;
-import org.example.pokemon.effects.move_effects.MoveEffect;
+import org.example.pokemon.move_effects.multiple.HitsMoreTimesEffect;
+import org.example.pokemon.move_effects.MoveEffect;
 import org.example.pokemon.MoveCategory;
 import org.example.pokemon.Moves;
 import org.example.repositories.MovesRepository;
