@@ -182,10 +182,7 @@ public class PokemonBuilder {
                     setText(null);
                     setTooltip(null);
                 } else {
-                    setText(Arrays.stream(item.name().split(" "))
-                            .map(w -> w.substring(0, 1).toUpperCase() + w.substring(1).toLowerCase())
-                            .collect(Collectors.joining(" ")));
-
+                    setText(Ability.convert(item.name()));
                     Tooltip tooltip = new Tooltip(item.description());
                     tooltip.setWrapText(true);
                     tooltip.setMaxWidth(300);

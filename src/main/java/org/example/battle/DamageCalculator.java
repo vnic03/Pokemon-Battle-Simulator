@@ -19,6 +19,7 @@ public class DamageCalculator {
         List<Typing> attackerTypes = attacker.getTyping();
 
         double typeAdvantage = getTypeAdvantage(move.getType(), defender.getTyping(), attackerTypes);
+        typeAdvantage *= result.getEffectiveness();
         setTypeAdvantageMsg(typeAdvantage, defender, result);
 
         double randomFactor = 0.85 + Math.random() * 0.15;
@@ -28,8 +29,6 @@ public class DamageCalculator {
 
         int damage = (int) ((((2 * attacker.getLevel() / 5 + 2) * move.getPower() * attackStat /
                 defenseStat) / 50 + 2) * typeAdvantage * randomFactor);
-
-        damage = applyAbilities(damage, attacker, defender, move);
 
         damage = applyWeather(damage, attacker, defender, move, weather);
 
@@ -49,9 +48,9 @@ public class DamageCalculator {
     }
 
     private static int isCriticalHit(int damage, Pokemon defender, BattleRoundResult result) {
-        String defAbility = defender.getActiveAbility().name();
+        Ability.Name defAbility = defender.getActiveAbility().name();
         if (Math.random() < CRITICAL_HIT_CHANCE &&
-                !("battle armor".equals(defAbility) || "shell armor".equals(defAbility)))
+                defAbility != Ability.Name.BATTLE_ARMOR && defAbility != Ability.Name.SHELL_ARMOR)
         {
             result.setMessage("\u001B[31m" + "CRITICAL HIT !" + "\u001B[0m");
             return (int) (damage * 1.5);
@@ -109,14 +108,5 @@ public class DamageCalculator {
             base.setDefense((int) (base.getDefense() * 1.5));
         }
         return base;
-    }
-
-    private static int applyAbilities(int damage, Pokemon attacker, Pokemon defender, Moves move) {
-        double modifiedDamage = damage;
-
-        if (defender.hasActiveAbility("Thick Fat") && (move.getType() == Typing.FIRE || move.getType() == Typing.ICE)) {
-            modifiedDamage *= 0.5;
-        }
-        return (int) modifiedDamage;
     }
 }

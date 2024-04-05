@@ -1,6 +1,7 @@
 package org.example.pokemon;
 
 import javafx.scene.image.Image;
+import org.example.pokemon.ability.EffectHandler;
 import org.example.pokemon.stats.Stat;
 import org.example.pokemon.stats.Stats;
 import org.example.screens.battleScene.BattleRoundResult;
@@ -24,6 +25,7 @@ public class Pokemon {
     private List<Moves> moves;
     private Nature nature;
     private final List<Ability> abilities;
+    private final EffectHandler effectHandler;
     private Ability activeAbility;
     private boolean isParalyzed;
     private boolean isBurned;
@@ -49,9 +51,6 @@ public class Pokemon {
     private final int[] evs = new int[6];
     private boolean statsCalculated = false;
 
-    private boolean thickFatActive;
-    private boolean isGutsActive = false;
-
     private final  Map<Moves, Integer> disabledMoves = new HashMap<>();
 
     public Pokemon(
@@ -66,6 +65,7 @@ public class Pokemon {
         this.stats = stats;
         this.nature = nature;
         this.abilities = abilities;
+        this.effectHandler = new EffectHandler(this);
         this.activeAbility = null;
 
         this.frontSpritePath = frontSpritePath;
@@ -77,7 +77,6 @@ public class Pokemon {
         if (this.nature != null) {
             applyNatureEffects();
         }
-        this.thickFatActive = false;
     }
 
     public String getName(){
@@ -153,6 +152,10 @@ public class Pokemon {
 
     public List<Ability> getAbilities() {
         return abilities;
+    }
+
+    public EffectHandler getEffectHandler() {
+        return effectHandler;
     }
 
     public void setMoves(List<Moves> moves) {
@@ -421,29 +424,8 @@ public class Pokemon {
         return evs;
     }
 
-    public boolean hasAbility(String abilityName) {
-        return abilities.stream()
-                .anyMatch(ability -> ability.name().equalsIgnoreCase(abilityName));
-    }
-
-    public boolean hasActiveAbility(String abilityName) {
-        return activeAbility != null && activeAbility.name().equalsIgnoreCase(abilityName);
-    }
-
-    public void setThickFatActive(boolean isActive) {
-        this.thickFatActive = isActive;
-    }
-
-    public boolean isThickFatActive() {
-        return this.thickFatActive;
-    }
-
-    public boolean isGutsActivated() {
-        return isGutsActive;
-    }
-
-    public void setGutsActivated(boolean gutsActivated) {
-        this.isGutsActive = gutsActivated;
+    public boolean hasActiveAbility(Ability.Name name) {
+        return activeAbility != null && activeAbility.name() == name;
     }
 
     public void disableMove(Moves move, int duration) {

@@ -8,6 +8,7 @@ public class BattleRoundResult {
     private boolean wasSuccessful;
     private boolean didFaint;
     private Weather currentWeather;
+    private double effectiveness = 1.0;
 
     public BattleRoundResult(String message, int damageDealt, boolean wasSuccessful, boolean didFaint, Weather weather) {
         this.message = message;
@@ -50,5 +51,13 @@ public class BattleRoundResult {
 
     public void setCurrentWeather(Weather currentWeather) {
         this.currentWeather = currentWeather;
+    }
+
+    public double getEffectiveness() {
+        return effectiveness;
+    }
+
+    public void setEffectiveness(double effectiveness) {
+        this.effectiveness = effectiveness;
     }
 }

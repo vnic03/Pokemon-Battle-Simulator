@@ -1,6 +1,7 @@
 package org.example.pokemon.ability;
 
 import org.example.battle.DamageCalculator;
+import org.example.battle.TypeChart;
 import org.example.battle.Weather;
 import org.example.pokemon.*;
 import org.example.repositories.api.PokeApiClient;
@@ -13,7 +14,7 @@ import java.util.*;
 
 public class AbilityRepository {
 
-    private final Map<String, Ability> abilities;
+    private final Map<Ability.Name, Ability> abilities;
 
     private final EffectHandler handler = new EffectHandler();
 
@@ -25,9 +26,23 @@ public class AbilityRepository {
 
     public static void main(String[] args) {
         PokeApiClient.saveAbilities("");
+
+        try {
+            final String groovy = "/opt/groovy/bin/groovy";
+            final String script = "scripts/UpdateAbilityEnum.groovy";
+            final String json = "src/main/java/org/example/pokemon/ability/abilities.json";
+            final String ability = "src/main/java/org/example/pokemon/Ability.java";
+
+            ProcessBuilder builder = new ProcessBuilder(groovy, script, json, ability);
+            Process process = builder.start();
+
+            if (process.waitFor() == 0) System.out.println("Groovy-Success");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public Ability getAbility(String name) {
+    public Ability getAbility(Ability.Name name) {
         return abilities.get(name);
     }
 
@@ -36,7 +51,8 @@ public class AbilityRepository {
                 "src/main/java/org/example/pokemon/ability/abilities.json");
 
         for (Map.Entry<String, String> entry : data.entrySet()) {
-            String name = entry.getKey().replace("-", " ");
+
+            Ability.Name name = Ability.convert(entry.getKey());
             String description = entry.getValue();
             AbilityEffect effect = handler.getEffect(name);
 
@@ -63,14 +79,16 @@ public class AbilityRepository {
     }
 
     private void createEffects() {
-        handler.registerEffect(List.of("blaze", "overgrow", "torrent", "swarm"), this::starterEffect);
+        handler.registerEffect(List.of(
+                Ability.Name.BLAZE, Ability.Name.OVERGROW, Ability.Name.TORRENT, Ability.Name.SWARM),
+                this::starterEffect);
 
-        handler.registerEffect("chlorophyll", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.CHLOROPHYLL, (user, target, move, weather, result) -> {
             if (weather == Weather.SUN) user.getStats().setSpeed(user.getStats().getSpeed() * 2);
             else user.resetStats();
         });
 
-        handler.registerEffect("cursed body", (user, target, move, weather, result) ->{
+        handler.registerEffect(Ability.Name.CURSED_BODY, (user, target, move, weather, result) ->{
             final double ACTIVATION_CHANCE = 0.3;
             final int DISABLE_DURATION = 3;
             if (new Random().nextDouble() < ACTIVATION_CHANCE) {
@@ -80,70 +98,70 @@ public class AbilityRepository {
             }
         });
 
-        handler.registerEffect("flame body", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.FLAME_BODY, (user, target, move, weather, result) -> {
             final double BURN_CHANCE = 0.3;
             if (move.getCategory() == MoveCategory.PHYSICAL) {
                 if (new Random().nextDouble() < BURN_CHANCE) move.getAttacker().setBurned(true);
             }
         });
 
-        handler.registerEffect("static", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.STATIC, (user, target, move, weather, result) -> {
             final double PARALYSIS_CHANCE = 0.3;
             if (move.getCategory() == MoveCategory.PHYSICAL) {
                 if (new Random().nextDouble() < PARALYSIS_CHANCE) move.getAttacker().setParalyzed(true);
             }
         });
 
-        handler.registerEffect("guts", (user, target, move, weather, result) -> {
-            if (user.hasStatusCondition() && !user.isGutsActivated()) {
+        handler.registerEffect(Ability.Name.GUTS, (user, target, move, weather, result) -> {
+            if (user.hasStatusCondition() && !user.getEffectHandler().isGutsActive()) {
                 user.getStats().setAttack((int) (user.getStats().getAttack() * 1.5));
-                user.setGutsActivated(true);
-            } else if (!user.hasStatusCondition() && user.isGutsActivated()) {
+                user.getEffectHandler().activateGuts(true);
+            } else if (!user.hasStatusCondition() && user.getEffectHandler().isGutsActive()) {
                 user.resetAttack();
-                user.setGutsActivated(false);
+                user.getEffectHandler().activateGuts(false);
             }
         });
 
-        handler.registerEffect("hydration", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.HYDRATION, (user, target, move, weather, result) -> {
             if (result.getCurrentWeather() == Weather.RAIN) user.clearStatusCondition();
         });
 
-        handler.registerEffect("magma armor", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.MAGMA_ARMOR, (user, target, move, weather, result) -> {
             if (user.isFrozen()) user.clearStatusCondition();
             result.setMessage(user.getName() + " is protected by Magma Armor");
         });
 
-        handler.registerEffect("marvel scale", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.MARVEL_SCALE, (user, target, move, weather, result) -> {
             if (user.hasStatusCondition()) user.getStats().setDefense((int) (user.getStats().getDefense() * 1.5));
             else user.resetStats();
         });
 
-        handler.registerEffect("multiscale", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.MULTISCALE, (user, target, move, weather, result) -> {
             if (target.getStats().getHp() == target.getStats().getMaxHp()) {
                 int damage = (DamageCalculator.calculateDamage(user, target, move, weather, result)) / 2;
                 user.takeDamage(damage);
             }
         });
 
-        handler.registerEffect("no guard", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.NO_GUARD, (user, target, move, weather, result) -> {
             // TODO: implement that moves also hit the user (pokemon) 100%
-            if (user.hasActiveAbility("No Guard")) move.setAccuracy(100);
+            if (user.hasActiveAbility(Ability.Name.NO_GUARD)) move.setAccuracy(100);
         });
 
-        handler.registerEffect("solar power", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.SOLAR_POWER, (user, target, move, weather, result) -> {
             if (weather == Weather.SUN) user.getStats().setSpecialAttack((int) (user.getStats().getSpecialAttack() * 1.5));
             // TODO: implement passive damage in Battle Logic
         });
 
 
-        handler.registerEffect("thick fat", (user, target, move, weather, result) -> {
-            if (move.getType() == Typing.FIRE || move.getType() == Typing.ICE) user.setThickFatActive(true);
+        handler.registerEffect(Ability.Name.THICK_FAT, (user, target, move, weather, result) -> {
+            if (move.getType() == Typing.FIRE || move.getType() == Typing.ICE) user.getEffectHandler().activateThickFat(true);
         });
 
         // Prevents-Crits-Effect implemented in Damage Calculator
-        handler.registerEffect(List.of("battle armor", "shell armor"), (user, target, move, weather, result) -> { });
+        handler.registerEffect(List.of(Ability.Name.BATTLE_ARMOR, Ability.Name.SHELL_ARMOR), (user, target, move, weather, result) -> { });
 
-        handler.registerEffect("water absorb", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.WATER_ABSORB, (user, target, move, weather, result) -> {
             if (move.getType() == Typing.WATER) {
                 user.heal((int) (user.getStats().getMaxHp() / 4.0));
                 result.setMessage(user.getName() + ": Water Absorb!");
@@ -151,15 +169,15 @@ public class AbilityRepository {
             }
         });
 
-        handler.registerEffect("technician", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.TECHNICIAN, (user, target, move, weather, result) -> {
             if (move.getPower() <= 60) move.setPower((int) (move.getPower() * 1.5));
         });
 
-        handler.registerEffect("synchronize", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.SYNCHRONIZE, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("sturdy", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.STURDY, (user, target, move, weather, result) -> {
             if (target.getStats().getHp() == target.getStats().getMaxHp()) {
                 int damage = DamageCalculator.calculateDamage(user, target, move, weather, result);
                 if (target.getStats().getHp() - damage <= 0) {
@@ -169,84 +187,97 @@ public class AbilityRepository {
             }
         });
 
-        handler.registerEffect("speed boost", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.SPEED_BOOST, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("soundproof", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.SOUNDPROOF, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("scrappy", (user, target, move, weather, result) -> {
-            // TODO
+        handler.registerEffect(Ability.Name.SCRAPPY, (user, target, move, weather, result) -> {
+            if (target.getTyping().contains(Typing.GHOST)) {
+                if (move.getType() == Typing.NORMAL || move.getType() == Typing.FIGHTING) {
+                    double original = TypeChart.getEffectiveness(move.getType(), Typing.GHOST);
+                    result.setEffectiveness(original > 0 ? original : 1.0);
+                }
+            }
         });
 
-        handler.registerEffect("rough skin", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.ROUGH_SKIN, (user, target, move, weather, result) -> {
             if (move.getCategory() == MoveCategory.PHYSICAL) {
                 move.getAttacker().takeDamage(move.getAttacker().getStats().getMaxHp() / 8);
                 result.setMessage(move.getAttacker().getName() + " was hurt by " + target.getName() + "'s Rough Skin!");
             }
         });
 
-        handler.registerEffect("rain dish", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.RAIN_DISH, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("moxie", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.MOXIE, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("magic guard", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.MAGIC_GUARD, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("keen eye", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.KEEN_EYE, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("intimidate", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.INTIMIDATE, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("inner focus", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.INNER_FOCUS, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("forewarn", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.FOREWARN, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("flash fire", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.FLASH_FIRE, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("dry skin", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.DRY_SKIN, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect(List.of("filter", "solid"), (user, target, move, weather, result) -> {
+        handler.registerEffect(List.of(Ability.Name.FILTER, Ability.Name.SOLID_ROCK), (user, target, move, weather, result) -> {
             // TODO: Damage-Reduction-Effect
         });
 
-        handler.registerEffect("competitive", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.COMPETITIVE, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("clear body", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.CLEAR_BODY, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("anger point", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.ANGER_POINT, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect("air lock", (user, target, move, weather, result) -> {
+        handler.registerEffect(Ability.Name.AIR_LOCK, (user, target, move, weather, result) -> {
             // TODO
         });
 
-        handler.registerEffect(List.of("drought", "drizzle", "sand stream"), (user, target, move, weather, result) -> {
-            // TODO: Weather-Effect
+        handler.registerEffect(Ability.Name.MIRROR_ARMOR, (user, target, move, weather, result) -> {
+            // TODO
         });
+
+        handler.registerEffect(List.of(
+                Ability.Name.DROUGHT, Ability.Name.DRIZZLE, Ability.Name.SAND_STREAM), this::weatherEffect);
+    }
+
+    private void weatherEffect(Pokemon user, Pokemon target, Moves move, Weather weather, BattleRoundResult result)
+    {
+        // TODO
     }
 
     private void starterEffect(
