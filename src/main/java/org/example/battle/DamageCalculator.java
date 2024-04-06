@@ -1,5 +1,6 @@
 package org.example.battle;
 
+import org.example.pokemon.ability.Ability;
 import org.example.pokemon.stats.Stats;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.pokemon.*;

@@ -8,6 +8,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("com.github.johnrengelman.shadow") version "7.1.0"
     id("application")
+    id("groovy")
 }
 
 javafx {
@@ -28,6 +29,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.json:json:20240303")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.codehaus.groovy:groovy:3.0.21")
+    implementation("org.codehaus.groovy:groovy-jsr223:3.0.21")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

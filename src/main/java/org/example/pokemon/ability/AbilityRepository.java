@@ -4,7 +4,6 @@ import org.example.battle.DamageCalculator;
 import org.example.battle.TypeChart;
 import org.example.battle.Weather;
 import org.example.pokemon.*;
-import org.example.repositories.api.PokeApiClient;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.json.JSONObject;
 
@@ -22,24 +21,6 @@ public class AbilityRepository {
         abilities = new HashMap<>();
         createEffects();
         init();
-    }
-
-    public static void main(String[] args) {
-        PokeApiClient.saveAbilities("");
-
-        try {
-            final String groovy = "/opt/groovy/bin/groovy";
-            final String script = "scripts/UpdateAbilityEnum.groovy";
-            final String json = "src/main/java/org/example/pokemon/ability/abilities.json";
-            final String ability = "src/main/java/org/example/pokemon/Ability.java";
-
-            ProcessBuilder builder = new ProcessBuilder(groovy, script, json, ability);
-            Process process = builder.start();
-
-            if (process.waitFor() == 0) System.out.println("Groovy-Success");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public Ability getAbility(Ability.Name name) {
@@ -77,6 +58,7 @@ public class AbilityRepository {
         }
         return abilities;
     }
+
 
     private void createEffects() {
         handler.registerEffect(List.of(
@@ -269,6 +251,19 @@ public class AbilityRepository {
 
         handler.registerEffect(Ability.Name.MIRROR_ARMOR, (user, target, move, weather, result) -> {
             // TODO
+        });
+
+        handler.registerEffect(Ability.Name.LIGHTNING_ROD, (user, target, move, weather, result) -> {
+            // TODO
+        });
+
+        handler.registerEffect(Ability.Name.SAP_SIPPER, (user, target, move, weather, result) -> {
+            // TODO
+        });
+
+        handler.registerEffect(List.of(Ability.Name.TERAVOLT, Ability.Name.TURBOBLAZE),
+                (user, target, move, weather, result) -> {
+                // TODO
         });
 
         handler.registerEffect(List.of(

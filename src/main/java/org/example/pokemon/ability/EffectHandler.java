@@ -1,6 +1,5 @@
 package org.example.pokemon.ability;
 
-import org.example.pokemon.Ability;
 import org.example.pokemon.Pokemon;
 
 import java.util.HashMap;

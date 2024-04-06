@@ -1,12 +1,11 @@
 package org.example.repositories;
 
-import org.example.pokemon.Ability;
+import org.example.pokemon.ability.Ability;
 import org.example.pokemon.Nature;
 import org.example.pokemon.Typing;
 import org.example.pokemon.Pokemon;
 import org.example.pokemon.stats.Stats;
 import org.example.pokemon.ability.AbilityRepository;
-import org.example.repositories.api.PokeApiClient;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,6 +28,8 @@ public abstract class PokemonRepository {
 
         // Electric
         pokemon("Pikachu", 25, Typing.ELECTRIC, stats(110, 75, 60, 70, 70, 110), Ability.Name.STATIC);
+
+        pokemon("Zebstrika", 523, Typing.ELECTRIC, stats(150, 120, 83, 100, 83, 136), Ability.Name.LIGHTNING_ROD, Ability.Name.SAP_SIPPER);
 
         // Fairy
         pokemon("Granbull", 210, Typing.FAIRY, stats(165, 140, 95, 80, 80, 65), Ability.Name.INTIMIDATE, Ability.Name.ROUGH_SKIN);
@@ -113,6 +114,9 @@ public abstract class PokemonRepository {
 
         pokemon("Kyogre", 1001, Typing.WATER, stats(175, 120,110, 170,160, 110), Ability.Name.DRIZZLE);
         pokemon("Groudon", 1002, Typing.GROUND, stats(175, 170, 160, 120, 110, 110), Ability.Name.DROUGHT);
+
+        pokemon("Zekrom", 644, Typing.DRAGON, Typing.ELECTRIC, stats(175, 170, 140, 140, 120, 110), Ability.Name.TERAVOLT);
+        pokemon("Reshiram", 643, Typing.DRAGON, Typing.FIRE, stats(175, 140, 120, 170, 140, 110), Ability.Name.TURBOBLAZE);
     }
 
     @SuppressWarnings("unused")
@@ -163,13 +167,6 @@ public abstract class PokemonRepository {
 
     private static Stats stats(int hp, int a, int d, int spA, int spD, int speed) {
         return new Stats(hp, a, d, spA, spD, speed);
-    }
-
-    // Creates the sprites for a Pokémon
-    public static void main(String[] args) {
-        final String pokemon = "";
-        String data = PokeApiClient.fetchData(pokemon);
-        PokeApiClient.createSprites(data, pokemon);
     }
 
     @SuppressWarnings("unused")

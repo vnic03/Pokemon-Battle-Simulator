@@ -1,6 +1,7 @@
 package org.example.pokemon;
 
 import javafx.scene.image.Image;
+import org.example.pokemon.ability.Ability;
 import org.example.pokemon.ability.EffectHandler;
 import org.example.pokemon.stats.Stat;
 import org.example.pokemon.stats.Stats;

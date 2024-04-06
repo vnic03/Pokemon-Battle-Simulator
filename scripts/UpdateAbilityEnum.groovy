@@ -4,7 +4,7 @@ static def update(json, java) {
     def jsonFile = new File(json)
     def abilities = new JsonSlurper().parseText(jsonFile.text)
 
-    def enumContent = abilities.keySet().collect { "    ${it.toUpperCase().replace('-', '_')}," }.join("\n")
+    def enumContent = abilities.keySet().sort().collect { "    ${it.toUpperCase().replace('-', '_')}," }.join("\n")
     enumContent = "public enum Name {\n${enumContent}\n};"
 
     def javaFile = new File(java)
@@ -18,7 +18,7 @@ static def update(json, java) {
 
 if (this.args.length > 0) {
     update('src/main/java/org/example/pokemon/ability/abilities.json',
-            'src/main/java/org/example/pokemon/Ability.java')
+            'src/main/java/org/example/pokemon/ability/Ability.java')
 } else {
     println "Usage: groovy <scriptName> <jsonPath> <javaFilePath>"
 }

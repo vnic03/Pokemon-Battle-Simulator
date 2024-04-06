@@ -10,6 +10,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class PokeApiClient {
@@ -34,6 +36,23 @@ public class PokeApiClient {
             Thread.currentThread().interrupt();
             return null;
         }
+    }
+
+    public static Map<String, Integer> fetchPokemonStats(String pokemonName) {
+        JSONObject obj = new JSONObject(fetchData(pokemonName));
+        JSONArray a = obj.getJSONArray("stats");
+        Map<String, Integer> stats = new HashMap<>();
+
+        for (int i = 0; i < a.length(); i++) {
+            JSONObject statObj = a.getJSONObject(i);
+            String name = statObj.getJSONObject("stat").getString("name");
+            int baseStat = statObj.getInt("base_stat");
+
+            // Adding to the base-stat to get the right amount for 31Ivs at level 50
+            if ("hp".equals(name)) stats.put(name, baseStat + 75);
+            else stats.put(name, baseStat + 20);
+        }
+        return stats;
     }
 
     public static void createSprites(String data, String pokemonName) {
