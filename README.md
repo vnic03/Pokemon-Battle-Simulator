@@ -50,6 +50,6 @@ You can open an issue on this repository to discuss any feedback you might have.
 
 **Current Pokémon-Amount: 89**
 
-*This number is regularly updated to reflect the latest count.*
+*This number is regularly updated!*
 
 ---
