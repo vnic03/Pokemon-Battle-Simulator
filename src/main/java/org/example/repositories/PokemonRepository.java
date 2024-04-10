@@ -30,6 +30,8 @@ public abstract class PokemonRepository {
          */
         pokemon("Houndoom", 229, Typing.DARK, Typing.FIRE, stats(150, 110, 70, 130, 100, 115), Ability.Name.FLASH_FIRE);
 
+        pokemon("Umbreon", 197, Typing.DARK, stats(170, 85, 130, 80, 150, 85), Ability.Name.SYNCHRONIZE, Ability.Name.INNER_FOCUS);
+
 
          /*
             DRAGON
@@ -49,6 +51,8 @@ public abstract class PokemonRepository {
 
         pokemon("Zebstrika", 523, Typing.ELECTRIC, stats(150, 120, 83, 100, 83, 136), Ability.Name.LIGHTNING_ROD, Ability.Name.SAP_SIPPER);
 
+        pokemon("Jolteon", 135, Typing.ELECTRIC, stats(140, 85, 80, 130, 115, 150), Ability.Name.VOLT_ABSORB);
+
 
          /*
             FAIRY
@@ -56,6 +60,8 @@ public abstract class PokemonRepository {
         pokemon("Granbull", 210, Typing.FAIRY, stats(165, 140, 95, 80, 80, 65), Ability.Name.INTIMIDATE, Ability.Name.ROUGH_SKIN);
 
         pokemon("Clefairy", 35, Typing.FAIRY, stats(145, 65, 68, 80, 85, 55), Ability.Name.MAGIC_GUARD);
+
+        pokemon("Sylveon", 700, Typing.FAIRY, stats(170, 85, 85, 130, 150, 80), Ability.Name.PIXILATE);
 
 
          /*
@@ -83,6 +89,8 @@ public abstract class PokemonRepository {
         pokemon("Growlithe", 58, Typing.FIRE, stats(130, 90, 65, 90, 70, 80), Ability.Name.INTIMIDATE, Ability.Name.FLASH_FIRE);
         pokemon("Arcanine", 59, Typing.FIRE, stats(165, 130, 100, 120, 100, 115), Ability.Name.INTIMIDATE, Ability.Name.FLASH_FIRE);
 
+        pokemon("Flareon", 136, Typing.FIRE, stats(140, 150, 80, 115, 130, 85), Ability.Name.FLASH_FIRE, Ability.Name.GUTS);
+
 
          /*
             FLYING
@@ -107,6 +115,8 @@ public abstract class PokemonRepository {
 
         pokemon("Exeggutor", 103, Typing.GRASS, Typing.PSYCHIC, stats(170, 115, 105, 145, 95, 75), Ability.Name.CHLOROPHYLL);
 
+        pokemon("Leafeon", 470, Typing.GRASS, stats(140, 130, 150, 80, 85, 115), Ability.Name.CHLOROPHYLL);
+
 
          /*
             GROUND
@@ -121,6 +131,8 @@ public abstract class PokemonRepository {
             ICE
          */
         pokemon("Jynx", 124, Typing.ICE, Typing.PSYCHIC, stats(140, 70,55, 135, 115, 115), Ability.Name.DRY_SKIN, Ability.Name.FOREWARN);
+
+        pokemon("Glaceon", 471, Typing.ICE, stats(140, 80, 130, 150, 115, 85), Ability.Name.ICE_BODY);
 
 
          /*
@@ -141,6 +153,8 @@ public abstract class PokemonRepository {
 
         pokemon("Kangaskhan", 115, Typing.NORMAL, stats(180, 115, 100, 60, 100, 110), Ability.Name.SCRAPPY, Ability.Name.INNER_FOCUS);
 
+        pokemon("Eevee", 133, Typing.NORMAL, stats(130, 75, 70, 65, 85, 75), Ability.Name.ADAPTABILITY);
+
 
          /*
             POISON
@@ -158,6 +172,8 @@ public abstract class PokemonRepository {
         pokemon("Abra", 63, Typing.PSYCHIC, stats(100, 40, 35, 125, 75, 110), Ability.Name.SYNCHRONIZE, Ability.Name.INNER_FOCUS, Ability.Name.MAGIC_GUARD);
         pokemon("Kadabra", 64, Typing.PSYCHIC, stats(115, 55, 50, 140, 90, 125), Ability.Name.SYNCHRONIZE, Ability.Name.INNER_FOCUS, Ability.Name.MAGIC_GUARD);
         pokemon("Alakazam", 65, Typing.PSYCHIC, stats(130, 70, 65, 155, 115, 140), Ability.Name.SYNCHRONIZE, Ability.Name.INNER_FOCUS, Ability.Name.MAGIC_GUARD);
+
+        pokemon("Espeon", 196, Typing.PSYCHIC, stats(140, 85, 80, 150, 115, 130), Ability.Name.SYNCHRONIZE);
 
 
          /*
@@ -207,6 +223,8 @@ public abstract class PokemonRepository {
         pokemon("Poliwhirl", 61, Typing.WATER, stats(140, 85, 85, 70, 70, 110), Ability.Name.WATER_ABSORB, Ability.Name.SWIFT_SWIM);
         pokemon("Poliwrath", 62, Typing.WATER, Typing.FIGHTING, stats(165, 115, 115, 90, 110, 90), Ability.Name.WATER_ABSORB, Ability.Name.SWIFT_SWIM);
 
+        pokemon("Vaporeon", 134, Typing.WATER, stats(205, 85, 80, 130, 115, 85), Ability.Name.WATER_ABSORB, Ability.Name.HYDRATION);
+
 
         /*
             Legendary-Pokemon
@@ -218,13 +236,13 @@ public abstract class PokemonRepository {
         pokemon("Kyogre", 1001, Typing.WATER, stats(175, 120,110, 170,160, 110), Ability.Name.DRIZZLE);
         pokemon("Groudon", 1002, Typing.GROUND, stats(175, 170, 160, 120, 110, 110), Ability.Name.DROUGHT);
 
-        pokemon("Zekrom", 644, Typing.DRAGON, Typing.ELECTRIC, stats(175, 170, 140, 140, 120, 110), Ability.Name.TERAVOLT);
-        pokemon("Reshiram", 643, Typing.DRAGON, Typing.FIRE, stats(175, 140, 120, 170, 140, 110), Ability.Name.TURBOBLAZE);
+        pokemon("Zekrom", 1644, Typing.DRAGON, Typing.ELECTRIC, stats(175, 170, 140, 140, 120, 110), Ability.Name.TERAVOLT);
+        pokemon("Reshiram", 1643, Typing.DRAGON, Typing.FIRE, stats(175, 140, 120, 170, 140, 110), Ability.Name.TURBOBLAZE);
     }
 
     @SuppressWarnings("unused")
     public static List<String> getAllPokemonNames() {
-        return new ArrayList<>(POKEMON.keySet());
+        return POKEMON.keySet().stream().map(String::toLowerCase).collect(Collectors.toList());
     }
 
     public static Pokemon getPokemon(String name) {

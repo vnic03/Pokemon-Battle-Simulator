@@ -7,7 +7,8 @@ public record Ability
         (Name name, String description, AbilityEffect effect)
 {
     public enum Name {
-    AIR_LOCK,
+    ADAPTABILITY,
+AIR_LOCK,
 ANGER_POINT,
 BATTLE_ARMOR,
 BLAZE,
@@ -25,6 +26,7 @@ FLASH_FIRE,
 FOREWARN,
 GUTS,
 HYDRATION,
+ICE_BODY,
 INNER_FOCUS,
 INTIMIDATE,
 KEEN_EYE,
@@ -38,6 +40,7 @@ MOXIE,
 MULTISCALE,
 NO_GUARD,
 OVERGROW,
+PIXILATE,
 RAIN_DISH,
 ROUGH_SKIN,
 SAND_RUSH,
@@ -61,6 +64,7 @@ THICK_FAT,
 TINTED_LENS,
 TORRENT,
 TURBOBLAZE,
+VOLT_ABSORB,
 WATER_ABSORB,
 };
 

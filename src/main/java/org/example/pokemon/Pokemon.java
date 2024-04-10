@@ -90,11 +90,15 @@ public class Pokemon {
     public String getBaseName() {
         return name;
     }
+
     public void setNickname(String name) {
         this.nickname = name;
     }
+
     public int getPokeDex() { return pokeDex; }
+
     public int getLevel() {
+        // The Level of all Pokemon are 50
         return 50;
     }
 
@@ -117,9 +121,11 @@ public class Pokemon {
     private Gender randomGender() {
         return Math.random() < 0.5 ? Gender.MALE : Gender.FEMALE;
     }
+
     public Gender getGender() {
         return gender;
     }
+
     public void setGender(Gender newGender) {
         this.gender = newGender;
     }

@@ -1,4 +1,4 @@
-package org.example.repositories.api;
+package org.example.api;
 
 import org.example.Constants;
 import org.example.pokemon.Typing;
@@ -14,64 +14,89 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * The PokeApiClient class is responsible for fetching data from the PokeAPI.
+ * It fetches data for a specific Pokemon, such as the typing, abilities, stats, sprites, etc.
+ */
 public class PokeApiClient {
 
+    // HttpClient to make requests
     private static final HttpClient client = HttpClient.newHttpClient();
 
+    /**
+     * Fetches data from the PokeAPI, for a specific Pokemon using the name
+     *
+     * @param pokemonName The name of the pokemon
+     * @return A CompletableFuture containing the data
+     */
     public static CompletableFuture<String> fetchData(String pokemonName) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(Constants.POKE_API_BASE_URL + pokemonName.toLowerCase()))
-                .GET()
-                .build();
-
+        HttpRequest request = buildRequest(Constants.POKE_API_BASE_URL + pokemonName.toLowerCase());
         return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
-                    if (response.statusCode() == 200) {
-                        return response.body();
-                    } else {
-                        throw new RuntimeException("HTTP Response Code: " + response.statusCode());
-                    }
+
+                    if (response.statusCode() == 200) return response.body();
+                    else  throw new RuntimeException("HTTP Response Code: " + response.statusCode());
+
                 }).exceptionally(e -> "Error: " + e.getMessage());
     }
 
+    /**
+     * Fetches the Pokedex number of a pokemon
+     *
+     * @param pokemonName The name of the pokemon
+     * @return A CompletableFuture containing the Pokedex number
+     */
     public static CompletableFuture<Integer> fetchPokeDexNumber(String pokemonName) {
-        return fetchData(pokemonName).thenApply(data -> {
-            JSONObject obj = new JSONObject(data);
-            return obj.getInt("id");
-        });
+        return fetchData(pokemonName).thenApply(data -> new JSONObject(data).getInt("id"));
     }
 
+    /**
+     * Fetches the typing of a pokemon
+     *
+     * @param pokemonName The name of the pokemon
+     * @return A CompletableFuture containing the typing
+     */
     public static CompletableFuture<List<Typing>> fetchTyping(String pokemonName) {
         return fetchData(pokemonName).thenApply(data -> {
-            List<Typing> types = new ArrayList<>();
-            JSONObject obj = new JSONObject(data);
-            JSONArray a = obj.getJSONArray("types");
-
-            for (int i = 0; i < a.length(); i++) {
-                JSONObject type = a.getJSONObject(i).getJSONObject("type");
-                String name = type.getString("name").toUpperCase();
-                try {
-                    types.add(Typing.valueOf(name));
-                } catch (IllegalArgumentException e) {
-                    System.err.println("Typing not found for: " + name);
-                }
-            }
-            return types;
+            JSONArray a = new JSONObject(data).getJSONArray("types");
+            return processJsonArray(a, json -> {
+                String name = json.getJSONObject("type").getString("name").toUpperCase();
+                return Typing.valueOf(name);
+            });
         });
     }
 
+    /**
+     * Fetches the abilities of a pokemon
+     *
+     * @param pokemonName The name of the pokemon
+     * @return A CompletableFuture containing the abilities
+     */
+    public static CompletableFuture<List<String>> fetchAbilities(String pokemonName) {
+        return fetchData(pokemonName).thenApply(data -> {
+            JSONArray a = new JSONObject(data).getJSONArray("abilities");
+            return processJsonArray(a, json -> json.getJSONObject("ability").getString("name"));
+        });
+    }
+
+    /**
+     * Fetches the stats of a pokemon
+     *
+     * @param pokemonName The name of the pokemon
+     * @return A CompletableFuture containing the stats
+     */
     public static CompletableFuture<Map<String, Integer>> fetchPokemonStats(String pokemonName) {
         return fetchData(pokemonName).thenApply(data -> {
-            JSONObject obj = new JSONObject(data);
-            JSONArray a = obj.getJSONArray("stats");
+            JSONArray a = new JSONObject(data).getJSONArray("stats");
             Map<String, Integer> stats = new HashMap<>();
 
             for (int i = 0; i < a.length(); i++) {
-                JSONObject statObj = a.getJSONObject(i);
-                String name = statObj.getJSONObject("stat").getString("name");
-                int baseStat = statObj.getInt("base_stat");
+                JSONObject obj = a.getJSONObject(i);
+                String name = obj.getJSONObject("stat").getString("name");
+                int baseStat = obj.getInt("base_stat");
 
                 // Adding to the base-stat to get the right amount for 31Ivs at level 50
                 if ("hp".equals(name)) stats.put(name, baseStat + 75);
@@ -81,49 +106,56 @@ public class PokeApiClient {
         });
     }
 
-    public static CompletableFuture<List<String>> fetchAbilities(String pokemonName) {
-        return fetchData(pokemonName).thenApply(data -> {
-            List<String> abilities = new ArrayList<>();
-            JSONObject obj = new JSONObject(data);
-            JSONArray a = obj.getJSONArray("abilities");
-
-            for (int i = 0; i < a.length(); i++) {
-                String ability = a.getJSONObject(i).getJSONObject("ability").getString("name");
-                abilities.add(ability);
-            }
-            return abilities;
-        });
-    }
-
+    /**
+     * Generates and stores the sprites and animations for a specific Pokemon,
+     * aligning them with the corresponding directory based on the Pokemon's name,
+     * using the saveImage method.
+     *
+     * @param data The data of the pokemon
+     * @param pokemonName The name of the pokemon
+     */
     public static void createSprites(String data, String pokemonName) {
-        JSONObject obj = new JSONObject(data);
-        JSONObject sprites = obj.getJSONObject("sprites");
+        JSONObject sprites = new JSONObject(data).getJSONObject("sprites");
 
-        String back = sprites.getString("back_default");
         String front = sprites.getString("front_default");
-
         String icon = sprites.getJSONObject("versions")
                 .getJSONObject("generation-viii")
                 .getJSONObject("icons")
                 .getString("front_default");
 
-        CompletableFuture<Void> backF= saveImage(back, "back", pokemonName);
-        CompletableFuture<Void> frontF = saveImage(front, "front", pokemonName);
-        CompletableFuture<Void> iconF = saveImage(icon, "icon", pokemonName);
+        CompletableFuture<Void> frontF = saveImage(front, "front", pokemonName, "png");
+        CompletableFuture<Void> iconF = saveImage(icon, "icon", pokemonName, "png");
 
-        CompletableFuture.allOf(backF, frontF, iconF).join();
+        JSONObject gifs = new JSONObject(data)
+                .getJSONObject("sprites")
+                .getJSONObject("other")
+                .getJSONObject("showdown");
+
+        CompletableFuture<Void> back = saveImage(gifs.getString("back_default"),
+                "back", pokemonName, "gif");
+        CompletableFuture<Void> frontGf = saveImage(gifs.getString("front_default"),
+                "front", pokemonName, "gif");
+
+        CompletableFuture.allOf(frontF, iconF, back, frontGf).join();
     }
 
-    private static CompletableFuture<Void> saveImage(String imageUrl, String imageName, String pokemonName) {
+    /**
+     * Saves an image from a given URL to a specified location.
+     * location -> src/main/resources/pokemon/{pokemonName}/{imageName}.{type}
+     *
+     * @param imageUrl The URL of the image
+     * @param imageName The name of the image
+     * @param pokemonName The name of the pokemon
+     * @param type The type of the image (png, gif, etc.)
+     * @return A CompletableFuture containing the image
+     */
+    private static CompletableFuture<Void> saveImage(String imageUrl, String imageName, String pokemonName, String type) {
         return CompletableFuture.runAsync(() -> {
             if (imageUrl == null || imageUrl.isEmpty()) {
                 System.out.println("Image URL for " + imageName + " does not exist. . .");
                 return;
             }
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(imageUrl))
-                    .GET()
-                    .build();
+            HttpRequest request = buildRequest(imageUrl);
             try {
                 HttpResponse<InputStream> response = client.send(request, HttpResponse.BodyHandlers.ofInputStream());
                 if (response.statusCode() == 200) {
@@ -138,10 +170,10 @@ public class PokeApiClient {
                             return;
                         }
                     }
-                    String path = directoryPath + "/" + imageName + ".png";
+                    String path = directoryPath + "/" + imageName + "." + type;
                     File file = new File(path);
 
-                    ImageIO.write(img, "png", file);
+                    ImageIO.write(img, type, file);
                     System.out.println("Saved: " + path);
                 } else {
                     System.err.println("Failed to fetch image. HTTP Response Code: " + response.statusCode());
@@ -153,6 +185,11 @@ public class PokeApiClient {
         });
     }
 
+    /**
+     * Saves the abilities of a pokemon to the abilities.json file
+     *
+     * @param abilities The abilities of the pokemon, which might not be implemented yet
+     */
     public static void saveAbilities(String... abilities) {
         JSONObject abilitiesJson = loadExisting();
 
@@ -172,11 +209,15 @@ public class PokeApiClient {
         }
     }
 
+    /**
+     * Fetches the description of an ability from the PokeAPI
+     *
+     * @param abilityUrl The URL of the ability
+     * @param name The name of the ability
+     * @return The description of the ability
+     */
     private static String fetchAbilityDescription(final String abilityUrl, String name) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(abilityUrl))
-                .GET()
-                .build();
+        HttpRequest request = buildRequest(abilityUrl);
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
@@ -200,6 +241,11 @@ public class PokeApiClient {
         return "Not Found";
     }
 
+    /**
+     * Loads the existing abilities from the abilities.json file
+     *
+     * @return The existing abilities
+     */
     private static JSONObject loadExisting() {
         File file = new File(Constants.PATH_TO_ABILITIES_JSON);
         if (file.exists()) {
@@ -214,6 +260,43 @@ public class PokeApiClient {
         return new JSONObject();
     }
 
+    /**
+     * Processes a JSON array
+     *
+     * @param a The JSON array
+     * @param processor The processor, which processes the JSON object
+     * @return The results
+     * @param <T> The type of the results
+     */
+    private static <T> List<T> processJsonArray(JSONArray a, Function<JSONObject, T> processor) {
+        List<T> results = new ArrayList<>();
+
+        for (int i = 0; i < a.length(); i++) {
+            T result = processor.apply(a.getJSONObject(i));
+            if (result != null) results.add(result);
+        }
+        return results;
+    }
+
+    /**
+     * Builds a request
+     *
+     * @param url The URL of the request
+     * @return The request
+     */
+    private static HttpRequest buildRequest(String url) {
+        return HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+    }
+
+    /**
+     * Cleans the description, to remove unnecessary characters
+     *
+     * @param description The description of an ability
+     * @return The cleaned description
+     */
     private static String clean(String description) {
         return description.replace("\n", " ")
                 .replace("’", "'")

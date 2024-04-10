@@ -34,7 +34,7 @@ In this project, sprites are directly sourced from the [PokéAPI](https://pokeap
 The `PokeApiClient` class within the project is responsible for fetching data from the PokéAPI.
 
 ## Note
-Please note that as the game is still in development, some features might not be fully implemented, and you may encounter bugs. 
+Please note that as the game is still in development, some features might not be fully implemented, and you may encounter bugs.
 
 ### Accessing the Game
 
@@ -46,3 +46,10 @@ making it easier for everyone to access and enjoy!
 If you have any ideas on how to enhance the game or if you've encountered any issues while playing, please don't hesitate to share your thoughts. 
 You can open an issue on this repository to discuss any feedback you might have.
 
+---
+
+**Current Pokémon-Amount: 89**
+
+*This number is regularly updated to reflect the latest count.*
+
+---

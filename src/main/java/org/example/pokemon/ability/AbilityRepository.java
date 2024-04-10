@@ -273,6 +273,22 @@ public class AbilityRepository {
             // TODO
         });
 
+        handler.registerEffect(Ability.Name.ADAPTABILITY, (user, target, move, weather, result) -> {
+            // TODO
+        });
+
+        handler.registerEffect(Ability.Name.ICE_BODY, (user, target, move, weather, result) -> {
+            // TODO
+        });
+
+        handler.registerEffect(Ability.Name.PIXILATE, (user, target, move, weather, result) -> {
+            // TODO
+        });
+
+        handler.registerEffect(Ability.Name.VOLT_ABSORB, (user, target, move, weather, result) -> {
+            // TODO
+        });
+
         handler.registerEffect(Ability.Name.LEVITATE, (user, target, move, weather, result) -> {
             if (move.getType() == Typing.GROUND) {
                 user.takeDamage(0);

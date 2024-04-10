@@ -24,7 +24,6 @@ import org.example.pokemon.Pokemon;
 import org.example.repositories.PokemonRepository;
 import org.example.teams.Team;
 
-
 import java.util.*;
 
 public class TeamBuilder {

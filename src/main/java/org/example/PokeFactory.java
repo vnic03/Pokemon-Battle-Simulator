@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.pokemon.Typing;
-import org.example.repositories.api.PokeApiClient;
+import org.example.api.PokeApiClient;
 import org.json.JSONObject;
 
 import javax.script.Bindings;
@@ -19,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static org.example.repositories.PokemonRepository.countPokemon;
 
-public class Main {
+public class PokeFactory {
 
     private final static List<String> POKEMON = List.of("");
 
