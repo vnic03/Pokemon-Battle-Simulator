@@ -1,6 +1,8 @@
 package org.example;
 
+import org.example.pokemon.Typing;
 import org.example.repositories.api.PokeApiClient;
+import org.json.JSONObject;
 
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
@@ -9,74 +11,128 @@ import javax.script.ScriptException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.CompletableFuture;
+
+import static org.example.repositories.PokemonRepository.countPokemon;
 
 public class Main {
 
-    private final static String POKEMON = "";
+    private final static List<String> POKEMON = List.of("");
 
-    private final static List<String> abilities = List.of("");
+    private final static List<String> ABILITIES = List.of("");
+
+    private final static ScriptEngineManager MANAGER = new ScriptEngineManager();
+    private final static ScriptEngine ENGINE = MANAGER.getEngineByName("groovy");
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("1 -> Sprites \n2 -> Abilities \n3 -> Stats");
+        try (Scanner scanner = new Scanner(System.in)) {
 
-        switch (scanner.nextInt()) {
-            case 1: createSprites(); break;
-            case 2: createAbilities(); break;
-            case 3: createStats(); break;
+            System.out.println("""
+                    1 -> Pokemon & Sprites\
+                    \s
+                    2 -> Sprites \
+                    \s
+                    3 -> Pokemon\
+                    \s
+                    4 -> Abilities""");
+
+            switch (scanner.nextInt()) {
+                case 1:
+                    createSprites();
+                    createPokemon();
+                    break;
+                case 2: createSprites(); break;
+                case 3: createPokemon(); break;
+                case 4: createAbilities();break;
+                default: break;
+            }
         }
-        scanner.close();
+        System.out.printf("\nAmount of Pokemon: %d%n", countPokemon() + POKEMON.size() + (POKEMON.getFirst().isEmpty() ? -1 : 0));
     }
 
     private static void createSprites() {
-        String data = PokeApiClient.fetchData(POKEMON);
-        PokeApiClient.createSprites(data, POKEMON);
+        List<CompletableFuture<Void>> sprites = POKEMON.stream()
+                .map(name -> PokeApiClient.fetchData(name)
+                        .thenAccept(data -> PokeApiClient.createSprites(data, name)))
+                .toList();
+        CompletableFuture.allOf(sprites.toArray(new CompletableFuture[0])).join();
+        System.out.println("Sprites Done!");
+    }
+
+    private static void createPokemon() {
+        final String scriptPath = "scripts/WritePokemon.groovy";
+
+        POKEMON.forEach(name -> {
+            Integer dex = PokeApiClient.fetchPokeDexNumber(name).join();
+            List<Typing> typings = PokeApiClient.fetchTyping(name).join();
+            Map<String, Integer> stats = PokeApiClient.fetchPokemonStats(name).join();
+            List<String> abilities = PokeApiClient.fetchAbilities(name).join();
+
+            List<String> gameAbilities = getGameAbilities(abilities);
+            try {
+                String typingString = Typing.format(typings);
+                String script = new String(Files.readAllBytes(Paths.get(scriptPath)));
+
+                Bindings bindings = ENGINE.createBindings();
+                bindings.put("path", Constants.PATH_TO_POKEMON_REPOSITORY);
+                bindings.put("pokemonName", name);
+                bindings.put("dex", dex);
+                bindings.put("typing", typingString);
+                bindings.put("stats", stats);
+                bindings.put("abilities", gameAbilities);
+
+                synchronized (ENGINE) {
+                    System.out.println("Writing " + name + " to file...");
+                    ENGINE.eval(script, bindings);
+                }
+            } catch (IOException | ScriptException e) {
+                System.err.println("Error processing " + name + ": " + e.getMessage());
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
+        });
+        System.out.println("Pokemon Done!");
     }
 
     private static void createAbilities() {
-        PokeApiClient.saveAbilities(abilities.toArray(new String[0]));
+        PokeApiClient.saveAbilities(ABILITIES.toArray(new String[0]));
 
+        final String scriptPath = "scripts/UpdateAbilityEnum.groovy";
         try {
-            final String groovy = "/opt/groovy/bin/groovy";
-            final String script = "scripts/UpdateAbilityEnum.groovy";
-            final String json = "src/main/java/org/example/pokemon/ability/abilities.json";
-            final String ability = "src/main/java/org/example/pokemon/ability/Ability.java";
+            String script = new String(Files.readAllBytes(Paths.get(scriptPath)));
 
-            ProcessBuilder builder = new ProcessBuilder(groovy, script, json, ability);
-            Process process = builder.start();
+            Bindings bindings = ENGINE.createBindings();
+            bindings.put("abilities", ABILITIES);
+            bindings.put("path", Constants.PATH_TO_ABILITY_RECORD);
 
-            if (process.waitFor() == 0) System.out.println("Groovy-Success");
-        } catch (Exception e) {
+            synchronized (ENGINE) {
+                ENGINE.eval(script, bindings);
+                System.out.println("Abilities Done!");
+            }
+        } catch (IOException | ScriptException  e) {
             e.printStackTrace();
         }
     }
 
-    private static void createStats() {
-        Map<String, Integer> stats = PokeApiClient.fetchPokemonStats(POKEMON);
-
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName("groovy");
-        final String scriptPath = "scripts/FillStats.groovy";
-        final String javaPath = "src/main/java/org/example/repositories/PokemonRepository.java";
-
+    private static List<String> getGameAbilities(List<String> apiAbilities) {
+        List<String> gameAbilities = new ArrayList<>();
         try {
-            String script = new String(Files.readAllBytes(Paths.get(scriptPath)));
+            String content = new String(Files.readAllBytes(Paths.get(Constants.PATH_TO_ABILITIES_JSON)));
+            JSONObject abilitiesJson = new JSONObject(content);
 
-            Bindings bindings = engine.createBindings();
-            bindings.put("pokemonName", POKEMON);
-            bindings.put("stats", stats);
-            bindings.put("path", javaPath);
-
-            engine.eval(script, bindings);
-        } catch (IOException e) {
-            System.err.println("Error while loading script: " + e.getMessage());
-            e.printStackTrace();
-        } catch (ScriptException e) {
-            System.err.println("Error while running script: " + e.getMessage());
+            for (String name : apiAbilities) {
+                String key = name.toLowerCase().replaceAll(" ", "-");
+                if (abilitiesJson.has(key)) {
+                    gameAbilities.add(name.toUpperCase().replaceAll("-", "_"));
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        return gameAbilities;
     }
 }

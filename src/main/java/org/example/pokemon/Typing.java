@@ -3,8 +3,10 @@ package org.example.pokemon;
 import javafx.scene.image.Image;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public enum Typing {
 
@@ -46,6 +48,12 @@ public enum Typing {
     }
     public Image getImage() {
         return imageCache.get(this);
+    }
+
+    public static String format(List<Typing> typings) {
+        return typings.stream()
+                .map(typing -> "Typing." + typing.name())
+                .collect(Collectors.joining(", "));
     }
 
     @Override

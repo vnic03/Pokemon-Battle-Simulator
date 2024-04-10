@@ -1,5 +1,7 @@
 package org.example.repositories.api;
 
+import org.example.Constants;
+import org.example.pokemon.Typing;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,49 +12,87 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 public class PokeApiClient {
 
-    public static String fetchData(String pokemonName) {
-        final String baseUrl = "https://pokeapi.co/api/v2/pokemon/";
+    private static final HttpClient client = HttpClient.newHttpClient();
 
-        HttpClient client = HttpClient.newHttpClient();
+    public static CompletableFuture<String> fetchData(String pokemonName) {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + pokemonName.toLowerCase()))
+                .uri(URI.create(Constants.POKE_API_BASE_URL + pokemonName.toLowerCase()))
                 .GET()
                 .build();
-        try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                return response.body();
-            } else {
-                throw new IOException("HTTP Response Code: " + response.statusCode());
-            }
-        } catch (IOException | InterruptedException e) {
-            System.err.println("Error: " + e.getMessage());
-            Thread.currentThread().interrupt();
-            return null;
-        }
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> {
+                    if (response.statusCode() == 200) {
+                        return response.body();
+                    } else {
+                        throw new RuntimeException("HTTP Response Code: " + response.statusCode());
+                    }
+                }).exceptionally(e -> "Error: " + e.getMessage());
     }
 
-    public static Map<String, Integer> fetchPokemonStats(String pokemonName) {
-        JSONObject obj = new JSONObject(fetchData(pokemonName));
-        JSONArray a = obj.getJSONArray("stats");
-        Map<String, Integer> stats = new HashMap<>();
+    public static CompletableFuture<Integer> fetchPokeDexNumber(String pokemonName) {
+        return fetchData(pokemonName).thenApply(data -> {
+            JSONObject obj = new JSONObject(data);
+            return obj.getInt("id");
+        });
+    }
 
-        for (int i = 0; i < a.length(); i++) {
-            JSONObject statObj = a.getJSONObject(i);
-            String name = statObj.getJSONObject("stat").getString("name");
-            int baseStat = statObj.getInt("base_stat");
+    public static CompletableFuture<List<Typing>> fetchTyping(String pokemonName) {
+        return fetchData(pokemonName).thenApply(data -> {
+            List<Typing> types = new ArrayList<>();
+            JSONObject obj = new JSONObject(data);
+            JSONArray a = obj.getJSONArray("types");
 
-            // Adding to the base-stat to get the right amount for 31Ivs at level 50
-            if ("hp".equals(name)) stats.put(name, baseStat + 75);
-            else stats.put(name, baseStat + 20);
-        }
-        return stats;
+            for (int i = 0; i < a.length(); i++) {
+                JSONObject type = a.getJSONObject(i).getJSONObject("type");
+                String name = type.getString("name").toUpperCase();
+                try {
+                    types.add(Typing.valueOf(name));
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Typing not found for: " + name);
+                }
+            }
+            return types;
+        });
+    }
+
+    public static CompletableFuture<Map<String, Integer>> fetchPokemonStats(String pokemonName) {
+        return fetchData(pokemonName).thenApply(data -> {
+            JSONObject obj = new JSONObject(data);
+            JSONArray a = obj.getJSONArray("stats");
+            Map<String, Integer> stats = new HashMap<>();
+
+            for (int i = 0; i < a.length(); i++) {
+                JSONObject statObj = a.getJSONObject(i);
+                String name = statObj.getJSONObject("stat").getString("name");
+                int baseStat = statObj.getInt("base_stat");
+
+                // Adding to the base-stat to get the right amount for 31Ivs at level 50
+                if ("hp".equals(name)) stats.put(name, baseStat + 75);
+                else stats.put(name, baseStat + 20);
+            }
+            return stats;
+        });
+    }
+
+    public static CompletableFuture<List<String>> fetchAbilities(String pokemonName) {
+        return fetchData(pokemonName).thenApply(data -> {
+            List<String> abilities = new ArrayList<>();
+            JSONObject obj = new JSONObject(data);
+            JSONArray a = obj.getJSONArray("abilities");
+
+            for (int i = 0; i < a.length(); i++) {
+                String ability = a.getJSONObject(i).getJSONObject("ability").getString("name");
+                abilities.add(ability);
+            }
+            return abilities;
+        });
     }
 
     public static void createSprites(String data, String pokemonName) {
@@ -67,63 +107,64 @@ public class PokeApiClient {
                 .getJSONObject("icons")
                 .getString("front_default");
 
-        saveImage(back, "back", pokemonName);
-        saveImage(front, "front", pokemonName);
-        saveImage(icon, "icon", pokemonName);
+        CompletableFuture<Void> backF= saveImage(back, "back", pokemonName);
+        CompletableFuture<Void> frontF = saveImage(front, "front", pokemonName);
+        CompletableFuture<Void> iconF = saveImage(icon, "icon", pokemonName);
+
+        CompletableFuture.allOf(backF, frontF, iconF).join();
     }
 
-    private static void saveImage(String imageUrl, String imageName, String pokemonName) {
-        if (imageUrl == null || imageUrl.isEmpty()) {
-            System.out.println("Image URL for " + imageName + " does not exist. . .");
-            return;
-        }
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(imageUrl))
-                .GET()
-                .build();
-        try {
-            HttpResponse<InputStream> response = client.send(request, HttpResponse.BodyHandlers.ofInputStream());
-            if (response.statusCode() == 200) {
-                BufferedImage img = ImageIO.read(response.body());
-
-                final String directoryPath = "src/main/resources/pokemon/" + pokemonName;
-                File directory = new File(directoryPath);
-
-                if (!directory.exists()) {
-                    boolean created = directory.mkdirs();
-                    if (!created) {
-                        System.out.println("Could not create directory: " + directoryPath);
-                        return;
-                    }
-                }
-                final String path = directoryPath + "/" + imageName + ".png";
-                File file = new File(path);
-
-                ImageIO.write(img, "png", file);
-                System.out.println("Saved: " + path);
-
-            } else {
-                System.err.println("Failed to fetch image. HTTP Response Code: " + response.statusCode());
+    private static CompletableFuture<Void> saveImage(String imageUrl, String imageName, String pokemonName) {
+        return CompletableFuture.runAsync(() -> {
+            if (imageUrl == null || imageUrl.isEmpty()) {
+                System.out.println("Image URL for " + imageName + " does not exist. . .");
+                return;
             }
-        }  catch (IOException | InterruptedException e) {
-            System.err.println("Error: " + e.getMessage());
-            Thread.currentThread().interrupt();
-        }
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(imageUrl))
+                    .GET()
+                    .build();
+            try {
+                HttpResponse<InputStream> response = client.send(request, HttpResponse.BodyHandlers.ofInputStream());
+                if (response.statusCode() == 200) {
+                    BufferedImage img = ImageIO.read(response.body());
+
+                    String directoryPath = "src/main/resources/pokemon/" + pokemonName;
+                    File directory = new File(directoryPath);
+                    if (!directory.exists()) {
+                        boolean created = directory.mkdirs();
+                        if (!created) {
+                            System.out.println("Could not create directory: " + directoryPath);
+                            return;
+                        }
+                    }
+                    String path = directoryPath + "/" + imageName + ".png";
+                    File file = new File(path);
+
+                    ImageIO.write(img, "png", file);
+                    System.out.println("Saved: " + path);
+                } else {
+                    System.err.println("Failed to fetch image. HTTP Response Code: " + response.statusCode());
+                }
+            } catch (IOException | InterruptedException e) {
+                System.err.println("Error: " + e.getMessage());
+                Thread.currentThread().interrupt();
+            }
+        });
     }
 
     public static void saveAbilities(String... abilities) {
-        final String path = "src/main/java/org/example/pokemon/ability/abilities.json";
-        JSONObject abilitiesJson = loadExisting(path);
+        JSONObject abilitiesJson = loadExisting();
 
         for (String name : abilities) {
             String description = fetchAbilityDescription(
-                    "https://pokeapi.co/api/v2/ability/" + name + "/", name);
+                    Constants.POKE_API_ABILITY_URL + name + "/", name
+            );
             if (!"Not Found".equals(description)) {
                 abilitiesJson.put(name, clean(description));
             }
         }
-        try (FileWriter file = new FileWriter(path)) {
+        try (FileWriter file = new FileWriter(Constants.PATH_TO_ABILITIES_JSON)) {
             file.write(abilitiesJson.toString(4));
             file.flush();
         } catch (IOException e) {
@@ -132,7 +173,6 @@ public class PokeApiClient {
     }
 
     private static String fetchAbilityDescription(final String abilityUrl, String name) {
-        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(abilityUrl))
                 .GET()
@@ -160,10 +200,10 @@ public class PokeApiClient {
         return "Not Found";
     }
 
-    private static JSONObject loadExisting(String path) {
-        File file = new File(path);
+    private static JSONObject loadExisting() {
+        File file = new File(Constants.PATH_TO_ABILITIES_JSON);
         if (file.exists()) {
-            try (FileReader reader = new FileReader(path)) {
+            try (FileReader reader = new FileReader(Constants.PATH_TO_ABILITIES_JSON)) {
                 String content = new BufferedReader(reader)
                         .lines().collect(Collectors.joining("\n"));
                 return new JSONObject(content);

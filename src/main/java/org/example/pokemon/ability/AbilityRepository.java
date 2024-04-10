@@ -1,5 +1,6 @@
 package org.example.pokemon.ability;
 
+import org.example.Constants;
 import org.example.battle.DamageCalculator;
 import org.example.battle.TypeChart;
 import org.example.battle.Weather;
@@ -28,8 +29,7 @@ public class AbilityRepository {
     }
 
     public void init() {
-        final Map<String, String> data = loadFromJson(
-                "src/main/java/org/example/pokemon/ability/abilities.json");
+        final Map<String, String> data = loadFromJson(Constants.PATH_TO_ABILITIES_JSON);
 
         for (Map.Entry<String, String> entry : data.entrySet()) {
 
@@ -259,6 +259,37 @@ public class AbilityRepository {
 
         handler.registerEffect(Ability.Name.SAP_SIPPER, (user, target, move, weather, result) -> {
             // TODO
+        });
+
+        handler.registerEffect(Ability.Name.SWIFT_SWIM, (user, target, move, weather, result) -> {
+            // TODO
+        });
+
+        handler.registerEffect(Ability.Name.SAND_VEIL, (user, target, move, weather, result) -> {
+            // TODO
+        });
+
+        handler.registerEffect(Ability.Name.SAND_RUSH, (user, target, move, weather, result) -> {
+            // TODO
+        });
+
+        handler.registerEffect(Ability.Name.LEVITATE, (user, target, move, weather, result) -> {
+            if (move.getType() == Typing.GROUND) {
+                user.takeDamage(0);
+                result.setDamageDealt(0);
+                result.setMessage(user.getName() + "Levitate!");
+            }
+        });
+
+        handler.registerEffect(Ability.Name.COMPOUND_EYES, (user, target, move, weather, result) -> {
+            // TODO: Not for ONE-HIT-KO moves (need to be implemented first)
+            user.getMoves().forEach(m -> m.setAccuracy((int) (m.getAccuracy() * 1.3)));
+        });
+
+        handler.registerEffect(Ability.Name.TINTED_LENS, (user, target, move, weather, result) -> {
+            int damage = DamageCalculator.calculateDamage(user, target, move, weather, result);
+            if (result.getEffectiveness() < 1.0 && result.getEffectiveness() > 0) damage *= 2;
+            target.takeDamage(damage);
         });
 
         handler.registerEffect(List.of(Ability.Name.TERAVOLT, Ability.Name.TURBOBLAZE),

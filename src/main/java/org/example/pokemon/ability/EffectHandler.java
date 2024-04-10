@@ -55,6 +55,7 @@ public class EffectHandler {
     public void activateGuts(boolean activate) {
         setAbilityState(Ability.Name.GUTS, activate);
     }
+
     public boolean isGutsActive() {
         return getAbilityState(Ability.Name.GUTS);
     }

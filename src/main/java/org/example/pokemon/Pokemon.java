@@ -131,6 +131,7 @@ public class Pokemon {
     public Stats getStats(){
         return stats;
     }
+
     public List<Moves> getMoves() {
         return this.moves;
     }

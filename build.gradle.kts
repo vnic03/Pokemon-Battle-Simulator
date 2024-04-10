@@ -50,6 +50,9 @@ tasks.test {
 
 sourceSets {
     main {
+        groovy {
+            srcDirs("scripts")
+        }
         resources {
             srcDirs("src/main/resources")
         }

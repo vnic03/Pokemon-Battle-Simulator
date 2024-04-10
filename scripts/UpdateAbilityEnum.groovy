@@ -1,24 +1,34 @@
-import groovy.json.JsonSlurper
 
-static def update(json, java) {
-    def jsonFile = new File(json)
-    def abilities = new JsonSlurper().parseText(jsonFile.text)
+static def update(List<String> abilities, String path) {
 
-    def enumContent = abilities.keySet().sort().collect { "    ${it.toUpperCase().replace('-', '_')}," }.join("\n")
-    enumContent = "public enum Name {\n${enumContent}\n};"
-
-    def javaFile = new File(java)
+    def javaFile = new File(path)
     def javaContent = javaFile.text
 
-    def pattern = ~/(?s)public enum Name \{.*?};/
-    def newJavaContent = javaContent.replaceAll(pattern, enumContent)
+    def existingEnumPattern = ~/(?s)public enum Name \{(.*?)};/
+    def matcher = existingEnumPattern.matcher(javaContent)
 
-    javaFile.write(newJavaContent)
+    def existingEnums = []
+    if (matcher.find()) {
+        String enumBlock = matcher.group(1).trim()
+        existingEnums = enumBlock.split(',\n').collect { it.trim() }
+    }
+
+    abilities.each {
+        String newEnum = it.toUpperCase().replace('-', '_')
+        if (!existingEnums.contains(newEnum + ",")) {
+            existingEnums.add(newEnum)
+        }
+    }
+
+    def enumContent = existingEnums.sort().join(",\n")
+    enumContent = "public enum Name {\n    ${enumContent}\n};"
+
+    javaFile.write(javaContent.replaceAll(existingEnumPattern, enumContent))
 }
 
-if (this.args.length > 0) {
-    update('src/main/java/org/example/pokemon/ability/abilities.json',
-            'src/main/java/org/example/pokemon/ability/Ability.java')
+if (!binding.hasVariable("abilities") || !binding.hasVariable("path")) {
+    println "Bindings missing!"
 } else {
-    println "Usage: groovy <scriptName> <jsonPath> <javaFilePath>"
+    update(binding.variables.abilities, binding.variables.path)
 }
+
