@@ -4,49 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Update read me">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/back.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/front.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/back.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/front.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/back.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/front.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/back.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/front.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/back.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/front.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/back.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/front.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/back.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/back.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/front.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/back.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/front.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/front.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/icon.png" afterDir="false" />
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Refactoring and optimization">
+      <change afterPath="$PROJECT_DIR$/scripts/WriteMove.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/api/ApiClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/api/MoveApiClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/PokeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/PokeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Moves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Moves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/AbilityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/AbilityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/api/PokeApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/api/PokeApiClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -408,15 +374,9 @@
       <workItem from="1712747462522" duration="215000" />
       <workItem from="1712747688163" duration="10951000" />
       <workItem from="1712759353684" duration="2102000" />
-      <workItem from="1712793374001" duration="432000" />
-    </task>
-    <task id="LOCAL-00013" summary="Fixed the Nature output">
-      <option name="closed" value="true" />
-      <created>1703954147010</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1703954147010</updated>
+      <workItem from="1712793374001" duration="1042000" />
+      <workItem from="1712825334815" duration="351000" />
+      <workItem from="1712825695225" duration="11088000" />
     </task>
     <task id="LOCAL-00014" summary="Test deleted">
       <option name="closed" value="true" />
@@ -802,7 +762,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712761876157</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Refactoring and optimization">
+      <option name="closed" value="true" />
+      <created>1712794241353</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1712794241353</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -821,7 +789,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added Pokemon sprites and styled the UI" />
     <MESSAGE value="Updated the UI and improved the EvConfigWindow" />
     <MESSAGE value="Updated the UI and added ExplosionEffect" />
     <MESSAGE value="Added frontend (react)" />
@@ -846,7 +813,8 @@
     <MESSAGE value="Implement automatic stats generation in Groovy script and nearly fully automated Pokémon creation in Main" />
     <MESSAGE value="Complete automation of the Pokemon creation process" />
     <MESSAGE value="Update read me" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update read me" />
+    <MESSAGE value="Refactoring and optimization" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring and optimization" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

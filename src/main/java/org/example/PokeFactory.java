@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.api.MoveApiClient;
 import org.example.pokemon.Typing;
 import org.example.api.PokeApiClient;
 import org.json.JSONObject;
@@ -26,6 +27,7 @@ import static org.example.repositories.PokemonRepository.countPokemon;
  * For every Ability-Name in the list, it will add the name and description to the abilities.json file.
  * Additionally, if there is a new Ability in the json file,
  * it will automatically update the Ability enum in the Ability class.
+ *
  */
 public class PokeFactory {
 
@@ -33,14 +35,17 @@ public class PokeFactory {
 
     private final static List<String> ABILITIES = List.of("");
 
+    private final static List<String> MOVES = List.of("shadow-ball");
+
     private final static ScriptEngineManager MANAGER = new ScriptEngineManager();
     private final static ScriptEngine ENGINE = MANAGER.getEngineByName("groovy");
 
     /**
      * Case 1 -> Saves the sprites and animations for each Pokemon and writes the Pokemon to the PokemonRepository.
      * Case 2 -> Saves the sprites and animations for each Pokemon.
-     * Case 3 -> Writes the Pokemon to the PokemonRepository.
+     * Case 3 -> Writes each Pokemon to the PokemonRepository.
      * Case 4 -> Writes the Abilities to the abilities.json file and updates the Ability enum in the Ability class.
+     * Case 5 -> Writes each Move to the MovesRepository.
      *
      * @param args Command line arguments
      */
@@ -54,7 +59,9 @@ public class PokeFactory {
                     \s
                     3 -> Pokemon\
                     \s
-                    4 -> Abilities
+                    4 -> Abilities\
+                    \s
+                    5 -> Moves
                     """);
 
             switch (scanner.nextInt()) {
@@ -65,6 +72,7 @@ public class PokeFactory {
                 case 2: createSprites(); break;
                 case 3: createPokemon(); break;
                 case 4: createAbilities(); break;
+                case 5: createMoves(); break;
                 default: break;
             }
         }
@@ -81,8 +89,6 @@ public class PokeFactory {
     }
 
     private static void createPokemon() {
-        final String scriptPath = "scripts/WritePokemon.groovy";
-
         POKEMON.forEach(name -> {
             Integer dex = PokeApiClient.fetchPokeDexNumber(name).join();
             List<Typing> typings = PokeApiClient.fetchTyping(name).join();
@@ -90,27 +96,17 @@ public class PokeFactory {
             List<String> abilities = PokeApiClient.fetchAbilities(name).join();
 
             List<String> gameAbilities = getGameAbilities(abilities);
-            try {
-                String typingString = Typing.format(typings);
-                String script = new String(Files.readAllBytes(Paths.get(scriptPath)));
+            String typingString = Typing.format(typings);
 
-                Bindings bindings = ENGINE.createBindings();
-                bindings.put("path", Constants.PATH_TO_POKEMON_REPOSITORY);
-                bindings.put("pokemonName", name);
-                bindings.put("dex", dex);
-                bindings.put("typing", typingString);
-                bindings.put("stats", stats);
-                bindings.put("abilities", gameAbilities);
+            Bindings bindings = ENGINE.createBindings();
+            bindings.put("path", Constants.PATH_TO_POKEMON_REPOSITORY);
+            bindings.put("pokemonName", name);
+            bindings.put("dex", dex);
+            bindings.put("typing", typingString);
+            bindings.put("stats", stats);
+            bindings.put("abilities", gameAbilities);
 
-                synchronized (ENGINE) {
-                    System.out.println("Writing " + name + " to file...");
-                    ENGINE.eval(script, bindings);
-                }
-            } catch (IOException | ScriptException e) {
-                System.err.println("Error processing " + name + ": " + e.getMessage());
-                e.printStackTrace();
-                Thread.currentThread().interrupt();
-            }
+            runScript(Constants.SCRIPT_PATH_POKEMON, bindings);
         });
         System.out.println("Pokemon Done!");
     }
@@ -118,20 +114,37 @@ public class PokeFactory {
     private static void createAbilities() {
         PokeApiClient.saveAbilities(ABILITIES.toArray(new String[0]));
 
-        final String scriptPath = "scripts/UpdateAbilityEnum.groovy";
-        try {
-            String script = new String(Files.readAllBytes(Paths.get(scriptPath)));
+        Bindings bindings = ENGINE.createBindings();
+        bindings.put("abilities", ABILITIES);
+        bindings.put("path", Constants.PATH_TO_ABILITY_RECORD);
+
+        runScript(Constants.SCRIPT_PATH_ABILITIES, bindings);
+    }
+
+    private static void createMoves() {
+        MOVES.forEach(name -> {
+            MoveApiClient.MoveData data = MoveApiClient.fetchMove(name).join();
 
             Bindings bindings = ENGINE.createBindings();
-            bindings.put("abilities", ABILITIES);
-            bindings.put("path", Constants.PATH_TO_ABILITY_RECORD);
+            bindings.put("path", Constants.PATH_TO_MOVES_REPOSITORY);
+            bindings.put("moveName", name);
+            bindings.put("data", data);
 
+            runScript(Constants.SCRIPT_PATH_MOVES, bindings);
+        });
+        System.out.println("Moves Done!");
+    }
+
+    private static void runScript(String scriptPath, Bindings bindings) {
+        try {
+            String script = new String(Files.readAllBytes(Paths.get(scriptPath)));
             synchronized (ENGINE) {
                 ENGINE.eval(script, bindings);
-                System.out.println("Abilities Done!");
             }
-        } catch (IOException | ScriptException  e) {
+        } catch (IOException | ScriptException e) {
+            System.err.println("Error executing script: " + e.getMessage());
             e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
     }
 

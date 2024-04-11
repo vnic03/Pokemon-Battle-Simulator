@@ -8,39 +8,20 @@ import org.json.JSONObject;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.URI;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
  * The PokeApiClient class is responsible for fetching data from the PokeAPI.
  * It fetches data for a specific Pokemon, such as the typing, abilities, stats, sprites, etc.
  */
-public class PokeApiClient {
+public class PokeApiClient extends ApiClient {
 
-    // HttpClient to make requests
-    private static final HttpClient client = HttpClient.newHttpClient();
-
-    /**
-     * Fetches data from the PokeAPI, for a specific Pokemon using the name
-     *
-     * @param pokemonName The name of the pokemon
-     * @return A CompletableFuture containing the data
-     */
-    public static CompletableFuture<String> fetchData(String pokemonName) {
-        HttpRequest request = buildRequest(Constants.POKE_API_BASE_URL + pokemonName.toLowerCase());
-        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(response -> {
-
-                    if (response.statusCode() == 200) return response.body();
-                    else  throw new RuntimeException("HTTP Response Code: " + response.statusCode());
-
-                }).exceptionally(e -> "Error: " + e.getMessage());
+    static {
+        setBaseUrl(PokeApiClient.class.getName(), Constants.POKE_API_BASE_URL);
     }
 
     /**
@@ -62,10 +43,10 @@ public class PokeApiClient {
     public static CompletableFuture<List<Typing>> fetchTyping(String pokemonName) {
         return fetchData(pokemonName).thenApply(data -> {
             JSONArray a = new JSONObject(data).getJSONArray("types");
-            return processJsonArray(a, json -> {
-                String name = json.getJSONObject("type").getString("name").toUpperCase();
-                return Typing.valueOf(name);
-            });
+
+            return processJsonArray(a, json -> Typing.valueOf(
+                    json.getJSONObject("type").getString("name").toUpperCase()
+            ));
         });
     }
 
@@ -157,7 +138,7 @@ public class PokeApiClient {
             }
             HttpRequest request = buildRequest(imageUrl);
             try {
-                HttpResponse<InputStream> response = client.send(request, HttpResponse.BodyHandlers.ofInputStream());
+                HttpResponse<InputStream> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofInputStream());
                 if (response.statusCode() == 200) {
                     BufferedImage img = ImageIO.read(response.body());
 
@@ -219,7 +200,7 @@ public class PokeApiClient {
     private static String fetchAbilityDescription(final String abilityUrl, String name) {
         HttpRequest request = buildRequest(abilityUrl);
         try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 JSONObject obj = new JSONObject(response.body());
                 JSONArray a = obj.getJSONArray("flavor_text_entries");
@@ -258,37 +239,6 @@ public class PokeApiClient {
             }
         }
         return new JSONObject();
-    }
-
-    /**
-     * Processes a JSON array
-     *
-     * @param a The JSON array
-     * @param processor The processor, which processes the JSON object
-     * @return The results
-     * @param <T> The type of the results
-     */
-    private static <T> List<T> processJsonArray(JSONArray a, Function<JSONObject, T> processor) {
-        List<T> results = new ArrayList<>();
-
-        for (int i = 0; i < a.length(); i++) {
-            T result = processor.apply(a.getJSONObject(i));
-            if (result != null) results.add(result);
-        }
-        return results;
-    }
-
-    /**
-     * Builds a request
-     *
-     * @param url The URL of the request
-     * @return The request
-     */
-    private static HttpRequest buildRequest(String url) {
-        return HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .build();
     }
 
     /**
