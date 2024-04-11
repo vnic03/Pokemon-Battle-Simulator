@@ -211,6 +211,7 @@ public class Pokemon {
             this.stats.setSpeed(this.stats.getSpeed() / 2);
         }
     }
+
     public boolean isParalyzed() {
         return this.isParalyzed;
     }
@@ -239,7 +240,7 @@ public class Pokemon {
             return false;
         }
 
-        if (isFlinching) {
+        if (isFlinching && !this.hasActiveAbility(Ability.Name.INNER_FOCUS)) {
             result.setMessage(this.name + " flinched and couldn't move !");
             isFlinching = false;
             return false;

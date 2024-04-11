@@ -65,10 +65,7 @@ public class AbilityRepository {
                 Ability.Name.BLAZE, Ability.Name.OVERGROW, Ability.Name.TORRENT, Ability.Name.SWARM),
                 this::starterEffect);
 
-        handler.registerEffect(Ability.Name.CHLOROPHYLL, (user, target, move, weather, result) -> {
-            if (weather == Weather.SUN) user.getStats().setSpeed(user.getStats().getSpeed() * 2);
-            else user.resetStats();
-        });
+        handler.registerEffect(Ability.Name.CHLOROPHYLL, (user, target, move, weather, result) -> doubleSpeedInWeather(user, weather, Weather.SUN));
 
         handler.registerEffect(Ability.Name.CURSED_BODY, (user, target, move, weather, result) ->{
             final double ACTIVATION_CHANCE = 0.3;
@@ -105,7 +102,7 @@ public class AbilityRepository {
         });
 
         handler.registerEffect(Ability.Name.HYDRATION, (user, target, move, weather, result) -> {
-            if (result.getCurrentWeather() == Weather.RAIN) user.clearStatusCondition();
+            if (result.getCurrentWeather() == Weather.RAIN && user.hasStatusCondition()) user.clearStatusCondition();
         });
 
         handler.registerEffect(Ability.Name.MAGMA_ARMOR, (user, target, move, weather, result) -> {
@@ -126,8 +123,9 @@ public class AbilityRepository {
         });
 
         handler.registerEffect(Ability.Name.NO_GUARD, (user, target, move, weather, result) -> {
-            // TODO: implement that moves also hit the user (pokemon) 100%
-            if (user.hasActiveAbility(Ability.Name.NO_GUARD)) move.setAccuracy(100);
+            user.getMoves().forEach(m -> m.setAccuracy(100));
+            target.getMoves().forEach(m -> m.setAccuracy(100));
+            // if switched out reset
         });
 
         handler.registerEffect(Ability.Name.SOLAR_POWER, (user, target, move, weather, result) -> {
@@ -140,16 +138,11 @@ public class AbilityRepository {
             if (move.getType() == Typing.FIRE || move.getType() == Typing.ICE) user.getEffectHandler().activateThickFat(true);
         });
 
-        // Prevents-Crits-Effect implemented in Damage Calculator
+        // Prevents-Crits-Effect implemented in DamageCalculator.class
         handler.registerEffect(List.of(Ability.Name.BATTLE_ARMOR, Ability.Name.SHELL_ARMOR), (user, target, move, weather, result) -> { });
 
-        handler.registerEffect(Ability.Name.WATER_ABSORB, (user, target, move, weather, result) -> {
-            if (move.getType() == Typing.WATER) {
-                user.heal((int) (user.getStats().getMaxHp() / 4.0));
-                result.setMessage(user.getName() + ": Water Absorb!");
-                // TODO: user takes no damage
-            }
-        });
+        handler.registerEffect(Ability.Name.WATER_ABSORB, (user, target, move, weather, result) ->
+                absorbEffect(user, move, Typing.WATER, result, ":Water Absorb!"));
 
         handler.registerEffect(Ability.Name.TECHNICIAN, (user, target, move, weather, result) -> {
             if (move.getPower() <= 60) move.setPower((int) (move.getPower() * 1.5));
@@ -213,13 +206,12 @@ public class AbilityRepository {
             // TODO
         });
 
-        handler.registerEffect(Ability.Name.INNER_FOCUS, (user, target, move, weather, result) -> {
-            // TODO
-        });
+        // Implemented in canAct() method in Pokemon.class
+        handler.registerEffect(Ability.Name.INNER_FOCUS, (user, target, move, weather, result) -> { });
 
-        handler.registerEffect(Ability.Name.FOREWARN, (user, target, move, weather, result) -> {
-            // TODO
-        });
+        handler.registerEffect(Ability.Name.FOREWARN, (user, target, move, weather, result) ->
+                target.getMoves().stream().max(Comparator.comparingInt(Moves::getPower))
+                .ifPresent(best -> result.setMessage(user.getName() + " forewarns of " + best.getName())));
 
         handler.registerEffect(Ability.Name.FLASH_FIRE, (user, target, move, weather, result) -> {
             // TODO
@@ -261,16 +253,15 @@ public class AbilityRepository {
             // TODO
         });
 
-        handler.registerEffect(Ability.Name.SWIFT_SWIM, (user, target, move, weather, result) -> {
-            // TODO
-        });
+        handler.registerEffect(Ability.Name.SWIFT_SWIM, (user, target, move, weather, result) -> doubleSpeedInWeather(user, weather, Weather.RAIN));
 
         handler.registerEffect(Ability.Name.SAND_VEIL, (user, target, move, weather, result) -> {
             // TODO
         });
 
         handler.registerEffect(Ability.Name.SAND_RUSH, (user, target, move, weather, result) -> {
-            // TODO
+            doubleSpeedInWeather(user, weather, Weather.SANDSTORM);
+            // TODO: No damage from sand-storm in battle logic
         });
 
         handler.registerEffect(Ability.Name.ADAPTABILITY, (user, target, move, weather, result) -> {
@@ -281,13 +272,15 @@ public class AbilityRepository {
             // TODO
         });
 
-        handler.registerEffect(Ability.Name.PIXILATE, (user, target, move, weather, result) -> {
-            // TODO
-        });
+        handler.registerEffect(Ability.Name.PIXILATE, (user, target, move, weather, result) -> user.getMoves().forEach(m -> {
+            if (m.getType() == Typing.NORMAL) {
+                m.setType(Typing.FAIRY);
+                m.setPower((int) (m.getPower() * 1.2));
+            }
+        }));
 
-        handler.registerEffect(Ability.Name.VOLT_ABSORB, (user, target, move, weather, result) -> {
-            // TODO
-        });
+        handler.registerEffect(Ability.Name.VOLT_ABSORB, (user, target, move, weather, result) ->
+                absorbEffect(user, move, Typing.ELECTRIC, result, ":Volt Absorb!"));
 
         handler.registerEffect(Ability.Name.LEVITATE, (user, target, move, weather, result) -> {
             if (move.getType() == Typing.GROUND) {
@@ -341,5 +334,18 @@ public class AbilityRepository {
                 }
             }
         }
+    }
+
+    private void absorbEffect(Pokemon user, Moves move, Typing typing, BattleRoundResult result, String text) {
+        if (move.getType() == typing) {
+            user.heal((int) (user.getStats().getMaxHp() / 4.0));
+            result.setMessage(user.getName() + text);
+            // TODO: user takes no damage
+        }
+    }
+
+    private void doubleSpeedInWeather(Pokemon user, Weather weather, Weather condition) {
+        if (weather == condition) user.getStats().setSpeed(user.getStats().getSpeed() * 2);
+        else user.resetStats();
     }
 }

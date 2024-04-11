@@ -48,7 +48,7 @@ You can open an issue on this repository to discuss any feedback you might have.
 
 ---
 
-**Current Pokémon-Amount: 89**
+**Current Pokémon-Amount: 96**
 
 *This number is regularly updated!*
 

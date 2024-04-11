@@ -19,6 +19,14 @@ import java.util.concurrent.CompletableFuture;
 
 import static org.example.repositories.PokemonRepository.countPokemon;
 
+/**
+ * This class is used to automatically create Pokemon, Abilities, and Sprites/Animations.
+ * For every Pokemon-Name in the list, it will write the Pokemon to the PokemonRepository class.
+ * It can also create the sprites/animations for each Pokemon.
+ * For every Ability-Name in the list, it will add the name and description to the abilities.json file.
+ * Additionally, if there is a new Ability in the json file,
+ * it will automatically update the Ability enum in the Ability class.
+ */
 public class PokeFactory {
 
     private final static List<String> POKEMON = List.of("");
@@ -28,6 +36,14 @@ public class PokeFactory {
     private final static ScriptEngineManager MANAGER = new ScriptEngineManager();
     private final static ScriptEngine ENGINE = MANAGER.getEngineByName("groovy");
 
+    /**
+     * Case 1 -> Saves the sprites and animations for each Pokemon and writes the Pokemon to the PokemonRepository.
+     * Case 2 -> Saves the sprites and animations for each Pokemon.
+     * Case 3 -> Writes the Pokemon to the PokemonRepository.
+     * Case 4 -> Writes the Abilities to the abilities.json file and updates the Ability enum in the Ability class.
+     *
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
 
@@ -38,7 +54,8 @@ public class PokeFactory {
                     \s
                     3 -> Pokemon\
                     \s
-                    4 -> Abilities""");
+                    4 -> Abilities
+                    """);
 
             switch (scanner.nextInt()) {
                 case 1:
@@ -47,7 +64,7 @@ public class PokeFactory {
                     break;
                 case 2: createSprites(); break;
                 case 3: createPokemon(); break;
-                case 4: createAbilities();break;
+                case 4: createAbilities(); break;
                 default: break;
             }
         }

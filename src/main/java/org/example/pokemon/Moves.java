@@ -14,7 +14,9 @@ public class Moves {
     private int currentPP;
     private final MoveEffect effect;
 
-    public Moves(String name, Typing type, MoveCategory category, int power, int accuracy, int initialPP, MoveEffect effect){
+    public Moves(String name, Typing type, MoveCategory category, int power,
+            int accuracy, int initialPP, MoveEffect effect)
+    {
         this.name = name;
         this.type = type;
         this.category = category;
@@ -31,16 +33,22 @@ public class Moves {
     public Typing getType(){
         return type;
     }
+
     public int getPower(){
         return power;
     }
+
     public int getAccuracy() {
         return accuracy; }
+
     public void setType(Typing type) { this.type = type; }
+
     public void setPower(int power) { this.power = power; }
+
     public void saveOriginalPower() {
         this.originalPower = this.power;
     }
+
     public void resetPower() {
         this.power = this.originalPower;
     }
@@ -50,9 +58,11 @@ public class Moves {
     public MoveCategory getCategory() {
         return category;
     }
+
     public void setCategory(MoveCategory category) {
         this.category = category;
     }
+
     public int getPp() {
         return this.currentPP;
     }

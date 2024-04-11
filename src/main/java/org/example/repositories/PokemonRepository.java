@@ -24,6 +24,8 @@ public abstract class PokemonRepository {
 
         pokemon("Butterfree", 12, Typing.BUG, Typing.FLYING, stats(135, 65, 70, 110, 100, 90), Ability.Name.COMPOUND_EYES, Ability.Name.TINTED_LENS);
 
+        pokemon("Beedrill", 15, Typing.BUG, Typing.POISON, stats(140, 110, 60, 65, 100, 95), Ability.Name.SWARM);
+
 
          /*
             DARK
@@ -70,6 +72,9 @@ public abstract class PokemonRepository {
         pokemon("Machop", 66, Typing.FIGHTING, stats(145, 100, 70, 55, 55, 55), Ability.Name.GUTS, Ability.Name.NO_GUARD);
         pokemon("Machoke", 67, Typing.FIGHTING, stats(155, 120, 90, 70, 80, 65), Ability.Name.GUTS, Ability.Name.NO_GUARD);
         pokemon("Machamp", 68, Typing.FIGHTING, stats(165, 150, 100, 85, 105, 75), Ability.Name.GUTS, Ability.Name.NO_GUARD);
+
+        pokemon("Mankey", 56, Typing.FIGHTING, stats(115, 100, 55, 55, 65, 90), Ability.Name.ANGER_POINT);
+        pokemon("Primeape", 57, Typing.FIGHTING, stats(140, 125, 80, 80, 90, 115), Ability.Name.ANGER_POINT);
 
 
          /*
@@ -163,6 +168,11 @@ public abstract class PokemonRepository {
         pokemon("Golbat", 42, Typing.POISON, Typing.FLYING, stats(150, 100, 90, 85, 95, 110), Ability.Name.INNER_FOCUS);
         pokemon("Crobat", 169, Typing.POISON, Typing.FLYING, stats(160, 110, 100, 90, 100, 150), Ability.Name.INNER_FOCUS);
 
+        pokemon("Ekans", 23, Typing.POISON, stats(110, 80, 64, 60, 74, 75), Ability.Name.INTIMIDATE);
+        pokemon("Arbok", 24, Typing.POISON, stats(135, 115, 89, 85, 99, 100), Ability.Name.INTIMIDATE);
+
+        // pokemon("Nidoqueen", 31, Typing.POISON, Typing.GROUND, stats(165, 112, 107, 95, 105, 96), );
+        // pokemon("Nidoking", 34, Typing.POISON, Typing.GROUND, stats(156, 122, 97, 105, 95, 105), );
 
          /*
             PSYCHIC
@@ -224,6 +234,9 @@ public abstract class PokemonRepository {
         pokemon("Poliwrath", 62, Typing.WATER, Typing.FIGHTING, stats(165, 115, 115, 90, 110, 90), Ability.Name.WATER_ABSORB, Ability.Name.SWIFT_SWIM);
 
         pokemon("Vaporeon", 134, Typing.WATER, stats(205, 85, 80, 130, 115, 85), Ability.Name.WATER_ABSORB, Ability.Name.HYDRATION);
+
+        pokemon("Psyduck", 54, Typing.WATER, stats(125, 72, 68, 85, 70, 75), Ability.Name.SWIFT_SWIM);
+        pokemon("Golduck", 55, Typing.WATER, stats(155, 102, 98, 115, 100, 105), Ability.Name.SWIFT_SWIM);
 
 
         /*
