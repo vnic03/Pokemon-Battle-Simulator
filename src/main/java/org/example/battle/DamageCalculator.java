@@ -38,7 +38,9 @@ public class DamageCalculator {
         return damage;
     }
 
-    private static void setTypeAdvantageMsg(double typeAdvantage, Pokemon defender, BattleRoundResult result) {
+    private static void setTypeAdvantageMsg(
+            double typeAdvantage, Pokemon defender, BattleRoundResult result)
+    {
         if (typeAdvantage == 2.0) {
             result.setMessage("It's super effective !");
         } else if (typeAdvantage < 1.0 && typeAdvantage > 0) {

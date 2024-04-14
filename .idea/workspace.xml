@@ -4,15 +4,598 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Refactoring and optimization">
-      <change afterPath="$PROJECT_DIR$/scripts/WriteMove.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/api/ApiClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/api/MoveApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="64aaf819-db22-446b-b13d-df140e1b4eb9" name="Changes" comment="Automize Move creation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ResourceManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/abra/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/alakazam/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/blastoise/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gible/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golem/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ledian/back.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ledian/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ledian/front.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ledian/front.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ledian/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machop/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mew/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mr_mime/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/front.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sylveon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/cry.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/cry.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/PokeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/PokeFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/api/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/api/ApiClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/api/PokeApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/api/PokeApiClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/battle/DamageCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/battle/DamageCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/battle/TypeChart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/battle/TypeChart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/MoveCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/MoveCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Pokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Typing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/Typing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/Ability.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/Ability.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/AbilityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/AbilityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/abilities.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/pokemon/ability/abilities.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/PokemonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/screens/battleScene/BattleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/abra/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/abra/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/abra/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/abra/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/abra/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/aggron/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/alakazam/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/alakazam/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/alakazam/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/alakazam/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/alakazam/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/alakazam/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/alakazam/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arbok/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/arcanine/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/beedrill/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/blastoise/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/bulbasaur/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/butterfree/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/camerupt/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charizard/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmander/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/charmeleon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/clefairy/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/corviknight/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/crobat/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/cubone/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/dragonite/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/eevee/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ekans/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/espeon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exeggutor/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/exploud/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/fearow/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/flareon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gabite/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/garchomp/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gastly/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gengar/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/geodude/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gible/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gible/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gible/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gible/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gible/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gible/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gible/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gible/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gible/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/glaceon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golbat/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golduck/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golem/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golem/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golem/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golem/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golem/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golem/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golem/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/golem/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/golem/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/granbull/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/graveler/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/greninja/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/groudon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/growlithe/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/gyarados/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/haunter/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/houndoom/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ivysaur/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jolteon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/jynx/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kabutops/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kadabra/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kangaskhan/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/kyogre/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/lapras/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/leafeon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machamp/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machoke/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machop/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machop/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machop/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machop/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machop/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machop/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machop/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/machop/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/machop/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magmar/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnemite/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magneton/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/magnezone/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mankey/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/metagross/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mew/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mew/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mew/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mew/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mew/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mew/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mew/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mew/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/mew/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/milotic/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/mr_mime/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoking/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/nidoqueen/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/ninetales/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pidgeot/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/pikachu/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwag/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwhirl/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/poliwrath/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/primeape/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/psyduck/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raichu/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/raticate/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rattata/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/rayquaza/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/reshiram/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandshrew/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sandslash/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/scyther/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sharpedo/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/snorlax/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/spearow/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/squirtle/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/steelix/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sylveon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sylveon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sylveon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sylveon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sylveon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sylveon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/sylveon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/sylveon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/tyranitar/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/umbreon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vaporeon/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/venusaur/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/vulpix/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/wartortle/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/whismur/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zebstrika/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zekrom/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/back.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/back.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/front.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/front.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/front.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/front.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pokemon/zubat/icon.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +727,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Shell Script.run.sh.executor&quot;: &quot;Debug&quot;,
     &quot;Spring Boot.MainApplication.executor&quot;: &quot;Run&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
@@ -160,7 +744,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.559721&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Java&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -174,11 +758,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources/preview" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/pokemon/mr_mime" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/groovy" />
       <recent name="$PROJECT_DIR$/scripts" />
       <recent name="$PROJECT_DIR$/src/main/java/org/example/ability" />
-      <recent name="$PROJECT_DIR$/src/main/java/org/example/repositories/ability" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="FailedIdeas" />
@@ -376,15 +960,16 @@
       <workItem from="1712759353684" duration="2102000" />
       <workItem from="1712793374001" duration="1042000" />
       <workItem from="1712825334815" duration="351000" />
-      <workItem from="1712825695225" duration="11088000" />
-    </task>
-    <task id="LOCAL-00014" summary="Test deleted">
-      <option name="closed" value="true" />
-      <created>1703954178870</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1703954178870</updated>
+      <workItem from="1712825695225" duration="14284000" />
+      <workItem from="1712845205063" duration="847000" />
+      <workItem from="1712846085823" duration="102000" />
+      <workItem from="1712846199976" duration="97000" />
+      <workItem from="1712846304965" duration="122000" />
+      <workItem from="1712846435801" duration="1800000" />
+      <workItem from="1712910353094" duration="3989000" />
+      <workItem from="1712914357177" duration="1067000" />
+      <workItem from="1712915443034" duration="29815000" />
+      <workItem from="1713102072105" duration="18410000" />
     </task>
     <task id="LOCAL-00015" summary="AbsorbEffect added">
       <option name="closed" value="true" />
@@ -770,7 +1355,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712794241353</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Automize Move creation">
+      <option name="closed" value="true" />
+      <created>1712837557674</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1712837557675</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -789,7 +1382,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated the UI and improved the EvConfigWindow" />
     <MESSAGE value="Updated the UI and added ExplosionEffect" />
     <MESSAGE value="Added frontend (react)" />
     <MESSAGE value="Deleted frontend" />
@@ -814,7 +1406,8 @@
     <MESSAGE value="Complete automation of the Pokemon creation process" />
     <MESSAGE value="Update read me" />
     <MESSAGE value="Refactoring and optimization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring and optimization" />
+    <MESSAGE value="Automize Move creation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Automize Move creation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

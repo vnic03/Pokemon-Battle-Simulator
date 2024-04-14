@@ -30,12 +30,13 @@ public enum Typing {
     FAIRY("fairy.png");
 
     private final String imagePath;
-    private static final Map<Typing, Image> imageCache = new EnumMap<>(Typing.class);
+
+    private static final Map<Typing, Image> IMAGE_CACHE = new EnumMap<>(Typing.class);
 
     static
     {
         for (Typing type: Typing.values()) {
-            imageCache.put(type, loadImage(type.imagePath));
+            IMAGE_CACHE.put(type, loadImage(type.imagePath));
         }
     }
 
@@ -46,8 +47,9 @@ public enum Typing {
     private static Image loadImage(String path) {
         return new Image(Objects.requireNonNull(Typing.class.getResourceAsStream(path)));
     }
+
     public Image getImage() {
-        return imageCache.get(this);
+        return IMAGE_CACHE.get(this);
     }
 
     public static String format(List<Typing> typings) {

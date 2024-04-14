@@ -8,6 +8,7 @@ import java.util.Map;
 public abstract class TypeChart {
 
     private static final Map<TypeKey, Double> effectiveness = new HashMap<>();
+
     private static boolean dataLoaded = false;
 
     private static void load()

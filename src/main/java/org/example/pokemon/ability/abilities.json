@@ -7,6 +7,7 @@
     "solar-power": "Boosts Sp. Atk, but lowers HP in sunshine.",
     "anger-point": "Raises Attack upon taking a critical hit.",
     "soundproof": "Avoids sound-based moves.",
+    "early-bird": "Awakens quickly from sleep.",
     "teravolt": "Moves can be used regardless of Abilities.",
     "keen-eye": "Prevents other Pokémon from lowering accuracy.",
     "forewarn": "Determines what moves the foe has.",
@@ -57,5 +58,6 @@
     "overgrow": "Ups GRASS moves in a pinch.",
     "drought": "Summons sunlight in battle.",
     "battle-armor": "Blocks critical hits.",
-    "dry-skin": "Reduces HP if it is hot. Water restores HP."
+    "dry-skin": "Reduces HP if it is hot. Water restores HP.",
+    "poison-point": "Poisons foe on contact."
 }

@@ -1,5 +1,6 @@
 package org.example.screens.battleScene;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
@@ -10,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import org.example.pokemon.Moves;
 import org.example.pokemon.Pokemon;
 import org.example.battle.BattleLogic;
@@ -86,6 +88,12 @@ public class BattleView extends AnchorPane {
 
         updateLayoutForTeam(team1, team1Container, fullLayoutTeam1, movesLayoutTeam1 ,true);
         updateLayoutForTeam(team2, team2Container, fullLayoutTeam2, movesLayoutTeam2 ,false);
+
+        team1.getPokemons().getFirst().getCry().play();
+        // After 1 second the other cry starts, overlapping doesn't sound good!
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        pause.setOnFinished(e -> team2.getPokemons().getFirst().getCry().play());
+        pause.play();
     }
 
     private void changePokemon(Team team, int pokemonIndex, boolean isTeamOne) {
@@ -94,7 +102,7 @@ public class BattleView extends AnchorPane {
         }
         Pokemon newPokemon = team.getPokemons().get(pokemonIndex);
         if (isTeamOne) {
-            ImageView newSpriteView = new ImageView(newPokemon.getBackSprite());
+            ImageView newSpriteView = new ImageView(newPokemon.getBackAnimation());
             newSpriteView.setFitWidth(200);
             newSpriteView.setFitHeight(200);
             newSpriteView.setPreserveRatio(true);
@@ -104,7 +112,7 @@ public class BattleView extends AnchorPane {
             team1Container.getChildren().clear();
             team1Container.getChildren().addAll(newSpriteView, newStatusBar);
         } else {
-            ImageView newSpriteView = new ImageView(newPokemon.getFrontSprite());
+            ImageView newSpriteView = new ImageView(newPokemon.getFrontAnimation());
             newSpriteView.setFitWidth(200);
             newSpriteView.setFitHeight(200);
             newSpriteView.setPreserveRatio(true);
@@ -119,6 +127,7 @@ public class BattleView extends AnchorPane {
             statusBar = new PokemonStatusBar(newPokemon);
             statusBarMap.put(newPokemon, statusBar);
         }
+        newPokemon.getCry().play();
     }
 
     public void handlePokemonChangeRequest(Team team, int pokemonIndex, boolean isTeam1) {
@@ -136,16 +145,25 @@ public class BattleView extends AnchorPane {
             System.out.println("Can't switch right now"); // fix later
         }
     }
+
     private void updateTeamView(HBox teamContainer, Team team, boolean isTeam1) {
         teamContainer.getChildren().clear();
-
         Pokemon activePokemon = team.getPokemons().get(team.getActivePokemonIndex());
+
         if (activePokemon != null) {
-            ImageView spriteView = new ImageView(isTeam1 ? activePokemon.getBackSprite() : activePokemon.getFrontSprite());
+            Image image = isTeam1 ?
+                    activePokemon.getBackAnimation()
+                    :
+                    activePokemon.getFrontAnimation();
+
+            ImageView spriteView = new ImageView(image);
             spriteView.setFitWidth(200);
             spriteView.setFitHeight(200);
             spriteView.setPreserveRatio(true);
             spriteView.setSmooth(true);
+
+            Platform.runLater(() -> spriteView.setImage(image));
+
             PokemonStatusBar statusBar = new PokemonStatusBar(activePokemon);
             teamContainer.getChildren().addAll(spriteView, statusBar);
         }
@@ -228,9 +246,7 @@ public class BattleView extends AnchorPane {
         }
     }
 
-    private void updateUIWithBattleResult(BattleRoundResult result) {
-
-    }
+    private void updateUIWithBattleResult(BattleRoundResult result) { }
 
     private void initializeBattleLog() {
         battleLog.setEditable(false);
@@ -249,11 +265,13 @@ public class BattleView extends AnchorPane {
 
         battleLog.setScrollTop(Double.MAX_VALUE);
     }
+
     public void setBattleLogic(BattleLogic battleLogic) {
         this.battleLogic = battleLogic;
     }
 
-    private void updateMovesLayout(List<Button> moveButtons, Button switchButton, VBox movesLayout) {
+    private void updateMovesLayout(List<Button> moveButtons, Button switchButton, VBox movesLayout)
+    {
         movesLayout.getChildren().clear();
         HBox topRow = new HBox(10);
         HBox bottomRow = new HBox(10);
@@ -268,7 +286,10 @@ public class BattleView extends AnchorPane {
         movesLayout.getChildren().addAll(switchButton, topRow, bottomRow);
         movesLayout.setAlignment(Pos.CENTER);
     }
-    private void updateLayoutForTeam(Team team, HBox teamContainer, HBox fullLayout,VBox movesLayout, boolean isTeam1) {
+
+    private void updateLayoutForTeam(
+            Team team, HBox teamContainer, HBox fullLayout,VBox movesLayout, boolean isTeam1)
+    {
         teamContainer.getChildren().clear();
         fullLayout.getChildren().clear();
         movesLayout.getChildren().clear();
@@ -276,11 +297,19 @@ public class BattleView extends AnchorPane {
         if (!team.getPokemons().isEmpty()) {
             Pokemon pokemon = team.getPokemons().getFirst();
             if (pokemon != null) {
-                ImageView spriteView = new ImageView(isTeam1 ? pokemon.getBackSprite() : pokemon.getFrontSprite());
+                Image image = isTeam1 ?
+                        pokemon.getBackAnimation()
+                        :
+                        pokemon.getFrontAnimation();
+
+                ImageView spriteView = new ImageView(image);
                 spriteView.setFitWidth(200);
                 spriteView.setFitHeight(200);
                 spriteView.setPreserveRatio(true);
                 spriteView.setSmooth(true);
+
+                Platform.runLater(() -> spriteView.setImage(image));
+
                 PokemonStatusBar statusBar = new PokemonStatusBar(pokemon);
                 statusBarMap.put(pokemon, statusBar);
                 teamContainer.getChildren().addAll(spriteView, statusBar);
@@ -294,21 +323,26 @@ public class BattleView extends AnchorPane {
             }
         }
     }
+
     public void updateTimerTeam1(int remainingTime) {
         Platform.runLater(() -> timerLabelTeam1.setText(String.valueOf(remainingTime)));
     }
+
     public void updateTimerTeam2(int remainingTime) {
         Platform.runLater(() -> timerLabelTeam2.setText(String.valueOf(remainingTime)));
     }
+
     public void showNewRoundStarted() {
         battleLog.appendText("-"); // fix later
     }
+
     public void hideButtons(boolean isTeam1) {
         VBox movesLayout = isTeam1 ? movesLayoutTeam1 : movesLayoutTeam2;
         movesLayout.setVisible(false);
         Label timerLabel = isTeam1 ? timerLabelTeam1 : timerLabelTeam2;
         timerLabel.setVisible(false);
     }
+
     public void showButtons() {
         movesLayoutTeam1.setVisible(true);
         movesLayoutTeam2.setVisible(true);

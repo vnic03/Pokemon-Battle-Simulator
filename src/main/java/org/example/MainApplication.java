@@ -31,7 +31,7 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
+        System.out.println("Build time: " + new java.util.Date());
         this.primaryStage = primaryStage;
 
         primaryStage.setFullScreen(true);

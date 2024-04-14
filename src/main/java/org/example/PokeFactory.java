@@ -16,12 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.CompletableFuture;
 
 import static org.example.repositories.PokemonRepository.countPokemon;
 
 /**
- * This class is used to automatically create Pokemon, Abilities, and Sprites/Animations.
+ * This class is used to automatically create Pokemon, Abilities, Cries and Sprites/Animations.
  * For every Pokemon-Name in the list, it will write the Pokemon to the PokemonRepository class.
  * It can also create the sprites/animations for each Pokemon.
  * For every Ability-Name in the list, it will add the name and description to the abilities.json file.
@@ -33,19 +32,20 @@ public class PokeFactory {
 
     private final static List<String> POKEMON = List.of("");
 
-    private final static List<String> ABILITIES = List.of("");
+    private final static List<String> ABILITIES = List.of("poison-point");
 
-    private final static List<String> MOVES = List.of("shadow-ball");
+    private final static List<String> MOVES = List.of("");
 
     private final static ScriptEngineManager MANAGER = new ScriptEngineManager();
     private final static ScriptEngine ENGINE = MANAGER.getEngineByName("groovy");
 
     /**
-     * Case 1 -> Saves the sprites and animations for each Pokemon and writes the Pokemon to the PokemonRepository.
+     * Case 1 -> Saves the sprites/animations and cries for each Pokemon and writes the Pokemon to the PokemonRepository.
      * Case 2 -> Saves the sprites and animations for each Pokemon.
      * Case 3 -> Writes each Pokemon to the PokemonRepository.
      * Case 4 -> Writes the Abilities to the abilities.json file and updates the Ability enum in the Ability class.
      * Case 5 -> Writes each Move to the MovesRepository.
+     * Case 6 -> Saves the cries for each Pokemon
      *
      * @param args Command line arguments
      */
@@ -53,26 +53,30 @@ public class PokeFactory {
         try (Scanner scanner = new Scanner(System.in)) {
 
             System.out.println("""
-                    1 -> Pokemon & Sprites\
+                    1 -> Pokemon & Sprites & Cries\
                     \s
-                    2 -> Sprites \
+                    2 -> Sprites\
                     \s
                     3 -> Pokemon\
                     \s
                     4 -> Abilities\
                     \s
-                    5 -> Moves
+                    5 -> Moves\
+                    \s
+                    6 -> Cries
                     """);
 
             switch (scanner.nextInt()) {
                 case 1:
                     createSprites();
+                    createCries();
                     createPokemon();
                     break;
                 case 2: createSprites(); break;
                 case 3: createPokemon(); break;
                 case 4: createAbilities(); break;
                 case 5: createMoves(); break;
+                case 6: createCries(); break;
                 default: break;
             }
         }
@@ -80,11 +84,10 @@ public class PokeFactory {
     }
 
     private static void createSprites() {
-        List<CompletableFuture<Void>> sprites = POKEMON.stream()
-                .map(name -> PokeApiClient.fetchData(name)
-                        .thenAccept(data -> PokeApiClient.createSprites(data, name)))
-                .toList();
-        CompletableFuture.allOf(sprites.toArray(new CompletableFuture[0])).join();
+        POKEMON.forEach(name -> {
+            try { PokeApiClient.createSprites(name); }
+            catch (Exception e) { System.out.println("Error: " + name); }
+        });
         System.out.println("Sprites Done!");
     }
 
@@ -95,7 +98,7 @@ public class PokeFactory {
             Map<String, Integer> stats = PokeApiClient.fetchPokemonStats(name).join();
             List<String> abilities = PokeApiClient.fetchAbilities(name).join();
 
-            List<String> gameAbilities = getGameAbilities(abilities);
+            List<String> gameAbilities = GameAbilities(abilities);
             String typingString = Typing.format(typings);
 
             Bindings bindings = ENGINE.createBindings();
@@ -135,6 +138,14 @@ public class PokeFactory {
         System.out.println("Moves Done!");
     }
 
+    private static void createCries() {
+        POKEMON.forEach(name -> {
+            try { PokeApiClient.createCry(name); }
+            catch (Exception e) { System.out.println("Error: " + name); }
+        });
+        System.out.println("Cries Done!");
+    }
+
     private static void runScript(String scriptPath, Bindings bindings) {
         try {
             String script = new String(Files.readAllBytes(Paths.get(scriptPath)));
@@ -148,7 +159,7 @@ public class PokeFactory {
         }
     }
 
-    private static List<String> getGameAbilities(List<String> apiAbilities) {
+    private static List<String> GameAbilities(List<String> apiAbilities) {
         List<String> gameAbilities = new ArrayList<>();
         try {
             String content = new String(Files.readAllBytes(Paths.get(Constants.PATH_TO_ABILITIES_JSON)));

@@ -26,6 +26,8 @@ public abstract class PokemonRepository {
 
         pokemon("Beedrill", 15, Typing.BUG, Typing.POISON, stats(140, 110, 60, 65, 100, 95), Ability.Name.SWARM);
 
+        pokemon("Ledian", 166, Typing.BUG, Typing.FLYING, stats(130, 55, 70, 75, 130, 105), Ability.Name.SWARM, Ability.Name.EARLY_BIRD);
+
 
          /*
             DARK
@@ -171,8 +173,8 @@ public abstract class PokemonRepository {
         pokemon("Ekans", 23, Typing.POISON, stats(110, 80, 64, 60, 74, 75), Ability.Name.INTIMIDATE);
         pokemon("Arbok", 24, Typing.POISON, stats(135, 115, 89, 85, 99, 100), Ability.Name.INTIMIDATE);
 
-        // pokemon("Nidoqueen", 31, Typing.POISON, Typing.GROUND, stats(165, 112, 107, 95, 105, 96), );
-        // pokemon("Nidoking", 34, Typing.POISON, Typing.GROUND, stats(156, 122, 97, 105, 95, 105), );
+        pokemon("Nidoqueen", 31, Typing.POISON, Typing.GROUND, stats(165, 112, 107, 95, 105, 96), Ability.Name.POISON_POINT);
+        pokemon("Nidoking", 34, Typing.POISON, Typing.GROUND, stats(156, 122, 97, 105, 95, 105), Ability.Name.POISON_POINT);
 
          /*
             PSYCHIC
@@ -267,14 +269,16 @@ public abstract class PokemonRepository {
     }
 
     private static void pokemon(
-            String name, int dex, Typing typing, Stats stats, Ability.Name... abilityNames)
+            String name, int dex, Typing type, Stats stats, Ability.Name... abilityNames)
     {
-        List<Typing> typings = Collections.singletonList(typing);
+        List<Typing> typing = Collections.singletonList(type);
         List<Ability> abilities = Arrays.stream(abilityNames).map(AR::getAbility).toList();
 
         Pokemon pokemon = new Pokemon(
-                name, dex, typings, stats, Nature.SERIOUS, abilities,
-                spritePath(name, "front"), spritePath(name, "back"), spritePath(name, "icon"),
+                name, dex, typing, stats, Nature.SERIOUS, abilities,
+                resourcePath(name, "front", "png"), resourcePath(name, "icon", "png"),
+                resourcePath(name, "front", "gif"), resourcePath(name, "back", "gif"),
+                resourcePath(name, "cry", "mp3"),
                 new ArrayList<>()); // moves
 
         POKEMON.put(name, pokemon);
@@ -288,15 +292,17 @@ public abstract class PokemonRepository {
 
         Pokemon pokemon = new Pokemon(
                 name, dex, typings, stats, Nature.SERIOUS, abilities,
-                spritePath(name, "front"), spritePath(name, "back"), spritePath(name, "icon"),
+                resourcePath(name, "front", "png"), resourcePath(name, "icon", "png"),
+                resourcePath(name, "front", "gif"), resourcePath(name, "back", "gif"),
+                resourcePath(name, "cry", "mp3"),
                 new ArrayList<>()); // moves
 
         POKEMON.put(name, pokemon);
     }
 
-    private static String spritePath(String name, String type) {
+    private static String resourcePath(String name, String type, String format) {
         String formattedName = name.toLowerCase().replaceAll("\\W+", "_");
-        return "/pokemon/" + formattedName + "/" + type + ".png";
+        return "/pokemon/" + formattedName + "/" + type + "." + format;
     }
 
     private static Stats stats(int hp, int a, int d, int spA, int spD, int speed) {

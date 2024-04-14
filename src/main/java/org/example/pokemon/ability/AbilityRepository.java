@@ -78,17 +78,23 @@ public class AbilityRepository {
         });
 
         handler.registerEffect(Ability.Name.FLAME_BODY, (user, target, move, weather, result) -> {
-            final double BURN_CHANCE = 0.3;
-            if (move.getCategory() == MoveCategory.PHYSICAL) {
-                if (new Random().nextDouble() < BURN_CHANCE) move.getAttacker().setBurned(true);
-            }
+            Pokemon attacker = move.getAttacker();
+            onTouchEffect(attacker, move, 0.3, Pokemon.StatusCondition.BURN, List.of(Typing.FIRE));
+            result.setMessage(attacker.getName() + " got burned!");
         });
 
         handler.registerEffect(Ability.Name.STATIC, (user, target, move, weather, result) -> {
-            final double PARALYSIS_CHANCE = 0.3;
-            if (move.getCategory() == MoveCategory.PHYSICAL) {
-                if (new Random().nextDouble() < PARALYSIS_CHANCE) move.getAttacker().setParalyzed(true);
-            }
+            Pokemon attacker = move.getAttacker();
+            onTouchEffect(attacker, move, 0.3, Pokemon.StatusCondition.PARALYZE,
+                    List.of(Typing.ELECTRIC, Typing.GROUND));
+            result.setMessage(attacker.getName() + " got paralyzed!");
+        });
+
+        handler.registerEffect(Ability.Name.POISON_POINT, (user, target, move, weather, result) -> {
+            Pokemon attacker = move.getAttacker();
+            onTouchEffect(attacker, move, 0.3, Pokemon.StatusCondition.POISON,
+                    List.of(Typing.POISON, Typing.STEEL));
+            result.setMessage(attacker.getName() + " got poisoned!");
         });
 
         handler.registerEffect(Ability.Name.GUTS, (user, target, move, weather, result) -> {
@@ -272,6 +278,9 @@ public class AbilityRepository {
             // TODO
         });
 
+        // Implemented in Pokemon-Class
+        handler.registerEffect(Ability.Name.EARLY_BIRD, (user, target, move, weather, result) -> { });
+
         handler.registerEffect(Ability.Name.PIXILATE, (user, target, move, weather, result) -> user.getMoves().forEach(m -> {
             if (m.getType() == Typing.NORMAL) {
                 m.setType(Typing.FAIRY);
@@ -347,5 +356,19 @@ public class AbilityRepository {
     private void doubleSpeedInWeather(Pokemon user, Weather weather, Weather condition) {
         if (weather == condition) user.getStats().setSpeed(user.getStats().getSpeed() * 2);
         else user.resetStats();
+    }
+
+    private void onTouchEffect(
+            Pokemon attacker, Moves move, double chance,
+            Pokemon.StatusCondition condition, List<Typing> immune)
+    {
+        if (move.getCategory() == MoveCategory.PHYSICAL &&
+                !Collections.disjoint(attacker.getTyping(), immune) &&
+                !attacker.hasStatusCondition())
+        {
+            if (new Random().nextDouble() < chance) {
+                attacker.applyStatusCondition(condition);
+            }
+        }
     }
 }

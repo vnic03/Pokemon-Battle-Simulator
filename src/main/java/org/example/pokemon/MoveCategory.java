@@ -13,22 +13,25 @@ public enum MoveCategory {
     STATUS("status_move_icon.png");
 
     private final String imagePath;
-    private static final Map<MoveCategory, Image> imageCache = new EnumMap<>(MoveCategory.class);
+
+    private static final Map<MoveCategory, Image> IMAGE_CACHE = new EnumMap<>(MoveCategory.class);
 
     static
     {
         for (MoveCategory category : MoveCategory.values()) {
-            imageCache.put(category, loadImage(category.imagePath));
+            IMAGE_CACHE.put(category, loadImage(category.imagePath));
         }
     }
 
     MoveCategory(String imagePath) {
         this.imagePath = "/move_categories/" + imagePath;
     }
+
     public static Image loadImage(String path) {
         return new Image(Objects.requireNonNull(MoveCategory.class.getResourceAsStream(path)));
     }
+
     public Image getImage() {
-        return imageCache.get(this);
+        return IMAGE_CACHE.get(this);
     }
 }

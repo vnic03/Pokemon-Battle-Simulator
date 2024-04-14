@@ -1,6 +1,8 @@
 package org.example.pokemon;
 
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
+import org.example.ResourceManager;
 import org.example.pokemon.ability.Ability;
 import org.example.pokemon.ability.EffectHandler;
 import org.example.pokemon.stats.Stat;
@@ -8,35 +10,35 @@ import org.example.pokemon.stats.Stats;
 import org.example.screens.battleScene.BattleRoundResult;
 import org.example.teams.Team;
 
-import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 public class Pokemon {
+
     private final String name;
     private String nickname = null;
     private final int pokeDex;
-    private final String frontSpritePath;
-    private final String backSpritePath;
-    private final String iconSpritePath;
-    private final String typeString;
-    private Gender gender;
     private final List<Typing> typing;
     private final Stats stats;
-    private List<Moves> moves;
     private Nature nature;
     private final List<Ability> abilities;
-    private final EffectHandler effectHandler;
     private Ability activeAbility;
-    private boolean isParalyzed;
-    private boolean isBurned;
-    private boolean isPoisoned;
-    private boolean isBadlyPoisoned;
+    private final EffectHandler effectHandler;
+
+    private final String frontSpritePath;
+    private final String iconSpritePath;
+    private final String frontAnimationPath;
+    private final String backAnimationPath;
+    private final String cryPath;
+
+    private List<Moves> moves;
+    private Gender gender;
+
+    private final EnumSet<StatusCondition> status = EnumSet.noneOf(StatusCondition.class);
     private int badlyPoisonedTurns;
-    private boolean isFrozen;
-    private static final double CHANCE_TO_THAW = 0.20;
-    private boolean isAsleep;
     private int sleepTurns;
+
     private static final Random random = new Random();
     private boolean isFlinching = false;
 
@@ -52,17 +54,17 @@ public class Pokemon {
     private final int[] evs = new int[6];
     private boolean statsCalculated = false;
 
-    private final  Map<Moves, Integer> disabledMoves = new HashMap<>();
+    private final Map<Moves, Integer> disabledMoves = new HashMap<>();
 
     public Pokemon(
-            String name, int pokeDex , List<Typing> typing, Stats stats, Nature nature, List<Ability> abilities,
-            String frontSpritePath, String backSpritePath, String iconSpritePath, List<Moves> moves)
+            String name, int pokeDex, List<Typing> typing, Stats stats, Nature nature, List<Ability> abilities,
+            String frontSpritePath, String iconSpritePath, String frontAnimationPath, String backAnimationPath,
+            String cryPath, List<Moves> moves)
     {
         this.name = name;
         this.pokeDex = pokeDex;
         this.gender = randomGender();
         this.typing = typing;
-        this.typeString = typing.stream().map(Typing::name).collect(Collectors.joining(", ")); // showing the type
         this.stats = stats;
         this.nature = nature;
         this.abilities = abilities;
@@ -70,8 +72,10 @@ public class Pokemon {
         this.activeAbility = null;
 
         this.frontSpritePath = frontSpritePath;
-        this.backSpritePath = backSpritePath;
         this.iconSpritePath = iconSpritePath;
+        this.frontAnimationPath = frontAnimationPath;
+        this.backAnimationPath = backAnimationPath;
+        this.cryPath = cryPath;
 
         this.moves = moves;
 
@@ -87,12 +91,13 @@ public class Pokemon {
             return name;
         }
     }
+
     public String getBaseName() {
         return name;
     }
 
     public void setNickname(String name) {
-        this.nickname = name;
+        nickname = name;
     }
 
     public int getPokeDex() { return pokeDex; }
@@ -103,19 +108,23 @@ public class Pokemon {
     }
 
     public Image getFrontSprite() {
-        return SpriteManager.loadImage(frontSpritePath);
-    }
-
-    public Image getBackSprite() {
-        return SpriteManager.loadImage(backSpritePath);
+        return ResourceManager.loadResource(frontSpritePath, Image::new);
     }
 
     public Image getIconSprite() {
-        return SpriteManager.loadImage(iconSpritePath);
+        return ResourceManager.loadResource(iconSpritePath, Image::new);
     }
 
-    public String getTypeString() {
-        return typeString;
+    public Image getFrontAnimation() {
+        return ResourceManager.loadResource(frontAnimationPath, Image::new);
+    }
+
+    public Image getBackAnimation() {
+        return ResourceManager.loadResource(backAnimationPath, Image::new);
+    }
+
+    public AudioClip getCry() {
+        return ResourceManager.loadResource(cryPath, AudioClip::new);
     }
 
     private Gender randomGender() {
@@ -130,23 +139,23 @@ public class Pokemon {
         this.gender = newGender;
     }
 
-    public List<Typing> getTyping(){
+    public List<Typing> getTyping() {
         return typing;
     }
 
-    public Stats getStats(){
+    public Stats getStats() {
         return stats;
     }
 
     public List<Moves> getMoves() {
-        return this.moves;
+        return moves;
     }
 
-    public Nature getNature(){
-        return this.nature;
+    public Nature getNature() {
+        return nature;
     }
 
-    public void setNature(Nature nature){
+    public void setNature(Nature nature) {
         this.nature = nature;
     }
 
@@ -155,7 +164,7 @@ public class Pokemon {
     }
 
     public Ability getActiveAbility() {
-        return this.activeAbility;
+        return activeAbility;
     }
 
     public List<Ability> getAbilities() {
@@ -206,81 +215,59 @@ public class Pokemon {
     }
 
     public void setParalyzed(boolean paralyzed) {
-        this.isParalyzed = paralyzed;
-        if (paralyzed){
-            this.stats.setSpeed(this.stats.getSpeed() / 2);
+        if (paralyzed) {
+            status.add(StatusCondition.PARALYZE);
+            stats.setSpeed(this.stats.getSpeed() / 2);
+        } else {
+            status.remove(StatusCondition.PARALYZE);
+            stats.setSpeed(this.stats.getSpeed() * 2);
         }
     }
 
     public boolean isParalyzed() {
-        return this.isParalyzed;
-    }
-
-    public boolean canAct(BattleRoundResult result) {
-
-        if (isFrozen) {
-            if (random.nextDouble() < CHANCE_TO_THAW) {
-                isFrozen = false;
-                result.setMessage(this.name + " has thawed out !");
-            } else {
-                result.setMessage(this.name + " is frozen solid !");
-                return false;
-            }
-        }
-        if (isParalyzed) {
-            if (random.nextDouble() > 0.25) {
-                result.setMessage(this.name + " is paralyzed and can't move !");
-                return false;
-            }
-        }
-
-        if (isAsleep) {
-            result.setMessage(this.name + " is fast asleep.");
-            decrementSleepTurns(result);
-            return false;
-        }
-
-        if (isFlinching && !this.hasActiveAbility(Ability.Name.INNER_FOCUS)) {
-            result.setMessage(this.name + " flinched and couldn't move !");
-            isFlinching = false;
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isFrozen() {
-        return isFrozen;
+        return status.contains(StatusCondition.PARALYZE);
     }
 
     public void setFrozen(boolean frozen) {
-        isFrozen = frozen;
+        if (frozen) status.add(StatusCondition.FREEZE);
+        else status.remove(StatusCondition.FREEZE);
     }
 
-    public void setBurned(boolean burned){
-        this.isBurned = burned;
+    public boolean isFrozen() {
+        return status.contains(StatusCondition.FREEZE);
+    }
+
+    public void setBurned(boolean burned) {
         if (burned) {
-            this.stats.setAttack(this.stats.getAttack() / 2);
+            status.add(StatusCondition.BURN);
+            stats.setAttack(this.stats.getAttack() / 2);
+        } else {
+            status.remove(StatusCondition.BURN);
+            stats.setAttack(this.stats.getAttack() * 2);
         }
     }
+
     public boolean isBurned() {
-        return isBurned;
+        return status.contains(StatusCondition.BURN);
     }
 
     public void setPoisoned(boolean poisoned) {
-        isPoisoned = poisoned;
+        if (poisoned) status.add(StatusCondition.POISON);
+        else status.remove(StatusCondition.POISON);
     }
 
     public boolean isPoisoned() {
-        return isPoisoned;
+        return status.contains(StatusCondition.POISON);
     }
 
     public void setBadlyPoisoned(boolean badlyPoisoned) {
-        isBadlyPoisoned = badlyPoisoned;
+        if (badlyPoisoned) status.add(StatusCondition.BADLY_POISON);
+        else status.remove(StatusCondition.BADLY_POISON);
         badlyPoisonedTurns = 1; // Counter to increase damage every round
     }
 
     public boolean isBadlyPoisoned() {
-        return isBadlyPoisoned;
+        return status.contains(StatusCondition.BADLY_POISON);
     }
 
     public int getBadlyPoisonedTurns() {
@@ -291,24 +278,55 @@ public class Pokemon {
         badlyPoisonedTurns++;
     }
 
-    public boolean isAsleep() {
-        return isAsleep;
-    }
-
     public void setAsleep(boolean asleep, int turns) {
-        isAsleep = asleep;
+        if (asleep) status.add(StatusCondition.SLEEP);
+        else status.remove(StatusCondition.SLEEP);
         sleepTurns = asleep ? turns : 0;
     }
 
-    public void decrementSleepTurns(BattleRoundResult result) {
+    public boolean isAsleep() {
+        return status.contains(StatusCondition.SLEEP);
+    }
 
-        if (isAsleep) {
-            sleepTurns--;
+    private void decrementSleepTurns(BattleRoundResult result) {
+        if (isAsleep()) {
+            sleepTurns -= this.hasActiveAbility(Ability.Name.EARLY_BIRD) ? 2 : 1;
             if (sleepTurns <= 0) {
-                isAsleep = false;
+                setAsleep(false, 0);
                 result.setMessage(this.name + " woke up !");
             }
         }
+    }
+
+    public boolean canAct(BattleRoundResult result) {
+        final double CHANCE_TO_THAW = 0.20;
+        if (isFrozen()) {
+            if (random.nextDouble() < CHANCE_TO_THAW) {
+                setFrozen(false);
+                result.setMessage(this.name + " has thawed out !");
+            } else {
+                result.setMessage(this.name + " is frozen solid !");
+                return false;
+            }
+        }
+        if (isParalyzed()) {
+            if (random.nextDouble() > 0.25) {
+                result.setMessage(this.name + " is paralyzed and can't move !");
+                return false;
+            }
+        }
+        if (isAsleep()) {
+            result.setMessage(this.name + " is fast asleep.");
+            decrementSleepTurns(result);
+            return false;
+        }
+        if (isFlinching && !this.hasActiveAbility(Ability.Name.INNER_FOCUS)) {
+            result.setMessage(this.name + " flinched and couldn't move !");
+            isFlinching = false;
+            return false;
+        }
+
+        return true;
     }
 
     public void applyNatureEffects() {
@@ -322,6 +340,7 @@ public class Pokemon {
             updateStat(nature.getDecreasedStat(), DECREASE);
         }
     }
+
     private void updateStat(Stat stat, double multiplier) {
         switch (stat) {
             case ATTACK -> stats.setAttack((int) (stats.getAttack() * multiplier));
@@ -331,6 +350,7 @@ public class Pokemon {
             case SPEED -> stats.setSpeed((int) (stats.getSpeed() * multiplier));
         }
     }
+
     public Stats getStatsAfterNatureEffects() {
         Stats modifiedStats = new Stats(
                 this.stats.getMaxHp(), this.stats.getAttack(), this.stats.getDefense(),
@@ -338,7 +358,8 @@ public class Pokemon {
         );
         Pokemon temp = new Pokemon(
                 this.name, this.pokeDex, this.typing, modifiedStats, this.nature, this.abilities,
-                this.frontSpritePath, this.backSpritePath, this.iconSpritePath, this.moves
+                this.frontSpritePath, this.iconSpritePath, this.frontAnimationPath, this.backAnimationPath,
+                this.cryPath, this.moves
         );
         temp.applyNatureEffects();
 
@@ -362,15 +383,11 @@ public class Pokemon {
     }
 
     public boolean hasStatusCondition() {
-        return isBurned || isParalyzed || isPoisoned || isBadlyPoisoned || isFrozen || isAsleep;
+        return !status.isEmpty();
     }
 
-    public void clearStatusCondition(){
-        isBurned = false;
-        isPoisoned = false;
-        isParalyzed = false;
-        isBadlyPoisoned = false;
-        isAsleep = false;
+    public void clearStatusCondition() {
+        status.clear();
     }
 
     public void saveOriginalStats() {
@@ -390,6 +407,7 @@ public class Pokemon {
         this.getStats().setSpecialDefense(this.originalSpDefense);
         this.getStats().setSpeed(this.originalSpeed);
     }
+
     public void resetAttack() {
         this.getStats().setAttack(this.originalAttack);
     }
@@ -454,24 +472,6 @@ public class Pokemon {
         return team.containsPokemon(this);
     }
 
-    private static class SpriteManager {
-        private static final Map<String, Image> imageCache = new HashMap<>();
-
-        public static Image loadImage(String path) {
-            return imageCache.computeIfAbsent(path, p -> {
-                try {
-                    final URL url = SpriteManager.class.getResource(p);
-                    if (url == null) {
-                        throw new IllegalArgumentException("Resource not found: " + p);
-                    }
-                    return new Image(url.toString());
-                } catch (Exception e) {
-                    throw new RuntimeException("Failed to load image: " + p, e);
-                }
-            });
-        }
-    }
-
     public static Map<String, Integer> getPokemonBaseStats(Pokemon pokemon) {
         Stats base = pokemon.getStats();
         Map<String, Integer> stats = new HashMap<>();
@@ -484,6 +484,14 @@ public class Pokemon {
         stats.put("Speed", base.getSpeed());
 
         return stats;
+    }
+
+    public enum StatusCondition {
+        BURN, PARALYZE, POISON, BADLY_POISON, FREEZE, SLEEP
+    }
+
+    public void applyStatusCondition(StatusCondition condition) {
+        status.add(condition);
     }
 
     public String toString() {

@@ -1,12 +1,11 @@
 package org.example.api;
 
 import org.example.Constants;
+import org.example.ResourceManager;
 import org.example.pokemon.Typing;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -90,13 +89,14 @@ public class PokeApiClient extends ApiClient {
     /**
      * Generates and stores the sprites and animations for a specific Pokemon,
      * aligning them with the corresponding directory based on the Pokemon's name,
-     * using the saveImage method.
+     * using the saveResource method.
      *
-     * @param data The data of the pokemon
      * @param pokemonName The name of the pokemon
      */
-    public static void createSprites(String data, String pokemonName) {
-        JSONObject sprites = new JSONObject(data).getJSONObject("sprites");
+    public static void createSprites(String pokemonName) {
+        String data = fetchData(pokemonName).join();
+        JSONObject obj = new JSONObject(data);
+        JSONObject sprites = obj.getJSONObject("sprites");
 
         String front = sprites.getString("front_default");
         String icon = sprites.getJSONObject("versions")
@@ -104,46 +104,67 @@ public class PokeApiClient extends ApiClient {
                 .getJSONObject("icons")
                 .getString("front_default");
 
-        CompletableFuture<Void> frontF = saveImage(front, "front", pokemonName, "png");
-        CompletableFuture<Void> iconF = saveImage(icon, "icon", pokemonName, "png");
+        CompletableFuture<Void> frontF = saveResource(pokemonName, front, "front", "png");
+        CompletableFuture<Void> iconF = saveResource(pokemonName, icon,  "icon", "png");
 
-        JSONObject gifs = new JSONObject(data)
-                .getJSONObject("sprites")
+        JSONObject gifs = sprites
                 .getJSONObject("other")
                 .getJSONObject("showdown");
 
-        CompletableFuture<Void> back = saveImage(gifs.getString("back_default"),
-                "back", pokemonName, "gif");
-        CompletableFuture<Void> frontGf = saveImage(gifs.getString("front_default"),
-                "front", pokemonName, "gif");
+        CompletableFuture<Void> back = saveResource(pokemonName,
+                gifs.getString("back_default"), "back", "gif");
+
+        CompletableFuture<Void> frontGf = saveResource(pokemonName,
+                gifs.getString("front_default"), "front", "gif");
 
         CompletableFuture.allOf(frontF, iconF, back, frontGf).join();
     }
 
     /**
-     * Saves an image from a given URL to a specified location.
-     * location -> src/main/resources/pokemon/{pokemonName}/{imageName}.{type}
+     * Generates and stores the cries for each pokemon at the same location
+     * where also the sprites/animation are stored using the saveResource method.
+     * The Api returns .ogg files which need to be converted into mp3 files using
+     * the convert-method from the ResourceManger class
      *
-     * @param imageUrl The URL of the image
-     * @param imageName The name of the image
+     * @param pokemonName The name of the pokemon
+     */
+    public static void createCry(String pokemonName) {
+        String data = fetchData(pokemonName).join();
+        String cry = new JSONObject(data).getJSONObject("cries").getString("latest");
+
+        CompletableFuture<Void> cryF = saveResource(pokemonName, cry, "cry", "ogg");
+        cryF.join();
+
+        ResourceManager.convertOggToMp3(pokemonName);
+    }
+
+    /**
+     * Saves a resource (images, audios etc.) from a given URL to a specified location.
+     * location -> src/main/resources/pokemon/{pokemonName}/{resourceName}.{type}
+     *
+     * @param url The URL of the resource
+     * @param resourceName The name of the resource
      * @param pokemonName The name of the pokemon
      * @param type The type of the image (png, gif, etc.)
      * @return A CompletableFuture containing the image
      */
-    private static CompletableFuture<Void> saveImage(String imageUrl, String imageName, String pokemonName, String type) {
+    private static CompletableFuture<Void> saveResource(
+            String pokemonName, String url, String resourceName, String type)
+    {
         return CompletableFuture.runAsync(() -> {
-            if (imageUrl == null || imageUrl.isEmpty()) {
-                System.out.println("Image URL for " + imageName + " does not exist. . .");
+            if (url == null || url.isEmpty()) {
+                System.out.println("Image URL for " + resourceName + " does not exist. . .");
                 return;
             }
-            HttpRequest request = buildRequest(imageUrl);
+            HttpRequest request = buildRequest(url);
             try {
-                HttpResponse<InputStream> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofInputStream());
-                if (response.statusCode() == 200) {
-                    BufferedImage img = ImageIO.read(response.body());
-
-                    String directoryPath = "src/main/resources/pokemon/" + pokemonName;
+                HttpResponse<InputStream> response = CLIENT.send(
+                        request, HttpResponse.BodyHandlers.ofInputStream()
+                );
+                if (response.statusCode() == Constants.HTTP_STATUS_OK) {
+                    String directoryPath = Constants.PATH_TO_POKEMON_RESOURCE + pokemonName;
                     File directory = new File(directoryPath);
+
                     if (!directory.exists()) {
                         boolean created = directory.mkdirs();
                         if (!created) {
@@ -151,10 +172,18 @@ public class PokeApiClient extends ApiClient {
                             return;
                         }
                     }
-                    String path = directoryPath + "/" + imageName + "." + type;
+                    String path = directoryPath + "/" + resourceName + "." + type;
                     File file = new File(path);
 
-                    ImageIO.write(img, type, file);
+                    try (InputStream is = response.body();
+                         FileOutputStream os = new FileOutputStream(file)
+                    ) {
+                        byte[] buffer = new byte[Constants.DEFAULT_BUFFER_SIZE];
+                        int bytesRead;
+                        while((bytesRead = is.read(buffer)) != -1) {
+                            os.write(buffer, 0, bytesRead);
+                        }
+                    }
                     System.out.println("Saved: " + path);
                 } else {
                     System.err.println("Failed to fetch image. HTTP Response Code: " + response.statusCode());
@@ -201,9 +230,9 @@ public class PokeApiClient extends ApiClient {
         HttpRequest request = buildRequest(abilityUrl);
         try {
             HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                JSONObject obj = new JSONObject(response.body());
-                JSONArray a = obj.getJSONArray("flavor_text_entries");
+            if (response.statusCode() == Constants.HTTP_STATUS_OK) {
+                JSONArray a = new JSONObject(response.body()).getJSONArray("flavor_text_entries");
+
                 for (int i = 0; i < a.length(); i++) {
                     JSONObject entry = a.getJSONObject(i);
                     String language = entry.getJSONObject("language").getString("name");
@@ -213,8 +242,10 @@ public class PokeApiClient extends ApiClient {
                     }
                 }
             } else {
-                if (response.statusCode() == 404)  System.err.println("Fetching failed: " + name);
-                else throw new IOException("HTTP Response Code: " + response.statusCode());
+                if (response.statusCode() == Constants.HTTP_STATUS_NOT_FOUND) {
+                    System.err.println("Fetching failed: " + name);
+
+                } else throw new IOException("HTTP Response Code: " + response.statusCode());
             }
         } catch (IOException | InterruptedException e) {
             System.err.println("Error fetching description: " + e.getMessage());

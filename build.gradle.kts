@@ -13,7 +13,7 @@ plugins {
 
 javafx {
     version="21.0.1"
-    modules = listOf("javafx.controls", "javafx.fxml")
+    modules = listOf("javafx.controls", "javafx.fxml", "javafx.media")
 }
 
 group = "org.example"
@@ -27,6 +27,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation(kotlin("stdlib"))
+    implementation("org.openjfx:javafx-media:21.0.1")
     implementation("org.json:json:20240303")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.codehaus.groovy:groovy:3.0.21")

@@ -25,7 +25,7 @@ Here, **every Pokémon can learn any move**, giving players unmatched freedom to
 *This showcases the team selection page, where players can choose and customize their Pokémon team before heading into battle.*
 
 ### Battle
-![Battle](src/main/resources/preview/BattlePreview.png)
+![Battle](src/main/resources/preview/Gameplay.gif)
 *This shows the battle in action, showing an encounter between two Pokémon, complete with strategic gameplay elements just like the real game.*
 
 ## Sprites
@@ -48,7 +48,7 @@ You can open an issue on this repository to discuss any feedback you might have.
 
 ---
 
-**Current Pokémon-Amount: 96**
+**Current Pokémon-Amount: 97**
 
 *This number is regularly updated!*
 
