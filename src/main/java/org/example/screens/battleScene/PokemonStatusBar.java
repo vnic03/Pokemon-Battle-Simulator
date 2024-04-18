@@ -18,13 +18,15 @@ import org.example.pokemon.Pokemon;
 import java.util.Objects;
 
 public class PokemonStatusBar extends StackPane {
+
     private static final double POLYGON_WIDTH = 460;
     private static final double POLYGON_HEIGHT = 80;
+
     private final Label nameLabel;
     private final Label levelLabel;
     private final Label genderLabel;
-    private final ProgressBar hpBar;
     private final Label hpLabel;
+    private final ProgressBar hpBar;
 
     public PokemonStatusBar(Pokemon pokemon) {
         nameLabel = new Label(" " + pokemon.getName());

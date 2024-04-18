@@ -25,9 +25,7 @@ def writeMove(String path, String moveName, MoveApiClient.MoveData data) {
 }
 
 static def format(String name) {
-    name.split('-').collect {
-        it.capitalize()
-    }.join(' ')
+    return '"' + name.split('-').collect { it.capitalize() }.join(' ') + '"'
 }
 
 if (!binding.hasVariable('path') ||

@@ -1,5 +1,8 @@
 package org.example;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -10,6 +13,8 @@ import java.util.function.Function;
 
 public class ResourceManager {
 
+    private static final Logger LOGGER = LogManager.getLogger(ResourceManager.class);
+
     private static final Map<String, Object> RESOURCE_CACHE = new HashMap<>();
 
     @SuppressWarnings("unchecked")
@@ -18,10 +23,13 @@ public class ResourceManager {
             try {
                 final URL url = ResourceManager.class.getResource(p);
 
-                if (url == null) throw new IllegalArgumentException("Resource not found: " + p);
-
+                if (url == null) {
+                    LOGGER.error("Resource not found at path: {}", p);
+                    throw new IllegalArgumentException("Resource not found: " + p);
+                }
                 return creator.apply(url.toString());
             } catch (Exception e) {
+                LOGGER.error("Failed to load resource from path: {}. Error: {}", p, e.getMessage(), e);
                 throw new RuntimeException("Failed to load resource: " + p, e);
             }
         });
@@ -40,22 +48,20 @@ public class ResourceManager {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
+            while ((line = reader.readLine()) != null) { LOGGER.info(line); }
 
             int exitCode = process.waitFor();
 
             if (exitCode == 0) {
-                System.out.println("\033[32m" + "Conversion successful!" + "\033[0m");
+                LOGGER.info("Conversion successful for: {}", pokemonName);
 
                 File oggFile = new File(source);
 
-                if (oggFile.delete()) System.out.println("Deleted: " + source);
+                if (oggFile.delete()) LOGGER.info("Deleted original OGG file: {}", source);
             }
-
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error during conversion process for: {}. Error: {}",
+                    pokemonName, e.getMessage(), e);
         }
     }
 }

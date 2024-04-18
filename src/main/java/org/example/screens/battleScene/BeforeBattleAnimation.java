@@ -22,6 +22,7 @@ import java.util.Objects;
 public class BeforeBattleAnimation extends AnchorPane {
 
     private static final int TEAM_SIZE = 6;
+
     private final Image unown = new Image(
             Objects.requireNonNull(getClass().getResourceAsStream("/pokemon/unown/icon.png")));
 

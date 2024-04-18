@@ -12,11 +12,13 @@ import org.example.pokemon.move_effects.multiple.HitsMoreTimesEffect;
 import org.example.pokemon.move_effects.special.NoEffect;
 import org.example.pokemon.move_effects.special.StruggleEffect;
 import org.example.pokemon.move_effects.special.ExplosionEffect;
+import org.example.pokemon.move_effects.stats.MayLowerStatsEffect;
 import org.example.pokemon.move_effects.status_condition.*;
 import org.example.pokemon.move_effects.weather.ChangeWeatherEffect;
 import org.example.screens.battleScene.BattleRoundResult;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,7 +27,9 @@ public abstract class MovesRepository {
 
     private static final List<Moves> MOVES = new ArrayList<>();
 
-    static { initializeMoves(); }
+    static {
+        initializeMoves();
+    }
 
     public static void initializeMoves() {
 
@@ -75,6 +79,8 @@ public abstract class MovesRepository {
         MoveEffect snow = new ChangeWeatherEffect(Weather.SNOW);
 
         MoveEffect user_faints = new ExplosionEffect();
+
+        MoveEffect may_lower_stat = new MayLowerStatsEffect();
 
         // no Effect
 
@@ -226,6 +232,11 @@ public abstract class MovesRepository {
         move("Extreme Speed", Typing.NORMAL, MoveCategory.PHYSICAL, 80, 100, 5, one);
         move("Mach Punch", Typing.FIGHTING, MoveCategory.PHYSICAL, 40, 100, 20, one);
 
+        // may lower stat
+
+        move("Shadow Ball", Typing.GHOST, MoveCategory.SPECIAL, 80, 100, 15, may_lower_stat);
+        move("Psychic", Typing.PSYCHIC, MoveCategory.SPECIAL, 90, 100, 10, may_lower_stat);
+
         // struggle
         move("Struggle", Typing.NORMAL, MoveCategory.PHYSICAL, 50, 100, 1000, struggleEffect);
     }
@@ -248,11 +259,18 @@ public abstract class MovesRepository {
 
     public static Moves getMoveByName(String moveName) {
         for (Moves move : getMoves()) {
-            if (move.getName().equalsIgnoreCase(moveName)){
+            if (move.getName().equalsIgnoreCase(moveName)) {
                 return move;
             }
         }
         return null;
+    }
+
+    // fire-punch -> Fire Punch
+    public static String format(String moveName) {
+        return Arrays.stream(moveName.split("-"))
+                .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
     }
 
     @SuppressWarnings("unused")

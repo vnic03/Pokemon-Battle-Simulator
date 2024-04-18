@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.screens.TeamBuilder;
 import org.example.battle.BattleLogic;
 import org.example.screens.battleScene.BattleView;
@@ -24,6 +26,8 @@ import javafx.scene.shape.Rectangle;
 import java.util.Objects;
 
 public class MainApplication extends Application {
+    private static final Logger LOGGER = LogManager.getLogger(MainApplication.class);
+
     private final TabPane tabPane = new TabPane();
     private final StackPane rootPane = new StackPane();
     private Stage primaryStage;
@@ -31,7 +35,9 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        System.out.println("Build time: " + new java.util.Date());
+        System.setProperty(Constants.LOGGER_PROPERTY, Constants.LOGGER_CONFIG_PATH);
+        LOGGER.info("Application start: {}", new java.util.Date());
+
         this.primaryStage = primaryStage;
 
         primaryStage.setFullScreen(true);
@@ -86,7 +92,7 @@ public class MainApplication extends Application {
         transition.play();
 
         primaryStage.setOnCloseRequest(event -> {
-            System.out.println("Exit application");
+            LOGGER.info("Closing application");
             Platform.exit();
             System.exit(0);
         });

@@ -2,7 +2,9 @@ package org.example.api;
 
 import org.example.Constants;
 import org.example.ResourceManager;
+import org.example.pokemon.Moves;
 import org.example.pokemon.Typing;
+import org.example.repositories.MovesRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -87,6 +89,21 @@ public class PokeApiClient extends ApiClient {
     }
 
     /**
+     * Retrieves a list of all moves that a specific Pokémon can learn
+     *
+     * @param pokemonName The name of the Pokemon
+     * @return A CompletableFuture that, returns a list of all moves learnable by the Pokémon.
+     */
+    public static CompletableFuture<List<Moves>> fetchPokemonMoves(String pokemonName) {
+        return fetchData(pokemonName).thenApply(data -> {
+            JSONArray a = new JSONObject(data).getJSONArray("moves");
+            return processJsonArray(a, json -> MovesRepository.getMoveByName(
+                    MovesRepository.format(json.getJSONObject("move").getString("name"))
+            ));
+        });
+    }
+
+    /**
      * Generates and stores the sprites and animations for a specific Pokemon,
      * aligning them with the corresponding directory based on the Pokemon's name,
      * using the saveResource method.
@@ -153,7 +170,7 @@ public class PokeApiClient extends ApiClient {
     {
         return CompletableFuture.runAsync(() -> {
             if (url == null || url.isEmpty()) {
-                System.out.println("Image URL for " + resourceName + " does not exist. . .");
+                LOGGER.warn("Image URL for {} does not exist.", resourceName);
                 return;
             }
             HttpRequest request = buildRequest(url);
@@ -161,14 +178,16 @@ public class PokeApiClient extends ApiClient {
                 HttpResponse<InputStream> response = CLIENT.send(
                         request, HttpResponse.BodyHandlers.ofInputStream()
                 );
-                if (response.statusCode() == Constants.HTTP_STATUS_OK) {
+                int status = response.statusCode();
+
+                if (status == Constants.HTTP_STATUS_OK) {
                     String directoryPath = Constants.PATH_TO_POKEMON_RESOURCE + pokemonName;
                     File directory = new File(directoryPath);
 
                     if (!directory.exists()) {
                         boolean created = directory.mkdirs();
                         if (!created) {
-                            System.out.println("Could not create directory: " + directoryPath);
+                            LOGGER.error("Could not create directory: {}", directoryPath);
                             return;
                         }
                     }
@@ -184,13 +203,13 @@ public class PokeApiClient extends ApiClient {
                             os.write(buffer, 0, bytesRead);
                         }
                     }
-                    System.out.println("Saved: " + path);
+                    LOGGER.info("Saved: {}", path);
                 } else {
-                    System.err.println("Failed to fetch image. HTTP Response Code: " + response.statusCode());
+                    LOGGER.error("Failed to fetch image for {}. HTTP-Response-Code: {}", resourceName, status);
                 }
             } catch (IOException | InterruptedException e) {
-                System.err.println("Error: " + e.getMessage());
-                Thread.currentThread().interrupt();
+                LOGGER.error("Error downloading resource for {}: {}", resourceName, e.getMessage(), e);
+                if (e instanceof InterruptedException) Thread.currentThread().interrupt();
             }
         });
     }
@@ -209,13 +228,15 @@ public class PokeApiClient extends ApiClient {
             );
             if (!"Not Found".equals(description)) {
                 abilitiesJson.put(name, clean(description));
+                LOGGER.info("Ability {} added with description.", name);
             }
         }
         try (FileWriter file = new FileWriter(Constants.PATH_TO_ABILITIES_JSON)) {
             file.write(abilitiesJson.toString(4));
             file.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Failed to save abilities to {}: {}",
+                    Constants.PATH_TO_ABILITIES_JSON, e.getMessage(), e);
         }
     }
 
@@ -230,26 +251,29 @@ public class PokeApiClient extends ApiClient {
         HttpRequest request = buildRequest(abilityUrl);
         try {
             HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == Constants.HTTP_STATUS_OK) {
+            int status = response.statusCode();
+            if (status == Constants.HTTP_STATUS_OK) {
                 JSONArray a = new JSONObject(response.body()).getJSONArray("flavor_text_entries");
 
                 for (int i = 0; i < a.length(); i++) {
                     JSONObject entry = a.getJSONObject(i);
                     String language = entry.getJSONObject("language").getString("name");
 
-                    if ("en".equals(language)) {
-                        return entry.getString("flavor_text");
-                    }
+                    if ("en".equals(language))  return entry.getString("flavor_text");
                 }
-            } else {
-                if (response.statusCode() == Constants.HTTP_STATUS_NOT_FOUND) {
-                    System.err.println("Fetching failed: " + name);
 
-                } else throw new IOException("HTTP Response Code: " + response.statusCode());
+            } else {
+                if (status == Constants.HTTP_STATUS_NOT_FOUND) {
+                    LOGGER.warn("Fetching failed for ability {}: HTTP status- Not Found", name);
+                } else {
+                    LOGGER.error("Unexpected HTTP response code {} for ability {}", status, name);
+                    throw new IOException("HTTP Response Code: " + status);                }
             }
         } catch (IOException | InterruptedException e) {
-            System.err.println("Error fetching description: " + e.getMessage());
+            LOGGER.error("Error fetching description for ability {}: {}", name, e.getMessage(), e);
+            if (e instanceof InterruptedException) Thread.currentThread().interrupt();
         }
+
         return "Not Found";
     }
 
@@ -262,11 +286,15 @@ public class PokeApiClient extends ApiClient {
         File file = new File(Constants.PATH_TO_ABILITIES_JSON);
         if (file.exists()) {
             try (FileReader reader = new FileReader(Constants.PATH_TO_ABILITIES_JSON)) {
+
                 String content = new BufferedReader(reader)
                         .lines().collect(Collectors.joining("\n"));
+
                 return new JSONObject(content);
+
             } catch (IOException e) {
-                System.err.println("Failed to read file: " + e.getMessage());
+                LOGGER.error("Failed to load abilities from {}: {}",
+                        Constants.PATH_TO_ABILITIES_JSON, e.getMessage(), e);
             }
         }
         return new JSONObject();

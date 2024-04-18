@@ -1,5 +1,7 @@
 package org.example.api;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.example.Constants;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,17 +17,22 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
+
+
 /**
  * Abstract base class for API clients that provides common functionalities for sending HTTP requests,
  * processing JSON arrays, and managing base URLs for derived classes
  */
 public abstract class ApiClient {
 
+    protected static final Logger LOGGER = LogManager.getLogger(ApiClient.class);
+
     // HttpClient to make requests
     protected static final HttpClient CLIENT = HttpClient.newHttpClient();
 
     // Map storing base URLs for different classes
     private static final Map<String, String> BASE_URLS = new ConcurrentHashMap<>();
+
 
     /**
      * This method constructs a complete URL using the base URL associated with the calling class,
@@ -35,17 +42,28 @@ public abstract class ApiClient {
      * @return A CompletableFuture that, when completed, provides the fetched data as a string
      */
     protected static CompletableFuture<String> fetchData(String name) {
+        if (name == null || name.isEmpty()) {
+            LOGGER.error("Name missing");
+            return CompletableFuture.failedFuture(new IllegalArgumentException("Forgot to put name ?"));
+        }
         String baseUrl = BASE_URLS.get(Thread.currentThread().getStackTrace()[2].getClassName());
-
         HttpRequest request = buildRequest(baseUrl + name.toLowerCase());
+
         return CLIENT.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(response -> {
+                    int status = response.statusCode();
+                    var body = response.body();
 
-                    if (response.statusCode() == Constants.HTTP_STATUS_OK) return response.body();
-
-                    else throw new RuntimeException("HTTP Response Code: " + response.statusCode());
-
-                }).exceptionally(e -> "Error: " + e.getMessage());
+                    if (status == Constants.HTTP_STATUS_OK) return body;
+                    else {
+                        LOGGER.warn("Received non-OK HTTP status {} from {}: {}", status, baseUrl + name, body);
+                        LOGGER.info("Name-Check: {}", name);
+                        throw new RuntimeException("HTTP Response Code: " + status);
+                    }
+                }).exceptionally(e -> {
+                    LOGGER.error("Failed to fetch data from {}: {}", baseUrl + name, e.getMessage(), e);
+                    return "Error: " + e.getMessage();
+                });
     }
 
     /**

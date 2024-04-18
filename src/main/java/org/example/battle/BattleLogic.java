@@ -16,6 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class BattleLogic {
+
     private final Team team1;
     private final Team team2;
     private static final int ROUND_DURATION = 60;

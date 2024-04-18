@@ -20,13 +20,16 @@ import org.example.teams.Team;
 import java.util.*;
 
 public class BattleView extends AnchorPane {
+
     private BattleLogic battleLogic;
     private final Team team1;
     private final Team team2;
+
     private final HBox team1Container = new HBox(10);
     private final HBox team2Container = new HBox(10);
     private final VBox playerOneView = new VBox(10);
     private final VBox playerTwoView = new VBox(10);
+
     private final TextArea battleLog = new TextArea();
     private ContextMenu switchMenu;
     private Button switchButtonTeam1;
@@ -37,6 +40,7 @@ public class BattleView extends AnchorPane {
     private VBox movesLayoutTeam2;
     private Label timerLabelTeam1;
     private Label timerLabelTeam2;
+
     private final HashMap<Pokemon, PokemonStatusBar> statusBarMap = new HashMap<>();
 
     public BattleView(Team team1, Team team2) {
@@ -210,6 +214,7 @@ public class BattleView extends AnchorPane {
        }
        return switchButton;
    }
+
     private boolean canPokemonSwitch(Pokemon pokemon) {
         // add logic later
         return true;
@@ -228,6 +233,7 @@ public class BattleView extends AnchorPane {
         }
         return moveButtons;
     }
+
     private void handleMoveSelection(Moves move, Pokemon activePokemon) {
         boolean isTeam1 = activePokemon.belongsTo(team1);
         Team otherTeam = isTeam1 ? team2 : team1;

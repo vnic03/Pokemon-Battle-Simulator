@@ -1,8 +1,11 @@
 package org.example;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.example.api.MoveApiClient;
 import org.example.pokemon.Typing;
 import org.example.api.PokeApiClient;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.script.Bindings;
@@ -19,6 +22,8 @@ import java.util.Scanner;
 
 import static org.example.repositories.PokemonRepository.countPokemon;
 
+
+
 /**
  * This class is used to automatically create Pokemon, Abilities, Cries and Sprites/Animations.
  * For every Pokemon-Name in the list, it will write the Pokemon to the PokemonRepository class.
@@ -30,14 +35,16 @@ import static org.example.repositories.PokemonRepository.countPokemon;
  */
 public class PokeFactory {
 
-    private final static List<String> POKEMON = List.of("");
+    private static final List<String> POKEMON = List.of("");
 
-    private final static List<String> ABILITIES = List.of("poison-point");
+    private static final List<String> ABILITIES = List.of("");
 
-    private final static List<String> MOVES = List.of("");
+    private static final List<String> MOVES = List.of("");
 
-    private final static ScriptEngineManager MANAGER = new ScriptEngineManager();
-    private final static ScriptEngine ENGINE = MANAGER.getEngineByName("groovy");
+    private static final ScriptEngineManager MANAGER = new ScriptEngineManager();
+    private static final ScriptEngine ENGINE = MANAGER.getEngineByName("groovy");
+
+    private static final Logger LOGGER = LogManager.getLogger(PokeFactory.class);
 
     /**
      * Case 1 -> Saves the sprites/animations and cries for each Pokemon and writes the Pokemon to the PokemonRepository.
@@ -50,6 +57,7 @@ public class PokeFactory {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
+        System.setProperty(Constants.LOGGER_PROPERTY, Constants.LOGGER_CONFIG_PATH);
         try (Scanner scanner = new Scanner(System.in)) {
 
             System.out.println("""
@@ -86,9 +94,9 @@ public class PokeFactory {
     private static void createSprites() {
         POKEMON.forEach(name -> {
             try { PokeApiClient.createSprites(name); }
-            catch (Exception e) { System.out.println("Error: " + name); }
+            catch (Exception e) { LOGGER.error("Error creating sprite for {}: {}", name, e.getMessage(), e); }
         });
-        System.out.println("Sprites Done!");
+        LOGGER.info("Sprites Done!");
     }
 
     private static void createPokemon() {
@@ -111,7 +119,7 @@ public class PokeFactory {
 
             runScript(Constants.SCRIPT_PATH_POKEMON, bindings);
         });
-        System.out.println("Pokemon Done!");
+        LOGGER.info("Pokemon Done!");
     }
 
     private static void createAbilities() {
@@ -135,15 +143,15 @@ public class PokeFactory {
 
             runScript(Constants.SCRIPT_PATH_MOVES, bindings);
         });
-        System.out.println("Moves Done!");
+        LOGGER.info("Moves Done!");
     }
 
     private static void createCries() {
         POKEMON.forEach(name -> {
             try { PokeApiClient.createCry(name); }
-            catch (Exception e) { System.out.println("Error: " + name); }
+            catch (Exception e) { LOGGER.error("Error creating cry for {}: {}", name, e.getMessage(), e); }
         });
-        System.out.println("Cries Done!");
+        LOGGER.info("Cries Done!");
     }
 
     private static void runScript(String scriptPath, Bindings bindings) {
@@ -153,9 +161,7 @@ public class PokeFactory {
                 ENGINE.eval(script, bindings);
             }
         } catch (IOException | ScriptException e) {
-            System.err.println("Error executing script: " + e.getMessage());
-            e.printStackTrace();
-            Thread.currentThread().interrupt();
+            LOGGER.error("Error executing script at {}: {}", scriptPath, e.getMessage(), e);
         }
     }
 
@@ -171,8 +177,12 @@ public class PokeFactory {
                     gameAbilities.add(name.toUpperCase().replaceAll("-", "_"));
                 }
             }
+        } catch (IOException e) {
+            LOGGER.error("Failed to read abilities from {}: {}", Constants.PATH_TO_ABILITIES_JSON, e.getMessage(), e);
+        } catch (JSONException e) {
+            LOGGER.error("JSON parsing error when processing abilities: {}", e.getMessage(), e);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Unexpected error when processing game abilities: {}", e.getMessage(), e);
         }
         return gameAbilities;
     }

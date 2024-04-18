@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.StringConverter;
+import org.example.api.PokeApiClient;
 import org.example.pokemon.*;
 import org.example.pokemon.ability.Ability;
 import org.example.repositories.MovesRepository;
@@ -39,6 +40,7 @@ public class PokemonBuilder {
 
     private static final int MAX_EVS = 252;
     private static final int TOTAl_EVS = 508;
+
     private Slider hpSlider, attackSlider, defenseSlider, spAttackSlider, spDefenseSlider, speedSlider;
     private ProgressBar hpProgressBar, attackProgressBar, defenseProgressBar, spAttackProgressBar, spDefenseProgressBar, speedProgressBar;
     private TextField hpTextField, attackTextField, defenseTextField, spAttackTextField, spDefenseTextField, speedTextField;
@@ -59,7 +61,7 @@ public class PokemonBuilder {
 
     private void initializeLayout() {
 
-        Tab detailsTab = new Tab("Details", createDetailsPane());
+        Tab detailsTab = new Tab("Details", createDetailsPane(pokemon));
         Tab movesTab = new Tab("Moves", creatMovesPane());
         Tab evsTab = new Tab("EVs", createEvPane());
 
@@ -98,7 +100,11 @@ public class PokemonBuilder {
         return imageView;
     }
 
-    private GridPane createDetailsPane() {
+
+    /*
+        DETAILS_PANE
+     */
+    private GridPane createDetailsPane(Pokemon pokemon) {
         GridPane detailsPane = new GridPane();
 
         detailsPane.setHgap(20);
@@ -226,13 +232,15 @@ public class PokemonBuilder {
 
         return detailsPane;
     }
+
     public String getNickName() {
         return nicknameField.getText().trim();
     }
 
 
-    // Moves Pane
-
+    /*
+        MOVES-PANE
+     */
     private ScrollPane creatMovesPane() {
         VBox movesPane = new VBox(10);
         movesPane.setPadding(new Insets(10));
@@ -253,7 +261,9 @@ public class PokemonBuilder {
             //moveComboBoxes[index].hide();
 
             FilteredList<Moves> filteredMoves = new FilteredList<>(
-                    FXCollections.observableArrayList(MovesRepository.getMoves()), p -> true);
+                    FXCollections.observableArrayList(
+                            PokeApiClient.fetchPokemonMoves(pokemon.getBaseName()).join()
+                    ), p -> true);
 
             moveComboBoxes[index].setItems(filteredMoves);
 
@@ -265,18 +275,12 @@ public class PokemonBuilder {
 
                 @Override
                 public Moves fromString(String string) {
-                    if (string == null || string.trim().isEmpty()) {
-                        return null;
-                    }
+                    if (string == null || string.trim().isEmpty()) return null;
 
-                    Moves move = MovesRepository.getMoves().stream()
+                    return MovesRepository.getMoves().stream()
                             .filter(m -> m.getName().equalsIgnoreCase(string.trim()))
                             .findFirst()
                             .orElse(null);
-
-                    System.out.println("From String: " + string + " -> Move: " + move);
-
-                    return move;
                 }
             });
 
@@ -292,7 +296,7 @@ public class PokemonBuilder {
                 }
             });
 
-            final boolean[] isShowing = {false};
+            final boolean[] isShowing = { false };
 
             moveComboBoxes[index].getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
                 if (!isUpdating[0] && (newValue == null || !newValue.equals(oldValue))) {
@@ -400,6 +404,7 @@ public class PokemonBuilder {
         });
         return moveComboBox;
     }
+
     public List<Moves> getSelectedMoves() {
         List<Moves> selectedMoves = new ArrayList<>();
         for (ComboBox<Moves> comboBox : moveComboBoxes) {
@@ -410,6 +415,7 @@ public class PokemonBuilder {
         }
         return selectedMoves;
     }
+
     public void saveSelectedMoves() {
         List<Moves> selectedMoves = getSelectedMoves();
 
@@ -425,11 +431,12 @@ public class PokemonBuilder {
         }
         updateMoveComboBoxes();
     }
+
     private Moves getRandomMove() {
         List<Moves> allMoves = MovesRepository.getMoves();
-        int random = new Random().nextInt(allMoves.size());
-        return allMoves.get(random);
+        return allMoves.get(new Random().nextInt(allMoves.size()));
     }
+
     private void updateMoveComboBoxes() {
         List<Moves> moves = pokemon.getMoves();
         for (int i = 0; i < moveComboBoxes.length; i++) {
@@ -438,8 +445,9 @@ public class PokemonBuilder {
     }
 
 
-    //Ev Pane
-
+    /*
+        EV-PANE
+     */
     private VBox createEvPane() {
         VBox evPane = new VBox(10);
         evPane.getStyleClass().add("ev-pane");

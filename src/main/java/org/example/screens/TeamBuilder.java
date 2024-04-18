@@ -312,8 +312,6 @@ public class TeamBuilder {
         if (pokemonBuilderTab.getUserData() instanceof PokemonBuilder pokemonBuilder) {
             List<Moves> selectedMoves = pokemonBuilder.getSelectedMoves();
 
-            selectedMoves.forEach(move -> System.out.println(move.getName()));
-
             Pokemon editedPokemon = isTeam1 ? team1.getPokemons().get(index) : team2.getPokemons().get(index);
 
             editedPokemon.clearMoves();

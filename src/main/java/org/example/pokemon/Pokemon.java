@@ -2,6 +2,8 @@ package org.example.pokemon;
 
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.ResourceManager;
 import org.example.pokemon.ability.Ability;
 import org.example.pokemon.ability.EffectHandler;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 
 
 public class Pokemon {
+
+    private static final Logger LOGGER = LogManager.getLogger(Pokemon.class);
 
     private final String name;
     private String nickname = null;
@@ -84,12 +88,8 @@ public class Pokemon {
         }
     }
 
-    public String getName(){
-        if (this.nickname != null && !this.nickname.isEmpty()) {
-            return this.nickname;
-        } else {
-            return name;
-        }
+    public String getName() {
+        return nickname != null && !nickname.isEmpty() ? nickname : name;
     }
 
     public String getBaseName() {
@@ -182,31 +182,30 @@ public class Pokemon {
     public void addMove(Moves move) {
         if (this.moves.size() < 4) {
             this.moves.add(move);
-        } else {
-            System.err.println(this.name + " moves slots are full !");
-        }
+        } else LOGGER.warn("{} moves slots are full!", name);
     }
+
     public void clearMoves() {
         this.moves.clear();
     }
 
     public Moves chooseMoveByName(String moveName) {
         return moves.stream()
-                .filter(move -> move.getName().equalsIgnoreCase(moveName)).findFirst().orElse(null);
+                .filter(move -> move.getName().equalsIgnoreCase(moveName)).findFirst()
+                .orElse(null);
     }
 
     public boolean isAlive() {
         return stats.getHp() > 0;
     }
 
-    public void takeDamage(int damage){
+    public void takeDamage(int damage) {
         this.lastDamageTaken = damage;
 
         int currentHP = stats.getHp() - damage;
 
-        if (currentHP < 0) {
-            currentHP = 0;
-        }
+        if (currentHP < 0) currentHP = 0;
+
         stats.setHp(currentHP);
     }
 
@@ -367,19 +366,15 @@ public class Pokemon {
     }
 
     public void heal(int amount) {
+        if (amount < 0) return;
         int currentHP = stats.getHp();
         int maxHp = stats.getMaxHp();
 
-        int healedAmount = Math.min(amount, maxHp - currentHP);
+        currentHP += Math.min(amount, maxHp - currentHP);
 
-        currentHP += amount;
-
-        if (currentHP > maxHp) {
-            currentHP = maxHp;
-        }
         stats.setHp(currentHP);
 
-        System.out.println(this.getName() + " healed " + healedAmount + " HP !");
+        LOGGER.info("{} healed", this.getName());
     }
 
     public boolean hasStatusCondition() {
@@ -492,6 +487,16 @@ public class Pokemon {
 
     public void applyStatusCondition(StatusCondition condition) {
         status.add(condition);
+    }
+
+    public void applyStatModifier(Stat stat, double modifier) {
+        switch (stat) {
+            case ATTACK -> stats.setAttack((int) (stats.getAttack() * modifier));
+            case DEFENSE -> stats.setDefense((int) (stats.getDefense() * modifier));
+            case SPECIAL_ATTACK -> stats.setSpecialAttack((int) (stats.getSpecialAttack() * modifier));
+            case SPECIAL_DEFENSE -> stats.setSpecialDefense((int) (stats.getSpecialDefense() * modifier));
+            case SPEED -> stats.setSpeed((int) (stats.getSpeed() * modifier));
+        }
     }
 
     public String toString() {

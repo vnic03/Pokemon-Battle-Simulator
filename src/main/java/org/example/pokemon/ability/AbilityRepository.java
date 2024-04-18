@@ -1,5 +1,7 @@
 package org.example.pokemon.ability;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.Constants;
 import org.example.battle.DamageCalculator;
 import org.example.battle.TypeChart;
@@ -13,6 +15,8 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class AbilityRepository {
+
+    private static final Logger LOGGER = LogManager.getLogger(AbilityRepository.class);
 
     private final Map<Ability.Name, Ability> abilities;
 
@@ -40,21 +44,22 @@ public class AbilityRepository {
             if (!abilities.containsKey(name)) {
                 abilities.put(name, new Ability(name, description, effect));
 
-            } else System.out.println("Ability " + name + " already exists.");
+            } else LOGGER.warn("Ability {} already exists!", name);
         }
     }
 
     public Map<String, String> loadFromJson(String path) {
         Map<String, String> abilities = new HashMap<>();
         try {
-            String text = new String(Files.readAllBytes(Paths.get(path)));
-            JSONObject obj = new JSONObject(text);
+            JSONObject obj = new JSONObject(
+                    new String(Files.readAllBytes(Paths.get(path)))
+            );
 
-            for(String key : obj.keySet()) {
+            for (String key : obj.keySet()) {
                 abilities.put(key, obj.getString(key));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Failed to load JSON from path: {}, error: {}", path, e.getMessage(), e);
         }
         return abilities;
     }

@@ -4,8 +4,6 @@ plugins {
     id("java")
     kotlin("jvm") version "1.6.10"
     id("org.openjfx.javafxplugin") version "0.1.0"
-    id("org.springframework.boot") version "2.6.3"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("com.github.johnrengelman.shadow") version "7.1.0"
     id("application")
     id("groovy")
@@ -29,10 +27,12 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.openjfx:javafx-media:21.0.1")
     implementation("org.json:json:20240303")
-    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.codehaus.groovy:groovy:3.0.21")
     implementation("org.codehaus.groovy:groovy-jsr223:3.0.21")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.apache.logging.log4j:log4j-core:2.17.1")
+    implementation("org.apache.logging.log4j:log4j-api:2.17.1")
+    implementation("org.slf4j:slf4j-api:1.7.32")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.17.1")
 }
 
 application {
